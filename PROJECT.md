@@ -64,6 +64,10 @@ The initial version does not show timestamps. Keeping them makes a later scoring
 
 Automated testing stays extremely small. If the pages build, Sass compiles, and TypeScript type-checks, that is enough. The final experience gets checked manually on the five real phones.
 
+## Commits and attribution
+
+Do not add AI-tool attribution to commits or pull requests in this repo. No `Co-Authored-By` trailer for an assistant, no "generated with" footer. Contributors appear as themselves. Agents working here must strip those lines before committing.
+
 ## Deal and freeze
 
 Cards are dealt on Lemon's machine and committed as plain data. The deployed site never shuffles them. The commit is the lock.
