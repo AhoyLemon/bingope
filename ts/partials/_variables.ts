@@ -2,4 +2,4 @@
  * Site-wide variables
  */
 
-export const siteURL = "";
+export const siteURL = "https://ahoylemon.github.io/bingope/";

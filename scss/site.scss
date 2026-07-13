@@ -20,6 +20,7 @@
 // SECTIONS is a stripe (like a hero section) - like a component, but bigger.
 
 // PAGES is for any specific page template
+@use "pages/skeleton";
 
 // FINALLY, we should have a place for things we still need to get to...
 @use "todo/shame";

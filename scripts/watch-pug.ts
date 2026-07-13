@@ -25,6 +25,7 @@ function compilePugFile(source: string, output: string): boolean {
     const html = pug.renderFile(sourcePath, {
       pretty: true,
       basedir: path.resolve(projectRoot, "pug"),
+      testing: true,
     });
 
     const outputDir = path.dirname(outputPath);

@@ -1,58 +1,55 @@
-# There are many boilerplates. This one is mine.
+# BINGOPE
 
-I never set out to create a boilerplate, but after making sites dozens of times, I realized there were familiar patterns I was reaching for, and I'd always copy that code out of my last project. The most recent time, I decided to strip everything out into a boilerplate.
+#### (Minnesota State Fair bingo for five specific people)
 
 ## What is this?
 
-This is the starting point that I ([Lemon](https://ahoylemon.xyz)) use every time I make a new website. It's built using my own aesthetics.
+BINGOPE is a bingo game to play at the 2026 Minnesota State Fair.
 
-### And what aesthetics are those?
+Everyone gets a different card full of things they might see at the fair. Mark enough squares to complete a row, column, or diagonal and the site celebrates. Then keep playing. We'll figure out how to score the whole day when we get home.
 
-I want to have reusable components to help me make a static HTML site, and I want to do that as quickly as possible. At the same time, I _don't_ want to have a whole bunch of boilerplate stuff in the shipped code. The idea here is **only when you need it**: Making something that's slim and extendable.
+The finished site will live at [ahoylemon.github.io/bingope](https://ahoylemon.github.io/bingope/).
 
-This project uses npm for build tooling, with Pug for HTML templating, Sass for CSS, and TypeScript for JavaScript.
+## Can I run this locally?
 
-This also assumes you want to write in Vue, Sass & Pug.
+Yeah. You'll need [Bun](https://bun.sh/).
 
-### Prerequisites
+```bash
+bun install
+bun run dev
+```
 
-You'll need [Node.js](https://nodejs.org/) (v18 or higher) and npm installed. If you don't have them, [download Node.js here](https://nodejs.org/) (npm comes with it).
+Other useful commands:
 
-### Alright, how do I get started?
+```bash
+bun run test         # compile Sass and type-check TypeScript
+bun run build        # build the site
+bun run build:pages  # build the deployable site in _site/
+```
 
-1. Click [Use This Template](https://github.com/AhoyLemon/startHere/generate) to use this repo as a project template.
-2. Clone your new repository locally
-3. Run `npm install` to install dependencies
-4. Run `npm run setup` to configure your project name and details
-5. Run `npm run dev` to start the development server
-6. If you see **It works.** in the middle of the screen, congratulations it's working right.
+## Where is everything?
 
-## Commands
+- [`pug/`](pug/) contains the homepage, five player pages, and shared page partials.
+- [`routes/pug.routes.ts`](routes/pug.routes.ts) maps those templates to clean URLs.
+- [`scss/`](scss/) contains the styles.
+- [`ts/`](ts/) contains the Vue application code.
+- [`scripts/`](scripts/) contains the build and development tools.
+- [`PROJECT.md`](PROJECT.md) explains the decisions and constraints that are easy to forget.
+- [Milestone 1](https://github.com/AhoyLemon/bingope/milestone/1) and its issues are the actual project plan.
 
-- `npm install` - Install all dependencies
-- `npm run setup` - Initial project setup (prompts for project name, URL, etc.)
-- `npm run dev` - Start development server with live reload
-- `npm run build` - Build all files for production
-- `npm test` - Check for Sass and TypeScript errors
+## What's this written in?
 
-## Fundamentals
+[![Pug](https://img.shields.io/badge/Pug-000?style=flat-square&labelColor=212121&logo=pug&logoColor=A86454&color=fff)](https://pugjs.org/)
+[![Sass](https://img.shields.io/badge/Sass-000?style=flat-square&labelColor=212121&logo=sass&logoColor=CC6699&color=fff)](https://sass-lang.com/)
+[![TypeScript](https://img.shields.io/badge/TypeScript-000?style=flat-square&labelColor=212121&logo=typescript&logoColor=3178C6&color=fff)](https://www.typescriptlang.org/)
+[![Vue.js](https://img.shields.io/badge/Vue.js-000?style=flat-square&labelColor=212121&logo=vue.js&logoColor=42B883&color=fff)](https://vuejs.org/)
+[![Bun](https://img.shields.io/badge/Bun-000?style=flat-square&labelColor=212121&logo=bun&logoColor=FBF0DF&color=fff)](https://bun.sh/)
+[![GitHub Pages](https://img.shields.io/badge/GitHub%20Pages-000?style=flat-square&labelColor=212121&logo=github&logoColor=fff&color=fff)](https://pages.github.com/)
 
-I'll break this down into three sections, Pug, Sass, & TypeScript.
+Pug, Sass, TypeScript, and Vue 3. It builds into a small static site and deploys to GitHub Pages. There is no backend, no Vite, and no Nuxt.
 
-For detailed information about routing configuration, see the [Pug Routing Documentation](_docs/routes.md).
+## What else should I know?
 
-1. [Pug](_docs/pug.md) - HTML templating with routing configuration in `routes/pug.routes.ts`
-2. [Sass](_docs/sass.md) - Modern CSS with @use syntax
-3. [TypeScript](_docs/ts.md) - Type-safe JavaScript
-4. [Development Tools](_docs/tools.md) - Prettier, BrowserSync, and other helpful tools
+This is a personal project, not a general-purpose bingo platform. Build the version we need for September 3, 2026 first. Anything reusable or public can be somebody's problem later.
 
-## Deploying to GitHub Pages
-
-If you want to deploy this project to GitHub Pages, follow these steps:
-
-1. Navigate to the `.github/workflows/` directory.
-2. Rename the `deploy.yml.example` file to `deploy.yml`.
-3. Commit and push the changes to your repository.
-4. GitHub Actions will automatically run the workflow to deploy your site to GitHub Pages.
-
-Make sure your repository settings are configured to use GitHub Pages, and the branch is set to `github-pages` or the branch specified in the workflow file.
+The code and cards freeze on September 1. Every push to `main` builds and republishes the site.

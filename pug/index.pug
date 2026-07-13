@@ -1,18 +1,32 @@
-- const testing = true
+- const pageTitle = null
+- const assetPath = ""
+-
+  const players = [
+    { name: "Lemon", slug: "lemon" },
+    { name: "Simone", slug: "simone" },
+    { name: "Angie", slug: "angie" },
+    { name: "Mike", slug: "mike" },
+    { name: "Victor", slug: "victor" },
+  ]
 include partials/_variables
 include partials/_mixins
 
 doctype html
 html(lang="en")
-  
   include partials/_head.pug
-    
-  body
-    #app(v-cloak)
 
-      main(style="height:100vh; display:flex; align-items:center; justify-content:center; padding:2rem;")
-        .inner
-          h1 {{h1}} 
-          h5 {{h5}}
+  body
+    #app.site-shell
+      header.site-header
+        p.eyebrow 2026 Minnesota State Fair
+        h1 BINGOPE
+        p Choose your Card. The bingo grids are coming next.
+
+      main
+        nav(aria-label="Player Cards")
+          ul.card-links
+            each player in players
+              li
+                a.card-link(href=player.slug + "/") #{player.name}'s Card
 
     include partials/_javascripts
