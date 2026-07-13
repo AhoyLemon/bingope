@@ -32,7 +32,7 @@ interface BingoSquare {
 
 Square IDs are sequential integers. An ID stays with the same idea through wording changes. Retired IDs are never reused for different content. IDs do not describe order, rarity, or card position.
 
-Issue 2 will create `WRITING_STYLE.md`, which becomes the source of truth for square writing. No square copy ships without Lemon's approval.
+[`WRITING_STYLE.md`](WRITING_STYLE.md) is the source of truth for square writing. No square copy ships without Lemon's approval.
 
 The center square is still an open question. It may be an easy sighting the player marks, or a joke the game treats as already seen. Make that decision after reviewing the writing.
 
