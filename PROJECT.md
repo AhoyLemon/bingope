@@ -32,7 +32,7 @@ interface BingoSquare {
 
 Square IDs are sequential integers. An ID stays with the same idea through wording changes. Retired IDs are never reused for different content. IDs do not describe order, rarity, or card position.
 
-Issue 2 will create `WRITING_STYLE.md`, which becomes the source of truth for square writing. No square copy ships without Lemon's approval.
+[`WRITING_STYLE.md`](WRITING_STYLE.md) is the source of truth for square writing. No square copy ships without Lemon's approval.
 
 The center square is still an open question. It may be an easy sighting the player marks, or a joke the game treats as already seen. Make that decision after reviewing the writing.
 
@@ -63,6 +63,10 @@ The initial version does not show timestamps. Keeping them makes a later scoring
 - Asset URLs must work from the GitHub Pages `/bingope/` project path and from one-folder-deep player routes.
 
 Automated testing stays extremely small. If the pages build, Sass compiles, and TypeScript type-checks, that is enough. The final experience gets checked manually on the five real phones.
+
+## Commits and attribution
+
+Do not add AI-tool attribution to commits or pull requests in this repo. No `Co-Authored-By` trailer for an assistant, no "generated with" footer. Contributors appear as themselves. Agents working here must strip those lines before committing.
 
 ## Deal and freeze
 
