@@ -4,6 +4,7 @@ node_modules/
 # Build outputs
 css/
 js/min/
+_site/
 *.html
 !_docs/
 

@@ -66,21 +66,12 @@ export interface RouteMap {
 }
 
 export const routes: RouteMap = {
-  // Main pages
   "pug/index.pug": "index.html",
-
-  // Add more routes here as you create new pages
-  // 'pug/about.pug': 'about/index.html',
-  // 'pug/contact.pug': 'contact/index.html',
-  // 'pug/services.pug': 'services/index.html',
-
-  // Blog or content pages
-  // 'pug/blog/index.pug': 'blog/index.html',
-  // 'pug/blog/post-template.pug': 'blog/post/index.html',
-
-  // Special pages
-  // 'pug/404.pug': '404.html',
-  // 'pug/sitemap.pug': 'sitemap.xml',
+  "pug/lemon.pug": "lemon/index.html",
+  "pug/simone.pug": "simone/index.html",
+  "pug/angie.pug": "angie/index.html",
+  "pug/mike.pug": "mike/index.html",
+  "pug/victor.pug": "victor/index.html",
 };
 
 export default routes;

@@ -262,7 +262,7 @@ async function startDev() {
     spinner,
   );
 
-  startProcess("Pug", "tsx", ["scripts/watch-pug.ts"], spinner);
+  startProcess("Pug", "bun", ["scripts/watch-pug.ts"], spinner);
 
   startProcess("TypeScript", "tsc", ["--watch"], spinner);
 
@@ -273,7 +273,7 @@ async function startDev() {
       "start",
       "--server",
       "--files",
-      "*.html, css/*.css, js/**/*.js",
+      "**/*.html, css/*.css, js/**/*.js",
       "--no-notify",
       "--no-open",
     ],

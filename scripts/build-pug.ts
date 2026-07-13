@@ -33,6 +33,7 @@ function buildPug() {
       const html = pug.renderFile(sourcePath, {
         pretty: true,
         basedir: path.resolve(projectRoot, "pug"),
+        testing: false,
       });
 
       // Ensure output directory exists

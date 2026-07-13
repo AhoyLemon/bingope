@@ -1,0 +1,66 @@
+@use "../abstracts/variables" as vars;
+
+.site-shell {
+  width: min(100% - 2rem, 36rem);
+  min-height: 100dvh;
+  margin-inline: auto;
+  padding-block: clamp(2rem, 10vw, 5rem);
+}
+
+.site-header {
+  margin-bottom: 2rem;
+}
+
+.site-header h1 {
+  margin-bottom: 0.75rem;
+}
+
+.eyebrow {
+  margin-bottom: 0.5rem;
+  color: vars.$accent;
+  font-size: 0.8125rem;
+  font-weight: vars.$bold;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.card-links {
+  display: grid;
+  gap: 0.75rem;
+}
+
+.card-link,
+.back-link {
+  color: vars.$copy;
+  font-weight: vars.$bold;
+}
+
+.card-link {
+  display: block;
+  padding: 1rem 1.25rem;
+  border: 2px solid vars.$copy;
+  background: vars.$white;
+  box-shadow: 0.25rem 0.25rem 0 vars.$copy;
+  text-decoration: none;
+}
+
+.card-link:hover {
+  box-shadow: 0.125rem 0.125rem 0 vars.$copy;
+  transform: translate(0.125rem, 0.125rem);
+}
+
+.card-link:focus-visible,
+.back-link:focus-visible {
+  outline: 0.25rem solid vars.$focus;
+  outline-offset: 0.25rem;
+}
+
+.card-shell {
+  padding: clamp(1.5rem, 8vw, 3rem);
+  border: 2px dashed vars.$copy;
+  text-align: center;
+}
+
+.card-shell p {
+  margin-bottom: 1.5rem;
+}
