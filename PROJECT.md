@@ -34,16 +34,24 @@ interface BingoSquare {
   id: number;
   text: string;
   shortText?: string;
+  rarity: "gimme" | "medium" | "rare";
+  type: "see" | "do";
 }
 ```
 
-`text` is the canonical wording. The grid displays `shortText ?? text`, and the larger zoomed view always displays `text`. Try to make `text` fit the grid before adding `shortText`.
+`text` is the canonical wording and defines what counts. The grid displays `shortText ?? text`, and the larger zoomed view always displays `text`. Since the player always reads full `text` before marking, `text` can be declarative and longer than the grid allows. `shortText` is the concise card label: optional but strongly encouraged, and required whenever `text` is too long to fit the grid.
 
 Square IDs are sequential integers. An ID stays with the same idea through wording changes. Retired IDs are never reused for different content. IDs do not describe order, rarity, or card position.
 
-[`WRITING_STYLE.md`](WRITING_STYLE.md) is the source of truth for square writing. No square copy ships without Lemon's approval.
+`rarity` and `type` are authoring-time judgments recorded for the eventual card deal. `rarity` ('gimme', 'medium', 'rare') lets the deal weight cards so every card stays winnable. `type` ('see', 'do') marks whether the square is witnessed or performed. Both are hints, not gospel, and stay tunable.
+
+[`WRITING_STYLE.md`](WRITING_STYLE.md) is the source of truth for square writing. No square copy ships without Lemon's approval. [`SQUARES_PLAN.md`](SQUARES_PLAN.md) tracks area coverage and the log of parked and rejected ideas.
 
 The center square is still an open question. It may be an easy sighting the player marks, or a joke the game treats as already seen. Make that decision after reviewing the writing.
+
+### Guaranteed and special squares (idea, not built)
+
+Some squares sit between the free center and the ordinary pool: not free, because you do not get them on walk-in, but things we want every one of our five players to do or catch. The first example is "Throw a pair of underwear from the Skyglider." A candidate deal rule is a small subroutine that guarantees each dealt card includes at least one such special square and at least one crop art square. This is a maybe, and implementation is paused. It probably wants its own issue once the square pool is settled.
 
 ## Saved state
 
