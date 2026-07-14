@@ -20,11 +20,12 @@ Territory to draw squares from. Status is coverage, not quality.
 | Food & drink | Big Fat Bacon | ✅ | |
 | Food & drink | Deep-fried everything | ✅ | Candy bar banked; Oreos, pickle, cheese still open. |
 | Food & drink | Roasted corn on the cob | ✅ | |
+| Food & drink | New foods of the year (annual list) | ✅ | Blind-pick-and-find square banked (#32). |
 | Food & drink | Pickle on a stick | 🔷 | |
 | Food & drink | Turkey legs / foot-longs / brats | 🔷 | Turkey leg *eaten like a king* was rejected (see log). |
 | Food & drink | Gator & exotic meats on a stick | 🔷 | |
 | Food & drink | Spam booth | 🔷 | |
-| Food & drink | Beer gardens / craft beer | 🔷 | |
+| Food & drink | Beer gardens / craft beer | ✅ | Brewers Guild flight 'notes' banked (#33). |
 | Food & drink | Malts, milkshakes, buckets | 🔷 | |
 | Food & drink | Fresh fries + vinegar | 🔷 | |
 | Food & drink | Caramel apples / cotton candy | 🔷 | |
@@ -36,9 +37,12 @@ Territory to draw squares from. Status is coverage, not quality.
 | Buildings & exhibits | Grandstand marketplace / demo hucksters | ✅ | |
 | Buildings & exhibits | Big Boar pavilion | ✅ | |
 | Buildings & exhibits | Crop art / Ag-Hort building | ⏳ | Own batch. Prince is the obvious lock. |
+| Buildings & exhibits | Ag Building — scarecrows | ✅ | Nakedly political scarecrow banked (#37). Weird/political, crop-art-adjacent. |
+| Buildings & exhibits | Ag Building — seed art | ⏳ | Likely a special/guaranteed square, like crop art. Don't force into the pool. |
+| Buildings & exhibits | Ag Building — Brewers Guild | ✅ | See beer-flight square (#33). |
 | Buildings & exhibits | Creative Activities (quilts, canning, ribbons) | 🔷 | |
 | Buildings & exhibits | Fine Arts | 🔷 | |
-| Buildings & exhibits | DNR building (fish pond, Smokey Bear) | 🔷 | |
+| Buildings & exhibits | DNR building (fish pond, Smokey Bear) | ✅ | Bitten fish at the fish pond banked (#41). |
 | Buildings & exhibits | Eco Experience | 🔷 | |
 | Buildings & exhibits | International Bazaar | 🔷 | |
 | Buildings & exhibits | 4-H building | 🔷 | |
@@ -58,7 +62,8 @@ Territory to draw squares from. Status is coverage, not quality.
 | Rides & Midway | Carnies | ✅ | |
 | Rides & Midway | Prize hauls | ✅ | |
 | Rides & Midway | Ferris wheel / big rides | 🔷 | |
-| Rides & Midway | Skyride gondola | ⏳ | Skyglider / underwear-throw special (see PROJECT.md). |
+| Rides & Midway | Skyride gondola | ✅ | Regular Skyride nerves banked (#36). The Skyglider underwear-throw special is still its own queued thing. |
+| Rides & Midway | Arcade / coin-pusher games | ✅ | Coin-pusher win banked (#38). |
 | Rides & Midway | Space Tower | 🔷 | |
 | Rides & Midway | Ye Old Mill | 🔷 | |
 | Rides & Midway | Kidway | 🔷 | |
@@ -80,6 +85,7 @@ Territory to draw squares from. Status is coverage, not quality.
 | People & behavior | Airbrush tattoos / face paint / henna | 🔷 | |
 | People & behavior | Novelty hats & balloon animals | 🔷 | |
 | People & behavior | Exhausted parents | 🔷 | |
+| People & behavior | Crowd dead-stops / traffic jams | ✅ | Mid-street pileup banked (#34). |
 | People & behavior | Teens on first dates | 🔷 | |
 | Landmarks & margins | Machinery Hill | ✅ | |
 | Landmarks & margins | Gadget-demo halls | ✅ | |
@@ -87,8 +93,10 @@ Territory to draw squares from. Status is coverage, not quality.
 | Landmarks & margins | WCCO / media row broadcasts | 🔷 | |
 | Landmarks & margins | Bandshell / free-stage acts | 🔷 | Polka. |
 | Landmarks & margins | Political party booths & candidates | 🔷 | |
-| Landmarks & margins | Fairchild the gopher mascot | 🔷 | |
-| Landmarks & margins | Misting stations / heat casualties | 🔷 | |
+| Landmarks & margins | Fairchild the gopher mascot | ✅ | Fairchild-in-the-wild banked (#40), realistically a parade-only sighting. |
+| Landmarks & margins | Daily Parade | 🔷 | The realistic place to catch Fairchild. Otherwise unmined. |
+| Landmarks & margins | Great Minnesota Sing-Along | ✅ | Loudest-singer square banked (#39). |
+| Landmarks & margins | Misting stations / heat casualties | ✅ | Misting-station linger banked (#35). |
 | Landmarks & margins | Lost-kid PA announcements | 🔷 | |
 | Landmarks & margins | People lugging bizarre purchases | 🔷 | Brooms, cast iron, potted mums. |
 | Landmarks & margins | Porta-potty / cash-only economy | 🔷 | |
@@ -110,6 +118,11 @@ Specific concepts that are parked or dead, so we don't re-pitch them. Banked ide
 | Baby in ear protection *at the Grandstand* | Rejected | Scuttled entirely (was also show-attendance dependent). |
 | Sweet Martha's bucket "carried like a newborn" | Rejected | Arguable simile ("that's not like a newborn / yes it is"). |
 | Cheese curd "one always falls to the ground" | Rejected | Advocates wasting food, and not actually true. Became the curd-sacrament do-it. |
+| Overheard Pronto Pup vs corn dog opinion (old #5) | Rejected | Superseded by #22, which lands the same joke as a controllable do-it. Id 5 is retired and never reused. |
+| Pickle on a stick | Rejected | Not a real fair item (it's fried Perfect Pickle chips, or a topped pickle). |
+| Turkey leg (plain sighting) | Rejected | Lemon isn't into the turkey-leg avenue. |
+| Mobility scooter cut-off | Rejected | Reworked into the mid-street dead-stop pileup (#34). |
+| Lost-child PA page | Rejected | Lemon has never actually heard one. |
 
 ## Queued batches / next work
 
