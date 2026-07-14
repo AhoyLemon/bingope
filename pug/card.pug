@@ -16,7 +16,7 @@ html(lang="en")
       main.card-shell(v-cloak)
         //- Card resolved (a special name). The grid itself arrives in #5.
         template(v-if="hasCard")
-          h2 {{ displayName }}'s Card
+          h2 You are viewing {{ displayName }}'s card
           p The bingo grid is coming next.
         //- No name in the URL, or a name we do not have a card for yet.
         template(v-else)
