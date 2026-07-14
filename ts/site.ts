@@ -12,6 +12,9 @@ import * as Variables from "./partials/_variables.js";
 // Import and initialize Vue app
 import "./partials/_vue.js";
 
+// Wire the homepage name-entry form
+import "./partials/_nameEntry.js";
+
 // Make functions available globally for convenience
 // (optional - you can also import them where needed)
 (window as any).Functions = Functions;
