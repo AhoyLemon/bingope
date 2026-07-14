@@ -21,17 +21,14 @@ Territory to draw squares from. Status is coverage, not quality.
 | Food & drink | Deep-fried everything | ✅ | Candy bar banked; Oreos, pickle, cheese still open. |
 | Food & drink | Roasted corn on the cob | ✅ | |
 | Food & drink | New foods of the year (annual list) | ✅ | Blind-pick-and-find square banked (#32). |
-| Food & drink | Pickle on a stick | 🔷 | |
 | Food & drink | Turkey legs / foot-longs / brats | 🔷 | Turkey leg *eaten like a king* was rejected (see log). |
 | Food & drink | Gator & exotic meats on a stick | ✅ | Alligator-on-a-stick sighting banked (#46). |
-| Food & drink | Spam booth | 🔷 | |
 | Food & drink | Beer gardens / craft beer | ✅ | Brewers Guild flight 'notes' banked (#33). |
 | Food & drink | Malts, milkshakes, buckets | 🔷 | |
 | Food & drink | Fresh fries + vinegar | ✅ | Vinegar-only, no-ketchup fries banked (#44). |
 | Food & drink | Caramel apples / cotton candy | ✅ | Cotton-candy speed-run banked (#42). |
 | Food & drink | The Food Building (indoor hall) | 🔷 | |
 | Food & drink | Church dining halls (sit-down) | 🔷 | Salem Lutheran etc. |
-| Food & drink | Free-sample circuit | 🔷 | |
 | Buildings & exhibits | Dairy Building / butter heads | ✅ | Live carving + princess-in-wild banked. |
 | Buildings & exhibits | Miracle of Birth Center | ✅ | |
 | Buildings & exhibits | Grandstand marketplace / demo hucksters | ✅ | |
@@ -83,29 +80,37 @@ Territory to draw squares from. Status is coverage, not quality.
 | People & behavior | Butter Princesses | ✅ | |
 | People & behavior | Fanny packs / cargo-short dads | 🔷 | |
 | People & behavior | Matching family-reunion shirts | ✅ | 3+ in matching t-shirts banked (#48). |
-| People & behavior | Radio Flyer wagon armadas | 🔷 | |
-| People & behavior | Mobility scooters | 🔷 | |
 | People & behavior | Airbrush tattoos / face paint / henna | 🔷 | |
 | People & behavior | Novelty hats & balloon animals | 🔷 | |
 | People & behavior | Exhausted parents | 🔷 | |
 | People & behavior | Crowd dead-stops / traffic jams | ✅ | Mid-street pileup banked (#34). |
 | People & behavior | Goth / alt kids | ✅ | Head-to-toe-black kid banked (#52). |
-| People & behavior | Teens on first dates | 🔷 | |
 | Landmarks & margins | Machinery Hill | ✅ | |
 | Landmarks & margins | Gadget-demo halls | ✅ | |
 | Landmarks & margins | Vendor pitches (gutters, mops, hot tubs, stairlifts) | ✅ | $10,000+ hot tub for sale banked (#51). Still a fat vein. |
 | Landmarks & margins | Free yardsticks / giveaways | ✅ | The iconic free yardstick banked (#43). |
 | Landmarks & margins | Prize wheels / spin-to-win | ✅ | Spin-a-prize-wheel banked (#50). |
-| Landmarks & margins | WCCO / media row broadcasts | 🔷 | |
-| Landmarks & margins | Bandshell / free-stage acts | 🔷 | Polka. |
+| Landmarks & margins | Live radio station recording | 🔷 | A station broadcasting live from the fairgrounds. |
+| Landmarks & margins | Bandshell / free-stage acts | 🔷 | Live polka is a good avenue (pinned). |
 | Landmarks & margins | Political party booths & candidates | 🔷 | |
 | Landmarks & margins | Fairchild the gopher mascot | ✅ | Fairchild-in-the-wild banked (#40), realistically a parade-only sighting. |
 | Landmarks & margins | Daily Parade | 🔷 | The realistic place to catch Fairchild. Otherwise unmined. |
 | Landmarks & margins | Great Minnesota Sing-Along | ✅ | Loudest-singer square banked (#39). |
 | Landmarks & margins | Misting stations / heat casualties | ✅ | Misting-station linger banked (#35). |
-| Landmarks & margins | Lost-kid PA announcements | 🔷 | |
 | Landmarks & margins | People lugging bizarre purchases | 🔷 | Brooms, cast iron, potted mums. |
 | Landmarks & margins | Porta-potty / cash-only economy | 🔷 | |
+
+## Exemplars
+
+Our current favorites, kept as a quality bar for future squares. Each nails a different thing.
+
+| id | Square | What it nails |
+|----|--------|---------------|
+| 22 | I ordered a 'corn dog' at a Pronto Pup stand and refused to be corrected | The platonic pleasant-argument square, riding real Pronto Pup lore. A controllable `do`. |
+| 9 | I saw a toddler with a mullet he never agreed to | Specificity is the joke. One concrete image, zero stacking. |
+| 21 | I saw a full-size shirt that a belly had turned into an accidental crop top | One perfect sighting. Pure observation, no inner-state read. |
+| 29 | I rode the Giant Slide with my arms crossed and a serious expression | Committing to a bit. Bold deadpan voice, fully player-controlled. |
+| 47 | I found a pumpkin that weighs more than 1,000 pounds | A markable rule anchored to a real, postable number. |
 
 ## Idea log
 
@@ -137,6 +142,13 @@ Specific concepts that are parked or dead, so we don't re-pitch them. Banked ide
 | Decked-out mobility scooter | Rejected | All the scooters are rentals, so no personalization to spot. |
 | Tractor price tag | Rejected | Already have a tractor square (#24). |
 | Dairy Building malt | Parked | You get a regular spoon, so the tiny-wooden-spoon joke dies. Something's here, revisit later. |
+| Spam booth | Rejected | Whole avenue killed. |
+| Radio Flyer wagon armadas | Rejected | Whole avenue killed. |
+| Mobility scooters (all angles) | Rejected | Whole avenue killed. All rentals, and the cut-off version was already reworked into #34. |
+| Free-sample circuit | Rejected | No real free food samples at the fair. |
+| Teens on first dates | Rejected | Whole avenue killed (also leans on inner-state inference). |
+| Lost-kid PA announcements | Rejected | Whole avenue killed. Lemon has never actually heard one. |
+| Live polka / free-stage acts | Parked | Good avenue, pinned for a later batch. |
 
 ## Queued batches / next work
 
