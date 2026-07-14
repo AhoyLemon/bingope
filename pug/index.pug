@@ -27,6 +27,6 @@ html(lang="en")
           ul.card-links
             each player in players
               li
-                a.card-link(href=player.slug + "/") #{player.name}'s Card
+                a.card-link(href="card/?card=" + player.slug) #{player.name}'s Card
 
     include partials/_javascripts

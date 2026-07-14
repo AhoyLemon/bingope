@@ -1,0 +1,27 @@
+- const pageTitle = "Your Card"
+- const assetPath = "../"
+include partials/_variables
+include partials/_mixins
+
+doctype html
+html(lang="en")
+  include partials/_head.pug
+
+  body
+    #app.site-shell
+      header.site-header
+        p.eyebrow 2026 Minnesota State Fair
+        h1 BINGOPE
+
+      main.card-shell(v-cloak)
+        //- Card resolved (a special name). The grid itself arrives in #5.
+        template(v-if="hasCard")
+          h2 {{ displayName }}'s Card
+          p The bingo grid is coming next.
+        //- No name in the URL, or a name we do not have a card for yet.
+        template(v-else)
+          h2 No card yet
+          p Head back and pick a name to get your Card.
+          a.back-link(href="../") Go to the homepage
+
+    include partials/_javascripts
