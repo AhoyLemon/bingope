@@ -23,16 +23,17 @@ html(lang="en")
         p Choose your Card. The bingo grids are coming next.
 
       main
-        //- Native GET form: submitting navigates to card/?card=<name>, no JS needed.
-        form.name-entry(action="card/" method="get")
-          label(for="CardName") Enter your name
-          input#CardName(type="text" name="card" required autocomplete="off")
-          button(type="submit") Get my Card
-
         nav(aria-label="Player Cards")
           ul.card-links
             each player in players
               li
                 a.card-link(href="card/?card=" + player.slug) #{player.name}'s Card
+
+        //- Anyone else: type a name. _nameEntry.ts sanitizes to a tidy URL;
+        //- the native GET action is the no-JS fallback.
+        form.name-entry(action="card/" method="get")
+          label(for="CardName") Enter your name
+          input#CardName(type="text" name="card" required autocomplete="off")
+          button(type="submit") Get my Card
 
     include partials/_javascripts

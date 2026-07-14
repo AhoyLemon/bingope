@@ -27,9 +27,14 @@ export interface ResolvedCard {
   squareIds: number[];
 }
 
-/** Lowercase and trim, for special-name matching and saved-state namespacing. */
+/**
+ * Canonicalize a name for special-name matching, seeding, saved-state
+ * namespacing, and building a tidy `?card=` URL. Trims, lowercases, and
+ * collapses internal whitespace runs so a hand-typed URL and a form submit
+ * land on the same value.
+ */
 export function normalizeName(raw: string): string {
-  return raw.trim().toLowerCase();
+  return raw.trim().toLowerCase().replace(/\s+/g, " ");
 }
 
 /**
