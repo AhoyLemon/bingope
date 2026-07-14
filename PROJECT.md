@@ -1,6 +1,6 @@
 # BINGOPE Project Notes
 
-This file records the project decisions that are not obvious from the code. Current work, sequencing, and acceptance criteria live in [Milestone 1](https://github.com/AhoyLemon/bingope/milestone/1) and its issues.
+This file records the project decisions that are not obvious from the code. Current work, sequencing, and acceptance criteria live in the [GitHub milestones](https://github.com/AhoyLemon/bingope/milestones) and their issues. Milestone 1 (the five, the must-ship) and Milestone 2 ("Publicly Playable", the seeded name path) are the ones with deadlines. Milestones 3 (extra fun) and 4 (publicity) are maybe-someday.
 
 ## The goal
 
@@ -8,7 +8,7 @@ BINGOPE is a personal, one-day observation bingo game for Lemon, Simone, Angie, 
 
 Each person gets a distinct, pre-dealt card. The cards pull from one shared pool of funny, specific things someone might plausibly see at the fair. The five cards should differ but can overlap.
 
-The site is publicly accessible because it is hosted on GitHub Pages. The audience is still those five people. It does not need accounts, privacy controls, a backend, shared state, or a way to support other groups.
+The site is publicly accessible because it is hosted on GitHub Pages. Its heart is still those five people, and their five hand-tuned cards are the one thing that must ship. Beyond them, anyone can play: you type a name and get a card. It never needs accounts, privacy controls, a backend, or shared state between phones.
 
 ## How the game works
 
@@ -17,6 +17,15 @@ Each player opens their own URL and marks sightings on their own phone. Marks st
 Completing a row, column, or diagonal makes a bingo. A card can have more than one bingo at a time. A bingo gets highlighted and celebrated, but it does not end the game. Everyone keeps playing, and the group decides how to score the day afterward.
 
 The site does not announce a winner or synchronize anything between phones.
+
+## Getting your card
+
+There is one card page, not five folders. The homepage asks for a name and sends you to `card/?card=<name>`. What card you get depends on the name:
+
+- **The five special names** (`lemon`, `simone`, `angie`, `mike`, `victor`) resolve to their bespoke, hand-tuned card, committed as plain data.
+- **Any other name** is used as a seed. A deterministic deal turns the name into a card, so the same name always produces the same card in any browser or session, until the squares pool changes.
+
+Names are normalized (lowercased and trimmed) before matching and before namespacing saved state. Landing on `card/` with no name, or a name that resolves to nothing, shows a friendly nudge back to the homepage rather than a broken grid.
 
 ## Square data
 
@@ -60,12 +69,12 @@ The initial version does not show timestamps. Keeping them makes a later scoring
 ## Technical boundaries
 
 - The site is static and multipage.
-- Pug builds the homepage and five player routes.
+- Pug builds two pages: a homepage and a single card page. The homepage takes a name and sends you to `card/?card=<name>`. Player identity comes from that query parameter, not from a folder route.
 - Sass handles styling.
 - TypeScript and Vue 3 handle interactive card behavior.
 - Vue loads from a CDN. Do not add Vite, Nuxt, a router, or a state library without a real need.
 - Bun is Lemon's preferred package manager and is used in GitHub Actions. Harmless npm compatibility can stay.
-- Marks and bingo state live in `localStorage`, namespaced by player and stable square ID.
+- Marks and bingo state live in `localStorage`, namespaced by the normalized player name and stable square ID.
 - Recent iPhones and Pixels are the only meaningful browser targets.
 - The personal version does not need PWA or guaranteed offline support. Once loaded, gameplay itself requires no network traffic.
 - Asset URLs must work from the GitHub Pages `/bingope/` project path and from one-folder-deep player routes.
@@ -78,7 +87,9 @@ Do not add AI-tool attribution to commits or pull requests in this repo. No `Co-
 
 ## Deal and freeze
 
-Cards are dealt on Lemon's machine and committed as plain data. The deployed site never shuffles them. The commit is the lock.
+The five bespoke cards are dealt on Lemon's machine and committed as plain data. The deployed site never shuffles them. For the five, the commit is the lock.
+
+Public seeded cards are different: they are dealt in the browser, but deterministically from the name. So the lock for everyone else is the **squares pool**. Freeze the pool and every public card freezes with it. Editing the pool after someone has played reshuffles their seeded card and can orphan saved marks (which are keyed by square ID). That is acceptable for a party toy, and the pre-fair pool freeze covers it.
 
 The personal version must be finished by September 1, 2026. Both code and content freeze that day. Everyone arrives September 2, and the group goes to the fair September 3.
 
@@ -86,11 +97,12 @@ The freeze covers the approved writing, center-square treatment, five dealt card
 
 ## Maybe later
 
-None of these are current requirements:
+These live in Milestones 3 and 4. None have deadlines, and none block the fair.
 
-- Use the saved timestamps in a scoring screen.
-- Randomize celebrations or make later bingos more elaborate.
-- Document what a reusable public version would require, then refactor if anyone actually wants it.
-- Add offline or installable-PWA support to that public version.
+- A scoring screen built from the saved `markedAt` / `completedAt` timestamps.
+- Randomized or increasingly extravagant celebrations, and a game-over screen.
+- A possible Firebase hook for game reports.
+- Offline or installable-PWA support.
+- A one-page BINGOPE explainer, a public-facing README, and an Issue/PR contribution policy.
 
-If a public 2026 version becomes real, it needs to ship by August 26. Otherwise, do not spend time designing it.
+The reusable-public-version question is no longer hypothetical: the seeded name path (Milestone 2, "Publicly Playable") is that version, shipped without a refactor.

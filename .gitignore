@@ -5,6 +5,7 @@ node_modules/
 css/
 js/min/
 _site/
+card/
 *.html
 !_docs/
 

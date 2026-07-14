@@ -17,12 +17,14 @@ export function randomFrom<T>(array: T[]): T {
 }
 
 /**
- * Shuffle an array in place using Fisher-Yates algorithm
+ * Shuffle a copy of an array using the Fisher-Yates algorithm.
+ * Pass a seeded `rng` (returning 0..1) for a deterministic shuffle;
+ * defaults to Math.random.
  */
-export function shuffle<T>(array: T[]): T[] {
+export function shuffle<T>(array: T[], rng: () => number = Math.random): T[] {
   const arr = [...array];
   for (let i = arr.length - 1; i > 0; i--) {
-    const j = Math.floor(Math.random() * (i + 1));
+    const j = Math.floor(rng() * (i + 1));
     [arr[i], arr[j]] = [arr[j], arr[i]];
   }
   return arr;
