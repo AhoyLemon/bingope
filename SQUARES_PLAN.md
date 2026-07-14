@@ -23,12 +23,12 @@ Territory to draw squares from. Status is coverage, not quality.
 | Food & drink | New foods of the year (annual list) | ✅ | Blind-pick-and-find square banked (#32). |
 | Food & drink | Pickle on a stick | 🔷 | |
 | Food & drink | Turkey legs / foot-longs / brats | 🔷 | Turkey leg *eaten like a king* was rejected (see log). |
-| Food & drink | Gator & exotic meats on a stick | 🔷 | |
+| Food & drink | Gator & exotic meats on a stick | ✅ | Alligator-on-a-stick sighting banked (#46). |
 | Food & drink | Spam booth | 🔷 | |
 | Food & drink | Beer gardens / craft beer | ✅ | Brewers Guild flight 'notes' banked (#33). |
 | Food & drink | Malts, milkshakes, buckets | 🔷 | |
-| Food & drink | Fresh fries + vinegar | 🔷 | |
-| Food & drink | Caramel apples / cotton candy | 🔷 | |
+| Food & drink | Fresh fries + vinegar | ✅ | Vinegar-only, no-ketchup fries banked (#44). |
+| Food & drink | Caramel apples / cotton candy | ✅ | Cotton-candy speed-run banked (#42). |
 | Food & drink | The Food Building (indoor hall) | 🔷 | |
 | Food & drink | Church dining halls (sit-down) | 🔷 | Salem Lutheran etc. |
 | Food & drink | Free-sample circuit | 🔷 | |
@@ -40,7 +40,10 @@ Territory to draw squares from. Status is coverage, not quality.
 | Buildings & exhibits | Ag Building — scarecrows | ✅ | Nakedly political scarecrow banked (#37). Weird/political, crop-art-adjacent. |
 | Buildings & exhibits | Ag Building — seed art | ⏳ | Likely a special/guaranteed square, like crop art. Don't force into the pool. |
 | Buildings & exhibits | Ag Building — Brewers Guild | ✅ | See beer-flight square (#33). |
-| Buildings & exhibits | Creative Activities (quilts, canning, ribbons) | 🔷 | |
+| Buildings & exhibits | Creative Activities (quilts, canning, ribbons) | ✅ | Baffling blue-ribbon sighting banked (#49). |
+| Buildings & exhibits | Horticulture — giant vegetables | ✅ | 1,000+ lb pumpkin banked (#47). Fair record is ~1,808 lbs. |
+| Buildings & exhibits | Education Building | 🔷 | The real free-giveaway territory (tote bags, foam, swag). |
+| Buildings & exhibits | Craft Building | 🔷 | Crop-art-adjacent, worth mining. |
 | Buildings & exhibits | Fine Arts | 🔷 | |
 | Buildings & exhibits | DNR building (fish pond, Smokey Bear) | ✅ | Bitten fish at the fish pond banked (#41). |
 | Buildings & exhibits | Eco Experience | 🔷 | |
@@ -56,7 +59,7 @@ Territory to draw squares from. Status is coverage, not quality.
 | Animals & barns | Rabbit barn | 🔷 | Enormous rabbits. |
 | Animals & barns | Llama / alpaca | 🔷 | |
 | Animals & barns | Petting zoo / Little Farm Hands | 🔷 | |
-| Animals & barns | Honey & bees booth | 🔷 | |
+| Animals & barns | Honey & bees booth | ✅ | Identify-the-queen square banked (#45). |
 | Rides & Midway | Skill games | ✅ | |
 | Rides & Midway | Giant Slide | ✅ | |
 | Rides & Midway | Carnies | ✅ | |
@@ -79,17 +82,20 @@ Territory to draw squares from. Status is coverage, not quality.
 | People & behavior | Benched sleepers | ✅ | |
 | People & behavior | Butter Princesses | ✅ | |
 | People & behavior | Fanny packs / cargo-short dads | 🔷 | |
-| People & behavior | Matching family-reunion shirts | 🔷 | |
+| People & behavior | Matching family-reunion shirts | ✅ | 3+ in matching t-shirts banked (#48). |
 | People & behavior | Radio Flyer wagon armadas | 🔷 | |
 | People & behavior | Mobility scooters | 🔷 | |
 | People & behavior | Airbrush tattoos / face paint / henna | 🔷 | |
 | People & behavior | Novelty hats & balloon animals | 🔷 | |
 | People & behavior | Exhausted parents | 🔷 | |
 | People & behavior | Crowd dead-stops / traffic jams | ✅ | Mid-street pileup banked (#34). |
+| People & behavior | Goth / alt kids | ✅ | Head-to-toe-black kid banked (#52). |
 | People & behavior | Teens on first dates | 🔷 | |
 | Landmarks & margins | Machinery Hill | ✅ | |
 | Landmarks & margins | Gadget-demo halls | ✅ | |
-| Landmarks & margins | Vendor pitches (gutters, mops, hot tubs, stairlifts) | 🔷 | Plus the tote-bag swag haul. Fat vein. |
+| Landmarks & margins | Vendor pitches (gutters, mops, hot tubs, stairlifts) | ✅ | $10,000+ hot tub for sale banked (#51). Still a fat vein. |
+| Landmarks & margins | Free yardsticks / giveaways | ✅ | The iconic free yardstick banked (#43). |
+| Landmarks & margins | Prize wheels / spin-to-win | ✅ | Spin-a-prize-wheel banked (#50). |
 | Landmarks & margins | WCCO / media row broadcasts | 🔷 | |
 | Landmarks & margins | Bandshell / free-stage acts | 🔷 | Polka. |
 | Landmarks & margins | Political party booths & candidates | 🔷 | |
@@ -123,6 +129,14 @@ Specific concepts that are parked or dead, so we don't re-pitch them. Banked ide
 | Turkey leg (plain sighting) | Rejected | Lemon isn't into the turkey-leg avenue. |
 | Mobility scooter cut-off | Rejected | Reworked into the mid-street dead-stop pileup (#34). |
 | Lost-child PA page | Rejected | Lemon has never actually heard one. |
+| Free food samples at the Food Building | Rejected | There basically aren't any. Free giveaways live at the Education/Craft buildings instead. |
+| Deep-fried Oreo | Rejected | Already have the deep-fried candy bar (#28); no second deep-fried needed unless it's special. |
+| Solo Sweet Martha's bucket | Rejected | Won't endorse Martha's as a player action, and one person finishing a bucket is a coma. |
+| Cumbersome-purchase haulers (cast iron, mop + broom) | Rejected | Never-seen / didn't land as sightings. The expensive-thing angle became the hot tub (#51). |
+| Church dining hall meal | Rejected | Too much of a commitment (rules out other food). A sighting version was also cut. |
+| Decked-out mobility scooter | Rejected | All the scooters are rentals, so no personalization to spot. |
+| Tractor price tag | Rejected | Already have a tractor square (#24). |
+| Dairy Building malt | Parked | You get a regular spoon, so the tiny-wooden-spoon joke dies. Something's here, revisit later. |
 
 ## Queued batches / next work
 
