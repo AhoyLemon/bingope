@@ -15,12 +15,13 @@
     "serve": "browser-sync start --server --files \"**/*.html, css/*.css, js/**/*.js\" --no-notify --no-open",
     "test:sass": "sass scss/site.scss:css/site.css --no-source-map --style=compressed",
     "test:ts": "tsc --noEmit",
+    "test:unit": "bun test tests",
     "clean": "rimraf css/*.css js/**/*.js js/**/*.js.map !js/globals !js/partials",
     "dev": "bun scripts/dev.ts",
     "watch": "bun scripts/dev.ts",
     "build": "bun run build:sass && bun run build:pug && bun run build:ts",
     "build:pages": "bun run build && bun scripts/stage-pages.ts",
-    "test": "bun run test:sass && bun run test:ts"
+    "test": "bun run test:sass && bun run test:ts && bun run test:unit"
   },
   "keywords": [
     "bingo",

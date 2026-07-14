@@ -447,3 +447,90 @@ export const squares: BingoSquare[] = [
     type: "see",
   },
 ];
+
+/**
+ * Center-square candidates for the five bespoke cards (issue #14).
+ *
+ * The center anchors both diagonals plus a row and a column, so every candidate
+ * is a near-lock (`gimme`). The center is player-marked, not auto-marked: it
+ * starts unmarked but is markable in seconds, so it hands the player an instant
+ * mark plus something funnier than "free space" to recite when calling a bingo.
+ * Where the pool rewards sharp specificity, a good center is absurdly universal.
+ *
+ * Kept in a separate array so centers are never dealt into ordinary cells. IDs
+ * continue the shared pool numbering (permanent, never reused) so saved-state
+ * keys stay globally unique across squares and centers. Wiring the deal to place
+ * a center lives with the dealer script (#4) and seeded path (#12).
+ */
+export const centers: BingoSquare[] = [
+  {
+    id: 63,
+    text: "I saw a white person",
+    shortText: "A white person",
+    rarity: "gimme",
+    type: "see",
+  },
+  {
+    id: 64,
+    text: "I saw something fried",
+    shortText: "Something fried",
+    rarity: "gimme",
+    type: "see",
+  },
+  {
+    id: 65,
+    text: "I saw food on a stick",
+    shortText: "Food on a stick",
+    rarity: "gimme",
+    type: "see",
+  },
+  {
+    id: 66,
+    text: "I saw Crocs",
+    shortText: "Crocs",
+    rarity: "gimme",
+    type: "see",
+  },
+  {
+    id: 67,
+    text: "I saw Twins merch",
+    shortText: "Twins merch",
+    rarity: "gimme",
+    type: "see",
+  },
+  {
+    id: 68,
+    text: "I saw a flag",
+    shortText: "A flag",
+    rarity: "gimme",
+    type: "see",
+  },
+  {
+    id: 69,
+    text: "I saw corn",
+    shortText: "Corn",
+    rarity: "gimme",
+    type: "see",
+  },
+  {
+    id: 70,
+    text: "I saw trash",
+    shortText: "Trash",
+    rarity: "gimme",
+    type: "see",
+  },
+  {
+    id: 71,
+    text: "I saw something with cheese",
+    shortText: "Something with cheese",
+    rarity: "gimme",
+    type: "see",
+  },
+  {
+    id: 72,
+    text: "I saw daytime drinking",
+    shortText: "Daytime drinking",
+    rarity: "gimme",
+    type: "see",
+  },
+];

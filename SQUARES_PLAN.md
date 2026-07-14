@@ -162,5 +162,5 @@ Specific concepts that are parked or dead, so we don't re-pitch them. Banked ide
 - **Crop art** — its own batch, get specific (Prince, a sitting politician, a current meme, a Viking, "this year's celebrity who died").
 - **Animal barns** — the richest open territory. Poultry Building, cattle/horse barns especially.
 - **More `do` squares** — pool has grown sharply `see`-heavy (18 `do` of 61). `do`s are the controllable gimmes that keep dealt cards winnable, so the next batch should weight toward them.
-- **Center-square candidates** — unblocked now that voice and schema are locked.
+- **Center-square candidates** — ✅ ten landed (ids 63-72, `centers` array in [`ts/partials/_squares.ts`](ts/partials/_squares.ts)): a white person, something fried, food on a stick, Crocs, Twins merch, a flag, corn, trash, something with cheese, daytime drinking. All `gimme`/`see`. The joke is inevitability ("of course you did"), so they stay flat and unadorned. Treatment decided: **player-marked** (issue #14). Centers share the pool's id sequence, guarded by `tests/ids.test.ts`.
 - **Skyglider / "guaranteed square" mechanic** — noted in [`PROJECT.md`](PROJECT.md); paused, likely its own issue.
