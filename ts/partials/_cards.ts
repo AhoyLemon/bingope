@@ -12,7 +12,7 @@ export interface PlayerCard {
   slug: string;
   name: string;
   /** Dealt square IDs in grid order. Written by the dealer script (#4). */
-  squareIds: number[];
+  squareIds: string[];
 }
 
 export const cards: Record<string, PlayerCard> = {

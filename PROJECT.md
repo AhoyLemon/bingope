@@ -31,7 +31,7 @@ Names are normalized (lowercased and trimmed) before matching and before namespa
 
 ```ts
 interface BingoSquare {
-  id: number;
+  id: string;
   text: string;
   shortText?: string;
   rarity: "gimme" | "medium" | "rare";
@@ -39,19 +39,37 @@ interface BingoSquare {
 }
 ```
 
+The data lives under [`ts/partials/squares/`](ts/partials/squares/), split by group (`_pool`, `_centers`, `_essentials`) with shared shapes in `_types`, and re-exported by [`ts/partials/_squares.ts`](ts/partials/_squares.ts).
+
 `text` is the canonical wording and defines what counts. The grid displays `shortText ?? text`, and the larger zoomed view always displays `text`. Since the player always reads full `text` before marking, `text` can be declarative and longer than the grid allows. `shortText` is the concise card label: optional but strongly encouraged, and required whenever `text` is too long to fit the grid.
 
-Square IDs are sequential integers. An ID stays with the same idea through wording changes. Retired IDs are never reused for different content. IDs do not describe order, rarity, or card position.
+Square IDs are group-prefixed strings: `P` for the pool (`P1`…`P62`, `P5` retired), `C` for centers (`C1`…`C10`), and a per-group prefix for essentials (`CA` crop art, `SD` special dares, future groups their own). An ID stays with the same idea through wording changes. Retired IDs are never reused for different content. The number is a unique tag: IDs do not describe order, rarity, or card position, so they need not be sequential. Group prefixes also keep a bare id from auto-linking to a GitHub issue.
 
 `rarity` and `type` are authoring-time judgments recorded for the eventual card deal. `rarity` ('gimme', 'medium', 'rare') lets the deal weight cards so every card stays winnable. `type` ('see', 'do') marks whether the square is witnessed or performed. Both are hints, not gospel, and stay tunable.
 
 [`WRITING_STYLE.md`](WRITING_STYLE.md) is the source of truth for square writing. No square copy ships without Lemon's approval. [`SQUARES_PLAN.md`](SQUARES_PLAN.md) tracks area coverage and the log of parked and rejected ideas.
 
-The center square is **player-marked**, not auto-marked (issue #14). It starts unmarked but is a near-lock the player can mark in seconds, so it hands out an instant mark and gives the player something funnier than "free space" to recite when calling a bingo. Candidates live in the `centers` array in [`ts/partials/_squares.ts`](ts/partials/_squares.ts), one distinct center per bespoke card. Wiring the deal to reserve and place a center is separate work (dealer script #4, seeded path #12).
+The center square is **player-marked**, not auto-marked (issue #14). It starts unmarked but is a near-lock the player can mark in seconds, so it hands out an instant mark and gives the player something funnier than "free space" to recite when calling a bingo. Candidates live in the `centers` array in [`ts/partials/squares/_centers.ts`](ts/partials/squares/_centers.ts), one distinct center per bespoke card. Wiring the deal to reserve and place a center is separate work (dealer script #4, seeded path #12).
 
-### Guaranteed and special squares (idea, not built)
+### Essential ("must") squares
 
-Some squares sit between the free center and the ordinary pool: not free, because you do not get them on walk-in, but things we want every one of our five players to do or catch. The first example is "Throw a pair of underwear from the Skyglider." A candidate deal rule is a small subroutine that guarantees each dealt card includes at least one such special square and at least one crop art square. This is a maybe, and implementation is paused. It probably wants its own issue once the square pool is settled.
+Some squares sit between the free center and the ordinary pool: not free, because you do not get them on walk-in, but things we want on cards. These are **essential groups**, a real data structure in [`ts/partials/squares/_essentials.ts`](ts/partials/squares/_essentials.ts) (issue #15). Each group carries its own rules plus its own squares:
+
+```ts
+interface EssentialGroup {
+  groupName: string;
+  essentialFor: "everybody" | "special" | "unspecial";
+  minimum: number;
+  maximum: number;
+  squares: BingoSquare[];
+}
+```
+
+`essentialFor` sets the audience: `everybody` (all cards), `special` (just the five bespoke cards), or `unspecial` (public seeded cards only). `minimum`/`maximum` say how many of the group land on an applicable card, and may be 0 ("might not happen" / "definitely won't"). Unlike centers, essential squares are ordinary dealt cells that are merely guaranteed, so they live only in their group, never in the main pool, which is what makes the count authoritative.
+
+Two groups exist. **Crop Art** (`everybody`, `CA` id prefix) is a reliably findable theme in the Agriculture Horticulture building. **Special Dares** (`special`, `SD` id prefix) is one shared dare placed on all five bespoke cards, the same square in a different cell on each: the Skyglider underwear-throw tradition (`SD1`).
+
+The structure exists now; the deal actually reserving and placing essential squares is still separate work (dealer script #4, seeded path #12).
 
 ## Saved state
 
@@ -79,7 +97,7 @@ The initial version does not show timestamps. Keeping them makes a later scoring
 - The personal version does not need PWA or guaranteed offline support. Once loaded, gameplay itself requires no network traffic.
 - Asset URLs must work from the GitHub Pages `/bingope/` project path and from one-folder-deep player routes.
 
-Automated testing stays extremely small. If the pages build, Sass compiles, and TypeScript type-checks, that is enough. The one unit test (`tests/ids.test.ts`, run by `bun run test`) guards square-ID uniqueness across the pool and centers, since IDs namespace saved state and a collision would leak marks between squares. The final experience gets checked manually on the five real phones.
+Automated testing stays extremely small. If the pages build, Sass compiles, and TypeScript type-checks, that is enough. The one unit test (`tests/ids.test.ts`, run by `bun run test`) guards square-ID uniqueness across the pool, centers, and essentials (and sanity-checks each essential group's min/max counts), since IDs namespace saved state and a collision would leak marks between squares. The final experience gets checked manually on the five real phones.
 
 ## Commits and attribution
 

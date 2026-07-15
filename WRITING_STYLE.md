@@ -4,7 +4,7 @@ Guidance for authoring `BingoSquare` entries. Written for humans and agents. Two
 
 ```ts
 interface BingoSquare {
-  id: number;
+  id: string;
   text: string;
   shortText?: string;
   rarity: "gimme" | "medium" | "rare";
@@ -63,6 +63,15 @@ A center square is one of two things.
 
 Because the center is basically free, it is the safest place to spend the boldest joke, the one that does not depend on catching a rare sighting. Write center candidates to be funny on their own, since every player stares at their center all day. Whether the center auto-marks or the player marks it is decided later, so write candidates that work either way.
 
+## Essential (must) squares
+
+Some squares are guaranteed onto cards rather than dealt at random. They live in **essential groups** (`ts/partials/squares/_essentials.ts`), each a themed set with its own rules (how many per card, and for which audience). The first is **Crop Art**, findable in the Agriculture Horticulture building.
+
+Write them like any other square: the two bars (markable and funny) and the voice rules all still apply. Two things to keep in mind:
+
+- **Themed cohesion.** A group is a batch on one subject, so each square should feel of-a-piece with its siblings while still landing its own specific joke. For Crop Art, name the exact subject (Prince, a sitting politician, a Viking), because the specificity is the joke.
+- **Reliability suits the guarantee.** An essential square is one we're promising the player, so lean `gimme`/`medium` and genuinely findable over a rare gem they might not catch.
+
 ## Writing mechanics
 
 - Follow Lemon's global writing rules. The two that bite here: no em-dashes and no semicolons. Use periods or commas instead. Also avoid the usual AI tells.
@@ -85,4 +94,4 @@ Approved squares that show the bar in practice.
 1. Draft toward the frequency mix. Check what the pool is short on (gimmes versus mediums versus rares) before adding more of what it already has.
 2. **Pitch bold, Lemon dials back.** When drafting for review, pitch the sharper version. Lemon reads every square and softens anything himself, so 'too far' is his call, not yours to pre-empt. Timid drafts waste the review.
 3. **Explicit yes before it ships.** Never commit or push a square Lemon has not approved. Treat drafts as proposals.
-4. Append approved squares with the next sequential `id`. IDs are permanent. An id stays with an idea through wording changes, and retired ids are never reused for different content.
+4. Append approved squares with the next free `id` in that group's prefix (`P` pool, `C` centers, `CA` crop art, etc.), typically the current max for the prefix plus one. IDs are permanent and the number need not be sequential. An id stays with an idea through wording changes, and retired ids are never reused for different content.

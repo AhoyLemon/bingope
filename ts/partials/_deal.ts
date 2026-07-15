@@ -24,7 +24,7 @@ export interface ResolvedCard {
   name: string;
   source: CardSource;
   /** Dealt square IDs in grid order. May be empty until a deal is committed. */
-  squareIds: number[];
+  squareIds: string[];
 }
 
 /**
