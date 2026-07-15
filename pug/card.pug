@@ -7,18 +7,49 @@ doctype html
 html(lang="en")
   include partials/_head.pug
 
-  body
+  body.card-page
     #app.site-shell
-      header.site-header
-        p.eyebrow 2026 Minnesota State Fair
-        h1 BINGOPE
-
       main.card-shell(v-cloak)
-        //- Card resolved (a special name). The grid itself arrives in #5.
         template(v-if="hasCard")
-          h2 You are viewing {{ displayName }}'s card
-          p The bingo grid is coming next.
-        //- No name in the URL, or a name we do not have a card for yet.
+          header.card-ticket
+            .card-ticket__corners(aria-hidden="true")
+              span.card-ticket__corner.card-ticket__corner--top-left
+              span.card-ticket__corner.card-ticket__corner--top-right
+              span.card-ticket__corner.card-ticket__corner--bottom-left
+              span.card-ticket__corner.card-ticket__corner--bottom-right
+            .card-ticket__ornament(aria-hidden="true")
+              span
+            h1 BINGOPE
+            .card-ticket__footer
+              span.card-ticket__star(aria-hidden="true") ★
+              p {{ displayName }}'s Card
+              span.card-ticket__star(aria-hidden="true") ★
+
+          section.bingo-board(aria-label="Bingo card")
+            .bingo-grid
+              button.bingo-square(
+                v-for="square in cardSquares"
+                :key="square.id"
+                :class="squareClasses(square)"
+                :aria-pressed="isMarked(square.id)"
+                :aria-label="square.label + (isMarked(square.id) ? ', marked' : ', unmarked')"
+                @click="openSquare(square)"
+                type="button"
+              )
+                span.bingo-square__dauber(aria-hidden="true")
+                span.bingo-square__text {{ square.label }}
+
+          dialog.bingo-dialog(ref="markDialog" @close="clearSelectedSquare")
+            article.bingo-dialog__inside(v-if="selectedSquare")
+              button.bingo-dialog__close(@click="closeSquare" type="button") Close
+              p.bingo-dialog__eyebrow {{ selectedSquare.label }}
+              h2 {{ selectedSquare.text }}
+              button.bingo-dialog__mark(
+                @click="toggleSelectedSquare"
+                :aria-pressed="isMarked(selectedSquare.id)"
+                type="button"
+              ) {{ isMarked(selectedSquare.id) ? "Unmark it" : "Seen it!" }}
+
         template(v-else)
           h2 No card yet
           p Head back and pick a name to get your Card.

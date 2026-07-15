@@ -21,6 +21,7 @@
 
 // PAGES is for any specific page template
 @use "pages/skeleton";
+@use "pages/card";
 
 // FINALLY, we should have a place for things we still need to get to...
 @use "todo/shame";
