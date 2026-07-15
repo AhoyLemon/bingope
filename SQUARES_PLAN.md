@@ -34,7 +34,7 @@ Territory to draw squares from. Status is coverage, not quality.
 | Buildings & exhibits | Miracle of Birth Center | ✅ | |
 | Buildings & exhibits | Grandstand marketplace / demo hucksters | ✅ | |
 | Buildings & exhibits | Big Boar pavilion | ✅ | |
-| Buildings & exhibits | Crop art / Ag-Hort building | ⏳ | Own **essentials group** ("Crop Art") wired in #15; copy still pending. Prince is the obvious lock. |
+| Buildings & exhibits | Crop art / Ag-Hort building | ✅ | Own **essentials group** ("Crop Art", CA1–CA12), guaranteed one per card (#15). Prince rejected as too mainstream. |
 | Buildings & exhibits | Ag Building — scarecrows | ✅ | Nakedly political scarecrow banked (P37). Weird/political, crop-art-adjacent. |
 | Buildings & exhibits | Ag Building — seed art | ⏳ | Same medium as crop art (seeds-as-portrait). Folded into the Crop Art group. "Crop Art" is the fair's official term. |
 | Buildings & exhibits | Ag Building — Brewers Guild | ✅ | See beer-flight square (P33). |
@@ -159,7 +159,7 @@ Specific concepts that are parked or dead, so we don't re-pitch them. Banked ide
 
 ## Queued batches / next work
 
-- **Crop art** — structure landed as the "Crop Art" essentials group (`CA` id prefix, in [`ts/partials/squares/_essentials.ts`](ts/partials/squares/_essentials.ts), issue #15). Copy still to write: get specific (Prince, a sitting politician, a current meme, a Viking, "this year's celebrity who died"). Once squares land, bump the group `minimum` from 0 to 1.
+- **Crop art** — ✅ landed as the "Crop Art" essentials group (CA1–CA12, `essentialFor: "everybody"`, `minimum: 1`) in [`ts/partials/squares/_essentials.ts`](ts/partials/squares/_essentials.ts), issue #15. Subjects: a movie poster, a 20+ year-old album, an adult cartoon, the fair itself, dunking on Trump, a famous painting, a repressed meme, a seed pun, an unidentifiable person, an in-memoriam, a non-sports/non-fair Minnesota reference, and crop art about crop art.
 - **Animal barns** — the richest open territory. Poultry Building, cattle/horse barns especially.
 - **More `do` squares** — pool has grown sharply `see`-heavy (18 `do` of 61). `do`s are the controllable gimmes that keep dealt cards winnable, so the next batch should weight toward them.
 - **Center-square candidates** — ✅ ten landed (ids C1–C10, `centers` array in [`ts/partials/squares/_centers.ts`](ts/partials/squares/_centers.ts)): a white person, something fried, food on a stick, Crocs, Twins merch, a flag, corn, trash, something with cheese, daytime drinking. All `gimme`/`see`. The joke is inevitability ("of course you did"), so they stay flat and unadorned. Treatment decided: **player-marked** (issue #14). Centers use the `C` id prefix, guarded across all groups by `tests/ids.test.ts`.
