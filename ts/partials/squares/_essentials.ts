@@ -6,8 +6,8 @@
  * squares are ordinary dealt cells, just guaranteed to appear, so they live only
  * here and never in the main pool. Deal-time enforcement is dealer work (#4/#12).
  *
- * Crop art (`CA`) and special dares (`SD`) are the current groups. Future groups
- * get their own prefix (e.g. `LP` Lemon Party). "Crop Art" is the
+ * Crop art (`CA`) and special dares (`SD`) are the current groups. Any future
+ * group gets its own id prefix. "Crop Art" is the
  * Minnesota State Fair's official term for the seed-portrait exhibit in the
  * Agriculture Horticulture building ("seed art" is the same thing). Every crop
  * art `shortText` is prefixed "CROP ART:" so the group reads as a set on the grid.
