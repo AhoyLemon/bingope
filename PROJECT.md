@@ -43,7 +43,7 @@ The data lives under [`ts/partials/squares/`](ts/partials/squares/), split by gr
 
 `text` is the canonical wording and defines what counts. The grid displays `shortText ?? text`, and the larger zoomed view always displays `text`. Since the player always reads full `text` before marking, `text` can be declarative and longer than the grid allows. `shortText` is the concise card label: optional but strongly encouraged, and required whenever `text` is too long to fit the grid.
 
-Square IDs are group-prefixed strings: `P` for the pool (`P1`…`P62`, `P5` retired), `C` for centers (`C1`…`C10`), and a per-group prefix for essentials (`CA` crop art, future groups their own). An ID stays with the same idea through wording changes. Retired IDs are never reused for different content. The number is a unique tag: IDs do not describe order, rarity, or card position, so they need not be sequential. Group prefixes also keep a bare id from auto-linking to a GitHub issue.
+Square IDs are group-prefixed strings: `P` for the pool (`P1`…`P62`, `P5` retired), `C` for centers (`C1`…`C10`), and a per-group prefix for essentials (`CA` crop art, `SD` special dares, future groups their own). An ID stays with the same idea through wording changes. Retired IDs are never reused for different content. The number is a unique tag: IDs do not describe order, rarity, or card position, so they need not be sequential. Group prefixes also keep a bare id from auto-linking to a GitHub issue.
 
 `rarity` and `type` are authoring-time judgments recorded for the eventual card deal. `rarity` ('gimme', 'medium', 'rare') lets the deal weight cards so every card stays winnable. `type` ('see', 'do') marks whether the square is witnessed or performed. Both are hints, not gospel, and stay tunable.
 
@@ -67,7 +67,7 @@ interface EssentialGroup {
 
 `essentialFor` sets the audience: `everybody` (all cards), `special` (just the five bespoke cards), or `unspecial` (public seeded cards only). `minimum`/`maximum` say how many of the group land on an applicable card, and may be 0 ("might not happen" / "definitely won't"). Unlike centers, essential squares are ordinary dealt cells that are merely guaranteed, so they live only in their group, never in the main pool, which is what makes the count authoritative.
 
-The first group is **Crop Art** (`everybody`, `CA` id prefix), a reliably findable theme in the Agriculture Horticulture building. A future **special dares** group (e.g. the Skyglider underwear throw, `essentialFor: "special"`) fits the same shape.
+Two groups exist. **Crop Art** (`everybody`, `CA` id prefix) is a reliably findable theme in the Agriculture Horticulture building. **Special Dares** (`special`, `SD` id prefix) is one shared dare placed on all five bespoke cards, the same square in a different cell on each: the Skyglider underwear-throw tradition (`SD1`).
 
 The structure exists now; the deal actually reserving and placing essential squares is still separate work (dealer script #4, seeded path #12).
 

@@ -63,7 +63,7 @@ Territory to draw squares from. Status is coverage, not quality.
 | Rides & Midway | Carnies | ✅ | |
 | Rides & Midway | Prize hauls | ✅ | |
 | Rides & Midway | Ferris wheel / big rides | 🔷 | |
-| Rides & Midway | Skyride gondola | ✅ | Regular Skyride nerves banked (P36). The Skyglider underwear-throw special is still its own queued thing. |
+| Rides & Midway | Skyride gondola | ✅ | Regular Skyride nerves banked (P36). The Skyglider underwear-throw landed as the Special Dares essential (SD1). |
 | Rides & Midway | Arcade / coin-pusher games | ✅ | Coin-pusher win banked (P38). |
 | Rides & Midway | Space Tower | 🔷 | |
 | Rides & Midway | Ye Old Mill | ✅ | Damp-and-disappointed emerger banked (P53). |
@@ -163,4 +163,4 @@ Specific concepts that are parked or dead, so we don't re-pitch them. Banked ide
 - **Animal barns** — the richest open territory. Poultry Building, cattle/horse barns especially.
 - **More `do` squares** — pool has grown sharply `see`-heavy (18 `do` of 61). `do`s are the controllable gimmes that keep dealt cards winnable, so the next batch should weight toward them.
 - **Center-square candidates** — ✅ ten landed (ids C1–C10, `centers` array in [`ts/partials/squares/_centers.ts`](ts/partials/squares/_centers.ts)): a white person, something fried, food on a stick, Crocs, Twins merch, a flag, corn, trash, something with cheese, daytime drinking. All `gimme`/`see`. The joke is inevitability ("of course you did"), so they stay flat and unadorned. Treatment decided: **player-marked** (issue #14). Centers use the `C` id prefix, guarded across all groups by `tests/ids.test.ts`.
-- **Skyglider / "guaranteed square" mechanic** — the essentials structure now exists (issue #15), so a "special dares" group (its own prefix, e.g. `SD`, `essentialFor: "special"`) can slot in when ready. The Skyglider underwear-throw square itself is still unwritten and the deal-time enforcement is paused. See [`PROJECT.md`](PROJECT.md).
+- **Skyglider / "guaranteed square" mechanic** — ✅ landed as the **Special Dares** essentials group (SD1, `essentialFor: "special"`, `minimum: 1`) in [`ts/partials/squares/_essentials.ts`](ts/partials/squares/_essentials.ts): one shared dare (the Skyglider underwear throw) placed on all five bespoke cards. Deal-time enforcement is still dealer work (#4/#12). See [`PROJECT.md`](PROJECT.md).

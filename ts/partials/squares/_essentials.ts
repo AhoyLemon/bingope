@@ -6,8 +6,8 @@
  * squares are ordinary dealt cells, just guaranteed to appear, so they live only
  * here and never in the main pool. Deal-time enforcement is dealer work (#4/#12).
  *
- * Crop art is the first group. Its ids are prefixed `CA`. Future groups get their
- * own prefix (e.g. `SD` special dares, `LP` Lemon Party). "Crop Art" is the
+ * Crop art (`CA`) and special dares (`SD`) are the current groups. Future groups
+ * get their own prefix (e.g. `LP` Lemon Party). "Crop Art" is the
  * Minnesota State Fair's official term for the seed-portrait exhibit in the
  * Agriculture Horticulture building ("seed art" is the same thing). Every crop
  * art `shortText` is prefixed "CROP ART:" so the group reads as a set on the grid.
@@ -105,6 +105,21 @@ export const essentials: EssentialGroup[] = [
         shortText: "CROP ART: crop art about crop art",
         rarity: "medium",
         type: "see",
+      },
+    ],
+  },
+  {
+    groupName: "Special Dares",
+    essentialFor: "special",
+    minimum: 1,
+    maximum: 1,
+    squares: [
+      {
+        id: "SD1",
+        text: "I threw a pair of underwear onto the roof from the Skyglider. I respect the tradition. For the record, I (probably?) brought a spare pair for this event. So either I respect tradition enough to plan ahead, or enough to fully commit.",
+        shortText: "Throw your underwear",
+        rarity: "gimme",
+        type: "do",
       },
     ],
   },
