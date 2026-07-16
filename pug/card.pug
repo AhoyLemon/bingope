@@ -7,18 +7,134 @@ doctype html
 html(lang="en")
   include partials/_head.pug
 
-  body
+  body.card-page
     #app.site-shell
-      header.site-header
-        p.eyebrow 2026 Minnesota State Fair
-        h1 BINGOPE
-
       main.card-shell(v-cloak)
-        //- Card resolved (a special name). The grid itself arrives in #5.
         template(v-if="hasCard")
-          h2 You are viewing {{ displayName }}'s card
-          p The bingo grid is coming next.
-        //- No name in the URL, or a name we do not have a card for yet.
+          header.card-ticket.ticket-mask
+            span.card-ticket__perforations.card-ticket__perforations--left(aria-hidden="true")
+            span.card-ticket__perforations.card-ticket__perforations--right(aria-hidden="true")
+            .card-ticket__paper.ticket-mask
+              .card-ticket__rule.ticket-mask
+                .card-ticket__rule-gap.ticket-mask
+                  .card-ticket__inner-rule.ticket-mask
+                    .card-ticket__inside.ticket-mask
+                      .card-ticket__star-rail.card-ticket__star-rail--left(aria-hidden="true")
+                        span ★
+                        span ★
+                        span ★
+                        span ★
+                        span ★
+                      .card-ticket__brand
+                        h1 BINGOPE
+                        p.card-ticket__owner
+                          span.card-ticket__owner-name {{ cardLabel }}
+                      .card-ticket__star-rail.card-ticket__star-rail--right(aria-hidden="true")
+                        span ★
+                        span ★
+                        span ★
+                        span ★
+                        span ★
+
+          section.bingo-board(aria-label="Bingo card")
+            .bingo-grid
+              button.bingo-square(
+                v-for="(square, squareIndex) in cardSquares"
+                :key="square.id"
+                :class="squareClasses(square, squareIndex)"
+                :aria-pressed="isMarked(square.id)"
+                :aria-label="square.label + (isMarked(square.id) ? ', marked' : ', unmarked')"
+                @click="openSquare(square)"
+                type="button"
+              )
+                svg.bingo-square__dauber(viewBox="0 0 100 100" aria-hidden="true")
+                  defs
+                    linearGradient(
+                      :id="'dauber-colors-' + square.id"
+                      x1="8%"
+                      y1="10%"
+                      x2="92%"
+                      y2="88%"
+                      :gradientTransform="'rotate(' + ((squareIndex % 5) * 18 - 36) + ' 50 50)'"
+                    )
+                      stop(offset="0%" stop-color="#82d8f8")
+                      stop(offset="24%" stop-color="#2db2ec")
+                      stop(offset="49%" stop-color="#0d92d4")
+                      stop(offset="73%" stop-color="#61c9f3")
+                      stop(offset="100%" stop-color="#1ca5e5")
+                    filter(
+                      :id="'dauber-' + square.id"
+                      x="-12%"
+                      y="-12%"
+                      width="124%"
+                      height="124%"
+                      color-interpolation-filters="sRGB"
+                    )
+                      feTurbulence(
+                        type="fractalNoise"
+                        baseFrequency="0.08"
+                        numOctaves="3"
+                        :seed="squareIndex + 11"
+                        result="edgeNoise"
+                      )
+                      feDisplacementMap(
+                        in="SourceGraphic"
+                        in2="edgeNoise"
+                        scale="6.5"
+                        xChannelSelector="R"
+                        yChannelSelector="G"
+                        result="distorted"
+                      )
+                      feTurbulence(
+                        type="fractalNoise"
+                        baseFrequency="0.55"
+                        numOctaves="3"
+                        :seed="squareIndex + 31"
+                        result="grain"
+                      )
+                      feColorMatrix(in="grain" type="luminanceToAlpha" result="grainAlpha")
+                      feComponentTransfer(in="grainAlpha" result="inkMask")
+                        feFuncA(type="table" tableValues="0.22 0.5 0.82 1")
+                      feComposite(in="distorted" in2="inkMask" operator="in" result="grainyInk")
+                      feTurbulence(
+                        type="fractalNoise"
+                        baseFrequency="0.075"
+                        numOctaves="2"
+                        :seed="squareIndex + 51"
+                        result="blotches"
+                      )
+                      feColorMatrix(in="blotches" type="luminanceToAlpha" result="blotchAlpha")
+                      feComponentTransfer(in="blotchAlpha" result="blotchMask")
+                        feFuncA(type="table" tableValues="0 0.15 0.6 0.95")
+                      feComponentTransfer(in="blotchAlpha" result="darkBlotchMask")
+                        feFuncA(type="table" tableValues="0.95 0.55 0.15 0")
+                      feFlood(flood-color="#087fbd" flood-opacity="0.46" result="darkBlue")
+                      feComposite(in="darkBlue" in2="darkBlotchMask" operator="in" result="darkBlotches")
+                      feComposite(in="darkBlotches" in2="distorted" operator="in" result="darkBlotchesInside")
+                      feFlood(flood-color="#a6e4fb" flood-opacity="0.62" result="lightBlue")
+                      feComposite(in="lightBlue" in2="blotchMask" operator="in" result="lightBlotches")
+                      feComposite(in="lightBlotches" in2="distorted" operator="in" result="lightBlotchesInside")
+                      feBlend(in="grainyInk" in2="darkBlotchesInside" mode="multiply" result="shadowedInk")
+                      feBlend(in="shadowedInk" in2="lightBlotchesInside" mode="screen")
+                  path(
+                    :d="dauberPaths[squareIndex % dauberPaths.length]"
+                    :filter="'url(#dauber-' + square.id + ')'"
+                    :fill="'url(#dauber-colors-' + square.id + ')'"
+                    :fill-opacity="0.7 + (squareIndex % 5) * 0.035"
+                  )
+                span.bingo-square__text {{ square.label }}
+
+          dialog.bingo-dialog(ref="markDialog" @close="clearSelectedSquare")
+            article.bingo-dialog__inside(v-if="selectedSquare")
+              button.bingo-dialog__close(@click="closeSquare" type="button") Close
+              p.bingo-dialog__eyebrow {{ selectedSquare.label }}
+              h2 {{ selectedSquare.text }}
+              button.bingo-dialog__mark(
+                @click="toggleSelectedSquare"
+                :aria-pressed="isMarked(selectedSquare.id)"
+                type="button"
+              ) {{ isMarked(selectedSquare.id) ? "Unmark it" : "Seen it!" }}
+
         template(v-else)
           h2 No card yet
           p Head back and pick a name to get your Card.
