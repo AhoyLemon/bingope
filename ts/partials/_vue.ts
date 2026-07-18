@@ -25,6 +25,12 @@ let markOrigin: HTMLElement | null = null;
 
 const OPEN_MS = 280;
 const CLOSE_MS = 230;
+// Beat between the modal fully leaving and the mark landing on the board.
+const MARK_DELAY_MS = 300;
+// How long the stamp-slap plays before the one-shot `just-stamped` class drops.
+const STAMP_MS = 320;
+// Guards a double-tap from re-triggering the mark while the modal is exiting.
+let dismissing = false;
 
 function prefersReducedMotion(): boolean {
   return (
@@ -57,6 +63,7 @@ interface CardAppData {
   dauberPaths: string[];
   marks: Marks;
   selectedSquare: CardSquare | null;
+  justStamped: string | null;
 }
 
 interface CardAppMethods {
@@ -67,7 +74,7 @@ interface CardAppMethods {
     squareIndex: number,
   ): Record<string, boolean>;
   openSquare(square: CardSquare, event?: Event): void;
-  closeSquare(): void;
+  closeSquare(afterClose?: () => void): void;
   onBackdropClick(event: MouseEvent): void;
   clearSelectedSquare(): void;
   toggleSelectedSquare(): void;
@@ -116,6 +123,7 @@ const cardAppOptions: {
       dauberPaths,
       marks: resolved && storage ? loadMarks(resolved.slug, storage) : ({} as Marks),
       selectedSquare: null as CardSquare | null,
+      justStamped: null as string | null,
     };
   },
   methods: {
@@ -140,6 +148,7 @@ const cardAppOptions: {
         "task-do": square.type === "do",
         "copy-long": square.label.length > 22 || longestWordLength > 8,
         "copy-very-long": square.label.length > 28 || longestWordLength > 12,
+        "just-stamped": square.id === this.justStamped,
       };
     },
     openSquare(square: CardSquare, event?: Event): void {
@@ -164,15 +173,23 @@ const cardAppOptions: {
         );
       });
     },
-    closeSquare(): void {
+    closeSquare(afterClose?: () => void): void {
+      // Templates wire `@click="closeSquare"`, which would pass the DOM event as
+      // this arg — only honour a real callback.
+      const done = typeof afterClose === "function" ? afterClose : undefined;
       const dialog = this.$refs.markDialog as HTMLDialogElement | undefined;
       if (!dialog?.open) {
         this.clearSelectedSquare();
+        done?.();
         return;
       }
 
+      // Already zooming out (e.g. Esc during the exit) — don't start a second pass.
+      if (dialog.classList.contains("is-closing")) return;
+
       if (prefersReducedMotion()) {
         dialog.close();
+        done?.();
         return;
       }
 
@@ -191,6 +208,7 @@ const cardAppOptions: {
         dialog.close();
         // Drop the forwards-fill so it can't leak into the next open.
         animation.cancel();
+        done?.();
       };
     },
     onBackdropClick(event: MouseEvent): void {
@@ -202,11 +220,30 @@ const cardAppOptions: {
       this.selectedSquare = null;
     },
     toggleSelectedSquare(): void {
-      if (!this.selectedSquare || !this.resolved) return;
+      if (!this.selectedSquare || !this.resolved || dismissing) return;
 
-      this.marks = toggleMark(this.marks, this.selectedSquare.id);
-      if (storage) saveMarks(this.resolved.slug, this.marks, storage);
-      this.closeSquare();
+      const squareId = this.selectedSquare.id;
+      const slug = this.resolved.slug;
+      dismissing = true;
+
+      // Take the window away first, then land the mark ~300ms after it's gone —
+      // the state change is never visible mid-zoom. The stamp animates in on the
+      // board via the one-shot `just-stamped` class.
+      this.closeSquare(() => {
+        window.setTimeout(() => {
+          this.marks = toggleMark(this.marks, squareId);
+          if (storage) saveMarks(slug, this.marks, storage);
+
+          if (this.marks[squareId]) {
+            this.justStamped = squareId;
+            window.setTimeout(() => {
+              if (this.justStamped === squareId) this.justStamped = null;
+            }, STAMP_MS);
+          }
+
+          dismissing = false;
+        }, MARK_DELAY_MS);
+      });
     },
   },
   mounted() {

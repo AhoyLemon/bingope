@@ -354,6 +354,11 @@ $paper-texture-modal: url("../svg/paper-texture-modal.svg");
 }
 
 .bingo-square.marked .bingo-square__dauber {
+  // Split rotate/scale into longhands so the stamp-slap can animate scale alone
+  // while each square keeps its own resting angle.
+  --dauber-rotate: -7deg;
+  --dauber-scale: 0.98;
+
   position: absolute;
   z-index: 0;
   display: block;
@@ -362,15 +367,41 @@ $paper-texture-modal: url("../svg/paper-texture-modal.svg");
   aspect-ratio: 1;
   overflow: visible;
   mix-blend-mode: multiply;
-  transform: rotate(-7deg) scale(0.98);
+  rotate: var(--dauber-rotate);
+  scale: var(--dauber-scale);
 }
 
 .bingo-square:nth-child(3n + 2).marked .bingo-square__dauber {
-  transform: rotate(8deg) scale(0.94);
+  --dauber-rotate: 8deg;
+  --dauber-scale: 0.94;
 }
 
 .bingo-square:nth-child(4n).marked .bingo-square__dauber {
-  transform: rotate(-14deg) scale(0.93);
+  --dauber-rotate: -14deg;
+  --dauber-scale: 0.93;
+}
+
+// One-shot "slapped into place" stamp when a square is marked from the modal.
+// Overshoots small on impact, then settles to its resting scale.
+.bingo-square.just-stamped .bingo-square__dauber {
+  animation: dauber-slap 300ms ease-out both;
+}
+
+@keyframes dauber-slap {
+  0% {
+    opacity: 0;
+    scale: calc(var(--dauber-scale) * 1.55);
+  }
+
+  60% {
+    opacity: 1;
+    scale: calc(var(--dauber-scale) * 0.9);
+  }
+
+  100% {
+    opacity: 1;
+    scale: var(--dauber-scale);
+  }
 }
 
 .bingo-square__text {
@@ -713,5 +744,9 @@ $paper-texture-modal: url("../svg/paper-texture-modal.svg");
   .bingo-dialog__close,
   .bingo-dialog::backdrop {
     transition: none;
+  }
+
+  .bingo-square.just-stamped .bingo-square__dauber {
+    animation: none;
   }
 }
