@@ -12,7 +12,9 @@ $ink: #10192f;
 $display: "Avenir Next", Futura, "Arial Black", sans-serif;
 $grid-display: "Arial Narrow", "Aptos Narrow", "Helvetica Neue Condensed", sans-serif;
 $owner-serif: Georgia, "Times New Roman", serif;
+$ticket-serif: "Zilla Slab", Rockwell, "Roboto Slab", Georgia, serif;
 $paper-texture: url("../svg/paper-texture.svg");
+$paper-texture-modal: url("../svg/paper-texture-modal.svg");
 
 .card-page {
   --ticket-height: clamp(7rem, min(19dvw, 21dvh), 10.75rem);
@@ -388,76 +390,309 @@ $paper-texture: url("../svg/paper-texture.svg");
 }
 
 .bingo-dialog {
-  width: min(100% - 2rem, 34rem);
-  max-height: min(100% - 2rem, 42rem);
+  width: min(100% - 1.5rem, 34rem);
+  max-height: calc(100dvh - 1.5rem);
+  // The shared reset zeroes `dialog` margins, which kills the native modal's
+  // auto-centering — restore it.
+  margin: auto;
   padding: 0;
   border: 0;
   background: transparent;
+  filter: drop-shadow(0 0.6rem 0.5rem rgba($ink, 0.32));
+  overflow: visible;
 }
 
 .bingo-dialog::backdrop {
-  background: rgba($navy, 0.82);
+  background: rgba($navy, 0.86);
+}
+
+// Every ticket ring is clipped to the same scalloped-corner + side-notched
+// silhouette. Each nested ring pushes the notch centres out by its cumulative
+// --mask-offset so the arcs stay concentric and the twin navy rules trace the
+// shape at any size. `intersect` = a hole in any one gradient punches through;
+// where unsupported it degrades to a plain rectangle rather than breaking.
+@mixin dialog-frame-mask {
+  --mask-radius: calc(var(--notch-radius) + var(--mask-offset));
+  --edge-radius: calc(var(--edge-notch-radius) + var(--mask-offset));
+
+  mask:
+    radial-gradient(
+      circle at calc(0% - var(--mask-offset)) calc(0% - var(--mask-offset)),
+      transparent calc(var(--mask-radius) - 0.5px),
+      #000 calc(var(--mask-radius) + 0.5px)
+    ),
+    radial-gradient(
+      circle at calc(100% + var(--mask-offset)) calc(0% - var(--mask-offset)),
+      transparent calc(var(--mask-radius) - 0.5px),
+      #000 calc(var(--mask-radius) + 0.5px)
+    ),
+    radial-gradient(
+      circle at calc(0% - var(--mask-offset)) calc(100% + var(--mask-offset)),
+      transparent calc(var(--mask-radius) - 0.5px),
+      #000 calc(var(--mask-radius) + 0.5px)
+    ),
+    radial-gradient(
+      circle at calc(100% + var(--mask-offset)) calc(100% + var(--mask-offset)),
+      transparent calc(var(--mask-radius) - 0.5px),
+      #000 calc(var(--mask-radius) + 0.5px)
+    ),
+    radial-gradient(
+      circle at calc(0% - var(--mask-offset)) 50%,
+      transparent calc(var(--edge-radius) - 0.5px),
+      #000 calc(var(--edge-radius) + 0.5px)
+    ),
+    radial-gradient(
+      circle at calc(100% + var(--mask-offset)) 50%,
+      transparent calc(var(--edge-radius) - 0.5px),
+      #000 calc(var(--edge-radius) + 0.5px)
+    );
+  mask-composite: intersect;
+}
+
+.bingo-dialog__ticket {
+  --frame-margin: clamp(0.3rem, 1.15vw, 0.5rem);
+  --outer-rule: clamp(0.16rem, 0.55vw, 0.26rem);
+  --rule-gap: clamp(0.26rem, 0.95vw, 0.44rem);
+  --inner-rule: clamp(0.06rem, 0.24vw, 0.11rem);
+  --notch-radius: clamp(1rem, 4.2vw, 1.75rem);
+  --edge-notch-radius: clamp(0.9rem, 3.6vw, 1.5rem);
+  --mask-offset: 0px;
+
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  min-height: min(31rem, calc(100dvh - 1.5rem));
+  max-height: calc(100dvh - 1.5rem);
+  margin: 0;
+  padding: var(--frame-margin);
+  background-color: $paper;
+  background-image: $paper-texture-modal;
+  background-size: 13rem 13rem;
+  color: $ink;
+
+  @include dialog-frame-mask;
+}
+
+.bingo-dialog__rule,
+.bingo-dialog__rule-gap,
+.bingo-dialog__inner-rule,
+.bingo-dialog__inside {
+  flex: 1 1 auto;
+  min-height: 0;
+
+  @include dialog-frame-mask;
+}
+
+.bingo-dialog__rule,
+.bingo-dialog__rule-gap,
+.bingo-dialog__inner-rule {
+  display: flex;
+  flex-direction: column;
+}
+
+.bingo-dialog__rule {
+  --mask-offset: var(--frame-margin);
+
+  padding: var(--outer-rule);
+  background: $navy;
+}
+
+.bingo-dialog__rule-gap {
+  --mask-offset: calc(var(--frame-margin) + var(--outer-rule));
+
+  padding: var(--rule-gap);
+  background-color: $paper;
+  background-image: $paper-texture-modal;
+  background-size: 13rem 13rem;
+}
+
+.bingo-dialog__inner-rule {
+  --mask-offset: calc(var(--frame-margin) + var(--outer-rule) + var(--rule-gap));
+
+  padding: var(--inner-rule);
+  background: $navy;
 }
 
 .bingo-dialog__inside {
+  --mask-offset: calc(
+    var(--frame-margin) + var(--outer-rule) + var(--rule-gap) +
+      var(--inner-rule)
+  );
+
+  position: relative;
   display: grid;
-  gap: 1.25rem;
-  padding: clamp(1.25rem, 7vw, 2.5rem);
-  border: 0.25rem solid $ink;
-  background: $card;
-  color: $ink;
+  grid-template-rows: auto minmax(0, 1fr) auto auto;
+  gap: clamp(0.85rem, 3dvh, 1.6rem);
+  padding: clamp(1.9rem, 5.5vw, 2.9rem) clamp(1.15rem, 4vw, 2rem)
+    clamp(1.15rem, 3.5vw, 1.7rem);
+  background-color: $paper;
+  background-image: $paper-texture-modal;
+  background-size: 13rem 13rem;
 }
 
 .bingo-dialog__close {
-  justify-self: end;
-  padding: 0.35rem 0.6rem;
-  border: 0.125rem solid currentColor;
+  position: absolute;
+  z-index: 3;
+  top: clamp(0.35rem, 2vw, 0.85rem);
+  right: clamp(0.35rem, 2vw, 0.85rem);
+  display: grid;
+  width: 2.75rem;
+  height: 2.75rem;
+  place-items: center;
+  padding: 0;
+  border: 0;
+  border-radius: 0.25rem;
   background: transparent;
-  color: $ink;
-  font: inherit;
-  font-weight: vars.$bold;
-}
-
-.bingo-dialog__eyebrow {
-  margin: 0;
-  color: $green;
-  font-size: 0.875rem;
-  font-weight: vars.$bold;
-  line-height: 1.2;
-  text-wrap: balance;
+  color: $navy;
+  font-family: $display;
+  font-size: 2.6rem;
+  font-weight: vars.$light;
+  line-height: 1;
 }
 
 .bingo-dialog h2 {
+  display: grid;
+  align-self: stretch;
+  justify-self: center;
+  place-content: center;
+  max-width: 20ch;
   margin: 0;
-  font-size: clamp(1.75rem, 8vw, 2.75rem);
+  overflow-y: auto;
+  color: $navy;
+  font-family: $ticket-serif;
+  font-size: clamp(2rem, 8.2vw, 3.6rem);
+  font-weight: vars.$bold;
+  line-height: 1.05;
+  text-align: center;
   text-wrap: balance;
 }
 
+.bingo-dialog__fence {
+  display: flex;
+  gap: clamp(0.5rem, 2vw, 0.95rem);
+  align-items: center;
+  justify-content: center;
+  color: $green;
+  font-family: $display;
+  font-size: clamp(0.8rem, 3vw, 1.15rem);
+  line-height: 1;
+}
+
+.bingo-dialog__fence--top {
+  align-self: start;
+}
+
+.bingo-dialog__fence-line {
+  height: 0.1rem;
+  flex: 1;
+  background: currentColor;
+}
+
+.bingo-dialog__fence-stars {
+  display: inline-flex;
+  align-items: center;
+  gap: clamp(0.24rem, 1vw, 0.46rem);
+  line-height: 1;
+  white-space: nowrap;
+}
+
+.bingo-dialog__star--sm {
+  font-size: 0.68em;
+}
+
+.bingo-dialog__star--md {
+  font-size: 1em;
+}
+
+.bingo-dialog__star--lg {
+  font-size: 1.55em;
+}
+
 .bingo-dialog__mark {
-  padding: 1rem 1.25rem;
-  border: 0.1875rem solid $ink;
+  --notch: clamp(0.7rem, 2.8vw, 1.1rem);
+
+  width: 100%;
+  min-height: clamp(3.1rem, 9vw, 4rem);
+  padding: 0.8rem 1.4rem;
+  border: 0;
   background: $blue;
-  color: $ink;
-  font: inherit;
-  font-size: 1.25rem;
+  box-shadow: inset 0 0 0 0.16rem rgba($paper, 0.8);
+  // Concave scallops on both bottom corners, echoing the ticket's bottom edge.
+  mask:
+    radial-gradient(
+        circle at 0% 100%,
+        transparent calc(var(--notch) - 0.5px),
+        #000 calc(var(--notch) + 0.5px)
+      )
+      left bottom / 50% 100% no-repeat,
+    radial-gradient(
+        circle at 100% 100%,
+        transparent calc(var(--notch) - 0.5px),
+        #000 calc(var(--notch) + 0.5px)
+      )
+      right bottom / 50% 100% no-repeat;
+  color: $paper;
+  font-family: $grid-display;
+  font-size: clamp(1.15rem, 4.6vw, 1.7rem);
+  font-stretch: condensed;
   font-weight: vars.$bold;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  transition: transform 140ms ease-out, filter 140ms ease-out;
+}
+
+.bingo-dialog__mark.is-undo {
+  background: #b94d49;
 }
 
 .bingo-dialog__close:hover,
-.bingo-dialog__close:focus-visible,
 .bingo-dialog__mark:hover,
-.bingo-dialog__mark:focus-visible {
-  outline: 0.25rem solid $green;
-  outline-offset: 0.125rem;
-}
-
 .bingo-dialog__close:active,
 .bingo-dialog__mark:active {
-  transform: translateY(0.125rem);
+  transform: translateY(0.1rem);
+}
+
+.bingo-dialog__mark:hover {
+  filter: brightness(1.06);
+}
+
+.bingo-dialog__close:hover {
+  color: $green;
+}
+
+.bingo-dialog__close:focus-visible {
+  outline: 0.2rem solid $green;
+  outline-offset: 0.15rem;
+}
+
+.bingo-dialog__mark:focus-visible {
+  box-shadow:
+    inset 0 0 0 0.16rem rgba($paper, 0.85),
+    inset 0 0 0 0.4rem $green;
+  outline: none;
+}
+
+@media (max-height: 43rem) {
+  .bingo-dialog__ticket {
+    min-height: 0;
+  }
+
+  .bingo-dialog__inside {
+    gap: 0.9rem;
+    padding-top: clamp(2rem, 6vw, 2.8rem);
+    padding-bottom: 1.6rem;
+  }
+
+  .bingo-dialog h2 {
+    font-size: clamp(1.7rem, 7.5vw, 2.6rem);
+  }
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .bingo-square {
+  .bingo-square,
+  .bingo-dialog__mark,
+  .bingo-dialog__close {
     transition: none;
   }
 }

@@ -10,11 +10,12 @@
 declare const Vue: any;
 
 import { CENTER_INDEX, resolveCard } from "./_deal.js";
-import { resolveCardSquares } from "./_cardSquares.js";
+import { markActionText, resolveCardSquares } from "./_cardSquares.js";
 import { loadMarks, saveMarks, toggleMark } from "./_marks.js";
 import type { CardSquare } from "./_cardSquares.js";
 import type { ResolvedCard } from "./_deal.js";
 import type { Marks } from "./_marks.js";
+import type { SquareType } from "./_squares.js";
 
 const { createApp, nextTick } = Vue;
 
@@ -30,6 +31,7 @@ interface CardAppData {
 
 interface CardAppMethods {
   isMarked(squareId: string): boolean;
+  modalActionText(type: SquareType, marked: boolean): string;
   squareClasses(
     square: CardSquare,
     squareIndex: number,
@@ -88,6 +90,9 @@ const cardAppOptions: {
   methods: {
     isMarked(squareId: string): boolean {
       return Boolean(this.marks[squareId]);
+    },
+    modalActionText(type: SquareType, marked: boolean): string {
+      return markActionText(type, marked);
     },
     squareClasses(
       square: CardSquare,

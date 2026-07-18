@@ -124,16 +124,7 @@ html(lang="en")
                   )
                 span.bingo-square__text {{ square.label }}
 
-          dialog.bingo-dialog(ref="markDialog" @close="clearSelectedSquare")
-            article.bingo-dialog__inside(v-if="selectedSquare")
-              button.bingo-dialog__close(@click="closeSquare" type="button") Close
-              p.bingo-dialog__eyebrow {{ selectedSquare.label }}
-              h2 {{ selectedSquare.text }}
-              button.bingo-dialog__mark(
-                @click="toggleSelectedSquare"
-                :aria-pressed="isMarked(selectedSquare.id)"
-                type="button"
-              ) {{ isMarked(selectedSquare.id) ? "Unmark it" : "Seen it!" }}
+          include sections/_dialog.pug
 
         template(v-else)
           h2 No card yet
