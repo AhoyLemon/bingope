@@ -43,9 +43,9 @@ const BINGO_CHECK_MS = 300;
 const BINGO_LINE_MS = 1_500;
 const BINGO_LINE_GAP_MS = 180;
 const FAIR_STAR_MAX = 80;
-// 2.75× the original light-mist rate: lively, but still a stream of tosses.
-const FAIR_STAR_MIN_DELAY_MS = 180;
-const FAIR_STAR_MAX_DELAY_MS = 400;
+// 35% calmer than the lively stream: still festive, with breathing room.
+const FAIR_STAR_MIN_DELAY_MS = 280;
+const FAIR_STAR_MAX_DELAY_MS = 620;
 const FAIR_STAR_COLORS = [
   "#dd3843",
   "#e0aa22",
@@ -198,10 +198,10 @@ function fairStar(grid: DOMRect): FairBurstPiece {
   const landingY = grid.height * randomBetween(0.07, 0.93);
   const flightX = landingX - sourceX;
   const flightY = landingY - sourceY;
-  const arcHeight = randomBetween(grid.height * 0.12, grid.height * 0.3);
-  const sidewaysCurl = randomBetween(-grid.width * 0.12, grid.width * 0.12);
-  const controlX = flightX * randomBetween(0.32, 0.52) + sidewaysCurl;
-  const controlY = flightY * randomBetween(0.28, 0.46) - arcHeight;
+  const arcHeight = randomBetween(grid.height * 0.32, grid.height * 0.62);
+  const sidewaysCurl = randomBetween(-grid.width * 0.2, grid.width * 0.2);
+  const controlX = flightX * randomBetween(0.18, 0.38) + sidewaysCurl;
+  const controlY = flightY * randomBetween(0.16, 0.32) - arcHeight;
   const pointOnArc = (progress: number) => ({
     x: 2 * (1 - progress) * progress * controlX + progress ** 2 * flightX,
     y: 2 * (1 - progress) * progress * controlY + progress ** 2 * flightY,
@@ -224,7 +224,7 @@ function fairStar(grid: DOMRect): FairBurstPiece {
     curveRotation: Math.round(randomBetween(-120, 120)),
     approachRotation: Math.round(randomBetween(-70, 70)),
     landingRotation: Math.round(randomBetween(-38, 38)),
-    size: `${round(randomBetween(0.75, 1.75))}rem`,
+    size: `${round(randomBetween(1.5, 2.13))}rem`,
     color: FAIR_STAR_COLORS[Math.floor(Math.random() * FAIR_STAR_COLORS.length)],
     duration: `${Math.round(durationMs)}ms`,
     landingScale: round(randomBetween(0.8, 1.18)),

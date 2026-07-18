@@ -453,7 +453,7 @@ $paper-texture-modal: url("../svg/paper-texture-modal.svg");
       rotate(var(--star-approach-rotation)) scale(var(--star-landing-scale));
   }
 
-  15% {
+  16% {
     opacity: 1;
     transform: translate(-50%, -50%) translate(var(--star-flight-x), var(--star-flight-y))
       rotate(var(--star-landing-rotation)) scale(var(--star-landing-scale));
