@@ -36,12 +36,12 @@ html(lang="en")
                         span ★
                         span ★
 
-          section.bingo-board(
-            aria-label="Bingo card"
-            :aria-busy="celebrating ? 'true' : undefined"
-          )
+          section.bingo-board(aria-label="Bingo card")
             p.bingo-board__announcement(aria-live="polite" aria-atomic="true") {{ bingoAnnouncement }}
-            .bingo-grid(ref="bingoGrid")
+            .bingo-grid(
+              ref="bingoGrid"
+              :aria-busy="celebrating ? 'true' : undefined"
+            )
               svg.bingo-lines(viewBox="0 0 500 500" preserveAspectRatio="none" aria-hidden="true")
                 defs
                   linearGradient#bingo-sharpie-red(x1="0%" y1="8%" x2="100%" y2="92%")
