@@ -575,7 +575,9 @@ $paper-texture-modal: url("../svg/paper-texture-modal.svg");
   display: grid;
   align-self: stretch;
   justify-self: center;
-  place-content: center;
+  // `safe` so a challenge too tall for its row falls back to top-aligned
+  // (scrollable) instead of centring its start into unreachable overflow.
+  place-content: safe center;
   max-width: 20ch;
   margin: 0;
   overflow-y: auto;
@@ -619,10 +621,6 @@ $paper-texture-modal: url("../svg/paper-texture-modal.svg");
 
 .bingo-dialog__star--md {
   font-size: 1em;
-}
-
-.bingo-dialog__star--lg {
-  font-size: 1.55em;
 }
 
 .bingo-dialog__star--xl {
