@@ -19,6 +19,36 @@ import type { SquareType } from "./_squares.js";
 
 const { createApp, nextTick } = Vue;
 
+// The square whose tap opened the dialog — the origin the ticket zooms out of
+// (and collapses back into). Kept module-local so it stays out of reactive data.
+let markOrigin: HTMLElement | null = null;
+
+const OPEN_MS = 280;
+const CLOSE_MS = 230;
+
+function prefersReducedMotion(): boolean {
+  return (
+    typeof matchMedia !== "undefined" &&
+    matchMedia("(prefers-reduced-motion: reduce)").matches
+  );
+}
+
+/** Transform that maps the centred dialog onto the origin square's rect. */
+function originTransform(dialog: HTMLElement): string {
+  const fallback = "translateY(1.5rem) scale(0.96)";
+  if (!markOrigin) return fallback;
+
+  const d = dialog.getBoundingClientRect();
+  const o = markOrigin.getBoundingClientRect();
+  if (!d.width || !d.height) return fallback;
+
+  const scale = Math.max(0.08, o.width / d.width);
+  const translateX = o.left + o.width / 2 - (d.left + d.width / 2);
+  const translateY = o.top + o.height / 2 - (d.top + d.height / 2);
+
+  return `translate(${translateX}px, ${translateY}px) scale(${scale})`;
+}
+
 interface CardAppData {
   resolved: ResolvedCard | null;
   hasCard: boolean;
@@ -36,8 +66,9 @@ interface CardAppMethods {
     square: CardSquare,
     squareIndex: number,
   ): Record<string, boolean>;
-  openSquare(square: CardSquare): void;
+  openSquare(square: CardSquare, event?: Event): void;
   closeSquare(): void;
+  onBackdropClick(event: MouseEvent): void;
   clearSelectedSquare(): void;
   toggleSelectedSquare(): void;
 }
@@ -111,20 +142,61 @@ const cardAppOptions: {
         "copy-very-long": square.label.length > 28 || longestWordLength > 12,
       };
     },
-    openSquare(square: CardSquare): void {
+    openSquare(square: CardSquare, event?: Event): void {
+      markOrigin = (event?.currentTarget as HTMLElement) ?? null;
       this.selectedSquare = square;
       nextTick(() => {
         const dialog = this.$refs.markDialog as HTMLDialogElement | undefined;
-        if (dialog && !dialog.open) dialog.showModal();
+        if (!dialog || dialog.open) return;
+
+        dialog.showModal();
+        if (prefersReducedMotion()) return;
+
+        // Clear any leftover fill from a prior close animation before opening,
+        // or its persisted end-state reasserts once this entry finishes.
+        dialog.getAnimations().forEach((animation) => animation.cancel());
+        dialog.animate(
+          [
+            { transform: originTransform(dialog), opacity: 0 },
+            { transform: "none", opacity: 1 },
+          ],
+          { duration: OPEN_MS, easing: "cubic-bezier(0.2, 0.9, 0.25, 1)", fill: "backwards" },
+        );
       });
     },
     closeSquare(): void {
       const dialog = this.$refs.markDialog as HTMLDialogElement | undefined;
-      if (dialog?.open) {
-        dialog.close();
-      } else {
+      if (!dialog?.open) {
         this.clearSelectedSquare();
+        return;
       }
+
+      if (prefersReducedMotion()) {
+        dialog.close();
+        return;
+      }
+
+      // Zoom the ticket back into the origin square, fade the backdrop, then close.
+      dialog.classList.add("is-closing");
+      dialog.getAnimations().forEach((animation) => animation.cancel());
+      const animation = dialog.animate(
+        [
+          { transform: "none", opacity: 1 },
+          { transform: originTransform(dialog), opacity: 0 },
+        ],
+        { duration: CLOSE_MS, easing: "cubic-bezier(0.4, 0.05, 0.7, 0.2)", fill: "forwards" },
+      );
+      animation.onfinish = () => {
+        dialog.classList.remove("is-closing");
+        dialog.close();
+        // Drop the forwards-fill so it can't leak into the next open.
+        animation.cancel();
+      };
+    },
+    onBackdropClick(event: MouseEvent): void {
+      // A click whose target is the dialog element itself landed on the
+      // backdrop (not the ticket) — treat it as a cancel.
+      if (event.target === this.$refs.markDialog) this.closeSquare();
     },
     clearSelectedSquare(): void {
       this.selectedSquare = null;
@@ -134,6 +206,7 @@ const cardAppOptions: {
 
       this.marks = toggleMark(this.marks, this.selectedSquare.id);
       if (storage) saveMarks(this.resolved.slug, this.marks, storage);
+      this.closeSquare();
     },
   },
   mounted() {

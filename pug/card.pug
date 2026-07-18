@@ -44,7 +44,7 @@ html(lang="en")
                 :class="squareClasses(square, squareIndex)"
                 :aria-pressed="isMarked(square.id)"
                 :aria-label="square.label + (isMarked(square.id) ? ', marked' : ', unmarked')"
-                @click="openSquare(square)"
+                @click="openSquare(square, $event)"
                 type="button"
               )
                 svg.bingo-square__dauber(viewBox="0 0 100 100" aria-hidden="true")

@@ -398,12 +398,30 @@ $paper-texture-modal: url("../svg/paper-texture-modal.svg");
   padding: 0;
   border: 0;
   background: transparent;
-  filter: drop-shadow(0 0.6rem 0.5rem rgba($ink, 0.32));
+  filter:
+    drop-shadow(0 0.3rem 0.5rem rgba($ink, 0.35))
+    drop-shadow(0 1.5rem 2.5rem rgba($ink, 0.5));
   overflow: visible;
 }
 
+// The ticket's zoom-from-origin entry/exit is driven in JS (Web Animations API,
+// see openSquare/closeSquare) so it can start from the clicked square's rect.
+// The backdrop just cross-fades: @starting-style eases it in on open, and the
+// .is-closing class (added by closeSquare) eases it back out before close().
 .bingo-dialog::backdrop {
   background: rgba($navy, 0.86);
+  opacity: 1;
+  transition: opacity 240ms ease;
+}
+
+@starting-style {
+  .bingo-dialog[open]::backdrop {
+    opacity: 0;
+  }
+}
+
+.bingo-dialog.is-closing::backdrop {
+  opacity: 0;
 }
 
 // Every ticket ring is clipped to the same scalloped-corner + side-notched
@@ -522,9 +540,11 @@ $paper-texture-modal: url("../svg/paper-texture-modal.svg");
 
   position: relative;
   display: grid;
-  grid-template-rows: auto minmax(0, 1fr) auto auto;
+  grid-template-rows: minmax(0, 1fr) auto auto;
   gap: clamp(0.85rem, 3dvh, 1.6rem);
-  padding: clamp(1.9rem, 5.5vw, 2.9rem) clamp(1.15rem, 4vw, 2rem)
+  // Extra top padding: with the top rule gone, this keeps the challenge text
+  // clear of the absolutely-positioned close ✕ in the corner.
+  padding: clamp(3rem, 7vw, 3.6rem) clamp(1.15rem, 4vw, 2rem)
     clamp(1.15rem, 3.5vw, 1.7rem);
   background-color: $paper;
   background-image: $paper-texture-modal;
@@ -534,11 +554,11 @@ $paper-texture-modal: url("../svg/paper-texture-modal.svg");
 .bingo-dialog__close {
   position: absolute;
   z-index: 3;
-  top: clamp(0.35rem, 2vw, 0.85rem);
-  right: clamp(0.35rem, 2vw, 0.85rem);
+  top: clamp(0.3rem, 1.5vw, 0.7rem);
+  right: clamp(0.4rem, 2vw, 0.9rem);
   display: grid;
-  width: 2.75rem;
-  height: 2.75rem;
+  width: 2.6rem;
+  height: 2.6rem;
   place-items: center;
   padding: 0;
   border: 0;
@@ -546,7 +566,7 @@ $paper-texture-modal: url("../svg/paper-texture-modal.svg");
   background: transparent;
   color: $navy;
   font-family: $display;
-  font-size: 2.6rem;
+  font-size: 2.3rem;
   font-weight: vars.$light;
   line-height: 1;
 }
@@ -579,10 +599,6 @@ $paper-texture-modal: url("../svg/paper-texture-modal.svg");
   line-height: 1;
 }
 
-.bingo-dialog__fence--top {
-  align-self: start;
-}
-
 .bingo-dialog__fence-line {
   height: 0.1rem;
   flex: 1;
@@ -607,6 +623,10 @@ $paper-texture-modal: url("../svg/paper-texture-modal.svg");
 
 .bingo-dialog__star--lg {
   font-size: 1.55em;
+}
+
+.bingo-dialog__star--xl {
+  font-size: 2.1em;
 }
 
 .bingo-dialog__mark {
@@ -680,7 +700,7 @@ $paper-texture-modal: url("../svg/paper-texture-modal.svg");
 
   .bingo-dialog__inside {
     gap: 0.9rem;
-    padding-top: clamp(2rem, 6vw, 2.8rem);
+    padding-top: clamp(2.9rem, 7vw, 3.2rem);
     padding-bottom: 1.6rem;
   }
 
@@ -692,7 +712,8 @@ $paper-texture-modal: url("../svg/paper-texture-modal.svg");
 @media (prefers-reduced-motion: reduce) {
   .bingo-square,
   .bingo-dialog__mark,
-  .bingo-dialog__close {
+  .bingo-dialog__close,
+  .bingo-dialog::backdrop {
     transition: none;
   }
 }
