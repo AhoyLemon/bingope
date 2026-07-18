@@ -92,12 +92,12 @@ The initial version does not show timestamps. Keeping them makes a later scoring
 - TypeScript and Vue 3 handle interactive card behavior.
 - Vue loads from a CDN. Do not add Vite, Nuxt, a router, or a state library without a real need.
 - Bun is Lemon's preferred package manager and is used in GitHub Actions. Harmless npm compatibility can stay.
-- Marks and bingo state live in `localStorage`, namespaced by the normalized player name and stable square ID.
+- Marks and active Bingo lines live in separate `localStorage` records, namespaced by the normalized player name and stable square or line ID.
 - Recent iPhones and Pixels are the only meaningful browser targets.
 - The personal version does not need PWA or guaranteed offline support. Once loaded, gameplay itself requires no network traffic.
 - Asset URLs must work from the GitHub Pages `/bingope/` project path and from one-folder-deep player routes.
 
-Automated testing stays extremely small. If the pages build, Sass compiles, and TypeScript type-checks, that is enough. The one unit test (`tests/ids.test.ts`, run by `bun run test`) guards square-ID uniqueness across the pool, centers, and essentials (and sanity-checks each essential group's min/max counts), since IDs namespace saved state and a collision would leak marks between squares. The final experience gets checked manually on the five real phones.
+Automated testing stays extremely small. `bun run test` builds Sass, type-checks TypeScript, and runs targeted Bun tests for dealing, stable IDs, mark persistence, card copy, and Bingo-line reconciliation. The final experience still gets checked manually on the five real phones.
 
 ## Commits and attribution
 

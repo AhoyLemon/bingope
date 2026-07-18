@@ -10,8 +10,18 @@
 declare const Vue: any;
 
 import { CENTER_INDEX, resolveCard } from "./_deal.js";
+import {
+  activeBingoLines,
+  bingoCelebrationMessage,
+  bingoLines,
+  loadBingos,
+  reconcileBingos,
+  reconcileSavedBingos,
+  saveBingos,
+} from "./_bingos.js";
 import { markActionText, resolveCardSquares } from "./_cardSquares.js";
 import { loadMarks, saveMarks, toggleMark } from "./_marks.js";
+import type { BingoLine, Bingos } from "./_bingos.js";
 import type { CardSquare } from "./_cardSquares.js";
 import type { ResolvedCard } from "./_deal.js";
 import type { Marks } from "./_marks.js";
@@ -29,8 +39,47 @@ const CLOSE_MS = 230;
 const MARK_DELAY_MS = 300;
 // How long the stamp-slap plays before the one-shot `just-stamped` class drops.
 const STAMP_MS = 320;
+const BINGO_CHECK_MS = 300;
+const BINGO_LINE_MS = 1_500;
+const BINGO_LINE_GAP_MS = 180;
+const FAIR_STAR_MAX = 80;
+// 2.75× the original light-mist rate: lively, but still a stream of tosses.
+const FAIR_STAR_MIN_DELAY_MS = 180;
+const FAIR_STAR_MAX_DELAY_MS = 400;
+const FAIR_STAR_COLORS = [
+  "#dd3843",
+  "#e0aa22",
+  "#21a8eb",
+  "#247c42",
+  "#30266d",
+  "#c76f2d",
+  "#a52c43",
+];
 // Guards a double-tap from re-triggering the mark while the modal is exiting.
 let dismissing = false;
+let fairStarId = 0;
+let fairStarTimer: number | null = null;
+
+interface FairBurstPiece {
+  id: number;
+  expiresAt: number;
+  sourceX: string;
+  sourceY: string;
+  flightX: string;
+  flightY: string;
+  curveX: string;
+  curveY: string;
+  approachX: string;
+  approachY: string;
+  startRotation: number;
+  curveRotation: number;
+  approachRotation: number;
+  landingRotation: number;
+  size: string;
+  color: string;
+  duration: string;
+  landingScale: string;
+}
 
 function prefersReducedMotion(): boolean {
   return (
@@ -62,8 +111,17 @@ interface CardAppData {
   cardSquares: CardSquare[];
   dauberPaths: string[];
   marks: Marks;
+  bingos: Bingos;
+  bingoLines: readonly BingoLine[];
   selectedSquare: CardSquare | null;
   justStamped: string | null;
+  pendingBingoLineIds: string[];
+  revealingBingoLineIds: string[];
+  celebrating: boolean;
+  celebrationVisible: boolean;
+  celebrationMessage: string;
+  bingoAnnouncement: string;
+  fairBurst: FairBurstPiece[];
 }
 
 interface CardAppMethods {
@@ -73,16 +131,25 @@ interface CardAppMethods {
     square: CardSquare,
     squareIndex: number,
   ): Record<string, boolean>;
+  bingoLinePath(line: BingoLine): string;
+  bingoLineClasses(line: BingoLine): Record<string, boolean>;
   openSquare(square: CardSquare, event?: Event): void;
   closeSquare(afterClose?: () => void): void;
   onBackdropClick(event: MouseEvent): void;
   clearSelectedSquare(): void;
   toggleSelectedSquare(): void;
+  playBingoReveal(lines: BingoLine[]): void;
+  prepareCelebration(lines: BingoLine[]): void;
+  fairStarStyle(piece: FairBurstPiece): Record<string, string>;
+  startFairBurst(): void;
+  stopFairBurst(): void;
+  dismissCelebration(): void;
 }
 
 interface CardAppInstance extends CardAppData, CardAppMethods {
   $refs: {
     markDialog?: HTMLDialogElement;
+    bingoGrid?: HTMLElement;
   };
 }
 
@@ -108,6 +175,91 @@ function browserStorage(): Storage | null {
 
 const storage = browserStorage();
 
+function waitFor(ms: number): Promise<void> {
+  return new Promise((resolve) => window.setTimeout(resolve, ms));
+}
+
+function randomBetween(minimum: number, maximum: number): number {
+  return minimum + Math.random() * (maximum - minimum);
+}
+
+function round(value: number): string {
+  return value.toFixed(2);
+}
+
+/** One star's improvised toss and landing spot on the card. */
+function fairStar(grid: DOMRect): FairBurstPiece {
+  const durationMs = randomBetween(13_000, 20_000);
+  // The thrower lives just beyond the card's lower-right corner. Each toss
+  // receives a different landing point, force (distance), and sideways curl.
+  const sourceX = grid.width * randomBetween(1.03, 1.15);
+  const sourceY = grid.height * randomBetween(1.03, 1.12);
+  const landingX = grid.width * randomBetween(0.07, 0.93);
+  const landingY = grid.height * randomBetween(0.07, 0.93);
+  const flightX = landingX - sourceX;
+  const flightY = landingY - sourceY;
+  const arcHeight = randomBetween(grid.height * 0.12, grid.height * 0.3);
+  const sidewaysCurl = randomBetween(-grid.width * 0.12, grid.width * 0.12);
+  const controlX = flightX * randomBetween(0.32, 0.52) + sidewaysCurl;
+  const controlY = flightY * randomBetween(0.28, 0.46) - arcHeight;
+  const pointOnArc = (progress: number) => ({
+    x: 2 * (1 - progress) * progress * controlX + progress ** 2 * flightX,
+    y: 2 * (1 - progress) * progress * controlY + progress ** 2 * flightY,
+  });
+  const curve = pointOnArc(0.33);
+  const approach = pointOnArc(0.72);
+
+  return {
+    id: fairStarId += 1,
+    expiresAt: Date.now() + durationMs,
+    sourceX: `${round(sourceX)}px`,
+    sourceY: `${round(sourceY)}px`,
+    flightX: `${round(flightX)}px`,
+    flightY: `${round(flightY)}px`,
+    curveX: `${round(curve.x)}px`,
+    curveY: `${round(curve.y)}px`,
+    approachX: `${round(approach.x)}px`,
+    approachY: `${round(approach.y)}px`,
+    startRotation: Math.round(randomBetween(-230, 230)),
+    curveRotation: Math.round(randomBetween(-120, 120)),
+    approachRotation: Math.round(randomBetween(-70, 70)),
+    landingRotation: Math.round(randomBetween(-38, 38)),
+    size: `${round(randomBetween(0.75, 1.75))}rem`,
+    color: FAIR_STAR_COLORS[Math.floor(Math.random() * FAIR_STAR_COLORS.length)],
+    duration: `${Math.round(durationMs)}ms`,
+    landingScale: round(randomBetween(0.8, 1.18)),
+  };
+}
+
+/** A deterministic, gently imperfect Sharpie path through a line's cell centres. */
+function sharpiePath(line: BingoLine): string {
+  const points = line.indexes.map((index) => ({
+    x: (index % 5) * 100 + 50,
+    y: Math.floor(index / 5) * 100 + 50,
+  }));
+  const start = points[0];
+  const end = points[points.length - 1];
+  const distance = Math.hypot(end.x - start.x, end.y - start.y) || 1;
+  const normal = {
+    x: -(end.y - start.y) / distance,
+    y: (end.x - start.x) / distance,
+  };
+  const seed = [...line.id].reduce((total, character) => total + character.charCodeAt(0), 0);
+  // Slight enough to feel hand-drawn, not so much that it reads as a doodle.
+  const wobble = (step: number) => ((seed + step * 7) % 11 - 5) * 0.45;
+  let path = `M ${start.x + normal.x * wobble(0)} ${start.y + normal.y * wobble(0)}`;
+
+  for (let index = 1; index < points.length; index += 1) {
+    const previous = points[index - 1];
+    const point = points[index];
+    const controlWobble = wobble(index * 2 - 1) * 1.1;
+    const endWobble = wobble(index * 2);
+    path += ` Q ${(previous.x + point.x) / 2 + normal.x * controlWobble} ${(previous.y + point.y) / 2 + normal.y * controlWobble} ${point.x + normal.x * endWobble} ${point.y + normal.y * endWobble}`;
+  }
+
+  return path;
+}
+
 const cardAppOptions: {
   data: () => CardAppData;
   methods: CardAppMethods;
@@ -122,8 +274,17 @@ const cardAppOptions: {
       cardSquares,
       dauberPaths,
       marks: resolved && storage ? loadMarks(resolved.slug, storage) : ({} as Marks),
+      bingos: resolved && storage ? loadBingos(resolved.slug, storage) : ({} as Bingos),
+      bingoLines,
       selectedSquare: null as CardSquare | null,
       justStamped: null as string | null,
+      pendingBingoLineIds: [],
+      revealingBingoLineIds: [],
+      celebrating: false,
+      celebrationVisible: false,
+      celebrationMessage: "",
+      bingoAnnouncement: "",
+      fairBurst: [],
     };
   },
   methods: {
@@ -151,7 +312,18 @@ const cardAppOptions: {
         "just-stamped": square.id === this.justStamped,
       };
     },
+    bingoLinePath(line: BingoLine): string {
+      return sharpiePath(line);
+    },
+    bingoLineClasses(line: BingoLine): Record<string, boolean> {
+      return {
+        "is-pending": this.pendingBingoLineIds.includes(line.id),
+        "is-revealing": this.revealingBingoLineIds.includes(line.id),
+      };
+    },
     openSquare(square: CardSquare, event?: Event): void {
+      if (this.celebrating) return;
+
       markOrigin = (event?.currentTarget as HTMLElement) ?? null;
       this.selectedSquare = square;
       nextTick(() => {
@@ -231,22 +403,155 @@ const cardAppOptions: {
       // board via the one-shot `just-stamped` class.
       this.closeSquare(() => {
         window.setTimeout(() => {
-          this.marks = toggleMark(this.marks, squareId);
+          const markedAt = new Date().toISOString();
+          this.marks = toggleMark(this.marks, squareId, markedAt);
           if (storage) saveMarks(slug, this.marks, storage);
+
+          const reconciled = reconcileBingos(
+            this.resolved!.squareIds,
+            this.marks,
+            this.bingos,
+            markedAt,
+          );
+          this.bingos = reconciled.bingos;
+          if (storage) saveBingos(slug, this.bingos, storage);
 
           if (this.marks[squareId]) {
             this.justStamped = squareId;
             window.setTimeout(() => {
               if (this.justStamped === squareId) this.justStamped = null;
             }, STAMP_MS);
+
+            if (reconciled.newlyCompleted.length) {
+              this.pendingBingoLineIds = reconciled.newlyCompleted.map(
+                (line) => line.id,
+              );
+              this.celebrating = true;
+              window.setTimeout(() => {
+                this.playBingoReveal(reconciled.newlyCompleted);
+              }, STAMP_MS);
+            }
           }
 
           dismissing = false;
         }, MARK_DELAY_MS);
       });
     },
+    playBingoReveal(lines: BingoLine[]): void {
+      void (async () => {
+        this.prepareCelebration(lines);
+
+        if (prefersReducedMotion()) {
+          this.pendingBingoLineIds = [];
+          this.bingoAnnouncement = this.celebrationMessage;
+          this.celebrating = false;
+          return;
+        }
+
+        this.bingoAnnouncement = "Checking for a bingo…";
+        await waitFor(BINGO_CHECK_MS);
+
+        for (const [index, line] of lines.entries()) {
+          this.pendingBingoLineIds = this.pendingBingoLineIds.filter(
+            (lineId) => lineId !== line.id,
+          );
+          this.revealingBingoLineIds = [
+            ...this.revealingBingoLineIds,
+            line.id,
+          ];
+          await nextTick();
+          await waitFor(BINGO_LINE_MS);
+
+          if (index < lines.length - 1) await waitFor(BINGO_LINE_GAP_MS);
+        }
+
+        this.celebrationVisible = true;
+        this.startFairBurst();
+        this.bingoAnnouncement = this.celebrationMessage;
+      })();
+    },
+    prepareCelebration(lines: BingoLine[]): void {
+      const activeLines = activeBingoLines(this.bingos);
+      const blackout = this.cardSquares.every((square) => this.isMarked(square.id));
+
+      this.celebrationMessage = bingoCelebrationMessage(
+        lines,
+        activeLines,
+        blackout,
+      );
+    },
+    fairStarStyle(piece: FairBurstPiece): Record<string, string> {
+      return {
+        "--star-source-x": piece.sourceX,
+        "--star-source-y": piece.sourceY,
+        "--star-flight-x": piece.flightX,
+        "--star-flight-y": piece.flightY,
+        "--star-curve-x": piece.curveX,
+        "--star-curve-y": piece.curveY,
+        "--star-approach-x": piece.approachX,
+        "--star-approach-y": piece.approachY,
+        "--star-start-rotation": `${piece.startRotation}deg`,
+        "--star-curve-rotation": `${piece.curveRotation}deg`,
+        "--star-approach-rotation": `${piece.approachRotation}deg`,
+        "--star-landing-rotation": `${piece.landingRotation}deg`,
+        "--star-size": piece.size,
+        "--star-color": piece.color,
+        "--star-duration": piece.duration,
+        "--star-landing-scale": piece.landingScale,
+      };
+    },
+    startFairBurst(): void {
+      this.stopFairBurst();
+      const grid = this.$refs.bingoGrid;
+      if (!grid) return;
+      const makeStar = () => fairStar(grid.getBoundingClientRect());
+      // A light, irregular mist leaves room for the message. The eighty-star
+      // cap is a safety rail, not the intended visual density.
+      this.fairBurst = Array.from({ length: 2 }, makeStar);
+      const throwNextStar = () => {
+        const now = Date.now();
+        const next = makeStar();
+        this.fairBurst = [...this.fairBurst.filter((piece) => piece.expiresAt > now), next]
+          .slice(-FAIR_STAR_MAX);
+        fairStarTimer = window.setTimeout(
+          throwNextStar,
+          randomBetween(FAIR_STAR_MIN_DELAY_MS, FAIR_STAR_MAX_DELAY_MS),
+        );
+      };
+      fairStarTimer = window.setTimeout(
+        throwNextStar,
+        randomBetween(FAIR_STAR_MIN_DELAY_MS, FAIR_STAR_MAX_DELAY_MS),
+      );
+    },
+    stopFairBurst(): void {
+      if (fairStarTimer !== null) window.clearTimeout(fairStarTimer);
+      fairStarTimer = null;
+      this.fairBurst = [];
+    },
+    dismissCelebration(): void {
+      if (!this.celebrationVisible) return;
+
+      this.celebrationVisible = false;
+      this.pendingBingoLineIds = [];
+      this.revealingBingoLineIds = [];
+      this.celebrationMessage = "";
+      this.stopFairBurst();
+      this.bingoAnnouncement = "";
+      this.celebrating = false;
+    },
   },
   mounted() {
+    if (this.resolved) {
+      // Existing cards predate Bingo records: use their latest required mark as
+      // the best faithful completion timestamp, without replaying a celebration.
+      this.bingos = reconcileSavedBingos(
+        this.resolved.squareIds,
+        this.marks,
+        this.bingos,
+      ).bingos;
+      if (storage) saveBingos(this.resolved.slug, this.bingos, storage);
+    }
+
     document.documentElement.dataset.appReady = "true";
   },
 };
