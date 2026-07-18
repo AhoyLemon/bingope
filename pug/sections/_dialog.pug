@@ -1,0 +1,34 @@
+dialog.bingo-dialog(
+  ref="markDialog"
+  aria-labelledby="SquareDialogText"
+  @close="clearSelectedSquare"
+  @keydown.esc.prevent="closeSquare()"
+  @click="onBackdropClick"
+)
+  article.bingo-dialog__ticket.bingo-dialog__mask(v-if="selectedSquare")
+    .bingo-dialog__rule.bingo-dialog__mask
+      .bingo-dialog__rule-gap.bingo-dialog__mask
+        .bingo-dialog__inner-rule.bingo-dialog__mask
+          .bingo-dialog__inside.bingo-dialog__mask
+            button.bingo-dialog__close(
+              aria-label="Close square details"
+              @click="closeSquare()"
+              type="button"
+            )
+              span(aria-hidden="true") ×
+            h2#SquareDialogText {{ selectedSquare.text }}
+            .bingo-dialog__fence.bingo-dialog__fence--bottom(aria-hidden="true")
+              span.bingo-dialog__fence-line
+              span.bingo-dialog__fence-stars
+                span.bingo-dialog__star.bingo-dialog__star--sm ★
+                span.bingo-dialog__star.bingo-dialog__star--md ★
+                span.bingo-dialog__star.bingo-dialog__star--xl ★
+                span.bingo-dialog__star.bingo-dialog__star--md ★
+                span.bingo-dialog__star.bingo-dialog__star--sm ★
+              span.bingo-dialog__fence-line
+            button.bingo-dialog__mark(
+              @click="toggleSelectedSquare"
+              :class="{ 'is-undo': isMarked(selectedSquare.id) }"
+              :aria-pressed="isMarked(selectedSquare.id)"
+              type="button"
+            ) {{ modalActionText(selectedSquare.type, isMarked(selectedSquare.id)) }}

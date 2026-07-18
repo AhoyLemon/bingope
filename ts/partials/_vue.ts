@@ -10,13 +10,50 @@
 declare const Vue: any;
 
 import { CENTER_INDEX, resolveCard } from "./_deal.js";
-import { resolveCardSquares } from "./_cardSquares.js";
+import { markActionText, resolveCardSquares } from "./_cardSquares.js";
 import { loadMarks, saveMarks, toggleMark } from "./_marks.js";
 import type { CardSquare } from "./_cardSquares.js";
 import type { ResolvedCard } from "./_deal.js";
 import type { Marks } from "./_marks.js";
+import type { SquareType } from "./_squares.js";
 
 const { createApp, nextTick } = Vue;
+
+// The square whose tap opened the dialog — the origin the ticket zooms out of
+// (and collapses back into). Kept module-local so it stays out of reactive data.
+let markOrigin: HTMLElement | null = null;
+
+const OPEN_MS = 280;
+const CLOSE_MS = 230;
+// Beat between the modal fully leaving and the mark landing on the board.
+const MARK_DELAY_MS = 300;
+// How long the stamp-slap plays before the one-shot `just-stamped` class drops.
+const STAMP_MS = 320;
+// Guards a double-tap from re-triggering the mark while the modal is exiting.
+let dismissing = false;
+
+function prefersReducedMotion(): boolean {
+  return (
+    typeof matchMedia !== "undefined" &&
+    matchMedia("(prefers-reduced-motion: reduce)").matches
+  );
+}
+
+/** Transform that maps the centred dialog onto the origin square's rect. */
+function originTransform(dialog: HTMLElement): string {
+  const fallback = "translateY(1.5rem) scale(0.96)";
+  if (!markOrigin) return fallback;
+
+  const d = dialog.getBoundingClientRect();
+  const o = markOrigin.getBoundingClientRect();
+  if (!d.width || !d.height) return fallback;
+
+  const scale = Math.max(0.08, o.width / d.width);
+  const translateX = o.left + o.width / 2 - (d.left + d.width / 2);
+  const translateY = o.top + o.height / 2 - (d.top + d.height / 2);
+
+  return `translate(${translateX}px, ${translateY}px) scale(${scale})`;
+}
 
 interface CardAppData {
   resolved: ResolvedCard | null;
@@ -26,16 +63,19 @@ interface CardAppData {
   dauberPaths: string[];
   marks: Marks;
   selectedSquare: CardSquare | null;
+  justStamped: string | null;
 }
 
 interface CardAppMethods {
   isMarked(squareId: string): boolean;
+  modalActionText(type: SquareType, marked: boolean): string;
   squareClasses(
     square: CardSquare,
     squareIndex: number,
   ): Record<string, boolean>;
-  openSquare(square: CardSquare): void;
-  closeSquare(): void;
+  openSquare(square: CardSquare, event?: Event): void;
+  closeSquare(afterClose?: () => void): void;
+  onBackdropClick(event: MouseEvent): void;
   clearSelectedSquare(): void;
   toggleSelectedSquare(): void;
 }
@@ -83,11 +123,15 @@ const cardAppOptions: {
       dauberPaths,
       marks: resolved && storage ? loadMarks(resolved.slug, storage) : ({} as Marks),
       selectedSquare: null as CardSquare | null,
+      justStamped: null as string | null,
     };
   },
   methods: {
     isMarked(squareId: string): boolean {
       return Boolean(this.marks[squareId]);
+    },
+    modalActionText(type: SquareType, marked: boolean): string {
+      return markActionText(type, marked);
     },
     squareClasses(
       square: CardSquare,
@@ -104,31 +148,102 @@ const cardAppOptions: {
         "task-do": square.type === "do",
         "copy-long": square.label.length > 22 || longestWordLength > 8,
         "copy-very-long": square.label.length > 28 || longestWordLength > 12,
+        "just-stamped": square.id === this.justStamped,
       };
     },
-    openSquare(square: CardSquare): void {
+    openSquare(square: CardSquare, event?: Event): void {
+      markOrigin = (event?.currentTarget as HTMLElement) ?? null;
       this.selectedSquare = square;
       nextTick(() => {
         const dialog = this.$refs.markDialog as HTMLDialogElement | undefined;
-        if (dialog && !dialog.open) dialog.showModal();
+        if (!dialog || dialog.open) return;
+
+        dialog.showModal();
+        if (prefersReducedMotion()) return;
+
+        // Clear any leftover fill from a prior close animation before opening,
+        // or its persisted end-state reasserts once this entry finishes.
+        dialog.getAnimations().forEach((animation) => animation.cancel());
+        dialog.animate(
+          [
+            { transform: originTransform(dialog), opacity: 0 },
+            { transform: "none", opacity: 1 },
+          ],
+          { duration: OPEN_MS, easing: "cubic-bezier(0.2, 0.9, 0.25, 1)", fill: "backwards" },
+        );
       });
     },
-    closeSquare(): void {
+    closeSquare(afterClose?: () => void): void {
+      // Templates wire `@click="closeSquare"`, which would pass the DOM event as
+      // this arg — only honour a real callback.
+      const done = typeof afterClose === "function" ? afterClose : undefined;
       const dialog = this.$refs.markDialog as HTMLDialogElement | undefined;
-      if (dialog?.open) {
-        dialog.close();
-      } else {
+      if (!dialog?.open) {
         this.clearSelectedSquare();
+        done?.();
+        return;
       }
+
+      // Already zooming out (e.g. Esc during the exit) — don't start a second pass.
+      if (dialog.classList.contains("is-closing")) return;
+
+      if (prefersReducedMotion()) {
+        dialog.close();
+        done?.();
+        return;
+      }
+
+      // Zoom the ticket back into the origin square, fade the backdrop, then close.
+      dialog.classList.add("is-closing");
+      dialog.getAnimations().forEach((animation) => animation.cancel());
+      const animation = dialog.animate(
+        [
+          { transform: "none", opacity: 1 },
+          { transform: originTransform(dialog), opacity: 0 },
+        ],
+        { duration: CLOSE_MS, easing: "cubic-bezier(0.4, 0.05, 0.7, 0.2)", fill: "forwards" },
+      );
+      animation.onfinish = () => {
+        dialog.classList.remove("is-closing");
+        dialog.close();
+        // Drop the forwards-fill so it can't leak into the next open.
+        animation.cancel();
+        done?.();
+      };
+    },
+    onBackdropClick(event: MouseEvent): void {
+      // A click whose target is the dialog element itself landed on the
+      // backdrop (not the ticket) — treat it as a cancel.
+      if (event.target === this.$refs.markDialog) this.closeSquare();
     },
     clearSelectedSquare(): void {
       this.selectedSquare = null;
     },
     toggleSelectedSquare(): void {
-      if (!this.selectedSquare || !this.resolved) return;
+      if (!this.selectedSquare || !this.resolved || dismissing) return;
 
-      this.marks = toggleMark(this.marks, this.selectedSquare.id);
-      if (storage) saveMarks(this.resolved.slug, this.marks, storage);
+      const squareId = this.selectedSquare.id;
+      const slug = this.resolved.slug;
+      dismissing = true;
+
+      // Take the window away first, then land the mark ~300ms after it's gone —
+      // the state change is never visible mid-zoom. The stamp animates in on the
+      // board via the one-shot `just-stamped` class.
+      this.closeSquare(() => {
+        window.setTimeout(() => {
+          this.marks = toggleMark(this.marks, squareId);
+          if (storage) saveMarks(slug, this.marks, storage);
+
+          if (this.marks[squareId]) {
+            this.justStamped = squareId;
+            window.setTimeout(() => {
+              if (this.justStamped === squareId) this.justStamped = null;
+            }, STAMP_MS);
+          }
+
+          dismissing = false;
+        }, MARK_DELAY_MS);
+      });
     },
   },
   mounted() {

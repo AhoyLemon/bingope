@@ -6,7 +6,7 @@
  */
 
 import { centers, essentials, squares } from "./_squares.js";
-import type { BingoSquare } from "./_squares.js";
+import type { BingoSquare, SquareType } from "./_squares.js";
 
 export interface CardSquare extends BingoSquare {
   /** Concise grid label; the zoom view always uses canonical `text`. */
@@ -32,4 +32,11 @@ export function resolveCardSquares(squareIds: string[]): CardSquare[] {
       label: square.shortText ?? square.text,
     };
   });
+}
+
+/** Match the mark action to the square's verb without repeating its prompt. */
+export function markActionText(type: SquareType, marked: boolean): string {
+  if (marked) return "Oops, undo that";
+
+  return type === "see" ? "I saw that" : "I did that";
 }
