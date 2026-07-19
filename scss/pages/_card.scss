@@ -273,6 +273,7 @@ $paper-texture-modal: url("../svg/paper-texture-modal.svg");
 }
 
 .bingo-board {
+  position: relative;
   width: calc(100% - clamp(0.7rem, 2.5dvw, 1.4rem));
   margin-inline: auto;
   padding: clamp(0.12rem, 0.4dvw, 0.22rem);
@@ -282,6 +283,8 @@ $paper-texture-modal: url("../svg/paper-texture-modal.svg");
 }
 
 .bingo-grid {
+  position: relative;
+  isolation: isolate;
   display: grid;
   height: clamp(
     23rem,
@@ -293,6 +296,451 @@ $paper-texture-modal: url("../svg/paper-texture-modal.svg");
   grid-template-rows: repeat(5, minmax(0, 1fr));
   gap: clamp(0.1rem, 0.35dvw, 0.2rem);
   background: $navy;
+}
+
+// The line lives above the blue daubers, but the square copy is explicitly
+// stacked above it so a completed card remains readable at a glance.
+.bingo-lines {
+  position: absolute;
+  z-index: 2;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  overflow: visible;
+  pointer-events: none;
+}
+
+.bingo-line {
+  fill: none;
+  stroke: url("#bingo-sharpie-red");
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  stroke-width: 18;
+  opacity: 0.82;
+  mix-blend-mode: multiply;
+}
+
+.bingo-line.is-pending {
+  opacity: 0;
+}
+
+.bingo-line.is-revealing {
+  animation: bingo-sharpie-draw 1500ms cubic-bezier(0.2, 0.78, 0.28, 1) both;
+}
+
+@keyframes bingo-sharpie-draw {
+  0% {
+    stroke-dasharray: 1;
+    stroke-dashoffset: 1;
+    opacity: 0.5;
+  }
+
+  72% {
+    stroke-dasharray: 1;
+    stroke-dashoffset: 0;
+    opacity: 0.88;
+  }
+
+  100% {
+    stroke-dasharray: 1;
+    stroke-dashoffset: 0;
+    opacity: 0.82;
+  }
+}
+
+.bingo-board__announcement {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  white-space: nowrap;
+}
+
+.bingo-celebration {
+  position: absolute;
+  z-index: 4;
+  inset: 0;
+  display: grid;
+  place-items: center;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  cursor: pointer;
+  overflow: hidden;
+  animation: bingo-celebration-arrive 420ms cubic-bezier(0.2, 0.8, 0.28, 1) both;
+}
+
+.bingo-celebration:focus-visible {
+  outline: none;
+}
+
+.bingo-celebration:focus-visible .bingo-celebration__message {
+  outline: 0.18rem solid $green;
+  outline-offset: 0.24rem;
+}
+
+.bingo-celebration__message {
+  position: relative;
+  z-index: 1;
+  margin: 0;
+  padding: 0.56rem 0.9rem 0.5rem;
+  border: 0.12rem solid #a52530;
+  background: rgba($paper, 0.94);
+  box-shadow: 0 0.15rem 0 rgba(#6f1824, 0.25);
+  color: #9b202b;
+  font-family: $ticket-serif;
+  font-size: clamp(1.65rem, 7.4dvw, 2.7rem);
+  font-weight: 900;
+  letter-spacing: -0.015em;
+  line-height: 0.98;
+  text-align: center;
+  text-wrap: balance;
+  rotate: -1deg;
+  animation: bingo-celebration-breathe 1.8s ease-in-out 420ms infinite;
+}
+
+.bingo-celebration__burst {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+}
+
+.bingo-celebration__burst span {
+  position: absolute;
+  display: block;
+  color: var(--star-color);
+  font-family: $display;
+  font-size: var(--star-size, clamp(1rem, 4.7dvw, 1.55rem));
+  font-weight: 900;
+  line-height: 1;
+  text-shadow: 0 0.08rem 0 rgba($paper, 0.4);
+}
+
+// Every star gets a fresh inline toss and landing point. The animation runs
+// once; Vue keeps throwing replacements so the card stays continually festive.
+.bingo-celebration__piece {
+  position: absolute;
+  top: var(--star-source-y);
+  left: var(--star-source-x);
+  opacity: 0;
+  transform: translate(-50%, -50%);
+  will-change: opacity, transform;
+  animation: bingo-star-rain var(--star-duration) linear both;
+}
+
+@keyframes bingo-star-rain {
+  0% {
+    opacity: 0;
+    transform: translate(-50%, -50%) rotate(var(--star-start-rotation)) scale(0.5);
+  }
+
+  4% {
+    opacity: 1;
+  }
+
+  6% {
+    opacity: 1;
+    transform: translate(-50%, -50%) translate(var(--star-curve-x), var(--star-curve-y))
+      rotate(var(--star-curve-rotation))
+      scale(var(--star-landing-scale));
+  }
+
+  10% {
+    opacity: 1;
+    transform: translate(-50%, -50%) translate(var(--star-approach-x), var(--star-approach-y))
+      rotate(var(--star-approach-rotation)) scale(var(--star-landing-scale));
+  }
+
+  16% {
+    opacity: 1;
+    transform: translate(-50%, -50%) translate(var(--star-flight-x), var(--star-flight-y))
+      rotate(var(--star-landing-rotation)) scale(var(--star-landing-scale));
+  }
+
+  100% {
+    opacity: 0;
+    transform: translate(-50%, -50%) translate(var(--star-flight-x), var(--star-flight-y))
+      rotate(var(--star-landing-rotation)) scale(var(--star-landing-scale));
+  }
+}
+
+.bingo-celebration__piece--1 {
+  --star-color: #dd3843;
+  --star-size: clamp(1.15rem, 5.7dvw, 1.8rem);
+
+  animation: bingo-star-flare 2.7s cubic-bezier(0.18, 0.82, 0.28, 1) 55ms both;
+}
+
+.bingo-celebration__piece--2 {
+  --star-color: #e0aa22;
+  --star-size: clamp(0.95rem, 4.25dvw, 1.35rem);
+
+  animation: bingo-star-toss 2.95s cubic-bezier(0.18, 0.82, 0.28, 1) 155ms both;
+}
+
+.bingo-celebration__piece--3 {
+  --star-color: $blue;
+  --star-size: clamp(1.1rem, 5.1dvw, 1.6rem);
+
+  animation: bingo-star-spin 2.75s cubic-bezier(0.18, 0.82, 0.28, 1) 110ms both;
+}
+
+.bingo-celebration__piece--4 {
+  --star-color: $green;
+  --star-size: clamp(0.88rem, 3.95dvw, 1.25rem);
+
+  animation: bingo-star-hop 3.05s cubic-bezier(0.18, 0.82, 0.28, 1) 215ms both;
+}
+
+.bingo-celebration__piece--5 {
+  --star-color: $purple;
+  --star-size: clamp(1.2rem, 5.9dvw, 1.85rem);
+
+  animation: bingo-star-flutter 2.85s cubic-bezier(0.18, 0.82, 0.28, 1) 80ms both;
+}
+
+.bingo-celebration__piece--6 {
+  --star-color: #c76f2d;
+  --star-size: clamp(0.8rem, 3.7dvw, 1.15rem);
+
+  animation: bingo-star-swoop 2.65s cubic-bezier(0.18, 0.82, 0.28, 1) 275ms both;
+}
+
+.bingo-celebration__piece--7 {
+  --star-color: #a52c43;
+  --star-size: clamp(0.9rem, 4.1dvw, 1.3rem);
+
+  animation: bingo-star-spring 3.15s cubic-bezier(0.18, 0.82, 0.28, 1) 180ms both;
+}
+
+@keyframes bingo-celebration-arrive {
+  0% {
+    opacity: 0;
+    scale: 0.84;
+  }
+
+  100% {
+    opacity: 1;
+    scale: 1;
+  }
+}
+
+@keyframes bingo-celebration-breathe {
+  0%,
+  100% {
+    scale: 1;
+  }
+
+  50% {
+    scale: 1.035;
+  }
+}
+
+@keyframes bingo-star-flare {
+  0% {
+    opacity: 0;
+    transform: translate(calc(-50% - 8rem), calc(-50% - 11rem)) rotate(-118deg) scale(0.75)
+      skewX(-12deg);
+  }
+
+  18% {
+    opacity: 1;
+  }
+
+  45% {
+    opacity: 1;
+    transform: translate(calc(-50% - 5.7rem), calc(-50% - 3.9rem)) rotate(220deg)
+      scale(1.12) skewX(8deg);
+  }
+
+  57% {
+    opacity: 1;
+    transform: translate(calc(-50% - 5.7rem), calc(-50% - 3.9rem)) rotate(208deg)
+      scale(0.88) skewX(3deg);
+  }
+
+  100% {
+    opacity: 0;
+    transform: translate(calc(-50% - 5.7rem), calc(-50% - 3.9rem)) rotate(208deg)
+      scale(0.46) skewX(0deg);
+  }
+}
+
+@keyframes bingo-star-toss {
+  0% {
+    opacity: 0;
+    transform: translate(calc(-50% + 8rem), calc(-50% - 10rem)) rotate(132deg) scale(0.58)
+      skewY(-8deg);
+  }
+
+  16% {
+    opacity: 1;
+  }
+
+  43% {
+    opacity: 1;
+    transform: translate(calc(-50% + 4.9rem), calc(-50% - 4.5rem)) rotate(44deg) scale(1.12)
+      skewY(9deg);
+  }
+
+  55% {
+    opacity: 1;
+    transform: translate(calc(-50% + 4.9rem), calc(-50% - 4.5rem)) rotate(50deg) scale(0.86)
+      skewY(2deg);
+  }
+
+  100% {
+    opacity: 0;
+    transform: translate(calc(-50% + 4.9rem), calc(-50% - 4.5rem)) rotate(44deg)
+      scale(0.4) skewY(0deg);
+  }
+}
+
+@keyframes bingo-star-spin {
+  0% {
+    opacity: 0;
+    transform: translate(calc(-50% - 12rem), calc(-50% + 0.7rem)) rotate(-42deg) scale(0.54);
+  }
+
+  20% {
+    opacity: 1;
+  }
+
+  48% {
+    opacity: 1;
+    transform: translate(calc(-50% - 6.2rem), calc(-50% + 2.8rem)) rotate(-300deg) scale(1.05);
+  }
+
+  60% {
+    opacity: 1;
+    transform: translate(calc(-50% - 6.2rem), calc(-50% + 2.8rem)) rotate(-285deg) scale(0.82);
+  }
+
+  100% {
+    opacity: 0;
+    transform: translate(calc(-50% - 6.2rem), calc(-50% + 2.8rem)) rotate(-300deg)
+      scale(0.38);
+  }
+}
+
+@keyframes bingo-star-hop {
+  0% {
+    opacity: 0;
+    transform: translate(calc(-50% + 11rem), calc(-50% - 0.6rem)) rotate(102deg) scale(0.6) skewX(7deg);
+  }
+
+  17% {
+    opacity: 1;
+  }
+
+  44% {
+    opacity: 1;
+    transform: translate(calc(-50% + 5.8rem), calc(-50% + 3.2rem)) rotate(-4deg)
+      scale(1.08) skewX(-6deg);
+  }
+
+  58% {
+    opacity: 1;
+    transform: translate(calc(-50% + 5.8rem), calc(-50% + 3.2rem)) rotate(8deg)
+      scale(0.83) skewX(3deg);
+  }
+
+  100% {
+    opacity: 0;
+    transform: translate(calc(-50% + 5.8rem), calc(-50% + 3.2rem)) rotate(-4deg)
+      scale(0.37) skewX(0deg);
+  }
+}
+
+@keyframes bingo-star-flutter {
+  0% {
+    opacity: 0;
+    transform: translate(calc(-50% + 0.8rem), calc(-50% - 12rem)) rotate(-160deg) scale(0.5)
+      skewY(-10deg);
+  }
+
+  16% {
+    opacity: 1;
+  }
+
+  41% {
+    opacity: 1;
+    transform: translate(calc(-50% + 0.3rem), calc(-50% - 5.8rem)) rotate(-34deg)
+      scale(1.1) skewY(10deg);
+  }
+
+  55% {
+    opacity: 1;
+    transform: translate(calc(-50% + 0.3rem), calc(-50% - 5.8rem)) rotate(-26deg)
+      scale(0.84) skewY(-3deg);
+  }
+
+  100% {
+    opacity: 0;
+    transform: translate(calc(-50% + 0.3rem), calc(-50% - 5.8rem)) rotate(-34deg)
+      scale(0.38) skewY(0deg);
+  }
+}
+
+@keyframes bingo-star-swoop {
+  0% {
+    opacity: 0;
+    transform: translate(calc(-50% - 10rem), calc(-50% + 8.5rem)) rotate(145deg) scale(0.48)
+      skewX(-15deg);
+  }
+
+  18% {
+    opacity: 1;
+  }
+
+  46% {
+    opacity: 1;
+    transform: translate(calc(-50% - 5.2rem), calc(-50% + 4.9rem)) rotate(-88deg)
+      scale(1.15) skewX(12deg);
+  }
+
+  57% {
+    opacity: 1;
+    transform: translate(calc(-50% - 5.2rem), calc(-50% + 4.9rem)) rotate(-76deg)
+      scale(0.8) skewX(3deg);
+  }
+
+  100% {
+    opacity: 0;
+    transform: translate(calc(-50% - 5.2rem), calc(-50% + 4.9rem)) rotate(-88deg)
+      scale(0.34) skewX(0deg);
+  }
+}
+
+@keyframes bingo-star-spring {
+  0% {
+    opacity: 0;
+    transform: translate(calc(-50% + 10rem), calc(-50% + 9rem)) rotate(-130deg) scale(0.42);
+  }
+
+  15% {
+    opacity: 1;
+  }
+
+  45% {
+    opacity: 1;
+    transform: translate(calc(-50% + 5rem), calc(-50% + 4.8rem)) rotate(230deg)
+      scale(1.17) skewY(8deg);
+  }
+
+  58% {
+    opacity: 1;
+    transform: translate(calc(-50% + 5rem), calc(-50% + 4.8rem)) rotate(216deg)
+      scale(0.78) skewY(-3deg);
+  }
+
+  100% {
+    opacity: 0;
+    transform: translate(calc(-50% + 5rem), calc(-50% + 4.8rem)) rotate(230deg)
+      scale(0.35) skewY(0deg);
+  }
 }
 
 .bingo-square {
@@ -406,7 +854,7 @@ $paper-texture-modal: url("../svg/paper-texture-modal.svg");
 
 .bingo-square__text {
   position: relative;
-  z-index: 1;
+  z-index: 3;
   overflow-wrap: break-word;
 }
 
@@ -748,5 +1196,15 @@ $paper-texture-modal: url("../svg/paper-texture-modal.svg");
 
   .bingo-square.just-stamped .bingo-square__dauber {
     animation: none;
+  }
+
+  .bingo-line.is-revealing,
+  .bingo-celebration,
+  .bingo-celebration__message {
+    animation: none;
+  }
+
+  .bingo-celebration__burst {
+    display: none;
   }
 }
