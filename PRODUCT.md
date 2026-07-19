@@ -19,7 +19,6 @@ Specific, playful, sturdy. It should feel like a real fair-game artifact with a 
 ## Anti-references
 
 - Generic mobile bingo-app chrome: checkmarks, badges, progress dashboards, and stock game UI.
-- Over-decorated fair nostalgia: mascots, repeated stars, ornamental footers, and carnival clutter.
 - Blank or overly minimal grids that hide the actual square copy.
 
 ## Design Principles

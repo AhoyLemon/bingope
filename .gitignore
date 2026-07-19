@@ -8,6 +8,7 @@ _site/
 card/
 *.html
 !_docs/
+tmp/
 
 # TypeScript
 *.tsbuildinfo

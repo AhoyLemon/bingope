@@ -26,6 +26,8 @@ function compilePugFile(source: string, output: string): boolean {
       pretty: true,
       basedir: path.resolve(projectRoot, "pug"),
       testing: true,
+      buildId: "development",
+      assetVersion: new Date().toISOString(),
     });
 
     const outputDir = path.dirname(outputPath);

@@ -87,12 +87,12 @@ The initial version does not show timestamps. Keeping them makes a later scoring
 ## Technical boundaries
 
 - The site is static and multipage.
-- Pug builds two pages: a homepage and a single card page. The homepage takes a name and sends you to `card/?card=<name>`. Player identity comes from that query parameter, not from a folder route.
+- Pug builds three pages: a name-entry homepage, a single card page, and a Help page. The homepage takes a name and sends you to `card/?card=<name>`. Player identity comes from that query parameter, not from a folder route.
 - Sass handles styling.
 - TypeScript and Vue 3 handle interactive card behavior.
 - Vue loads from a CDN. Do not add Vite, Nuxt, a router, or a state library without a real need.
 - Bun is Lemon's preferred package manager and is used in GitHub Actions. Harmless npm compatibility can stay.
-- Marks and active Bingo lines live in separate `localStorage` records, namespaced by the normalized player name and stable square or line ID.
+- Marks and active Bingo lines live in separate `localStorage` records, namespaced by the normalized player name and stable square or line ID. Each deployed build clears only `bingope:*` storage before play begins, so changed pool/rule data never inherits old marks; other GitHub Pages projects on the shared origin are untouched.
 - Recent iPhones and Pixels are the only meaningful browser targets.
 - The personal version does not need PWA or guaranteed offline support. Once loaded, gameplay itself requires no network traffic.
 - Asset URLs must work from the GitHub Pages `/bingope/` project path and from one-folder-deep player routes.

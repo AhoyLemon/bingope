@@ -1,0 +1,34 @@
+- const pageTitle = "How to Play"
+- const assetPath = "../"
+include partials/_variables
+include partials/_mixins
+
+doctype html
+html(lang="en")
+  include partials/_head.pug
+
+  body.help-page
+    #app.site-shell.entry-shell
+      main.help-ticket
+        header.help-ticket__header
+          p.eyebrow BINGOPE
+          h1 How to play
+          p Pick a name. Get a card. Keep your eyes open.
+
+        ol.help-rules
+          li
+            h2 Get your card
+            p Enter your name and BINGOPE deals you a card for the fair.
+          li
+            h2 Make your marks
+            p Tap a square to read the whole challenge. Mark it when you saw it—or did it.
+          li
+            h2 Call bingo
+            p Complete a row, column, or diagonal to get a bingo. Then keep playing.
+          li
+            h2 Come back anytime
+            p Your marks stay in this browser on this device. No account required.
+
+        a.help-ticket__play(href="../") Deal my card
+
+    include partials/_javascripts

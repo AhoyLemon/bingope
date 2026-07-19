@@ -10,6 +10,7 @@
 declare const Vue: any;
 
 import { CENTER_INDEX, resolveCard } from "./_deal.js";
+import { currentBuildId, synchronizeBuildState } from "./_buildState.js";
 import {
   activeBingoLines,
   bingoCelebrationMessage,
@@ -174,6 +175,7 @@ function browserStorage(): Storage | null {
 }
 
 const storage = browserStorage();
+if (storage) synchronizeBuildState(storage, currentBuildId());
 
 function waitFor(ms: number): Promise<void> {
   return new Promise((resolve) => window.setTimeout(resolve, ms));

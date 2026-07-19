@@ -1,0 +1,211 @@
+@use "../abstracts/variables" as vars;
+
+$navy: #162447;
+$blue: #21a8eb;
+$green: #247c42;
+$paper: #fdfaf2;
+$page-paper: #eee8d8;
+$ink: #10192f;
+$display: "Avenir Next", Futura, "Arial Black", sans-serif;
+$ticket-serif: "Zilla Slab", Rockwell, "Roboto Slab", Georgia, serif;
+$paper-texture: url("../svg/paper-texture.svg");
+
+.entry-page,
+.help-page {
+  min-height: 100dvh;
+  background: $page-paper;
+}
+
+.entry-shell {
+  display: grid;
+  width: min(100% - 2rem, 39rem);
+  place-items: center;
+  padding-block: clamp(1.25rem, 6vw, 4rem);
+}
+
+.entry-ticket,
+.help-ticket {
+  width: 100%;
+  border: clamp(0.28rem, 1vw, 0.48rem) solid $navy;
+  outline: clamp(0.08rem, 0.3vw, 0.14rem) solid $green;
+  outline-offset: clamp(0.28rem, 1vw, 0.48rem);
+  background-color: $paper;
+  background-image: $paper-texture;
+  background-size: 11rem;
+  box-shadow: 0 0.7rem 1.5rem rgba($navy, 0.18);
+  color: $ink;
+}
+
+.entry-ticket {
+  display: grid;
+  gap: clamp(1.5rem, 5vw, 2.75rem);
+  padding: clamp(2rem, 8vw, 4rem) clamp(1.3rem, 7vw, 3.5rem);
+  text-align: center;
+}
+
+.entry-ticket__header h1,
+.help-ticket__header h1 {
+  margin: 0;
+  color: $navy;
+  font-family: $display;
+  font-size: clamp(3rem, 13vw, 5.8rem);
+  font-weight: 900;
+  letter-spacing: 0.08em;
+  line-height: 0.88;
+}
+
+.entry-ticket__lede {
+  max-width: 28ch;
+  margin: 1.2rem auto 0;
+  color: $navy;
+  font-family: $ticket-serif;
+  font-size: clamp(1.15rem, 4vw, 1.55rem);
+  font-weight: vars.$bold;
+  line-height: 1.25;
+}
+
+.name-entry {
+  display: grid;
+  gap: 0.7rem;
+  text-align: left;
+}
+
+.name-entry label {
+  color: $navy;
+  font-family: $ticket-serif;
+  font-size: clamp(1.25rem, 5vw, 1.7rem);
+  font-weight: vars.$bold;
+}
+
+.name-entry input,
+.name-entry button,
+.help-ticket__play {
+  min-height: 3.4rem;
+  border: 0.16rem solid $navy;
+  border-radius: 0;
+  font: inherit;
+}
+
+.name-entry input {
+  padding: 0.65rem 0.8rem;
+  background: rgba($paper, 0.8);
+  color: $ink;
+  font-size: 1.125rem;
+}
+
+.name-entry button,
+.help-ticket__play {
+  padding: 0.7rem 1rem;
+  background: $blue;
+  box-shadow: inset 0 0 0 0.16rem rgba($paper, 0.8);
+  color: $paper;
+  font-family: $display;
+  font-size: clamp(1rem, 4vw, 1.3rem);
+  font-weight: vars.$bold;
+  letter-spacing: 0.06em;
+  text-align: center;
+  text-decoration: none;
+  text-transform: uppercase;
+  transition: filter 140ms ease-out, transform 140ms ease-out;
+}
+
+.name-entry button:hover,
+.help-ticket__play:hover {
+  filter: brightness(1.06);
+}
+
+.name-entry button:active,
+.help-ticket__play:active {
+  transform: translateY(0.12rem);
+}
+
+.name-entry input:focus-visible,
+.name-entry button:focus-visible,
+.help-ticket__play:focus-visible,
+.entry-ticket__help a:focus-visible {
+  outline: 0.22rem solid vars.$focus;
+  outline-offset: 0.2rem;
+}
+
+.entry-ticket__help {
+  margin: 0;
+}
+
+.entry-ticket__help a {
+  color: $navy;
+  font-family: $ticket-serif;
+  font-weight: vars.$bold;
+}
+
+.help-ticket {
+  padding: clamp(2rem, 8vw, 4rem) clamp(1.3rem, 7vw, 3.5rem);
+}
+
+.help-ticket__header {
+  margin-bottom: clamp(2rem, 7vw, 3.5rem);
+  text-align: center;
+}
+
+.help-ticket__header h1 {
+  font-family: $ticket-serif;
+  font-size: clamp(2.7rem, 11vw, 4.6rem);
+  letter-spacing: 0;
+}
+
+.help-ticket__header p {
+  margin: 1rem auto 0;
+  font-size: clamp(1.05rem, 3vw, 1.25rem);
+}
+
+.help-rules {
+  display: grid;
+  gap: clamp(1.4rem, 5vw, 2.25rem);
+  margin: 0 0 clamp(2rem, 7vw, 3.5rem);
+  padding: 0;
+  counter-reset: rules;
+  list-style: none;
+}
+
+.help-rules li {
+  position: relative;
+  padding-left: 3.3rem;
+}
+
+.help-rules li::before {
+  position: absolute;
+  left: 0;
+  display: grid;
+  width: 2.35rem;
+  height: 2.35rem;
+  place-items: center;
+  border: 0.14rem solid $green;
+  border-radius: 50%;
+  color: $green;
+  content: counter(rules);
+  counter-increment: rules;
+  font-family: $ticket-serif;
+  font-weight: vars.$bold;
+}
+
+.help-rules h2 {
+  margin-bottom: 0.2rem;
+  color: $navy;
+  font-family: $ticket-serif;
+  font-size: clamp(1.4rem, 5vw, 1.8rem);
+}
+
+.help-rules p {
+  margin: 0;
+  line-height: 1.5;
+}
+
+.help-ticket__play {
+  display: block;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .name-entry button,
+  .help-ticket__play {
+    transition: none;
+  }
+}

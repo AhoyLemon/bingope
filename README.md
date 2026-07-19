@@ -29,7 +29,7 @@ bun run build:pages  # build the deployable site in _site/
 
 ## Where is everything?
 
-- [`pug/`](pug/) contains the homepage, five player pages, and shared page partials.
+- [`pug/`](pug/) contains the name-entry homepage, one card route, Help page, and shared page partials.
 - [`routes/pug.routes.ts`](routes/pug.routes.ts) maps those templates to clean URLs.
 - [`scss/`](scss/) contains the styles.
 - [`ts/`](ts/) contains the Vue application code.

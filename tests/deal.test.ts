@@ -1,6 +1,16 @@
 import { expect, test } from "bun:test";
 
-import { dealGrid, GRID_SIZE, CENTER_INDEX } from "../ts/partials/_deal";
+import {
+  CENTER_INDEX,
+  cleanDisplayName,
+  dealGrid,
+  GRID_SIZE,
+  mulberry32,
+  normalizeName,
+  resolveCard,
+  stringToSeed,
+} from "../ts/partials/_deal";
+import cards from "../ts/partials/_cards";
 import { squares, centers, essentials } from "../ts/partials/_squares";
 import type { BingoSquare, EssentialGroup } from "../ts/partials/_squares";
 
@@ -9,17 +19,6 @@ import type { BingoSquare, EssentialGroup } from "../ts/partials/_squares";
  * name-seeded PRNG the public path (#12) will supply; `dealGrid` only needs
  * something returning 0..1.
  */
-function mulberry32(seed: number): () => number {
-  let a = seed;
-  return () => {
-    a |= 0;
-    a = (a + 0x6d2b79f5) | 0;
-    let t = Math.imul(a ^ (a >>> 15), 1 | a);
-    t = (t + Math.imul(t ^ (t >>> 7), 61 | t)) ^ t;
-    return ((t ^ (t >>> 14)) >>> 0) / 4294967296;
-  };
-}
-
 function deal(audience: "special" | "unspecial", seed: number): string[] {
   return dealGrid({
     pool: squares,
@@ -104,4 +103,54 @@ test("throws when there are no center candidates", () => {
       rng: mulberry32(1),
     }),
   ).toThrow();
+});
+
+test("name identity is canonical while the ticket preserves entered casing", () => {
+  expect(normalizeName("  Harry   Potter  ")).toBe("harry potter");
+  expect(cleanDisplayName("  Harry   Potter  ")).toBe("Harry Potter");
+});
+
+test("the name seed and PRNG repeat for the same normalized name", () => {
+  const seed = stringToSeed("harry potter");
+
+  expect(seed).toBe(stringToSeed("harry potter"));
+  expect(seed).not.toBe(stringToSeed("hermione granger"));
+
+  const first = mulberry32(seed);
+  const second = mulberry32(seed);
+  expect(Array.from({ length: 5 }, () => first())).toEqual(
+    Array.from({ length: 5 }, () => second()),
+  );
+});
+
+test("a non-special name resolves to one deterministic public card", () => {
+  const first = resolveCard("  Harry   Potter  ");
+  const second = resolveCard("harry potter");
+
+  expect(first).not.toBeNull();
+  expect(second).not.toBeNull();
+  expect(first).toMatchObject({
+    slug: "harry potter",
+    name: "Harry Potter",
+    source: "seeded",
+  });
+  expect(first?.squareIds).toEqual(second?.squareIds);
+  expect(first?.squareIds).toHaveLength(GRID_SIZE);
+  expect(new Set(first?.squareIds).size).toBe(GRID_SIZE);
+  expect(first?.squareIds.some((id) => id.startsWith("CA"))).toBe(true);
+  expect(first?.squareIds.some((id) => id.startsWith("SD"))).toBe(false);
+});
+
+test("a special name continues to use its committed bespoke grid", () => {
+  expect(resolveCard("LEMON")).toMatchObject({
+    slug: "lemon",
+    name: "Lemon",
+    source: "bespoke",
+    squareIds: cards.lemon.squareIds,
+  });
+});
+
+test("blank names still do not resolve to a card", () => {
+  expect(resolveCard(null)).toBeNull();
+  expect(resolveCard("   ")).toBeNull();
 });

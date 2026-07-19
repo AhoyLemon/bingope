@@ -13,6 +13,7 @@ const projectRoot = path.resolve(__dirname, "..");
  */
 function buildPug() {
   console.log("Building Pug files...");
+  const buildId = new Date().toISOString();
 
   let successCount = 0;
   let errorCount = 0;
@@ -34,6 +35,8 @@ function buildPug() {
         pretty: true,
         basedir: path.resolve(projectRoot, "pug"),
         testing: false,
+        buildId,
+        assetVersion: buildId,
       });
 
       // Ensure output directory exists

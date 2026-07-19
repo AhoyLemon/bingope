@@ -1,13 +1,5 @@
 - const pageTitle = null
 - const assetPath = ""
--
-  const players = [
-    { name: "Lemon", slug: "lemon" },
-    { name: "Simone", slug: "simone" },
-    { name: "Angie", slug: "angie" },
-    { name: "Mike", slug: "mike" },
-    { name: "Victor", slug: "victor" },
-  ]
 include partials/_variables
 include partials/_mixins
 
@@ -15,25 +7,22 @@ doctype html
 html(lang="en")
   include partials/_head.pug
 
-  body
-    #app.site-shell
-      header.site-header
-        p.eyebrow 2026 Minnesota State Fair
-        h1 BINGOPE
-        p Choose your Card. The bingo grids are coming next.
+  body.entry-page
+    #app.site-shell.entry-shell
+      main.entry-ticket
+        header.entry-ticket__header
+          p.eyebrow 2026 Minnesota State Fair
+          h1 BINGOPE
+          p.entry-ticket__lede Your own fair day, one square at a time.
 
-      main
-        nav(aria-label="Player Cards")
-          ul.card-links
-            each player in players
-              li
-                a.card-link(href="card/?card=" + player.slug) #{player.name}'s Card
-
-        //- Anyone else: type a name. _nameEntry.ts sanitizes to a tidy URL;
-        //- the native GET action is the no-JS fallback.
+        //- The native GET action is the no-JS fallback. _nameEntry.ts cleans
+        //- whitespace while preserving the player-entered casing in the URL.
         form.name-entry(action="card/" method="get")
-          label(for="CardName") Enter your name
-          input#CardName(type="text" name="card" required autocomplete="off")
-          button(type="submit") Get my Card
+          label(for="CardName") What’s your name?
+          input#CardName(type="text" name="card" required autocomplete="name")
+          button(type="submit") Get My Card
+
+        p.entry-ticket__help
+          a(href="help/") What is this?
 
     include partials/_javascripts
