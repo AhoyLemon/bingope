@@ -1,0 +1,59 @@
+@use "../abstracts/variables" as vars;
+
+.help-content {
+  width: min(100%, 32rem);
+  margin-inline: auto;
+  padding: clamp(2.5rem, 10vw, 4rem) clamp(1.3rem, 7vw, 2.25rem)
+    clamp(2.5rem, 9vw, 3.5rem);
+  display: flex;
+  flex-direction: column;
+  gap: 1.85rem;
+}
+
+.help-header {
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5em;
+}
+
+.help-copy {
+  display: grid;
+  gap: 1rem;
+  font-size: clamp(1.05rem, 3vw, 1.15rem);
+  line-height: 1.6;
+
+  h1 {
+    margin: 0;
+    color: vars.$navy;
+    font-family: vars.$ticket-serif;
+    font-size: clamp(2.2rem, 9vw, 3.4rem);
+  }
+
+  .footnote {
+    font-weight: 300;
+    font-size: 75%;
+  }
+}
+
+.help-play {
+  display: block;
+  color: vars.$blue;
+  font-size: 285%;
+  text-decoration: none;
+
+  &:hover,
+  &:focus-visible {
+    text-decoration: underline;
+  }
+
+  &:active {
+    transform: translateY(0.12rem);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .help-play {
+    transition: none;
+  }
+}

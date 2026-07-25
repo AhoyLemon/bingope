@@ -6,6 +6,7 @@
 @use "abstracts/z-index" as *;
 @use "abstracts/mixins" as mix;
 @use "abstracts/extends";
+@use "abstracts/animations";
 
 // BASE is for things like global site styles and typography.
 @use "base/reset";
@@ -14,6 +15,7 @@
 // LIBRARIES is for third party Scss
 
 // COMPONENTS is for stuff like buttons, cards, callouts, toasts, etc... Essentially - reusable rectangles.
+@use "components/dialog";
 
 // LAYOUT is for stuff like a grid system, topnav, footer, etc.
 
@@ -22,6 +24,7 @@
 // PAGES is for any specific page template
 @use "pages/skeleton";
 @use "pages/entry";
+@use "pages/help";
 @use "pages/card";
 
 // FINALLY, we should have a place for things we still need to get to...

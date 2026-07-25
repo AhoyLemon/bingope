@@ -14,17 +14,8 @@ import { normalizeName } from "./_deal.js";
 
 const form = document.querySelector<HTMLFormElement>("form.name-entry");
 const input = form?.querySelector<HTMLInputElement>('input[name="card"]');
-const button = form?.querySelector<HTMLButtonElement>('button[type="submit"]');
 
-if (form && input && button) {
-  // Starts disabled only once JS confirms it can re-enable the button; a
-  // no-JS visitor keeps a normal, always-enabled button backed by `required`.
-  button.disabled = input.value.trim().length === 0;
-
-  input.addEventListener("input", () => {
-    button.disabled = input.value.trim().length === 0;
-  });
-
+if (form && input) {
   form.addEventListener("submit", (event) => {
     const name = normalizeName(input.value);
     if (!name) return; // whitespace-only; let the field stay put

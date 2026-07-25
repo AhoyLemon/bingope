@@ -1,39 +1,29 @@
 @use "../abstracts/variables" as vars;
 
-$navy: #162447;
-$blue: #21a8eb;
-$green: #247c42;
-$purple: #30266d;
-$dark-gray: #34343c;
-$card: #f9faf8;
-$page-paper: #eee8d8;
-$paper: #fdfaf2;
-$ink: #10192f;
-$display: "Avenir Next", Futura, "Arial Black", sans-serif;
-$grid-display: "Arial Narrow", "Aptos Narrow", "Helvetica Neue Condensed", sans-serif;
-$owner-serif: Georgia, "Times New Roman", serif;
-$ticket-serif: "Zilla Slab", Rockwell, "Roboto Slab", Georgia, serif;
 $paper-texture: url("../svg/paper-texture.svg");
-$paper-texture-modal: url("../svg/paper-texture-modal.svg");
 
 .card-page {
   --ticket-height: clamp(7rem, min(19dvw, 21dvh), 10.75rem);
 
   overflow-x: clip;
-  background: $page-paper;
-}
+  background: vars.$page-paper;
 
-.card-page .site-shell {
-  width: min(100%, 53.25rem);
-  min-height: 100dvh;
-  padding-block: 0 0.75rem;
-  background: transparent;
-}
+  .site-shell {
+    width: min(100%, 53.25rem);
+    min-height: 100dvh;
+    padding-block: 0 0.75rem;
+    background: transparent;
+  }
 
-.card-page .card-shell {
-  padding: 0;
-  border: 0;
-  text-align: initial;
+  .card-shell {
+    padding: 1rem 10px;
+    border: 0;
+    text-align: initial;
+    min-height: 100dvh;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+  }
 }
 
 .card-ticket {
@@ -49,11 +39,9 @@ $paper-texture-modal: url("../svg/paper-texture-modal.svg");
 
   position: relative;
   min-height: var(--ticket-height);
-  margin: clamp(0.4rem, 1.5dvw, 0.8rem) clamp(0.35rem, 1.25dvw, 0.7rem)
-    clamp(0.7rem, 2.5dvw, 1.25rem);
-  background: $navy;
-  color: $ink;
-  filter: drop-shadow(0 0.3rem 0.28rem rgba($navy, 0.14));
+  background: vars.$navy;
+  color: vars.$ink;
+  filter: drop-shadow(0 0.3rem 0.28rem rgba(vars.$navy, 0.14));
   text-align: center;
 }
 
@@ -65,20 +53,20 @@ $paper-texture-modal: url("../svg/paper-texture-modal.svg");
   width: calc(var(--perforation-size) + var(--perforation-size) + 0.08rem);
   background-image: radial-gradient(
     circle at center,
-    $page-paper 0 var(--perforation-size),
+    vars.$page-paper 0 var(--perforation-size),
     transparent calc(var(--perforation-size) + 0.03rem)
   );
   background-repeat: repeat-y;
   background-size: 100% var(--perforation-step);
   pointer-events: none;
-}
 
-.card-ticket__perforations--left {
-  left: calc(0rem - var(--perforation-size) - 0.04rem);
-}
+  &--left {
+    left: calc(0rem - var(--perforation-size) - 0.04rem);
+  }
 
-.card-ticket__perforations--right {
-  right: calc(0rem - var(--perforation-size) - 0.04rem);
+  &--right {
+    right: calc(0rem - var(--perforation-size) - 0.04rem);
+  }
 }
 
 .ticket-mask {
@@ -104,7 +92,8 @@ $paper-texture-modal: url("../svg/paper-texture-modal.svg");
       )
       left bottom / 50.5% 50.5% no-repeat,
     radial-gradient(
-        circle at calc(100% + var(--mask-offset)) calc(100% + var(--mask-offset)),
+        circle at calc(100% + var(--mask-offset))
+          calc(100% + var(--mask-offset)),
         transparent calc(var(--mask-radius) - 0.5px),
         #000 calc(var(--mask-radius) + 0.5px)
       )
@@ -129,7 +118,8 @@ $paper-texture-modal: url("../svg/paper-texture-modal.svg");
       )
       left bottom / 50.5% 50.5% no-repeat,
     radial-gradient(
-        circle at calc(100% + var(--mask-offset)) calc(100% + var(--mask-offset)),
+        circle at calc(100% + var(--mask-offset))
+          calc(100% + var(--mask-offset)),
         transparent calc(var(--mask-radius) - 0.5px),
         #000 calc(var(--mask-radius) + 0.5px)
       )
@@ -148,7 +138,7 @@ $paper-texture-modal: url("../svg/paper-texture-modal.svg");
   --mask-offset: var(--frame-width);
 
   inset: var(--frame-width);
-  background-color: $paper;
+  background-color: vars.$paper;
   background-image: $paper-texture;
   background-size: 11rem 11rem;
 }
@@ -157,14 +147,16 @@ $paper-texture-modal: url("../svg/paper-texture-modal.svg");
   --mask-offset: calc(var(--frame-width) + var(--paper-gap));
 
   inset: var(--paper-gap);
-  background: $green;
+  background: vars.$green;
 }
 
 .card-ticket__rule-gap {
-  --mask-offset: calc(var(--frame-width) + var(--paper-gap) + var(--rule-width));
+  --mask-offset: calc(
+    var(--frame-width) + var(--paper-gap) + var(--rule-width)
+  );
 
   inset: var(--rule-width);
-  background-color: $paper;
+  background-color: vars.$paper;
   background-image: $paper-texture;
   background-size: 11rem 11rem;
 }
@@ -175,13 +167,13 @@ $paper-texture-modal: url("../svg/paper-texture-modal.svg");
   );
 
   inset: var(--rule-gap);
-  background: $green;
+  background: vars.$green;
 }
 
 .card-ticket__inside {
   --mask-offset: calc(
-    var(--frame-width) + var(--paper-gap) + var(--rule-width) + var(--rule-gap) +
-      var(--inner-rule-width)
+    var(--frame-width) + var(--paper-gap) + var(--rule-width) +
+      var(--rule-gap) + var(--inner-rule-width)
   );
 
   inset: var(--inner-rule-width);
@@ -191,7 +183,7 @@ $paper-texture-modal: url("../svg/paper-texture-modal.svg");
     clamp(2.15rem, 7dvw, 3.75rem);
   align-items: stretch;
   padding-inline: clamp(0.35rem, 1.2dvw, 0.75rem);
-  background-color: $paper;
+  background-color: vars.$paper;
   background-image: $paper-texture;
   background-size: 11rem 11rem;
   container-type: size;
@@ -205,38 +197,45 @@ $paper-texture-modal: url("../svg/paper-texture-modal.svg");
   width: 100%;
   flex-direction: column;
   align-items: center;
-  gap: clamp(0.3rem, 5cqh, 0.5rem);
+  gap: 0.35rem;
   justify-content: center;
-  padding-block: clamp(0.45rem, 6cqh, 0.75rem);
-  transform: translateY(clamp(0.4rem, 9cqh, 0.75rem));
 }
 
-.card-ticket h1 {
-  margin: 0;
-  color: $navy;
-  font-family: $display;
-  font-size: clamp(2.35rem, min(9.4cqw, 54cqh), 5.15rem);
-  font-weight: 900;
-  line-height: 0.88;
-  letter-spacing: clamp(0.06rem, 0.35dvw, 0.22rem);
-  text-wrap: balance;
+.card-ticket__wordmark {
+  max-width: 75%;
+
+  svg {
+    display: block;
+    width: 100%;
+    height: auto;
+  }
 }
 
 .card-ticket__owner {
   display: grid;
   width: 100%;
   min-width: 0;
-  grid-template-columns: minmax(0.5rem, 1fr) minmax(0, max-content) minmax(0.5rem, 1fr);
+  grid-template-columns: minmax(0.5rem, 1fr) minmax(0, max-content) minmax(
+      0.5rem,
+      1fr
+    );
   gap: clamp(0.4rem, 1.6cqw, 0.85rem);
   align-items: center;
   margin: 0;
-  color: $navy;
-  font-family: $owner-serif;
+  color: vars.$green;
+  font-family: vars.$ticket-serif;
   font-size: clamp(0.85rem, min(1.85dvw, 3.25dvh), 1.2rem);
   font-weight: vars.$bold;
   line-height: 1;
   letter-spacing: 0.015em;
   white-space: nowrap;
+
+  &::before,
+  &::after {
+    height: var(--inner-rule-width);
+    background: vars.$green;
+    content: "";
+  }
 }
 
 .card-ticket__owner-name {
@@ -245,31 +244,24 @@ $paper-texture-modal: url("../svg/paper-texture-modal.svg");
   text-overflow: ellipsis;
 }
 
-.card-ticket__owner::before,
-.card-ticket__owner::after {
-  height: var(--inner-rule-width);
-  background: $green;
-  content: "";
-}
-
 .card-ticket__star-rail {
   z-index: 2;
   display: grid;
   grid-template-rows: repeat(5, 1fr);
   place-items: center;
   padding-block: clamp(0.3rem, 4cqh, 0.55rem);
-  color: $green;
-  font-family: $display;
+  color: vars.$green;
+  font-family: vars.$ticket-serif;
   font-size: clamp(0.65rem, min(2.5cqw, 12cqh), 0.95rem);
   line-height: 1;
-}
 
-.card-ticket__star-rail--left {
-  border-right: var(--inner-rule-width) solid $green;
-}
+  &--left {
+    border-right: var(--inner-rule-width) solid vars.$green;
+  }
 
-.card-ticket__star-rail--right {
-  border-left: var(--inner-rule-width) solid $green;
+  &--right {
+    border-left: var(--inner-rule-width) solid vars.$green;
+  }
 }
 
 .bingo-board {
@@ -278,8 +270,8 @@ $paper-texture-modal: url("../svg/paper-texture-modal.svg");
   margin-inline: auto;
   padding: clamp(0.12rem, 0.4dvw, 0.22rem);
   overflow-x: auto;
-  background: $navy;
-  box-shadow: 0 0.3rem 0.5rem rgba($navy, 0.12);
+  background: vars.$navy;
+  box-shadow: 0 0.3rem 0.5rem rgba(vars.$navy, 0.12);
 }
 
 .bingo-grid {
@@ -295,7 +287,7 @@ $paper-texture-modal: url("../svg/paper-texture-modal.svg");
   grid-template-columns: repeat(5, minmax(0, 1fr));
   grid-template-rows: repeat(5, minmax(0, 1fr));
   gap: clamp(0.1rem, 0.35dvw, 0.2rem);
-  background: $navy;
+  background: vars.$navy;
 }
 
 // The line lives above the blue daubers, but the square copy is explicitly
@@ -318,33 +310,13 @@ $paper-texture-modal: url("../svg/paper-texture-modal.svg");
   stroke-width: 18;
   opacity: 0.82;
   mix-blend-mode: multiply;
-}
 
-.bingo-line.is-pending {
-  opacity: 0;
-}
-
-.bingo-line.is-revealing {
-  animation: bingo-sharpie-draw 1500ms cubic-bezier(0.2, 0.78, 0.28, 1) both;
-}
-
-@keyframes bingo-sharpie-draw {
-  0% {
-    stroke-dasharray: 1;
-    stroke-dashoffset: 1;
-    opacity: 0.5;
+  &.is-pending {
+    opacity: 0;
   }
 
-  72% {
-    stroke-dasharray: 1;
-    stroke-dashoffset: 0;
-    opacity: 0.88;
-  }
-
-  100% {
-    stroke-dasharray: 1;
-    stroke-dashoffset: 0;
-    opacity: 0.82;
+  &.is-revealing {
+    animation: bingo-sharpie-draw 1500ms cubic-bezier(0.2, 0.78, 0.28, 1) both;
   }
 }
 
@@ -369,16 +341,17 @@ $paper-texture-modal: url("../svg/paper-texture-modal.svg");
   background: transparent;
   cursor: pointer;
   overflow: hidden;
-  animation: bingo-celebration-arrive 420ms cubic-bezier(0.2, 0.8, 0.28, 1) both;
-}
+  animation: bingo-celebration-arrive 420ms cubic-bezier(0.2, 0.8, 0.28, 1)
+    both;
 
-.bingo-celebration:focus-visible {
-  outline: none;
-}
+  &:focus-visible {
+    outline: none;
 
-.bingo-celebration:focus-visible .bingo-celebration__message {
-  outline: 0.18rem solid $green;
-  outline-offset: 0.24rem;
+    .bingo-celebration__message {
+      outline: 0.18rem solid vars.$green;
+      outline-offset: 0.24rem;
+    }
+  }
 }
 
 .bingo-celebration__message {
@@ -387,10 +360,10 @@ $paper-texture-modal: url("../svg/paper-texture-modal.svg");
   margin: 0;
   padding: 0.56rem 0.9rem 0.5rem;
   border: 0.12rem solid #a52530;
-  background: rgba($paper, 0.94);
+  background: rgba(vars.$paper, 0.94);
   box-shadow: 0 0.15rem 0 rgba(#6f1824, 0.25);
   color: #9b202b;
-  font-family: $ticket-serif;
+  font-family: vars.$ticket-serif;
   font-size: clamp(1.65rem, 7.4dvw, 2.7rem);
   font-weight: 900;
   letter-spacing: -0.015em;
@@ -405,17 +378,17 @@ $paper-texture-modal: url("../svg/paper-texture-modal.svg");
   position: absolute;
   inset: 0;
   pointer-events: none;
-}
 
-.bingo-celebration__burst span {
-  position: absolute;
-  display: block;
-  color: var(--star-color);
-  font-family: $display;
-  font-size: var(--star-size, clamp(1rem, 4.7dvw, 1.55rem));
-  font-weight: 900;
-  line-height: 1;
-  text-shadow: 0 0.08rem 0 rgba($paper, 0.4);
+  span {
+    position: absolute;
+    display: block;
+    color: var(--star-color);
+    font-family: vars.$ticket-serif;
+    font-size: var(--star-size, clamp(1rem, 4.7dvw, 1.55rem));
+    font-weight: 900;
+    line-height: 1;
+    text-shadow: 0 0.08rem 0 rgba(vars.$paper, 0.4);
+  }
 }
 
 // Every star gets a fresh inline toss and landing point. The animation runs
@@ -428,318 +401,61 @@ $paper-texture-modal: url("../svg/paper-texture-modal.svg");
   transform: translate(-50%, -50%);
   will-change: opacity, transform;
   animation: bingo-star-rain var(--star-duration) linear both;
-}
 
-@keyframes bingo-star-rain {
-  0% {
-    opacity: 0;
-    transform: translate(-50%, -50%) rotate(var(--star-start-rotation)) scale(0.5);
+  &--1 {
+    --star-color: #dd3843;
+    --star-size: clamp(1.15rem, 5.7dvw, 1.8rem);
+
+    animation: bingo-star-flare 2.7s cubic-bezier(0.18, 0.82, 0.28, 1) 55ms
+      both;
   }
 
-  4% {
-    opacity: 1;
+  &--2 {
+    --star-color: #e0aa22;
+    --star-size: clamp(0.95rem, 4.25dvw, 1.35rem);
+
+    animation: bingo-star-toss 2.95s cubic-bezier(0.18, 0.82, 0.28, 1) 155ms
+      both;
   }
 
-  6% {
-    opacity: 1;
-    transform: translate(-50%, -50%) translate(var(--star-curve-x), var(--star-curve-y))
-      rotate(var(--star-curve-rotation))
-      scale(var(--star-landing-scale));
+  &--3 {
+    --star-color: #{vars.$blue};
+    --star-size: clamp(1.1rem, 5.1dvw, 1.6rem);
+
+    animation: bingo-star-spin 2.75s cubic-bezier(0.18, 0.82, 0.28, 1) 110ms
+      both;
   }
 
-  10% {
-    opacity: 1;
-    transform: translate(-50%, -50%) translate(var(--star-approach-x), var(--star-approach-y))
-      rotate(var(--star-approach-rotation)) scale(var(--star-landing-scale));
+  &--4 {
+    --star-color: #{vars.$green};
+    --star-size: clamp(0.88rem, 3.95dvw, 1.25rem);
+
+    animation: bingo-star-hop 3.05s cubic-bezier(0.18, 0.82, 0.28, 1) 215ms
+      both;
   }
 
-  16% {
-    opacity: 1;
-    transform: translate(-50%, -50%) translate(var(--star-flight-x), var(--star-flight-y))
-      rotate(var(--star-landing-rotation)) scale(var(--star-landing-scale));
+  &--5 {
+    --star-color: #{vars.$purple};
+    --star-size: clamp(1.2rem, 5.9dvw, 1.85rem);
+
+    animation: bingo-star-flutter 2.85s cubic-bezier(0.18, 0.82, 0.28, 1) 80ms
+      both;
   }
 
-  100% {
-    opacity: 0;
-    transform: translate(-50%, -50%) translate(var(--star-flight-x), var(--star-flight-y))
-      rotate(var(--star-landing-rotation)) scale(var(--star-landing-scale));
-  }
-}
+  &--6 {
+    --star-color: #c76f2d;
+    --star-size: clamp(0.8rem, 3.7dvw, 1.15rem);
 
-.bingo-celebration__piece--1 {
-  --star-color: #dd3843;
-  --star-size: clamp(1.15rem, 5.7dvw, 1.8rem);
-
-  animation: bingo-star-flare 2.7s cubic-bezier(0.18, 0.82, 0.28, 1) 55ms both;
-}
-
-.bingo-celebration__piece--2 {
-  --star-color: #e0aa22;
-  --star-size: clamp(0.95rem, 4.25dvw, 1.35rem);
-
-  animation: bingo-star-toss 2.95s cubic-bezier(0.18, 0.82, 0.28, 1) 155ms both;
-}
-
-.bingo-celebration__piece--3 {
-  --star-color: $blue;
-  --star-size: clamp(1.1rem, 5.1dvw, 1.6rem);
-
-  animation: bingo-star-spin 2.75s cubic-bezier(0.18, 0.82, 0.28, 1) 110ms both;
-}
-
-.bingo-celebration__piece--4 {
-  --star-color: $green;
-  --star-size: clamp(0.88rem, 3.95dvw, 1.25rem);
-
-  animation: bingo-star-hop 3.05s cubic-bezier(0.18, 0.82, 0.28, 1) 215ms both;
-}
-
-.bingo-celebration__piece--5 {
-  --star-color: $purple;
-  --star-size: clamp(1.2rem, 5.9dvw, 1.85rem);
-
-  animation: bingo-star-flutter 2.85s cubic-bezier(0.18, 0.82, 0.28, 1) 80ms both;
-}
-
-.bingo-celebration__piece--6 {
-  --star-color: #c76f2d;
-  --star-size: clamp(0.8rem, 3.7dvw, 1.15rem);
-
-  animation: bingo-star-swoop 2.65s cubic-bezier(0.18, 0.82, 0.28, 1) 275ms both;
-}
-
-.bingo-celebration__piece--7 {
-  --star-color: #a52c43;
-  --star-size: clamp(0.9rem, 4.1dvw, 1.3rem);
-
-  animation: bingo-star-spring 3.15s cubic-bezier(0.18, 0.82, 0.28, 1) 180ms both;
-}
-
-@keyframes bingo-celebration-arrive {
-  0% {
-    opacity: 0;
-    scale: 0.84;
+    animation: bingo-star-swoop 2.65s cubic-bezier(0.18, 0.82, 0.28, 1) 275ms
+      both;
   }
 
-  100% {
-    opacity: 1;
-    scale: 1;
-  }
-}
+  &--7 {
+    --star-color: #a52c43;
+    --star-size: clamp(0.9rem, 4.1dvw, 1.3rem);
 
-@keyframes bingo-celebration-breathe {
-  0%,
-  100% {
-    scale: 1;
-  }
-
-  50% {
-    scale: 1.035;
-  }
-}
-
-@keyframes bingo-star-flare {
-  0% {
-    opacity: 0;
-    transform: translate(calc(-50% - 8rem), calc(-50% - 11rem)) rotate(-118deg) scale(0.75)
-      skewX(-12deg);
-  }
-
-  18% {
-    opacity: 1;
-  }
-
-  45% {
-    opacity: 1;
-    transform: translate(calc(-50% - 5.7rem), calc(-50% - 3.9rem)) rotate(220deg)
-      scale(1.12) skewX(8deg);
-  }
-
-  57% {
-    opacity: 1;
-    transform: translate(calc(-50% - 5.7rem), calc(-50% - 3.9rem)) rotate(208deg)
-      scale(0.88) skewX(3deg);
-  }
-
-  100% {
-    opacity: 0;
-    transform: translate(calc(-50% - 5.7rem), calc(-50% - 3.9rem)) rotate(208deg)
-      scale(0.46) skewX(0deg);
-  }
-}
-
-@keyframes bingo-star-toss {
-  0% {
-    opacity: 0;
-    transform: translate(calc(-50% + 8rem), calc(-50% - 10rem)) rotate(132deg) scale(0.58)
-      skewY(-8deg);
-  }
-
-  16% {
-    opacity: 1;
-  }
-
-  43% {
-    opacity: 1;
-    transform: translate(calc(-50% + 4.9rem), calc(-50% - 4.5rem)) rotate(44deg) scale(1.12)
-      skewY(9deg);
-  }
-
-  55% {
-    opacity: 1;
-    transform: translate(calc(-50% + 4.9rem), calc(-50% - 4.5rem)) rotate(50deg) scale(0.86)
-      skewY(2deg);
-  }
-
-  100% {
-    opacity: 0;
-    transform: translate(calc(-50% + 4.9rem), calc(-50% - 4.5rem)) rotate(44deg)
-      scale(0.4) skewY(0deg);
-  }
-}
-
-@keyframes bingo-star-spin {
-  0% {
-    opacity: 0;
-    transform: translate(calc(-50% - 12rem), calc(-50% + 0.7rem)) rotate(-42deg) scale(0.54);
-  }
-
-  20% {
-    opacity: 1;
-  }
-
-  48% {
-    opacity: 1;
-    transform: translate(calc(-50% - 6.2rem), calc(-50% + 2.8rem)) rotate(-300deg) scale(1.05);
-  }
-
-  60% {
-    opacity: 1;
-    transform: translate(calc(-50% - 6.2rem), calc(-50% + 2.8rem)) rotate(-285deg) scale(0.82);
-  }
-
-  100% {
-    opacity: 0;
-    transform: translate(calc(-50% - 6.2rem), calc(-50% + 2.8rem)) rotate(-300deg)
-      scale(0.38);
-  }
-}
-
-@keyframes bingo-star-hop {
-  0% {
-    opacity: 0;
-    transform: translate(calc(-50% + 11rem), calc(-50% - 0.6rem)) rotate(102deg) scale(0.6) skewX(7deg);
-  }
-
-  17% {
-    opacity: 1;
-  }
-
-  44% {
-    opacity: 1;
-    transform: translate(calc(-50% + 5.8rem), calc(-50% + 3.2rem)) rotate(-4deg)
-      scale(1.08) skewX(-6deg);
-  }
-
-  58% {
-    opacity: 1;
-    transform: translate(calc(-50% + 5.8rem), calc(-50% + 3.2rem)) rotate(8deg)
-      scale(0.83) skewX(3deg);
-  }
-
-  100% {
-    opacity: 0;
-    transform: translate(calc(-50% + 5.8rem), calc(-50% + 3.2rem)) rotate(-4deg)
-      scale(0.37) skewX(0deg);
-  }
-}
-
-@keyframes bingo-star-flutter {
-  0% {
-    opacity: 0;
-    transform: translate(calc(-50% + 0.8rem), calc(-50% - 12rem)) rotate(-160deg) scale(0.5)
-      skewY(-10deg);
-  }
-
-  16% {
-    opacity: 1;
-  }
-
-  41% {
-    opacity: 1;
-    transform: translate(calc(-50% + 0.3rem), calc(-50% - 5.8rem)) rotate(-34deg)
-      scale(1.1) skewY(10deg);
-  }
-
-  55% {
-    opacity: 1;
-    transform: translate(calc(-50% + 0.3rem), calc(-50% - 5.8rem)) rotate(-26deg)
-      scale(0.84) skewY(-3deg);
-  }
-
-  100% {
-    opacity: 0;
-    transform: translate(calc(-50% + 0.3rem), calc(-50% - 5.8rem)) rotate(-34deg)
-      scale(0.38) skewY(0deg);
-  }
-}
-
-@keyframes bingo-star-swoop {
-  0% {
-    opacity: 0;
-    transform: translate(calc(-50% - 10rem), calc(-50% + 8.5rem)) rotate(145deg) scale(0.48)
-      skewX(-15deg);
-  }
-
-  18% {
-    opacity: 1;
-  }
-
-  46% {
-    opacity: 1;
-    transform: translate(calc(-50% - 5.2rem), calc(-50% + 4.9rem)) rotate(-88deg)
-      scale(1.15) skewX(12deg);
-  }
-
-  57% {
-    opacity: 1;
-    transform: translate(calc(-50% - 5.2rem), calc(-50% + 4.9rem)) rotate(-76deg)
-      scale(0.8) skewX(3deg);
-  }
-
-  100% {
-    opacity: 0;
-    transform: translate(calc(-50% - 5.2rem), calc(-50% + 4.9rem)) rotate(-88deg)
-      scale(0.34) skewX(0deg);
-  }
-}
-
-@keyframes bingo-star-spring {
-  0% {
-    opacity: 0;
-    transform: translate(calc(-50% + 10rem), calc(-50% + 9rem)) rotate(-130deg) scale(0.42);
-  }
-
-  15% {
-    opacity: 1;
-  }
-
-  45% {
-    opacity: 1;
-    transform: translate(calc(-50% + 5rem), calc(-50% + 4.8rem)) rotate(230deg)
-      scale(1.17) skewY(8deg);
-  }
-
-  58% {
-    opacity: 1;
-    transform: translate(calc(-50% + 5rem), calc(-50% + 4.8rem)) rotate(216deg)
-      scale(0.78) skewY(-3deg);
-  }
-
-  100% {
-    opacity: 0;
-    transform: translate(calc(-50% + 5rem), calc(-50% + 4.8rem)) rotate(230deg)
-      scale(0.35) skewY(0deg);
+    animation: bingo-star-spring 3.15s cubic-bezier(0.18, 0.82, 0.28, 1) 180ms
+      both;
   }
 }
 
@@ -753,102 +469,98 @@ $paper-texture-modal: url("../svg/paper-texture-modal.svg");
   padding: clamp(0.18rem, 0.65dvw, 0.4rem);
   border: 0;
   border-radius: 0;
-  background-color: $paper;
+  background-color: vars.$paper;
   background-image: $paper-texture;
   background-size: 11rem 11rem;
-  color: $ink;
-  font-family: $grid-display;
+  color: vars.$ink;
+  font-family: vars.$grid-display;
   font-size: clamp(0.72rem, min(3.25dvw, 2.2dvh), 2.25rem);
-  font-stretch: condensed;
-  font-weight: 700;
+  font-weight: 100;
   line-height: 1.05;
   letter-spacing: 0;
   text-align: center;
   text-transform: uppercase;
   text-wrap: balance;
-  transition: background-color 160ms ease-out, transform 160ms ease-out;
-}
+  transition:
+    background-color 160ms ease-out,
+    transform 160ms ease-out;
 
-.bingo-square.task-see {
-  color: $dark-gray;
-}
+  &.task-see {
+    color: vars.$dark-gray;
+  }
 
-.bingo-square.task-do {
-  color: $purple;
-}
+  &.task-do {
+    color: vars.$purple;
+  }
 
-.bingo-square.square-center {
-  background-image:
-    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Cpath d='M50 3 61 36 96 36 68 56 79 91 50 70 21 91 32 56 4 36 39 36Z' fill='%23000000' fill-opacity='.09'/%3E%3C/svg%3E"),
-    $paper-texture;
-  background-position: center, 0 0;
-  background-repeat: no-repeat, repeat;
-  background-size: 96% 96%, 11rem 11rem;
-}
+  &.square-center {
+    background-image:
+      url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Cpath d='M50 3 61 36 96 36 68 56 79 91 50 70 21 91 32 56 4 36 39 36Z' fill='%23000000' fill-opacity='.09'/%3E%3C/svg%3E"),
+      $paper-texture;
+    background-position:
+      center,
+      0 0;
+    background-repeat: no-repeat, repeat;
+    background-size:
+      96% 96%,
+      11rem 11rem;
+  }
 
-.bingo-square:focus-visible {
-  z-index: 1;
-  outline: 0.25rem solid $green;
-  outline-offset: -0.25rem;
-}
+  &:focus-visible {
+    z-index: 1;
+    outline: 0.25rem solid vars.$green;
+    outline-offset: -0.25rem;
+  }
 
-.bingo-square:active {
-  transform: scale(0.97);
+  &:active {
+    transform: scale(0.97);
+  }
+
+  &.copy-long {
+    font-size: clamp(0.64rem, min(2.85dvw, 1.85dvh), 1.9rem);
+  }
+
+  &.copy-very-long {
+    padding-inline: 0;
+    font-size: clamp(0.58rem, min(2.45dvw, 1.55dvh), 1.55rem);
+    letter-spacing: -0.02em;
+  }
 }
 
 .bingo-square__dauber {
   display: none;
-  fill: $blue;
-}
+  fill: vars.$blue;
 
-.bingo-square.marked .bingo-square__dauber {
-  // Split rotate/scale into longhands so the stamp-slap can animate scale alone
-  // while each square keeps its own resting angle.
-  --dauber-rotate: -7deg;
-  --dauber-scale: 0.98;
+  .bingo-square.marked & {
+    // Split rotate/scale into longhands so the stamp-slap can animate scale
+    // alone while each square keeps its own resting angle.
+    --dauber-rotate: -7deg;
+    --dauber-scale: 0.98;
 
-  position: absolute;
-  z-index: 0;
-  display: block;
-  width: 86%;
-  width: min(88cqw, 88cqh);
-  aspect-ratio: 1;
-  overflow: visible;
-  mix-blend-mode: multiply;
-  rotate: var(--dauber-rotate);
-  scale: var(--dauber-scale);
-}
-
-.bingo-square:nth-child(3n + 2).marked .bingo-square__dauber {
-  --dauber-rotate: 8deg;
-  --dauber-scale: 0.94;
-}
-
-.bingo-square:nth-child(4n).marked .bingo-square__dauber {
-  --dauber-rotate: -14deg;
-  --dauber-scale: 0.93;
-}
-
-// One-shot "slapped into place" stamp when a square is marked from the modal.
-// Overshoots small on impact, then settles to its resting scale.
-.bingo-square.just-stamped .bingo-square__dauber {
-  animation: dauber-slap 300ms ease-out both;
-}
-
-@keyframes dauber-slap {
-  0% {
-    opacity: 0;
-    scale: calc(var(--dauber-scale) * 1.55);
-  }
-
-  60% {
-    opacity: 1;
-    scale: calc(var(--dauber-scale) * 0.9);
-  }
-
-  100% {
-    opacity: 1;
+    position: absolute;
+    z-index: 0;
+    display: block;
+    width: 86%;
+    width: min(88cqw, 88cqh);
+    aspect-ratio: 1;
+    overflow: visible;
+    mix-blend-mode: multiply;
+    rotate: var(--dauber-rotate);
     scale: var(--dauber-scale);
+  }
+
+  .bingo-square:nth-child(3n + 2).marked & {
+    --dauber-rotate: 8deg;
+    --dauber-scale: 0.94;
+  }
+
+  .bingo-square:nth-child(4n).marked & {
+    --dauber-rotate: -14deg;
+    --dauber-scale: 0.93;
+  }
+
+  .bingo-square.just-stamped & {
+    animation: dauber-slap 300ms ease-out both;
   }
 }
 
@@ -858,344 +570,13 @@ $paper-texture-modal: url("../svg/paper-texture-modal.svg");
   overflow-wrap: break-word;
 }
 
-.bingo-square.copy-long {
-  font-size: clamp(0.64rem, min(2.85dvw, 1.85dvh), 1.9rem);
-}
-
-.bingo-square.copy-very-long {
-  padding-inline: 0;
-  font-size: clamp(0.58rem, min(2.45dvw, 1.55dvh), 1.55rem);
-  letter-spacing: -0.02em;
-}
-
-.bingo-dialog {
-  width: min(100% - 1.5rem, 34rem);
-  max-height: calc(100dvh - 1.5rem);
-  // The shared reset zeroes `dialog` margins, which kills the native modal's
-  // auto-centering — restore it.
-  margin: auto;
-  padding: 0;
-  border: 0;
-  background: transparent;
-  filter:
-    drop-shadow(0 0.3rem 0.5rem rgba($ink, 0.35))
-    drop-shadow(0 1.5rem 2.5rem rgba($ink, 0.5));
-  overflow: visible;
-}
-
-// The ticket's zoom-from-origin entry/exit is driven in JS (Web Animations API,
-// see openSquare/closeSquare) so it can start from the clicked square's rect.
-// The backdrop just cross-fades: @starting-style eases it in on open, and the
-// .is-closing class (added by closeSquare) eases it back out before close().
-.bingo-dialog::backdrop {
-  background: rgba($navy, 0.86);
-  opacity: 1;
-  transition: opacity 240ms ease;
-}
-
-@starting-style {
-  .bingo-dialog[open]::backdrop {
-    opacity: 0;
-  }
-}
-
-.bingo-dialog.is-closing::backdrop {
-  opacity: 0;
-}
-
-// Every ticket ring is clipped to the same scalloped-corner + side-notched
-// silhouette. Each nested ring pushes the notch centres out by its cumulative
-// --mask-offset so the arcs stay concentric and the twin navy rules trace the
-// shape at any size. `intersect` = a hole in any one gradient punches through;
-// where unsupported it degrades to a plain rectangle rather than breaking.
-@mixin dialog-frame-mask {
-  --mask-radius: calc(var(--notch-radius) + var(--mask-offset));
-  --edge-radius: calc(var(--edge-notch-radius) + var(--mask-offset));
-
-  mask:
-    radial-gradient(
-      circle at calc(0% - var(--mask-offset)) calc(0% - var(--mask-offset)),
-      transparent calc(var(--mask-radius) - 0.5px),
-      #000 calc(var(--mask-radius) + 0.5px)
-    ),
-    radial-gradient(
-      circle at calc(100% + var(--mask-offset)) calc(0% - var(--mask-offset)),
-      transparent calc(var(--mask-radius) - 0.5px),
-      #000 calc(var(--mask-radius) + 0.5px)
-    ),
-    radial-gradient(
-      circle at calc(0% - var(--mask-offset)) calc(100% + var(--mask-offset)),
-      transparent calc(var(--mask-radius) - 0.5px),
-      #000 calc(var(--mask-radius) + 0.5px)
-    ),
-    radial-gradient(
-      circle at calc(100% + var(--mask-offset)) calc(100% + var(--mask-offset)),
-      transparent calc(var(--mask-radius) - 0.5px),
-      #000 calc(var(--mask-radius) + 0.5px)
-    ),
-    radial-gradient(
-      circle at calc(0% - var(--mask-offset)) 50%,
-      transparent calc(var(--edge-radius) - 0.5px),
-      #000 calc(var(--edge-radius) + 0.5px)
-    ),
-    radial-gradient(
-      circle at calc(100% + var(--mask-offset)) 50%,
-      transparent calc(var(--edge-radius) - 0.5px),
-      #000 calc(var(--edge-radius) + 0.5px)
-    );
-  mask-composite: intersect;
-}
-
-.bingo-dialog__ticket {
-  --frame-margin: clamp(0.3rem, 1.15vw, 0.5rem);
-  --outer-rule: clamp(0.16rem, 0.55vw, 0.26rem);
-  --rule-gap: clamp(0.26rem, 0.95vw, 0.44rem);
-  --inner-rule: clamp(0.06rem, 0.24vw, 0.11rem);
-  --notch-radius: clamp(1rem, 4.2vw, 1.75rem);
-  --edge-notch-radius: clamp(0.9rem, 3.6vw, 1.5rem);
-  --mask-offset: 0px;
-
-  position: relative;
-  display: flex;
-  flex-direction: column;
-  width: 100%;
-  min-height: min(31rem, calc(100dvh - 1.5rem));
-  max-height: calc(100dvh - 1.5rem);
-  margin: 0;
-  padding: var(--frame-margin);
-  background-color: $paper;
-  background-image: $paper-texture-modal;
-  background-size: 13rem 13rem;
-  color: $ink;
-
-  @include dialog-frame-mask;
-}
-
-.bingo-dialog__rule,
-.bingo-dialog__rule-gap,
-.bingo-dialog__inner-rule,
-.bingo-dialog__inside {
-  flex: 1 1 auto;
-  min-height: 0;
-
-  @include dialog-frame-mask;
-}
-
-.bingo-dialog__rule,
-.bingo-dialog__rule-gap,
-.bingo-dialog__inner-rule {
-  display: flex;
-  flex-direction: column;
-}
-
-.bingo-dialog__rule {
-  --mask-offset: var(--frame-margin);
-
-  padding: var(--outer-rule);
-  background: $navy;
-}
-
-.bingo-dialog__rule-gap {
-  --mask-offset: calc(var(--frame-margin) + var(--outer-rule));
-
-  padding: var(--rule-gap);
-  background-color: $paper;
-  background-image: $paper-texture-modal;
-  background-size: 13rem 13rem;
-}
-
-.bingo-dialog__inner-rule {
-  --mask-offset: calc(var(--frame-margin) + var(--outer-rule) + var(--rule-gap));
-
-  padding: var(--inner-rule);
-  background: $navy;
-}
-
-.bingo-dialog__inside {
-  --mask-offset: calc(
-    var(--frame-margin) + var(--outer-rule) + var(--rule-gap) +
-      var(--inner-rule)
-  );
-
-  position: relative;
-  display: grid;
-  grid-template-rows: minmax(0, 1fr) auto auto;
-  gap: clamp(0.85rem, 3dvh, 1.6rem);
-  // Extra top padding: with the top rule gone, this keeps the challenge text
-  // clear of the absolutely-positioned close ✕ in the corner.
-  padding: clamp(3rem, 7vw, 3.6rem) clamp(1.15rem, 4vw, 2rem)
-    clamp(1.15rem, 3.5vw, 1.7rem);
-  background-color: $paper;
-  background-image: $paper-texture-modal;
-  background-size: 13rem 13rem;
-}
-
-.bingo-dialog__close {
-  position: absolute;
-  z-index: 3;
-  top: clamp(0.3rem, 1.5vw, 0.7rem);
-  right: clamp(0.4rem, 2vw, 0.9rem);
-  display: grid;
-  width: 2.6rem;
-  height: 2.6rem;
-  place-items: center;
-  padding: 0;
-  border: 0;
-  border-radius: 0.25rem;
-  background: transparent;
-  color: $navy;
-  font-family: $display;
-  font-size: 2.3rem;
-  font-weight: vars.$light;
-  line-height: 1;
-}
-
-.bingo-dialog h2 {
-  display: grid;
-  align-self: stretch;
-  justify-self: center;
-  // `safe` so a challenge too tall for its row falls back to top-aligned
-  // (scrollable) instead of centring its start into unreachable overflow.
-  place-content: safe center;
-  max-width: 20ch;
-  margin: 0;
-  overflow-y: auto;
-  color: $navy;
-  font-family: $ticket-serif;
-  font-size: clamp(2rem, 8.2vw, 3.6rem);
-  font-weight: vars.$bold;
-  line-height: 1.05;
-  text-align: center;
-  text-wrap: balance;
-}
-
-.bingo-dialog__fence {
-  display: flex;
-  gap: clamp(0.5rem, 2vw, 0.95rem);
-  align-items: center;
-  justify-content: center;
-  color: $green;
-  font-family: $display;
-  font-size: clamp(0.8rem, 3vw, 1.15rem);
-  line-height: 1;
-}
-
-.bingo-dialog__fence-line {
-  height: 0.1rem;
-  flex: 1;
-  background: currentColor;
-}
-
-.bingo-dialog__fence-stars {
-  display: inline-flex;
-  align-items: center;
-  gap: clamp(0.24rem, 1vw, 0.46rem);
-  line-height: 1;
-  white-space: nowrap;
-}
-
-.bingo-dialog__star--sm {
-  font-size: 0.68em;
-}
-
-.bingo-dialog__star--md {
-  font-size: 1em;
-}
-
-.bingo-dialog__star--xl {
-  font-size: 2.1em;
-}
-
-.bingo-dialog__mark {
-  --notch: clamp(0.7rem, 2.8vw, 1.1rem);
-
-  width: 100%;
-  min-height: clamp(3.1rem, 9vw, 4rem);
-  padding: 0.8rem 1.4rem;
-  border: 0;
-  background: $blue;
-  box-shadow: inset 0 0 0 0.16rem rgba($paper, 0.8);
-  // Concave scallops on both bottom corners, echoing the ticket's bottom edge.
-  mask:
-    radial-gradient(
-        circle at 0% 100%,
-        transparent calc(var(--notch) - 0.5px),
-        #000 calc(var(--notch) + 0.5px)
-      )
-      left bottom / 50% 100% no-repeat,
-    radial-gradient(
-        circle at 100% 100%,
-        transparent calc(var(--notch) - 0.5px),
-        #000 calc(var(--notch) + 0.5px)
-      )
-      right bottom / 50% 100% no-repeat;
-  color: $paper;
-  font-family: $grid-display;
-  font-size: clamp(1.15rem, 4.6vw, 1.7rem);
-  font-stretch: condensed;
-  font-weight: vars.$bold;
-  letter-spacing: 0.05em;
-  text-transform: uppercase;
-  transition: transform 140ms ease-out, filter 140ms ease-out;
-}
-
-.bingo-dialog__mark.is-undo {
-  background: #b94d49;
-}
-
-.bingo-dialog__close:hover,
-.bingo-dialog__mark:hover,
-.bingo-dialog__close:active,
-.bingo-dialog__mark:active {
-  transform: translateY(0.1rem);
-}
-
-.bingo-dialog__mark:hover {
-  filter: brightness(1.06);
-}
-
-.bingo-dialog__close:hover {
-  color: $green;
-}
-
-.bingo-dialog__close:focus-visible {
-  outline: 0.2rem solid $green;
-  outline-offset: 0.15rem;
-}
-
-.bingo-dialog__mark:focus-visible {
-  box-shadow:
-    inset 0 0 0 0.16rem rgba($paper, 0.85),
-    inset 0 0 0 0.4rem $green;
-  outline: none;
-}
-
-@media (max-height: 43rem) {
-  .bingo-dialog__ticket {
-    min-height: 0;
-  }
-
-  .bingo-dialog__inside {
-    gap: 0.9rem;
-    padding-top: clamp(2.9rem, 7vw, 3.2rem);
-    padding-bottom: 1.6rem;
-  }
-
-  .bingo-dialog h2 {
-    font-size: clamp(1.7rem, 7.5vw, 2.6rem);
-  }
-}
-
 @media (prefers-reduced-motion: reduce) {
-  .bingo-square,
-  .bingo-dialog__mark,
-  .bingo-dialog__close,
-  .bingo-dialog::backdrop {
+  .bingo-square {
     transition: none;
-  }
 
-  .bingo-square.just-stamped .bingo-square__dauber {
-    animation: none;
+    &.just-stamped .bingo-square__dauber {
+      animation: none;
+    }
   }
 
   .bingo-line.is-revealing,

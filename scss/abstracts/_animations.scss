@@ -1,0 +1,314 @@
+@keyframes bingo-sharpie-draw {
+  0% {
+    stroke-dasharray: 1;
+    stroke-dashoffset: 1;
+    opacity: 0.5;
+  }
+
+  72% {
+    stroke-dasharray: 1;
+    stroke-dashoffset: 0;
+    opacity: 0.88;
+  }
+
+  100% {
+    stroke-dasharray: 1;
+    stroke-dashoffset: 0;
+    opacity: 0.82;
+  }
+}
+
+@keyframes bingo-celebration-arrive {
+  0% {
+    opacity: 0;
+    scale: 0.84;
+  }
+
+  100% {
+    opacity: 1;
+    scale: 1;
+  }
+}
+
+@keyframes bingo-celebration-breathe {
+  0%,
+  100% {
+    scale: 1;
+  }
+
+  50% {
+    scale: 1.035;
+  }
+}
+
+// Every star gets a fresh inline toss and landing point via CSS custom
+// properties (see .bingo-celebration__piece in _card.scss); this single
+// keyframe animates any of them along their own --star-* trajectory.
+@keyframes bingo-star-rain {
+  0% {
+    opacity: 0;
+    transform: translate(-50%, -50%) rotate(var(--star-start-rotation))
+      scale(0.5);
+  }
+
+  4% {
+    opacity: 1;
+  }
+
+  6% {
+    opacity: 1;
+    transform: translate(-50%, -50%)
+      translate(var(--star-curve-x), var(--star-curve-y))
+      rotate(var(--star-curve-rotation)) scale(var(--star-landing-scale));
+  }
+
+  10% {
+    opacity: 1;
+    transform: translate(-50%, -50%)
+      translate(var(--star-approach-x), var(--star-approach-y))
+      rotate(var(--star-approach-rotation)) scale(var(--star-landing-scale));
+  }
+
+  16% {
+    opacity: 1;
+    transform: translate(-50%, -50%)
+      translate(var(--star-flight-x), var(--star-flight-y))
+      rotate(var(--star-landing-rotation)) scale(var(--star-landing-scale));
+  }
+
+  100% {
+    opacity: 0;
+    transform: translate(-50%, -50%)
+      translate(var(--star-flight-x), var(--star-flight-y))
+      rotate(var(--star-landing-rotation)) scale(var(--star-landing-scale));
+  }
+}
+
+@keyframes bingo-star-flare {
+  0% {
+    opacity: 0;
+    transform: translate(calc(-50% - 8rem), calc(-50% - 11rem)) rotate(-118deg)
+      scale(0.75) skewX(-12deg);
+  }
+
+  18% {
+    opacity: 1;
+  }
+
+  45% {
+    opacity: 1;
+    transform: translate(calc(-50% - 5.7rem), calc(-50% - 3.9rem))
+      rotate(220deg) scale(1.12) skewX(8deg);
+  }
+
+  57% {
+    opacity: 1;
+    transform: translate(calc(-50% - 5.7rem), calc(-50% - 3.9rem))
+      rotate(208deg) scale(0.88) skewX(3deg);
+  }
+
+  100% {
+    opacity: 0;
+    transform: translate(calc(-50% - 5.7rem), calc(-50% - 3.9rem))
+      rotate(208deg) scale(0.46) skewX(0deg);
+  }
+}
+
+@keyframes bingo-star-toss {
+  0% {
+    opacity: 0;
+    transform: translate(calc(-50% + 8rem), calc(-50% - 10rem)) rotate(132deg)
+      scale(0.58) skewY(-8deg);
+  }
+
+  16% {
+    opacity: 1;
+  }
+
+  43% {
+    opacity: 1;
+    transform: translate(calc(-50% + 4.9rem), calc(-50% - 4.5rem)) rotate(44deg)
+      scale(1.12) skewY(9deg);
+  }
+
+  55% {
+    opacity: 1;
+    transform: translate(calc(-50% + 4.9rem), calc(-50% - 4.5rem)) rotate(50deg)
+      scale(0.86) skewY(2deg);
+  }
+
+  100% {
+    opacity: 0;
+    transform: translate(calc(-50% + 4.9rem), calc(-50% - 4.5rem)) rotate(44deg)
+      scale(0.4) skewY(0deg);
+  }
+}
+
+@keyframes bingo-star-spin {
+  0% {
+    opacity: 0;
+    transform: translate(calc(-50% - 12rem), calc(-50% + 0.7rem)) rotate(-42deg)
+      scale(0.54);
+  }
+
+  20% {
+    opacity: 1;
+  }
+
+  48% {
+    opacity: 1;
+    transform: translate(calc(-50% - 6.2rem), calc(-50% + 2.8rem))
+      rotate(-300deg) scale(1.05);
+  }
+
+  60% {
+    opacity: 1;
+    transform: translate(calc(-50% - 6.2rem), calc(-50% + 2.8rem))
+      rotate(-285deg) scale(0.82);
+  }
+
+  100% {
+    opacity: 0;
+    transform: translate(calc(-50% - 6.2rem), calc(-50% + 2.8rem))
+      rotate(-300deg) scale(0.38);
+  }
+}
+
+@keyframes bingo-star-hop {
+  0% {
+    opacity: 0;
+    transform: translate(calc(-50% + 11rem), calc(-50% - 0.6rem)) rotate(102deg)
+      scale(0.6) skewX(7deg);
+  }
+
+  17% {
+    opacity: 1;
+  }
+
+  44% {
+    opacity: 1;
+    transform: translate(calc(-50% + 5.8rem), calc(-50% + 3.2rem)) rotate(-4deg)
+      scale(1.08) skewX(-6deg);
+  }
+
+  58% {
+    opacity: 1;
+    transform: translate(calc(-50% + 5.8rem), calc(-50% + 3.2rem)) rotate(8deg)
+      scale(0.83) skewX(3deg);
+  }
+
+  100% {
+    opacity: 0;
+    transform: translate(calc(-50% + 5.8rem), calc(-50% + 3.2rem)) rotate(-4deg)
+      scale(0.37) skewX(0deg);
+  }
+}
+
+@keyframes bingo-star-flutter {
+  0% {
+    opacity: 0;
+    transform: translate(calc(-50% + 0.8rem), calc(-50% - 12rem))
+      rotate(-160deg) scale(0.5) skewY(-10deg);
+  }
+
+  16% {
+    opacity: 1;
+  }
+
+  41% {
+    opacity: 1;
+    transform: translate(calc(-50% + 0.3rem), calc(-50% - 5.8rem))
+      rotate(-34deg) scale(1.1) skewY(10deg);
+  }
+
+  55% {
+    opacity: 1;
+    transform: translate(calc(-50% + 0.3rem), calc(-50% - 5.8rem))
+      rotate(-26deg) scale(0.84) skewY(-3deg);
+  }
+
+  100% {
+    opacity: 0;
+    transform: translate(calc(-50% + 0.3rem), calc(-50% - 5.8rem))
+      rotate(-34deg) scale(0.38) skewY(0deg);
+  }
+}
+
+@keyframes bingo-star-swoop {
+  0% {
+    opacity: 0;
+    transform: translate(calc(-50% - 10rem), calc(-50% + 8.5rem)) rotate(145deg)
+      scale(0.48) skewX(-15deg);
+  }
+
+  18% {
+    opacity: 1;
+  }
+
+  46% {
+    opacity: 1;
+    transform: translate(calc(-50% - 5.2rem), calc(-50% + 4.9rem))
+      rotate(-88deg) scale(1.15) skewX(12deg);
+  }
+
+  57% {
+    opacity: 1;
+    transform: translate(calc(-50% - 5.2rem), calc(-50% + 4.9rem))
+      rotate(-76deg) scale(0.8) skewX(3deg);
+  }
+
+  100% {
+    opacity: 0;
+    transform: translate(calc(-50% - 5.2rem), calc(-50% + 4.9rem))
+      rotate(-88deg) scale(0.34) skewX(0deg);
+  }
+}
+
+@keyframes bingo-star-spring {
+  0% {
+    opacity: 0;
+    transform: translate(calc(-50% + 10rem), calc(-50% + 9rem)) rotate(-130deg)
+      scale(0.42);
+  }
+
+  15% {
+    opacity: 1;
+  }
+
+  45% {
+    opacity: 1;
+    transform: translate(calc(-50% + 5rem), calc(-50% + 4.8rem)) rotate(230deg)
+      scale(1.17) skewY(8deg);
+  }
+
+  58% {
+    opacity: 1;
+    transform: translate(calc(-50% + 5rem), calc(-50% + 4.8rem)) rotate(216deg)
+      scale(0.78) skewY(-3deg);
+  }
+
+  100% {
+    opacity: 0;
+    transform: translate(calc(-50% + 5rem), calc(-50% + 4.8rem)) rotate(230deg)
+      scale(0.35) skewY(0deg);
+  }
+}
+
+// One-shot "slapped into place" stamp when a square is marked from the modal.
+// Overshoots small on impact, then settles to its resting scale.
+@keyframes dauber-slap {
+  0% {
+    opacity: 0;
+    scale: calc(var(--dauber-scale) * 1.55);
+  }
+
+  60% {
+    opacity: 1;
+    scale: calc(var(--dauber-scale) * 0.9);
+  }
+
+  100% {
+    opacity: 1;
+    scale: var(--dauber-scale);
+  }
+}
