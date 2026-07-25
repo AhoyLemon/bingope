@@ -26,8 +26,9 @@ html(lang="en")
                         span ★
                         span ★
                       .card-ticket__brand
-                        h1 BINGOPE
-                        p.card-ticket__owner
+                        .card-ticket__wordmark(aria-label="BINGOPE" role="img")
+                          include ../svg/bingope_v2.svg
+                        h1.card-ticket__owner
                           span.card-ticket__owner-name {{ cardLabel }}
                       .card-ticket__star-rail.card-ticket__star-rail--right(aria-hidden="true")
                         span ★

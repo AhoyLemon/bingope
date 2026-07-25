@@ -1,27 +1,11 @@
-@use "sass:color";
 @use "../abstracts/variables" as vars;
 @use "../abstracts/mixins" as mix;
 
-$navy: #162447;
-$blue: #21a8eb;
-$green: #247c42;
-$paper: #fdfaf2;
-$page-paper: #eee8d8;
-$ink: #10192f;
-$ticket-serif: "Zilla Slab", Rockwell, "Roboto Slab", Georgia, serif;
 $paper-texture: url("../svg/paper-texture.svg");
 
-// Phone-only page (see PROJECT.md): the whole page fills exactly 100dvh
-// and is laid out as a column — wordmark, photo, form, help link — so it
-// reads as one composed screen instead of clumping at the top. The photo
-// is full viewport width (it breaks out of #app's padding) and its height
-// tracks the viewport rather than its own aspect ratio, since the point of
-// a wide banner image is to stay wide no matter how tall the phone is.
 .entry-page {
   min-height: 100dvh;
-  background: $page-paper;
-  background-image: $paper-texture;
-  background-size: 11rem;
+  background: vars.$page-paper;
 }
 
 .entry-app {
@@ -29,23 +13,22 @@ $paper-texture: url("../svg/paper-texture.svg");
   display: flex;
   flex-direction: column;
   justify-content: center;
-  gap: clamp(1.5rem, 5vh, 2.5rem);
   min-height: 100dvh;
   padding-block: clamp(1.5rem, 5vh, 3rem);
-  overflow-x: hidden;
+  overflow: hidden;
 }
 
-.entry-photo-band {
-  width: 100vw;
-  height: clamp(9rem, 22dvh, 16rem);
-  margin-inline: calc(50% - 50vw);
+.entry-header {
+  display: flex;
+  flex-direction: column;
+  gap: 2dvh;
 }
 
 .entry-photo {
   display: block;
   width: 100%;
-  height: 100%;
-  object-fit: contain;
+  height: 37dvh;
+  object-fit: cover;
 }
 
 .entry-content {
@@ -57,27 +40,23 @@ $paper-texture: url("../svg/paper-texture.svg");
   text-align: center;
 }
 
-.entry-header {
-  margin-bottom: clamp(1.5rem, 5vh, 2.5rem);
-}
-
 .entry-wordmark {
   width: min(100%, 26rem);
   height: auto;
   margin-inline: auto;
-  color: color.mix($blue, $navy, 55%);
-}
+  color: vars.$navy;
 
-.entry-wordmark svg {
-  display: block;
-  width: 100%;
-  height: auto;
+  svg {
+    display: block;
+    width: 100%;
+    height: auto;
+  }
 }
 
 .entry-tagline {
-  margin-top: 0.75rem;
-  color: $green;
-  font-family: $ticket-serif;
+  margin: 0;
+  color: vars.$green;
+  font-family: vars.$ticket-serif;
   font-size: 0.9375rem;
   font-weight: vars.$bold;
   letter-spacing: 0.04em;
@@ -89,74 +68,88 @@ $paper-texture: url("../svg/paper-texture.svg");
   display: grid;
   gap: 0.7rem;
   text-align: left;
-}
 
-.name-entry label {
-  color: $green;
-  font-family: $ticket-serif;
-  font-size: clamp(1.25rem, 5vw, 1.7rem);
-  font-weight: vars.$bold;
-}
+  label {
+    color: vars.$green;
+    font-family: vars.$ticket-serif;
+    font-size: clamp(1.25rem, 5vw, 1.7rem);
+    font-weight: vars.$bold;
+  }
 
-.name-entry input {
-  min-height: 3.4rem;
-  padding: 0.65rem 0.8rem;
-  border: 0.16rem solid $green;
-  border-radius: 0.4rem;
-  background: rgba($paper, 0.8);
-  color: $ink;
-  font: inherit;
-  font-size: 1.125rem;
-}
+  input {
+    min-height: 3.4rem;
+    padding: 0.65rem 0.8rem;
+    border: 0.16rem solid vars.$green;
+    border-radius: 0.4rem;
+    background: rgba(vars.$paper, 0.8);
+    color: vars.$ink;
+    font: inherit;
+    font-size: 1.125rem;
 
-.name-entry button {
-  min-height: 3.4rem;
-  padding: 0.7rem 1rem;
-  border: 0.16rem solid $green;
-  border-radius: 0.4rem;
-  background: $green;
-  color: $paper;
-  font: inherit;
-  font-size: clamp(1.05rem, 4vw, 1.3rem);
-  font-weight: vars.$bold;
-  letter-spacing: 0.02em;
-  text-align: center;
-  transition: filter 140ms ease-out, transform 140ms ease-out;
-}
+    &:focus-visible {
+      outline: 0.22rem solid vars.$focus;
+      outline-offset: 0.2rem;
+    }
+  }
 
-.name-entry button:hover {
-  filter: brightness(1.08);
-}
+  .button-holder {
+    display: flex;
+    justify-content: end;
+  }
 
-.name-entry button:active {
-  transform: translateY(0.12rem);
-}
+  button {
+    min-height: 3.4rem;
+    padding: 0.35em 1em;
+    border: 0.16rem solid vars.$green;
+    border-radius: 0.4rem;
+    background: vars.$green;
+    color: vars.$paper;
+    font: inherit;
+    font-size: 1.1rem;
+    font-weight: vars.$bold;
+    letter-spacing: 0.02em;
+    text-align: center;
+    transition:
+      filter 140ms ease-out,
+      transform 140ms ease-out;
 
-.name-entry button:disabled {
-  border-color: transparent;
-  background: rgba($green, 0.35);
-  color: rgba($paper, 0.8);
-  cursor: not-allowed;
-}
+    &:hover {
+      filter: brightness(1.08);
+    }
 
-.name-entry input:focus-visible,
-.name-entry button:focus-visible,
-.entry-help a:focus-visible,
-.help-play:focus-visible {
-  outline: 0.22rem solid vars.$focus;
-  outline-offset: 0.2rem;
+    &:active {
+      transform: translateY(0.12rem);
+    }
+
+    &:disabled {
+      border-color: transparent;
+      background: rgba(vars.$green, 0.35);
+      color: rgba(vars.$paper, 0.8);
+      cursor: not-allowed;
+    }
+
+    &:focus-visible {
+      outline: 0.22rem solid vars.$focus;
+      outline-offset: 0.2rem;
+    }
+  }
 }
 
 .entry-help {
   margin: 1.5rem 0 0;
   text-align: center;
-}
 
-.entry-help a {
-  color: $green;
-  font-family: $ticket-serif;
-  font-weight: vars.$bold;
-  text-decoration: underline;
+  a {
+    color: vars.$green;
+    font-family: vars.$ticket-serif;
+    font-weight: vars.$bold;
+    text-decoration: underline;
+
+    &:focus-visible {
+      outline: 0.22rem solid vars.$focus;
+      outline-offset: 0.2rem;
+    }
+  }
 }
 
 .entry-corner-accent {
@@ -169,71 +162,8 @@ $paper-texture: url("../svg/paper-texture.svg");
   pointer-events: none;
 }
 
-// HELP PAGE ////////////////////////////////////////////////////////////////
-.help-content {
-  width: min(100%, 32rem);
-  margin-inline: auto;
-  padding: clamp(2.5rem, 10vw, 4rem) clamp(1.3rem, 7vw, 2.25rem)
-    clamp(2.5rem, 9vw, 3.5rem);
-}
-
-.help-header {
-  margin-bottom: clamp(1.5rem, 5vw, 2.25rem);
-  text-align: center;
-}
-
-.eyebrow {
-  margin-bottom: 0.5rem;
-  color: $green;
-  font-family: $ticket-serif;
-  font-size: 0.9375rem;
-  font-weight: vars.$bold;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
-}
-
-.help-header h1 {
-  margin: 0;
-  color: $navy;
-  font-family: $ticket-serif;
-  font-size: clamp(2.2rem, 9vw, 3.4rem);
-}
-
-.help-copy {
-  display: grid;
-  gap: 1rem;
-  margin-bottom: clamp(2rem, 7vw, 3rem);
-  font-size: clamp(1.05rem, 3vw, 1.15rem);
-  line-height: 1.6;
-}
-
-.help-play {
-  display: block;
-  min-height: 3.4rem;
-  padding: 0.7rem 1rem;
-  border: 0.16rem solid $green;
-  border-radius: 0.4rem;
-  background: $green;
-  color: $paper;
-  font: inherit;
-  font-size: clamp(1.05rem, 4vw, 1.3rem);
-  font-weight: vars.$bold;
-  text-align: center;
-  text-decoration: none;
-  transition: filter 140ms ease-out, transform 140ms ease-out;
-}
-
-.help-play:hover {
-  filter: brightness(1.08);
-}
-
-.help-play:active {
-  transform: translateY(0.12rem);
-}
-
 @media (prefers-reduced-motion: reduce) {
-  .name-entry button,
-  .help-play {
+  .name-entry button {
     transition: none;
   }
 }

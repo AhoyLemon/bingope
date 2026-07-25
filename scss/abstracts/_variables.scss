@@ -1,23 +1,20 @@
 // COLORS //////////////////////////////////////////////////////////////////////////////////
-$white: #eee;
-$black: #212121;
-$blue: #4885ed;
-$red: #ee2a2a;
-$green: #17680f;
-$yellow: #e9eab9;
-$teal: #4e7f71;
+$navy: #162447;
+$blue: #21a8eb;
+$green: #247c42;
+$purple: #30266d;
+$dark-gray: #34343c;
+$ink: #10192f;
+$card: #f9faf8;
+$paper: #fdfaf2;
+$page-paper: #eee8d8;
 
 // COLOR UTILITIES
-$body: $white;
-$copy: $black;
+$body: $page-paper;
+$copy: $ink;
 $link: $blue;
-$accent: $teal;
-$focus: $yellow;
-
-// BRAND COLORS /////////////////////////////////////////////////////////////////////////
-$color-twitter: #55acee;
-$color-github: #181616;
-$color-facebook: #3b5998;
+$accent: $green;
+$focus: #e9eab9;
 
 // FONTS ////////////////////////////////////////////////////////////////////////////////
 $light: 300;
@@ -25,10 +22,10 @@ $medium: 400;
 $bold: 700;
 
 // FONT UTILITIES /////////////////////////////////////////////////////////////////////
-$serif: "Palatino", serif;
-$sans-serif: Helvetica, sans-serif;
-$font-family: $sans-serif;
-$headline: $serif;
+$grid-display: "Oswald", "Arial Narrow", "Helvetica Neue Condensed", sans-serif;
+$ticket-serif: "Zilla Slab", Rockwell, "Roboto Slab", Georgia, serif;
+$font-family: $ticket-serif;
+$headline: $ticket-serif;
 
 // MEASUREMENTS //////////////////////////////////////////////////////////////////////
 $mobile-max: 767px;

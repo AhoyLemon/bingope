@@ -122,6 +122,9 @@ interface CardAppData {
   celebrationMessage: string;
   bingoAnnouncement: string;
   fairBurst: FairBurstPiece[];
+  // Homepage-only: the name-entry form's input. Inert everywhere else, same
+  // as the rest of this shared app is inert on pages that aren't the card.
+  name: { input: string };
 }
 
 interface CardAppMethods {
@@ -285,6 +288,7 @@ const cardAppOptions: {
       celebrationMessage: "",
       bingoAnnouncement: "",
       fairBurst: [],
+      name: { input: "" },
     };
   },
   methods: {
