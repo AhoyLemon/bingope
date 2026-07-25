@@ -1,0 +1,26 @@
+- const pageTitle = "What is this?"
+- const assetPath = "../"
+include partials/_variables
+include partials/_mixins
+
+doctype html
+html(lang="en")
+  include partials/_head.pug
+
+  body.entry-page.help-page
+    #app
+      main.help-content
+        header.help-header
+          p.eyebrow BINGOPE
+          h1 What is this?
+
+        .help-copy
+          p BINGOPE is a bingo game for the Minnesota State Fair. Type your name, and it deals you a card full of things you might plausibly see or do while you're there. (Could it work at some other fair, some other year? Maybe. We'll see.)
+
+          p Walk around, and mark a square when you spot it &mdash; or pull it off. Complete a row, a column, or a diagonal, and the card celebrates. BINGOPE keeps track of every bingo you get. Who actually wins, and what they win, is between you and whoever you're with.
+
+          p Your marks stay in this browser, on this phone. No account, no login, nothing to sync.
+
+        a.help-play(href="../") Okay, let's play
+
+    include partials/_javascripts

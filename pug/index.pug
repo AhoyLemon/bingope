@@ -1,13 +1,5 @@
 - const pageTitle = null
 - const assetPath = ""
--
-  const players = [
-    { name: "Lemon", slug: "lemon" },
-    { name: "Simone", slug: "simone" },
-    { name: "Angie", slug: "angie" },
-    { name: "Mike", slug: "mike" },
-    { name: "Victor", slug: "victor" },
-  ]
 include partials/_variables
 include partials/_mixins
 
@@ -15,25 +7,28 @@ doctype html
 html(lang="en")
   include partials/_head.pug
 
-  body
-    #app.site-shell
-      header.site-header
-        p.eyebrow 2026 Minnesota State Fair
-        h1 BINGOPE
-        p Choose your Card. The bingo grids are coming next.
+  body.entry-page
+    main#app.entry-app
+      .entry-content
+        header.entry-header
+          .entry-wordmark(aria-label="BINGOPE" role="img")
+            include ../svg/bingope_v1.svg
+          p.entry-tagline Minnesota State Fair Bingo, by Lemon
 
-      main
-        nav(aria-label="Player Cards")
-          ul.card-links
-            each player in players
-              li
-                a.card-link(href="card/?card=" + player.slug) #{player.name}'s Card
+      .entry-photo-band(aria-hidden="true")
+        img.entry-photo(src=assetPath + "img/entry-crowd.png" alt="" role="presentation")
 
-        //- Anyone else: type a name. _nameEntry.ts sanitizes to a tidy URL;
-        //- the native GET action is the no-JS fallback.
+      .entry-content
+        //- The native GET action is the no-JS fallback. _nameEntry.ts normalizes
+        //- the typed name before navigation; see ts/partials/_nameEntry.ts.
         form.name-entry(action="card/" method="get")
-          label(for="CardName") Enter your name
-          input#CardName(type="text" name="card" required autocomplete="off")
-          button(type="submit") Get my Card
+          label(for="CardName") What's your name?
+          input#CardName(type="text" name="card" required autocomplete="name")
+          button(type="submit") Get My Card
+
+        p.entry-help
+          a(href="help/") What is this?
+
+      img.entry-corner-accent(src=assetPath + "svg/entry-corner-accent.svg" alt="" role="presentation" aria-hidden="true")
 
     include partials/_javascripts
