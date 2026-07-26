@@ -1,24 +1,9 @@
 import { expect, test } from "bun:test";
 
 import { dealGrid, GRID_SIZE, CENTER_INDEX } from "../ts/partials/_deal";
+import { mulberry32 } from "../ts/partials/_prng";
 import { squares, centers, essentials } from "../ts/partials/_squares";
 import type { BingoSquare, EssentialGroup } from "../ts/partials/_squares";
-
-/**
- * A tiny seeded PRNG so tests are deterministic. This stands in for the
- * name-seeded PRNG the public path (#12) will supply; `dealGrid` only needs
- * something returning 0..1.
- */
-function mulberry32(seed: number): () => number {
-  let a = seed;
-  return () => {
-    a |= 0;
-    a = (a + 0x6d2b79f5) | 0;
-    let t = Math.imul(a ^ (a >>> 15), 1 | a);
-    t = (t + Math.imul(t ^ (t >>> 7), 61 | t)) ^ t;
-    return ((t ^ (t >>> 14)) >>> 0) / 4294967296;
-  };
-}
 
 function deal(audience: "special" | "unspecial", seed: number): string[] {
   return dealGrid({
