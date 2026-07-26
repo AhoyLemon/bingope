@@ -66,9 +66,9 @@ export interface RouteMap {
 }
 
 export const routes: RouteMap = {
-  "pug/index.pug": "index.html",
-  "pug/card.pug": "card/index.html",
-  "pug/help.pug": "help/index.html",
+  "src/pug/index.pug": "index.html",
+  "src/pug/card.pug": "card/index.html",
+  "src/pug/help.pug": "help/index.html",
 };
 
 export default routes;

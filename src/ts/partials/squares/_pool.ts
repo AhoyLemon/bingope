@@ -1,7 +1,7 @@
 /**
  * The shared pool of bingo squares.
  * All five cards draw from this one pool, so cards differ but overlap.
- * See WRITING_STYLE.md for the authoring rules. IDs are permanent and never
+ * See _docs/writing-style.md for the authoring rules. IDs are permanent and never
  * reused. Pool ids are prefixed `P`; `P5` is retired (an old Pronto Pup square).
  */
 

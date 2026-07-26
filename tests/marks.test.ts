@@ -5,7 +5,7 @@ import {
   marksStorageKey,
   saveMarks,
   toggleMark,
-} from "../ts/partials/_marks";
+} from "../src/ts/partials/_marks";
 
 class MemoryStorage {
   private values = new Map<string, string>();
