@@ -21,7 +21,7 @@ import {
 } from "./_bingos.js";
 import { markActionText, resolveCardSquares } from "./_cardSquares.js";
 import { loadMarks, saveMarks, toggleMark } from "./_marks.js";
-import { isStalePoolVersion, poolVersionHash, savePoolVersion } from "./_cardVersion.js";
+import { poolVersionHash, resetStaleCard } from "./_cardVersion.js";
 import { squares, centers, essentials } from "./_squares.js";
 import type { BingoLine, Bingos } from "./_bingos.js";
 import type { CardSquare } from "./_cardSquares.js";
@@ -174,12 +174,14 @@ const cardSquares = resolved ? resolveCardSquares(resolved.squareIds) : [];
 
 // A squares-pool edit (add/edit/remove a square, center, or essential) means
 // every dealt card may look different than what a player last marked, so
-// start fresh instead of showing marks that no longer line up with what's on
-// screen. One shared version covers everyone, since the pool is shared.
+// clear that player's saved marks/bingos instead of showing marks that no
+// longer line up with what's on screen. One shared version covers everyone,
+// since the pool is shared.
 const poolVersion = poolVersionHash(squares, centers, essentials);
 const cardIsStale =
-  resolved && storage ? isStalePoolVersion(poolVersion, storage) : false;
-if (storage) savePoolVersion(poolVersion, storage);
+  resolved && storage
+    ? resetStaleCard(resolved.slug, poolVersion, storage)
+    : false;
 
 const dauberPaths = [
   "M50 4C69 3 86 15 94 34C102 55 91 79 73 91C54 103 28 98 13 81C-1 64 2 37 16 19C24 9 37 3 50 4Z",

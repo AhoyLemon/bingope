@@ -3,8 +3,11 @@ import { expect, test } from "bun:test";
 import {
   isStalePoolVersion,
   poolVersionHash,
+  resetStaleCard,
   savePoolVersion,
 } from "../ts/partials/_cardVersion";
+import { loadMarks, saveMarks } from "../ts/partials/_marks";
+import { loadBingos, saveBingos } from "../ts/partials/_bingos";
 import type { BingoSquare, EssentialGroup } from "../ts/partials/squares/_types";
 
 class MemoryStorage {
@@ -86,4 +89,47 @@ test("a pool edit invalidates every saved version", () => {
   const editedHash = poolVersionHash([...pool, square("P3")], centers, essentials);
 
   expect(isStalePoolVersion(editedHash, storage)).toBe(true);
+});
+
+test("resetStaleCard leaves a matching card's marks and bingos untouched", () => {
+  const storage = new MemoryStorage();
+  const hash = poolVersionHash(pool, centers, essentials);
+  savePoolVersion(hash, storage);
+  saveMarks("lemon", { P1: { markedAt: "2026-01-01T00:00:00.000Z" } }, storage);
+  saveBingos("lemon", { "row-1": { completedAt: "2026-01-01T00:00:00.000Z" } }, storage);
+
+  const stale = resetStaleCard("lemon", hash, storage);
+
+  expect(stale).toBe(false);
+  expect(loadMarks("lemon", storage)).toEqual({
+    P1: { markedAt: "2026-01-01T00:00:00.000Z" },
+  });
+  expect(loadBingos("lemon", storage)).toEqual({
+    "row-1": { completedAt: "2026-01-01T00:00:00.000Z" },
+  });
+});
+
+test("resetStaleCard clears a stale card's marks and bingos from storage, not just in-memory", () => {
+  const storage = new MemoryStorage();
+  savePoolVersion(poolVersionHash(pool, centers, essentials), storage);
+  saveMarks("lemon", { P1: { markedAt: "2026-01-01T00:00:00.000Z" } }, storage);
+  saveBingos("lemon", { "row-1": { completedAt: "2026-01-01T00:00:00.000Z" } }, storage);
+
+  const editedHash = poolVersionHash([...pool, square("P3")], centers, essentials);
+  const stale = resetStaleCard("lemon", editedHash, storage);
+
+  expect(stale).toBe(true);
+  // Marks/bingos must be gone from storage itself, not merely skipped for one
+  // render — otherwise a later load could read the pre-invalidation state back.
+  expect(loadMarks("lemon", storage)).toEqual({});
+  expect(loadBingos("lemon", storage)).toEqual({});
+});
+
+test("resetStaleCard always re-stamps the current pool version", () => {
+  const storage = new MemoryStorage();
+  const editedHash = poolVersionHash([...pool, square("P3")], centers, essentials);
+
+  resetStaleCard("lemon", editedHash, storage);
+
+  expect(isStalePoolVersion(editedHash, storage)).toBe(false);
 });
