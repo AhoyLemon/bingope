@@ -21,6 +21,8 @@ import {
 } from "./_bingos.js";
 import { markActionText, resolveCardSquares } from "./_cardSquares.js";
 import { loadMarks, saveMarks, toggleMark } from "./_marks.js";
+import { poolVersionHash, resetStaleCard } from "./_cardVersion.js";
+import { squares, centers, essentials } from "./_squares.js";
 import type { BingoLine, Bingos } from "./_bingos.js";
 import type { CardSquare } from "./_cardSquares.js";
 import type { ResolvedCard } from "./_deal.js";
@@ -156,18 +158,6 @@ interface CardAppInstance extends CardAppData, CardAppMethods {
   };
 }
 
-const rawCard = new URLSearchParams(window.location.search).get("card");
-const resolved = resolveCard(rawCard);
-const cardSquares = resolved ? resolveCardSquares(resolved.squareIds) : [];
-const dauberPaths = [
-  "M50 4C69 3 86 15 94 34C102 55 91 79 73 91C54 103 28 98 13 81C-1 64 2 37 16 19C24 9 37 3 50 4Z",
-  "M52 5C73 4 90 19 96 39C101 60 89 83 69 93C49 102 24 95 12 76C2 59 5 34 19 18C28 8 41 4 52 5Z",
-  "M47 4C67 1 87 13 95 32C104 52 95 76 78 90C61 104 34 101 17 86C1 71-2 45 10 25C18 12 32 6 47 4Z",
-  "M54 6C75 6 92 22 96 43C100 64 86 84 66 94C45 102 21 92 10 72C1 54 7 30 23 16C31 9 42 5 54 6Z",
-  "M49 3C71 2 89 17 95 37C101 58 90 80 70 92C50 103 25 96 12 78C0 61 3 37 17 20C25 10 37 4 49 3Z",
-  "M53 4C72 5 90 18 96 36C103 57 93 80 74 92C55 104 30 99 15 83C0 67 1 42 14 23C23 10 39 3 53 4Z",
-];
-
 function browserStorage(): Storage | null {
   try {
     return window.localStorage;
@@ -177,6 +167,30 @@ function browserStorage(): Storage | null {
 }
 
 const storage = browserStorage();
+
+const rawCard = new URLSearchParams(window.location.search).get("card");
+const resolved = resolveCard(rawCard);
+const cardSquares = resolved ? resolveCardSquares(resolved.squareIds) : [];
+
+// A squares-pool edit (add/edit/remove a square, center, or essential) means
+// every dealt card may look different than what a player last marked, so
+// clear that player's saved marks/bingos instead of showing marks that no
+// longer line up with what's on screen. One shared version covers everyone,
+// since the pool is shared.
+const poolVersion = poolVersionHash(squares, centers, essentials);
+const cardIsStale =
+  resolved && storage
+    ? resetStaleCard(resolved.slug, poolVersion, storage)
+    : false;
+
+const dauberPaths = [
+  "M50 4C69 3 86 15 94 34C102 55 91 79 73 91C54 103 28 98 13 81C-1 64 2 37 16 19C24 9 37 3 50 4Z",
+  "M52 5C73 4 90 19 96 39C101 60 89 83 69 93C49 102 24 95 12 76C2 59 5 34 19 18C28 8 41 4 52 5Z",
+  "M47 4C67 1 87 13 95 32C104 52 95 76 78 90C61 104 34 101 17 86C1 71-2 45 10 25C18 12 32 6 47 4Z",
+  "M54 6C75 6 92 22 96 43C100 64 86 84 66 94C45 102 21 92 10 72C1 54 7 30 23 16C31 9 42 5 54 6Z",
+  "M49 3C71 2 89 17 95 37C101 58 90 80 70 92C50 103 25 96 12 78C0 61 3 37 17 20C25 10 37 4 49 3Z",
+  "M53 4C72 5 90 18 96 36C103 57 93 80 74 92C55 104 30 99 15 83C0 67 1 42 14 23C23 10 39 3 53 4Z",
+];
 
 function waitFor(ms: number): Promise<void> {
   return new Promise((resolve) => window.setTimeout(resolve, ms));
@@ -276,8 +290,14 @@ const cardAppOptions: {
       cardLabel: resolved ? `${resolved.name}'s Card` : "",
       cardSquares,
       dauberPaths,
-      marks: resolved && storage ? loadMarks(resolved.slug, storage) : ({} as Marks),
-      bingos: resolved && storage ? loadBingos(resolved.slug, storage) : ({} as Bingos),
+      marks:
+        resolved && storage && !cardIsStale
+          ? loadMarks(resolved.slug, storage)
+          : ({} as Marks),
+      bingos:
+        resolved && storage && !cardIsStale
+          ? loadBingos(resolved.slug, storage)
+          : ({} as Bingos),
       bingoLines,
       selectedSquare: null as CardSquare | null,
       justStamped: null as string | null,

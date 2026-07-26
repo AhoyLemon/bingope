@@ -2,26 +2,28 @@
  * The shared card dealer.
  *
  * `dealCard` is a pure, deterministic pick from any pool given an `rng`. The
- * dealer script (#4) calls it with a random `rng` and commits the result; the
- * seeded public path (#12) will call it with a name-seeded `rng`. Because it is
+ * dealer script (#4) calls it with a random `rng` and commits the result;
+ * `resolveCard`'s seeded path calls it with a name-seeded `rng`. Because it is
  * generic over the pool item, it stays decoupled from the square pool while
  * that content lands separately (#3).
  *
  * `dealGrid` is the square-aware layer built on top: it composes `dealCard` to
  * lay out a full 5x5 card (center + audience-filtered essentials + pool fill) as
  * 25 square IDs in grid order. It is the shared entry point for both deal paths.
- * The dealer script (#4) passes `Math.random`; the seeded public path (#12) will
- * pass a name-seeded PRNG. Only the `rng` differs, so the RNG-consumption order
- * inside `dealGrid` is a compatibility contract: reordering it would change every
- * seeded public card. Do not reorder the draws.
+ * The dealer script (#4) passes `Math.random`; the seeded public path passes a
+ * name-seeded PRNG (see `_prng.ts`). Only the `rng` differs, so the
+ * RNG-consumption order inside `dealGrid` is a compatibility contract:
+ * reordering it would change every seeded public card. Do not reorder the draws.
  *
- * `resolveCard` turns a name from the URL into a card. Right now it only knows
- * the five special names (committed in `_cards.ts`); the seeded fallback for
- * any other name is Milestone 2 (#12).
+ * `resolveCard` turns a name from the URL into a card: the five special names
+ * (committed in `_cards.ts`) get their bespoke card; any other name gets a
+ * card seeded deterministically from the normalized name.
  */
 
 import { shuffle } from "../globals/_functions.js";
 import cards from "./_cards.js";
+import { hashSeed, mulberry32 } from "./_prng.js";
+import { squares, centers, essentials } from "./_squares.js";
 import type {
   BingoSquare,
   EssentialAudience,
@@ -79,6 +81,11 @@ export interface DealGridInput {
  */
 export function normalizeName(raw: string): string {
   return raw.trim().toLowerCase().replace(/\s+/g, " ");
+}
+
+/** Title-case a normalized slug for display when there is no curated name. */
+function titleCase(slug: string): string {
+  return slug.replace(/\b\w/g, (c) => c.toUpperCase());
 }
 
 /**
@@ -147,8 +154,10 @@ export function dealGrid(input: DealGridInput): string[] {
 }
 
 /**
- * Resolve a raw `?card=` value into a card, or `null` when there is nothing to
- * show (no name, blank name, or a non-special name until the seeded path ships).
+ * Resolve a raw `?card=` value into a card, or `null` when there is no name to
+ * work with (missing or blank). The five special names get their committed
+ * bespoke card; any other name gets a card seeded deterministically from the
+ * normalized name, so the same name always deals the same card.
  */
 export function resolveCard(
   rawName: string | null | undefined,
@@ -167,6 +176,18 @@ export function resolveCard(
     };
   }
 
-  // Seeded deal for any other name is Milestone 2 (#12).
-  return null;
+  const rng = mulberry32(hashSeed(slug));
+  const squareIds = dealGrid({
+    pool: squares,
+    centers,
+    essentials,
+    audience: "unspecial",
+    rng,
+  });
+  return {
+    slug,
+    name: titleCase(slug),
+    source: "seeded",
+    squareIds,
+  };
 }
