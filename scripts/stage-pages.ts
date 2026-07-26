@@ -31,6 +31,10 @@ if (fs.existsSync(path.join(projectRoot, "svg"))) {
   copy("svg");
 }
 
+if (fs.existsSync(path.join(projectRoot, "img"))) {
+  copy("img");
+}
+
 fs.writeFileSync(path.join(artifactRoot, ".nojekyll"), "");
 
 console.log(`GitHub Pages artifact staged at ${artifactRoot}`);
