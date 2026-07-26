@@ -8,9 +8,9 @@ const __dirname = path.dirname(__filename);
 const projectRoot = path.resolve(__dirname, "..");
 const artifactRoot = path.join(projectRoot, "_site");
 
-function copy(relativePath: string) {
+function copy(relativePath: string, outputRelativePath: string = relativePath) {
   const sourcePath = path.join(projectRoot, relativePath);
-  const outputPath = path.join(artifactRoot, relativePath);
+  const outputPath = path.join(artifactRoot, outputRelativePath);
 
   if (!fs.existsSync(sourcePath)) {
     throw new Error(`Build output not found: ${relativePath}`);
@@ -23,16 +23,16 @@ function copy(relativePath: string) {
 fs.rmSync(artifactRoot, { recursive: true, force: true });
 fs.mkdirSync(artifactRoot, { recursive: true });
 
-Object.values(routes).forEach(copy);
+Object.values(routes).forEach((route) => copy(route));
 copy("css");
 copy("js/min");
 
-if (fs.existsSync(path.join(projectRoot, "svg"))) {
-  copy("svg");
+if (fs.existsSync(path.join(projectRoot, "src/svg"))) {
+  copy("src/svg", "svg");
 }
 
-if (fs.existsSync(path.join(projectRoot, "img"))) {
-  copy("img");
+if (fs.existsSync(path.join(projectRoot, "src/img"))) {
+  copy("src/img", "img");
 }
 
 fs.writeFileSync(path.join(artifactRoot, ".nojekyll"), "");

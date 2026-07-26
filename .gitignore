@@ -3,9 +3,10 @@ node_modules/
 
 # Build outputs
 css/
-js/min/
+js/
 _site/
 card/
+help/
 *.html
 !_docs/
 

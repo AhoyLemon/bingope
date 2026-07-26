@@ -5,10 +5,10 @@ import {
   poolVersionHash,
   resetStaleCard,
   savePoolVersion,
-} from "../ts/partials/_cardVersion";
-import { loadMarks, saveMarks } from "../ts/partials/_marks";
-import { loadBingos, saveBingos } from "../ts/partials/_bingos";
-import type { BingoSquare, EssentialGroup } from "../ts/partials/squares/_types";
+} from "../src/ts/partials/_cardVersion";
+import { loadMarks, saveMarks } from "../src/ts/partials/_marks";
+import { loadBingos, saveBingos } from "../src/ts/partials/_bingos";
+import type { BingoSquare, EssentialGroup } from "../src/ts/partials/squares/_types";
 
 class MemoryStorage {
   private values = new Map<string, string>();

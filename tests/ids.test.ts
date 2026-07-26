@@ -1,6 +1,6 @@
 import { expect, test } from "bun:test";
 
-import { squares, centers, essentials } from "../ts/partials/_squares";
+import { squares, centers, essentials } from "../src/ts/partials/_squares";
 
 /** Every square from every group: pool, centers, and all essential groups. */
 const allSquares = [...squares, ...centers, ...essentials.flatMap((g) => g.squares)];
