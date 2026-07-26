@@ -10,8 +10,8 @@ import {
   reconcileBingos,
   reconcileSavedBingos,
   saveBingos,
-} from "../src/ts/partials/_bingos";
-import type { Marks } from "../src/ts/partials/_marks";
+} from "../ts/partials/_bingos";
+import type { Marks } from "../ts/partials/_marks";
 
 const cardIds = Array.from({ length: 25 }, (_, index) => `P${index + 1}`);
 

@@ -3,7 +3,7 @@
  *
  * The data is split by group under `squares/` (`_pool`, `_centers`,
  * `_essentials`) with shared shapes in `_types`. This file re-exports all of it
- * so consumers keep importing from one place. See _docs/writing-style.md for authoring
+ * so consumers keep importing from one place. See WRITING_STYLE.md for authoring
  * rules. IDs are permanent, group-prefixed, and never reused.
  */
 

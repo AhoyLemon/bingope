@@ -1,6 +1,6 @@
 import { expect, test } from "bun:test";
 
-import { markActionText } from "../src/ts/partials/_cardSquares";
+import { markActionText } from "../ts/partials/_cardSquares";
 
 test("modal action text follows the square verb until it is marked", () => {
   expect(markActionText("see", false)).toBe("I saw that");

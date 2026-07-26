@@ -1,9 +1,9 @@
 import { expect, test } from "bun:test";
 
-import { dealGrid, GRID_SIZE, CENTER_INDEX } from "../src/ts/partials/_deal";
-import { mulberry32 } from "../src/ts/partials/_prng";
-import { squares, centers, essentials } from "../src/ts/partials/_squares";
-import type { BingoSquare, EssentialGroup } from "../src/ts/partials/_squares";
+import { dealGrid, GRID_SIZE, CENTER_INDEX } from "../ts/partials/_deal";
+import { mulberry32 } from "../ts/partials/_prng";
+import { squares, centers, essentials } from "../ts/partials/_squares";
+import type { BingoSquare, EssentialGroup } from "../ts/partials/_squares";
 
 function deal(audience: "special" | "unspecial", seed: number): string[] {
   return dealGrid({

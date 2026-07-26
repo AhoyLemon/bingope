@@ -47,7 +47,7 @@ Square IDs are group-prefixed strings: `P` for the pool (`P1`…`P62`, `P5` reti
 
 `rarity` and `type` are authoring-time judgments recorded for the eventual card deal. `rarity` ('gimme', 'medium', 'rare') lets the deal weight cards so every card stays winnable. `type` ('see', 'do') marks whether the square is witnessed or performed. Both are hints, not gospel, and stay tunable.
 
-[`writing-style.md`](writing-style.md) is the source of truth for square writing. No square copy ships without Lemon's approval. [`squares-plan.md`](squares-plan.md) tracks area coverage and the log of parked and rejected ideas.
+[`WRITING_STYLE.md`](WRITING_STYLE.md) is the source of truth for square writing. No square copy ships without Lemon's approval. [`SQUARES_PLAN.md`](SQUARES_PLAN.md) tracks area coverage and the log of parked and rejected ideas.
 
 The center square is **player-marked**, not auto-marked (issue #14). It starts unmarked but is a near-lock the player can mark in seconds, so it hands out an instant mark and gives the player something funnier than "free space" to recite when calling a bingo. Candidates live in the `centers` array in [`ts/partials/squares/_centers.ts`](ts/partials/squares/_centers.ts), one distinct center per bespoke card. Wiring the deal to reserve and place a center is separate work (dealer script #4, seeded path #12).
 

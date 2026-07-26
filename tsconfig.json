@@ -17,6 +17,6 @@
     "sourceMap": true,
     "removeComments": true
   },
-  "include": ["src/ts/**/*", "scripts/**/*", "types/**/*"],
+  "include": ["ts/**/*", "scripts/**/*", "types/**/*"],
   "exclude": ["node_modules"]
 }

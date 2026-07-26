@@ -29,13 +29,12 @@ bun run build:pages  # build the deployable site in _site/
 
 ## Where is everything?
 
-- [`src/pug/`](src/pug/) contains the homepage, five player pages, and shared page partials.
+- [`pug/`](pug/) contains the homepage, five player pages, and shared page partials.
 - [`routes/pug.routes.ts`](routes/pug.routes.ts) maps those templates to clean URLs.
-- [`src/scss/`](src/scss/) contains the styles.
-- [`src/ts/`](src/ts/) contains the Vue application code.
-- [`src/svg/`](src/svg/) and [`src/img/`](src/img/) contain static assets.
+- [`scss/`](scss/) contains the styles.
+- [`ts/`](ts/) contains the Vue application code.
 - [`scripts/`](scripts/) contains the build and development tools.
-- [`_docs/`](_docs/) has project notes, writing guidelines, and tooling references — see [`_docs/project.md`](_docs/project.md) for the decisions and constraints that are easy to forget.
+- [`PROJECT.md`](PROJECT.md) explains the decisions and constraints that are easy to forget.
 - [Milestone 1](https://github.com/AhoyLemon/bingope/milestone/1) and its issues are the actual project plan.
 
 ## What's this written in?

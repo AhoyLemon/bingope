@@ -1,6 +1,6 @@
 import { expect, test } from "bun:test";
 
-import { resolveCard, GRID_SIZE } from "../src/ts/partials/_deal";
+import { resolveCard, GRID_SIZE } from "../ts/partials/_deal";
 
 test("an unknown name resolves to a seeded card", () => {
   const resolved = resolveCard("fdsffsdfd");

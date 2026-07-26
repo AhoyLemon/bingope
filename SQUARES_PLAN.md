@@ -1,6 +1,6 @@
 # Squares Plan & Backlog
 
-The living content backlog for BINGOPE squares: what territory exists, what we've mined, and which ideas were parked or killed. This is *what to write about*. For *how to write* it, see [`writing-style.md`](writing-style.md). Approved squares live under [`src/ts/partials/squares/`](../src/ts/partials/squares/) (`_pool`, `_centers`, `_essentials`, re-exported by [`src/ts/partials/_squares.ts`](../src/ts/partials/_squares.ts)) — those files are the source of truth for what is "done," so it is not duplicated here.
+The living content backlog for BINGOPE squares: what territory exists, what we've mined, and which ideas were parked or killed. This is *what to write about*. For *how to write* it, see [`WRITING_STYLE.md`](WRITING_STYLE.md). Approved squares live under [`ts/partials/squares/`](ts/partials/squares/) (`_pool`, `_centers`, `_essentials`, re-exported by [`ts/partials/_squares.ts`](ts/partials/_squares.ts)) — those files are the source of truth for what is "done," so it is not duplicated here.
 
 ## Area coverage
 
@@ -163,4 +163,4 @@ Specific concepts that are parked or dead, so we don't re-pitch them. Banked ide
 - **Animal barns** — the richest open territory. Poultry Building, cattle/horse barns especially.
 - **More `do` squares** — pool has grown sharply `see`-heavy (18 `do` of 61). `do`s are the controllable gimmes that keep dealt cards winnable, so the next batch should weight toward them.
 - **Center-square candidates** — ✅ ten landed (ids C1–C10, `centers` array in [`ts/partials/squares/_centers.ts`](ts/partials/squares/_centers.ts)): a white person, something fried, food on a stick, Crocs, Twins merch, a flag, corn, trash, something with cheese, daytime drinking. All `gimme`/`see`. The joke is inevitability ("of course you did"), so they stay flat and unadorned. Treatment decided: **player-marked** (issue #14). Centers use the `C` id prefix, guarded across all groups by `tests/ids.test.ts`.
-- **Skyglider / "guaranteed square" mechanic** — ✅ landed as the **Special Dares** essentials group (SD1, `essentialFor: "special"`, `minimum: 1`) in [`src/ts/partials/squares/_essentials.ts`](../src/ts/partials/squares/_essentials.ts): one shared dare (the Skyglider underwear throw) placed on all five bespoke cards. Deal-time enforcement is still dealer work (#4/#12). See [`project.md`](project.md).
+- **Skyglider / "guaranteed square" mechanic** — ✅ landed as the **Special Dares** essentials group (SD1, `essentialFor: "special"`, `minimum: 1`) in [`ts/partials/squares/_essentials.ts`](ts/partials/squares/_essentials.ts): one shared dare (the Skyglider underwear throw) placed on all five bespoke cards. Deal-time enforcement is still dealer work (#4/#12). See [`PROJECT.md`](PROJECT.md).

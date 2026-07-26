@@ -30,7 +30,9 @@
 
 routes/
 scripts/
-src/
+pug/
+scss/
+ts/
 \_docs/
 
 # Configuration files
@@ -40,7 +42,6 @@ package.json
 package-lock.json
 pug.routes.js
 pug.routes.ts
-bs-config.cjs
 
 # Build tools
 
