@@ -25,7 +25,7 @@ Territory to draw squares from. Status is coverage, not quality.
 | Food & drink | Gator & exotic meats on a stick | ✅ | Alligator-on-a-stick sighting banked (P46). |
 | Food & drink | Walleye / fish on a stick | ✅ | Walleye-on-a-stick banked (P59). Peak Minnesota. |
 | Food & drink | Beer gardens / craft beer | ✅ | Brewers Guild flight 'notes' banked (P33). |
-| Food & drink | Malts, milkshakes, buckets | 🔷 | |
+| Food & drink | Malts, milkshakes, buckets | ✅ | Dairy Building malt-defeats-straw banked (P64). |
 | Food & drink | Fresh fries + vinegar | ✅ | Vinegar-only, no-ketchup fries banked (P44). |
 | Food & drink | Caramel apples / cotton candy | ✅ | Cotton-candy speed-run banked (P42). |
 | Food & drink | The Food Building (indoor hall) | 🔷 | |
@@ -41,22 +41,22 @@ Territory to draw squares from. Status is coverage, not quality.
 | Buildings & exhibits | Creative Activities (quilts, canning, ribbons) | ✅ | Baffling blue-ribbon sighting banked (P49). |
 | Buildings & exhibits | Horticulture — giant vegetables | ✅ | 1,000+ lb pumpkin banked (P47). Fair record is ~1,808 lbs. |
 | Buildings & exhibits | Education Building | 🔷 | The real free-giveaway territory (tote bags, foam, swag). |
-| Buildings & exhibits | Craft Building | 🔷 | Crop-art-adjacent, worth mining. |
+| Buildings & exhibits | Craft Building | ✅ | Pickled watermelon rind banked (P73). Still thin, worth another pass. |
 | Buildings & exhibits | Fine Arts | ✅ | The "perfectly fine" award-winning photo banked (P62). |
 | Buildings & exhibits | DNR building (fish pond, Smokey Bear) | ✅ | Bitten fish at the fish pond banked (P41). |
-| Buildings & exhibits | Eco Experience | 🔷 | |
-| Buildings & exhibits | International Bazaar | 🔷 | |
-| Buildings & exhibits | 4-H building | 🔷 | |
+| Buildings & exhibits | Eco Experience | ✅ | Eco Bingo stamp-and-recycle banked (P70). |
+| Buildings & exhibits | International Bazaar | ✅ | Shark tooth necklace banked (P72). |
+| Buildings & exhibits | 4-H building | ✅ | Asked-and-pretended-to-listen banked (P66). Robotics/non-animal project angle still open. |
 | Buildings & exhibits | Heritage Square | 🔷 | |
 | Animals & barns | Swine / hog barn | ✅ | |
 | Animals & barns | Birthing barn | ✅ | |
-| Animals & barns | Cattle & dairy barn | 🔷 | Kids sleeping with their cows, cow-washing. |
-| Animals & barns | Horse barn / draft horses | 🔷 | |
+| Animals & barns | Cattle & dairy barn | ✅ | Clarissa-hometown stall card banked (P69). Kids-asleep-with-cows and cow-washing angles rejected, not plausible with foot traffic. |
+| Animals & barns | Horse barn / draft horses | ✅ | Asked-permission-then-petted banked (P63). |
 | Animals & barns | Sheep & goat barn | 🔷 | |
-| Animals & barns | Poultry Building | 🔷 | Roosters, giant turkeys, freak breeds. Fat vein. |
-| Animals & barns | Rabbit barn | 🔷 | Enormous rabbits. |
+| Animals & barns | Poultry Building | ✅ | Poultry and rabbits share one building. Cage-card breed-name-length banked (P68). |
+| Animals & barns | Rabbit barn | 🔷 | Shares the Poultry Building, no separate barn. Still no rabbit-specific square (size/weight comparisons rejected as unmarkable). |
 | Animals & barns | Llama / alpaca | 🔷 | |
-| Animals & barns | Petting zoo / Little Farm Hands | 🔷 | |
+| Animals & barns | Little Farm Hands | ✅ | Not a petting zoo, a kid-farmer-simulation walkthrough (Kemps-sponsored). Skip-the-ice-cream-reward banked (P71). |
 | Animals & barns | Honey & bees booth | ✅ | Identify-the-queen square banked (P45). |
 | Rides & Midway | Skill games | ✅ | |
 | Rides & Midway | Giant Slide | ✅ | |
@@ -86,13 +86,13 @@ Territory to draw squares from. Status is coverage, not quality.
 | People & behavior | Exhausted parents | ✅ | Empty-stroller-carried-kid banked (P60). |
 | People & behavior | Crowd dead-stops / traffic jams | ✅ | Mid-street pileup banked (P34). |
 | People & behavior | Goth / alt kids | ✅ | Head-to-toe-black kid banked (P52). |
-| Landmarks & margins | Machinery Hill | ✅ | |
+| Landmarks & margins | Machinery Hill | ✅ | 3+ men around a tractor (P24), plus sitting in a combine harvester's driver's seat (P67). |
 | Landmarks & margins | Gadget-demo halls | ✅ | |
 | Landmarks & margins | Vendor pitches (gutters, mops, hot tubs, stairlifts) | ✅ | $10,000+ hot tub for sale banked (P51). Still a fat vein. |
 | Landmarks & margins | Free yardsticks / giveaways | ✅ | The iconic free yardstick banked (P43). |
 | Landmarks & margins | Prize wheels / spin-to-win | ✅ | Spin-a-prize-wheel banked (P50). |
 | Landmarks & margins | Live radio station recording | 🔷 | A station broadcasting live from the fairgrounds. |
-| Landmarks & margins | Bandshell / free-stage acts | 🔷 | Live polka is a good avenue (pinned). |
+| Landmarks & margins | Bandshell / free-stage acts | ✅ | Live-polka-confirmed-by-accordion banked (P65). |
 | Landmarks & margins | Political party booths & candidates | ✅ | GOP-building photo-op kiss (P57) and the dead-empty Libertarian booth (P58) banked. |
 | Landmarks & margins | Fairchild the gopher mascot | ✅ | Fairchild-in-the-wild banked (P40), realistically a parade-only sighting. |
 | Landmarks & margins | Daily Parade | ✅ | Annoyed-street-crosser banked (P61). Also the realistic place to catch Fairchild. |
@@ -156,11 +156,24 @@ Specific concepts that are parked or dead, so we don't re-pitch them. Banked ide
 | Space Tower view | Rejected | The "just parking lots" joke isn't even true, and nothing else landed. |
 | Ferris wheel stuck at the top | Rejected | Nothing there. |
 | Giant foam cowboy hat | Rejected | Not particularly MN State Fair. Novelty-hats avenue still open otherwise. |
+| Sweet Martha's second angle (bucket-finishing, any consumption framing) | Rejected | Lemon does not want cards encouraging actual Sweet Martha's purchase/consumption. Whole avenue closed, not just #2. |
+| Poultry/rabbit sightings via size or vague description ("ridiculous feathers", "big rabbit", staring contest with a specific rooster) | Rejected | Too subjective or too hard to actually witness. Cage-card breed-name-length (P68) is the angle that stuck. |
+| Cattle barn: kids asleep with their cow, cow getting a bath/leaf-blower groomed in view | Rejected | Not plausible with real foot traffic and visibility. Stall-card hometown (Clarissa, P69) is the angle that stuck. |
+| Cattle barn hometown gimmick, "town with farm in the name" | Rejected | Farmington is the only real MN town with "farm" in the name, too low-odds to build a square around. Went with Clarissa (real Todd County dairy town, reads as a person's name) instead. |
+| Horse barn: hoof-size or head-size comparison | Rejected | Implausible ("bigger than my head" reads as a stumpy joke, not a real comparison). Ask-permission-then-pet (P63) is the angle that stuck. |
+| Dairy Building malt eaten backwards with the wrong end of the spoon | Rejected | Spoons go directly into the hard ice cream, no "wrong end" mechanic exists. Straw-defeat (P64) is the real, messier version. |
+| Shared malt with two straws | Rejected | Not fair vibe, you're walking around, not sitting down to share. |
+| Novelty hat, purchased and worn by the player | Rejected | Forces a purchase for a sighting-shaped joke, and the foam-cowboy-hat version was already rejected once. Avenue closed for this round. |
+| Machinery Hill, sit in an unnamed "biggest, most complicated" machine | Rejected | Landed on naming the machine outright (combine harvester) instead, for markability. |
+| Craft Building: pickles (plain), a quilt's time investment, "Work by Senior Citizens" division standout | Rejected | Pickles alone too obvious, quilt hours unknowable/subjective, and any senior-citizen entry "outclassing" others is a judgment call, not a sighting. Pickled watermelon rind (P73, a specific non-cucumber pickle) and cage/card-reading squares carried this batch instead. |
+| Craft Building: decorated cake "too detailed to cut" | Rejected | Those display cakes are deliberately not meant to be eaten, so the joke doesn't land. |
+| International Bazaar: buying something unidentifiable, watching the free stage, cowhide rug | Parked/Rejected | Free stage "kinda sucks," buying-something-unidentifiable too vague. Shark tooth necklace (P72) landed instead; cowhide rug still a fine fallback if the Bazaar needs a second square later. |
 
 ## Queued batches / next work
 
 - **Crop art** — ✅ landed as the "Crop Art" essentials group (CA1–CA12, `essentialFor: "everybody"`, `minimum: 1`) in [`ts/partials/squares/_essentials.ts`](ts/partials/squares/_essentials.ts), issue #15. Subjects: a movie poster, a 20+ year-old album, an adult cartoon, the fair itself, dunking on Trump, a famous painting, a repressed meme, a seed pun, an unidentifiable person, an in-memoriam, a non-sports/non-fair Minnesota reference, and crop art about crop art.
-- **Animal barns** — the richest open territory. Poultry Building, cattle/horse barns especially.
-- **More `do` squares** — pool has grown sharply `see`-heavy (18 `do` of 61). `do`s are the controllable gimmes that keep dealt cards winnable, so the next batch should weight toward them.
+- **Animal barns** — Poultry, cattle, and horse barns each landed one square this round (P63, P68, P69). Rabbits share the Poultry Building but still have no rabbit-specific square (size/weight comparisons were rejected as unmarkable). Sheep/goat barn and llama/alpaca are still untouched.
 - **Center-square candidates** — ✅ ten landed (ids C1–C10, `centers` array in [`ts/partials/squares/_centers.ts`](ts/partials/squares/_centers.ts)): a white person, something fried, food on a stick, Crocs, Twins merch, a flag, corn, trash, something with cheese, daytime drinking. All `gimme`/`see`. The joke is inevitability ("of course you did"), so they stay flat and unadorned. Treatment decided: **player-marked** (issue #14). Centers use the `C` id prefix, guarded across all groups by `tests/ids.test.ts`.
 - **Skyglider / "guaranteed square" mechanic** — ✅ landed as the **Special Dares** essentials group (SD1, `essentialFor: "special"`, `minimum: 1`) in [`ts/partials/squares/_essentials.ts`](ts/partials/squares/_essentials.ts): one shared dare (the Skyglider underwear throw) placed on all five bespoke cards. Deal-time enforcement is still dealer work (#4/#12). See [`PROJECT.md`](PROJECT.md).
+- **4-H robotics team** — flagged during the issue #16 pass as a fresh angle distinct from the general "award" square (P66). Not yet drafted.
+- **Crafts, second pass** — issue #16 only landed one Craft Building square (pickled watermelon rind, P73). Lemon flagged crafts as still thin; porcelain painting and other Creative Activities categories are unexplored.
