@@ -39,7 +39,7 @@ interface BingoSquare {
 }
 ```
 
-The data lives under [`ts/partials/squares/`](ts/partials/squares/), split by group (`_pool`, `_centers`, `_essentials`) with shared shapes in `_types`, and re-exported by [`ts/partials/_squares.ts`](ts/partials/_squares.ts).
+The data lives under [`src/ts/partials/squares/`](../src/ts/partials/squares/), split by group (`_pool`, `_centers`, `_essentials`) with shared shapes in `_types`, and re-exported by [`src/ts/partials/_squares.ts`](../src/ts/partials/_squares.ts).
 
 `text` is the canonical wording and defines what counts. The grid displays `shortText ?? text`, and the larger zoomed view always displays `text`. Since the player always reads full `text` before marking, `text` can be declarative and longer than the grid allows. `shortText` is the concise card label: optional but strongly encouraged, and required whenever `text` is too long to fit the grid.
 
@@ -49,11 +49,11 @@ Square IDs are group-prefixed strings: `P` for the pool (`P1`…`P62`, `P5` reti
 
 [`writing-style.md`](writing-style.md) is the source of truth for square writing. No square copy ships without Lemon's approval. [`squares-plan.md`](squares-plan.md) tracks area coverage and the log of parked and rejected ideas.
 
-The center square is **player-marked**, not auto-marked (issue #14). It starts unmarked but is a near-lock the player can mark in seconds, so it hands out an instant mark and gives the player something funnier than "free space" to recite when calling a bingo. Candidates live in the `centers` array in [`ts/partials/squares/_centers.ts`](ts/partials/squares/_centers.ts), one distinct center per bespoke card. Wiring the deal to reserve and place a center is separate work (dealer script #4, seeded path #12).
+The center square is **player-marked**, not auto-marked (issue #14). It starts unmarked but is a near-lock the player can mark in seconds, so it hands out an instant mark and gives the player something funnier than "free space" to recite when calling a bingo. Candidates live in the `centers` array in [`src/ts/partials/squares/_centers.ts`](../src/ts/partials/squares/_centers.ts), one distinct center per bespoke card. Wiring the deal to reserve and place a center is separate work (dealer script #4, seeded path #12).
 
 ### Essential ("must") squares
 
-Some squares sit between the free center and the ordinary pool: not free, because you do not get them on walk-in, but things we want on cards. These are **essential groups**, a real data structure in [`ts/partials/squares/_essentials.ts`](ts/partials/squares/_essentials.ts) (issue #15). Each group carries its own rules plus its own squares:
+Some squares sit between the free center and the ordinary pool: not free, because you do not get them on walk-in, but things we want on cards. These are **essential groups**, a real data structure in [`src/ts/partials/squares/_essentials.ts`](../src/ts/partials/squares/_essentials.ts) (issue #15). Each group carries its own rules plus its own squares:
 
 ```ts
 interface EssentialGroup {
