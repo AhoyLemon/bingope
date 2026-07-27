@@ -1,5 +1,5 @@
 /**
- * Essential ("must") groups — the guaranteed-square mechanic from PROJECT.md.
+ * Essential ("must") groups — the guaranteed-square mechanic from _docs/project.md.
  *
  * Each group carries its own rules (how many per card via `minimum`/`maximum`,
  * and who via `essentialFor`) plus its own squares. Unlike `centers`, essential

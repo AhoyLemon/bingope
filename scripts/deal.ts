@@ -3,10 +3,10 @@
  *
  * Workflow: `bun run deal:<slug>` (or `deal:all`) shuffles a fresh card for a
  * player, prints it as a 5x5 grid to eyeball, and rewrites that player's entry
- * in `ts/partials/_cards.ts` — leaving the other four untouched. Deal, look,
+ * in `src/ts/partials/_cards.ts` — leaving the other four untouched. Deal, look,
  * deal again until happy, then commit. The commit is the lock.
  *
- * The deal itself lives in the shared `dealGrid` (`ts/partials/_deal.ts`), the
+ * The deal itself lives in the shared `dealGrid` (`src/ts/partials/_deal.ts`), the
  * same logic the seeded public path (#12) reuses; here we just feed it a random
  * `rng` and the "special" audience. Center distinctness across the five is this
  * script's job (dealGrid only picks from the centers it is handed).
@@ -19,15 +19,22 @@ import { fileURLToPath } from "url";
 import chalk from "chalk";
 import Table from "cli-table3";
 
-import { squares, centers, essentials } from "../ts/partials/_squares.js";
-import type { BingoSquare } from "../ts/partials/_squares.js";
-import { dealGrid, CENTER_INDEX } from "../ts/partials/_deal.js";
-import committedCards from "../ts/partials/_cards.js";
-import type { PlayerCard } from "../ts/partials/_cards.js";
+import { squares, centers, essentials } from "../src/ts/partials/_squares.js";
+import type { BingoSquare } from "../src/ts/partials/_squares.js";
+import { dealGrid, CENTER_INDEX } from "../src/ts/partials/_deal.js";
+import committedCards from "../src/ts/partials/_cards.js";
+import type { PlayerCard } from "../src/ts/partials/_cards.js";
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
-const cardsPath = path.resolve(__dirname, "..", "ts", "partials", "_cards.ts");
+const cardsPath = path.resolve(
+  __dirname,
+  "..",
+  "src",
+  "ts",
+  "partials",
+  "_cards.ts",
+);
 
 /** Canonical roster: the source of truth for who exists and their display name. */
 const ROSTER: { slug: string; name: string }[] = [
