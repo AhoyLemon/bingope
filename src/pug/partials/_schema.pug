@@ -1,19 +1,15 @@
-// this is an example of schema I've used.
-// PLEASE edit before publishing.
-// https://search.google.com/structured-data/testing-tool/u/0/
-
 script(type="application/ld+json").
   {
     "@context": "http://schema.org",
-    "@type": "VideoGame",
+    "@type": "Game",
     "name": "#{siteTitle}",
     "url": "#{siteURL}",
-    "image": "#{siteURL}/og-image.png",
+    "image": "#{siteURL}img/og-wide.png",
     "playMode": "SinglePlayer",
     "applicationCategory": "browser game",
     "gamePlatform": "web browser",
     "operatingSystem": "web browser",
-    "genre": "guessing game",
+    "genre": "bingo",
     "description": "#{description}",
     "inLanguage": "English",
     "author": {
@@ -21,39 +17,16 @@ script(type="application/ld+json").
       "name": "Lemon",
       "url": "https://ahoylemon.xyz",
       "sameAs": [
+        "https://github.com/ahoylemon",
         "https://thefpl.us/meet/lemon",
-        "https://twitter.com/AhoyLemon"
+        "https://mastodon.social/@ahoylemon",
+        "https://bsky.app/profile/ahoylemon.xyz"
       ]
-    },
-    "publisher": {
-      "@type": "PerformingGroup",
-      "name": "The F Plus",
-      "url": "https://thefpl.us"
     },
     "offers": {
       "@type": "Offer",
       "description": "free",
       "price": "0",
       "priceCurrency": "USD"
-    },
-    "screenshot": [
-      {
-        "@type": "ImageObject",
-        "url": "#{siteURL}/img/screenshots/1.jpg",
-        "width": 1083,
-        "height": 924
-      },
-      {
-        "@type": "ImageObject",
-        "url": "#{siteURL}/img/screenshots/2.jpg",
-        "width": 1083,
-        "height": 924
-      },
-      {
-        "@type": "ImageObject",
-        "url": "#{siteURL}/img/screenshots/3.jpg",
-        "width": 1083,
-        "height": 924
-      }
-    ]
+    }
   }
