@@ -35,6 +35,15 @@ if (fs.existsSync(path.join(projectRoot, "src/img"))) {
   copy("src/img", "img");
 }
 
+// Files that must be served exactly at the site root (e.g. search engine
+// verification files) live in src/static and are copied in unprocessed.
+const staticRoot = path.join(projectRoot, "src/static");
+if (fs.existsSync(staticRoot)) {
+  fs.readdirSync(staticRoot).forEach((file) => {
+    copy(path.join("src/static", file), file);
+  });
+}
+
 fs.writeFileSync(path.join(artifactRoot, ".nojekyll"), "");
 
 console.log(`GitHub Pages artifact staged at ${artifactRoot}`);

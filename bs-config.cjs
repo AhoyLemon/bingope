@@ -1,6 +1,6 @@
 module.exports = {
   server: {
-    baseDir: ".",
+    baseDir: [".", "src/static"],
     routes: {
       "/svg": "src/svg",
       "/img": "src/img",

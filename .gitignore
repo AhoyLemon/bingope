@@ -9,6 +9,7 @@ card/
 help/
 *.html
 !_docs/
+!src/static/*
 
 # TypeScript
 *.tsbuildinfo
