@@ -78,6 +78,8 @@ Write them like any other square: the two bars (markable and funny) and the voic
 
 - Follow Lemon's global writing rules. The two that bite here: no em-dashes and no semicolons. Use periods or commas instead. Also avoid the usual AI tells.
 - Use single quotes for any quotation inside a square, since the field itself is a double-quoted string.
+- **`text` is a sentence, so it ends with a period.** Every square is a full first-person sentence, and it gets terminal punctuation like one (a `!` or `?` when the sentence calls for it). This holds for one-clause squares too: 'I saw a kid on a leash.' A closing parenthesis or quote takes the period after it, since the period belongs to the outer sentence, not to the aside.
+- **`shortText` never takes a period.** It is a label on the grid, not a sentence, so it stays bare.
 - **Sentence case.** Capitalize the first word only, then lowercase the rest, except for proper nouns that demand a capital (Sweet Martha's, Pronto Pup, Machinery Hill). Squares read as observations, not headlines.
 - Write `text` for clarity of what counts, not for grid width. Let `shortText` carry the compression.
 
@@ -87,9 +89,9 @@ Approved squares that show the bar in practice.
 
 | `text` | `shortText` | Notes |
 |--------|-------------|-------|
-| Two farm boys sharing a cigarette | (none) | Short and specific. Fits the grid raw, so no `shortText`. |
-| A nearly empty bucket of Sweet Martha's, held by someone who regrets emptying it | A bucket of Sweet Martha's regret | Same joke, compressed. `shortText` earns its place because `text` is long. |
-| A toddler asleep in a wagon with a corn dog still gripped in one fist | (none) | One concrete image doing all the work. Specificity, no stacked references. |
+| I saw two farm boys sharing a cigarette. | Farm boys sharing a smoke | Short and specific. One concrete image doing all the work, no stacked references. |
+| I saw a nearly empty bucket of Sweet Martha's in the hands of someone sick with regret. | A bucket of Sweet Martha's regret | Same joke, compressed. `shortText` earns its place because `text` is long. |
+| I saw a full-size shirt that a belly had turned into an accidental crop top. | Belly vanquishes shirt | Pure observation with no inner-state read. The `shortText` is a tighter phrasing of the same joke, never a different one. |
 
 ## Workflow
 
