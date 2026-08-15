@@ -23,43 +23,43 @@ The issue #16 completion pass closed every row it could. The **scissors pass** t
 | Food & drink | Deep-fried everything | ✅ | Candy bar banked (P26). Deep-fried Oreo and pickle-on-a-stick both rejected (see log), so no second deep-fried square unless something special turns up. |
 | Food & drink | Roasted corn on the cob | ✅ | |
 | Food & drink | New foods of the year (annual list) | ✅ | Blind-pick-and-find square banked (P30). |
-| Food & drink | Turkey legs / foot-longs / brats | ✅ | Foot-long in six bites or fewer banked (P71). Turkey leg and brat angles all rejected (see log), so the row is carried entirely by the foot-long. |
+| Food & drink | Turkey legs / foot-longs / brats | ✅ | Foot-long in six bites or fewer banked (P69). Turkey leg and brat angles all rejected (see log), so the row is carried entirely by the foot-long. |
 | Food & drink | Gator & exotic meats on a stick | ✅ | Alligator-on-a-stick sighting banked (P44). |
 | Food & drink | Walleye / fish on a stick | ✅ | Walleye-on-a-stick banked (P57). Peak Minnesota. |
 | Food & drink | Beer gardens / craft beer | ✅ | Brewers Guild flight 'notes' banked (P31). |
 | Food & drink | Malts, milkshakes, buckets | ❌ | **Closed in the scissors pass, with regret.** The malt-defeats-straw square was cut for reading an inner state ('someone realize in real time'), and no objective replacement landed. A straw standing upright unassisted was drafted and declined. Three angles are now dead here (wrong end of the spoon, shared malt with two straws, straw defeat), so the Dairy Building ice cream avenue is closed. Note the Dairy Building itself is still covered by the butter-carving squares on its own row. |
-| Food & drink | Fresh fries + vinegar | ✅ | Vinegar-only, no-ketchup fries banked (P42). |
-| Food & drink | Caramel apples / cotton candy | ✅ | Oversized cotton candy bag banked (P40). Rewritten in the scissors pass. The original was a five-minute speed-run watch of a specific child, which is both a bad mark and a bad look. A dyed-mouth version was drafted and rejected here because fair cotton candy is essentially always pink, so size carries the square instead. 'Bigger than their own head' beat 'the size of a pillow', since pillows vary and heads do not. The dyed-mouth joke survived separately as P84, retargeted at an adult. |
-| Food & drink | The Food Building (indoor hall) | ✅ | Karaoke-surrender banked (P72). It's a vendor hall (Mouth Trap curds plus ~20 smaller stands) with a baseball-themed bar and occasional terrible night karaoke, not a demo space. P72 deliberately does not name the building, since karaoke could be caught elsewhere. |
+| Food & drink | Fresh fries + vinegar | ✅ | Vinegar-only, no-ketchup fries banked (P42). Nominated in the second scissors pass as 'no joke' and **kept**, so do not re-pitch it. The constraint is the square: what makes it remarkable is that you *had* to use malt vinegar and *could not* use ketchup. 'A thing of fries' is deliberate word choice, not sloppiness. Only the capitalization was fixed, since malt vinegar is not a proper noun. |
+| Food & drink | Caramel apples / cotton candy | ✅ | Oversized cotton candy bag banked (P40). Rewritten in the scissors pass. The original was a five-minute speed-run watch of a specific child, which is both a bad mark and a bad look. A dyed-mouth version was drafted and rejected here because fair cotton candy is essentially always pink, so size carries the square instead. 'Bigger than their own head' beat 'the size of a pillow', since pillows vary and heads do not. The dyed-mouth joke survived separately as P82, retargeted at an adult. |
+| Food & drink | The Food Building (indoor hall) | ✅ | Karaoke-surrender banked (P70). It's a vendor hall (Mouth Trap curds plus ~20 smaller stands) with a baseball-themed bar and occasional terrible night karaoke, not a demo space. P70 deliberately does not name the building, since karaoke could be caught elsewhere. |
 | Food & drink | Church dining halls (sit-down) | ❌ | Third pass, nothing landed. Meal-as-a-do rejected (too much commitment), and the sighting angles (empty hall vs the curd line, saying grace, a lifer volunteer) all read dull. Avenue closed. |
 | Buildings & exhibits | Dairy Building / butter heads | ✅ | Live carving + princess-in-wild banked. |
 | Buildings & exhibits | Miracle of Birth Center | ✅ | |
 | Buildings & exhibits | Grandstand marketplace / demo hucksters | ✅ | |
 | Buildings & exhibits | Big Boar pavilion | ✅ | |
-| Buildings & exhibits | Crop art / Ag-Hort building | ✅ | Own **essentials group** ("Crop Art", CA1–CA12), guaranteed one per card (#15). Prince rejected as too mainstream. |
+| Buildings & exhibits | Crop art / Ag-Hort building | ✅ | Own **essentials group** ("Crop Art", CA1–CA14), guaranteed one per card (#15). Prince rejected as too mainstream. |
 | Buildings & exhibits | Ag Building — scarecrows | ✅ | Nakedly political scarecrow banked (P35). Weird/political, crop-art-adjacent. |
-| Buildings & exhibits | Ag Building — seed art | ✅ | Same medium as crop art (seeds-as-portrait), folded into the Crop Art essentials group (CA1–CA12). "Crop Art" is the fair's official term. |
+| Buildings & exhibits | Ag Building — seed art | ✅ | Same medium as crop art (seeds-as-portrait), folded into the Crop Art essentials group (CA1–CA14). "Crop Art" is the fair's official term. |
 | Buildings & exhibits | Ag Building — Brewers Guild | ✅ | See beer-flight square (P31). |
 | Buildings & exhibits | Creative Activities (quilts, canning, ribbons) | ✅ | Baffling blue-ribbon sighting banked (P47). |
 | Buildings & exhibits | Horticulture — giant vegetables | ✅ | 1,000+ lb pumpkin banked (P45). Fair record is ~1,808 lbs. |
-| Buildings & exhibits | Education Building | ✅ | Mailing-list-signup fake email banked (P73). The card dictates the address ('hogdaddy1987@hotmail.com'), so every player who draws it poisons the same list. Free-swag-grab itself was already covered by the yardstick (P41). |
-| Buildings & exhibits | Craft Building / Creative Activities | ✅ | Pickled watermelon rind (P70), a hand-painted bug on dishware (P80), and the crochet fruit doll (P81). Second pass done, driven by the verified 2026 class list. No longer thin. |
+| Buildings & exhibits | Education Building | ✅ | Mailing-list-signup fake email banked (P71). The card dictates the address ('hogdaddy1987@hotmail.com'), so every player who draws it poisons the same list. Free-swag-grab itself was already covered by the yardstick (P41). |
+| Buildings & exhibits | Craft Building / Creative Activities | ✅ | Pickled watermelon rind (P68), a hand-painted bug on dishware (P78), and the crochet fruit doll (P79). Second pass done, driven by the verified 2026 class list. No longer thin. |
 | Buildings & exhibits | Fine Arts | ✅ | The "perfectly fine" award-winning photo banked (P60). |
 | Buildings & exhibits | DNR building (fish pond, Smokey Bear) | ✅ | Bitten fish at the fish pond banked (P39). |
-| Buildings & exhibits | Eco Experience | ✅ | Eco Bingo stamp-and-recycle banked (P67). |
-| Buildings & exhibits | International Bazaar | ✅ | Shark tooth necklace banked (P69). |
-| Buildings & exhibits | 4-H building | ✅ | Asked-and-pretended-to-listen banked (P63). **Robotics is closed, researched and disproven.** The word 'robot' appears nowhere in the 2026 4-H premium book, there is no robotics division (only 'Technology'), and that entire statewide division drew 17 exhibits in 2025 of which roughly four were robot-related. The U of M MnDRIVE humanoid in the Crossroads Building is the fair's real robotics, but it is not 4-H and was killed too. |
-| Buildings & exhibits | West End Market / History & Heritage Center | ✅ | **Heritage Square no longer exists.** It was demolished and replaced by West End Market in 2014, which also brought the History & Heritage Center, Schilling Amphitheater, and transit hub. Row retargeted. Asking-directions-to-the-fair-inside-the-fair-museum banked (P74). |
+| Buildings & exhibits | Eco Experience | ✅ | Eco Bingo stamp-and-recycle banked (P66). |
+| Buildings & exhibits | International Bazaar | ✅ | Shark tooth necklace banked (P67). |
+| Buildings & exhibits | 4-H building | ❌ | **Closed in the second scissors pass.** The asked-a-4-H-kid-and-pretended-to-listen square was cut, so the row now carries nothing. It did not outright fail any single test, but it scored badly on three at once: inference (you report your own pretending, which nobody can check), meanness aimed at a proud kid rather than at the usual fair targets, and vagueness about what actually gets marked. 'Not great in several categories' is its own kind of failure. **Robotics is closed, researched and disproven.** The word 'robot' appears nowhere in the 2026 4-H premium book, there is no robotics division (only 'Technology'), and that entire statewide division drew 17 exhibits in 2025 of which roughly four were robot-related. The U of M MnDRIVE humanoid in the Crossroads Building is the fair's real robotics, but it is not 4-H and was killed too. |
+| Buildings & exhibits | West End Market / History & Heritage Center | ✅ | **Heritage Square no longer exists.** It was demolished and replaced by West End Market in 2014, which also brought the History & Heritage Center, Schilling Amphitheater, and transit hub. Row retargeted. Asking-directions-to-the-fair-inside-the-fair-museum banked (P72). |
 | Animals & barns | Swine / hog barn | ✅ | |
 | Animals & barns | Birthing barn | ✅ | |
-| Animals & barns | Cattle & dairy barn | ✅ | Place-name-on-the-sign square banked (P66). Kids-asleep-with-cows and cow-washing angles rejected, not plausible with foot traffic. |
+| Animals & barns | Cattle & dairy barn | ✅ | Place-name-on-the-sign square banked (P65). Kids-asleep-with-cows and cow-washing angles rejected, not plausible with foot traffic. |
 | Animals & barns | Horse barn / draft horses | ✅ | Asked-permission-then-petted banked (P61). |
-| Animals & barns | Sheep & goat barn | ✅ | Show sheep wear fitted spandex coats and pointed hoods to protect the fleece. The hood's unfortunate resemblance banked (P75). Goats-standing-on-things rejected, they're penned. Spandex-bodysuit angle declined, one sheep square is enough. |
-| Animals & barns | Live animal judging / show ring | ✅ | Gap found mid-pass (P47 is a static-entry ribbon, P63 is asking a 4-H kid about an award, neither covers live judging). Small-kid-manhandles-big-animal banked (P76). Deliberately species-agnostic, since the showmanship kid might be wrangling a goat rather than a steer. Judge-explains-the-verdict and repositioning-the-legs angles rejected as duller. |
-| Animals & barns | Poultry Building | ✅ | Poultry and rabbits share one building. Cage-card breed-name-length banked (P65). |
+| Animals & barns | Sheep & goat barn | ✅ | Show sheep wear fitted spandex coats and pointed hoods to protect the fleece. The hood's unfortunate resemblance banked (P73). Goats-standing-on-things rejected, they're penned. Spandex-bodysuit angle declined, one sheep square is enough. |
+| Animals & barns | Live animal judging / show ring | ✅ | Gap found mid-pass (P47 is a static-entry ribbon, P63 is asking a 4-H kid about an award, neither covers live judging). Small-kid-manhandles-big-animal banked (P74). Deliberately species-agnostic, since the showmanship kid might be wrangling a goat rather than a steer. Judge-explains-the-verdict and repositioning-the-legs angles rejected as duller. |
+| Animals & barns | Poultry Building | ✅ | Poultry and rabbits share one building. Cage-card breed-name-length banked (P64). |
 | Animals & barns | Rabbit barn | 🔷 | Shares the Poultry Building, no separate barn. Still no rabbit-specific square (size/weight comparisons rejected as unmarkable). |
 | Animals & barns | Llama / alpaca | ❌ | Mined and abandoned as boring. Shearing-silhouette angles (Q-tip alpaca, blinding bangs, a fireable haircut) all rejected. Avenue closed. |
-| Animals & barns | Little Farm Hands | ✅ | Not a petting zoo, a kid-farmer-simulation walkthrough (Kemps-sponsored). Skip-the-ice-cream-reward banked (P68). |
+| Animals & barns | Little Farm Hands | ❌ | Not a petting zoo, a kid-farmer-simulation walkthrough (Kemps-sponsored) that ends in an ice cream reward. **Closed in the second scissors pass.** The skip-the-ice-cream square was genuinely liked and still cut, because it fails two ways: it is unreadable to anyone who does not already know about the ice cream at the end, and it marks the *absence* of a thing, which quietly requires watching a kid all the way through the walkthrough to confirm. Same surveillance problem the first pass cleared out. |
 | Animals & barns | Honey & bees booth | ✅ | Identify-the-queen square banked (P43). |
 | Rides & Midway | Skill games | ✅ | Tickets spent for nothing banked (P29). Tightened in the scissors pass: the threshold dropped from 9 Fun Card tickets to 6, and the parenthetical that muddied what counts was replaced with the actual rule. Winning the square means receiving no prize at all, so any prize, consolation prizes included, forfeits it. |
 | Rides & Midway | Giant Slide | ✅ | |
@@ -80,21 +80,21 @@ The issue #16 completion pass closed every row it could. The **scissors pass** t
 | People & behavior | Political merch | ✅ | |
 | People & behavior | Accidental crop tops | ✅ | |
 | People & behavior | Crying with fair food | ✅ | |
-| People & behavior | Food-dyed mouths | ✅ | Row added in the scissors pass. A grown adult with a blue mouth banked (P84). Started life as a dyed-mouth *kid* attached to the cotton candy row, which read as creepy, since it put the player's attention on a child. Fixing it structurally (drop the child, keep the artifact) made it funnier, because the joke inverts into 'you are an adult'. Blue rather than pink, so it points at sno-cones and slushies and does not duplicate P40. |
+| People & behavior | Food-dyed mouths | ✅ | Row added in the scissors pass. A grown adult with a blue mouth banked (P82). Started life as a dyed-mouth *kid* attached to the cotton candy row, which read as creepy, since it put the player's attention on a child. Fixing it structurally (drop the child, keep the artifact) made it funnier, because the joke inverts into 'you are an adult'. Blue rather than pink, so it points at sno-cones and slushies and does not duplicate P40. |
 | People & behavior | Benched sleepers | ✅ | |
 | People & behavior | Butter Princesses | ✅ | |
 | People & behavior | Fanny packs / cargo-short dads | ✅ | The self-conscious cargo-shorts-and-fanny-pack square banked (P52). |
 | People & behavior | Matching family-reunion shirts | ✅ | 3+ in matching t-shirts banked (P46). |
 | People & behavior | Airbrush tattoos / face paint / henna | ✅ | Henna-down-a-whole-limb banked (P53). |
-| People & behavior | Novelty hats & balloon animals | ✅ | Balloon death banked (P77). The novelty-hat half stays closed (foam cowboy hat rejected as not fair-specific, player-worn hat rejected as forcing a purchase). |
+| People & behavior | Novelty hats & balloon animals | ✅ | Balloon death banked (P75). The novelty-hat half stays closed (foam cowboy hat rejected as not fair-specific, player-worn hat rejected as forcing a purchase). |
 | People & behavior | Exhausted parents | ✅ | Empty-stroller-carried-kid banked (P58). |
-| People & behavior | Crowd dead-stops / traffic jams | ✅ | Mid-street pileup banked (P32). |
-| People & behavior | Goth / alt kids | ✅ | Head-to-toe-black kid banked (P50). |
-| People & behavior | Phones & vaping | ✅ | Row added mid-pass, the inherited table covered mullets and camo but nothing from this century. Walking through a vape cloud (P82) and vertical-video-in-the-walkway (P83). Outlet-guarding and phone-beats-animal angles rejected as weaker. |
-| Landmarks & margins | Machinery Hill | ✅ | 3+ men around a tractor (P22), plus sitting in a combine harvester's driver's seat (P64). |
+| People & behavior | Crowd dead-stops / traffic jams | ✅ | A dead stop causing an actual rear-end collision banked (P32). Rewritten in the second scissors pass. The original claimed a 'ten-person pileup', and nobody counts to ten, so in practice it got marked for any dead stop at all. A real accident was wanted here, so it is now one person walking into another, with the fault assigned deadpan ('They had it coming.'). |
+| People & behavior | Goth / alt kids | ✅ | Head-to-toe-black kid in direct sun banked (P50). Nominated in the second scissors pass and **kept**, because it is the only square carrying the 'dressed completely wrong for this weather' idea. Reworded rather than cut: 'committed to' inferred effort, so the mark is now black clothing plus direct sunlight. An earlier fix said 'under the full August sun' and was rejected, since **the fair runs into early September** and any month reference dates the square. |
+| People & behavior | Phones & vaping | ✅ | Row added mid-pass, the inherited table covered mullets and camo but nothing from this century. Walking through a vape cloud (P80) and vertical-video-in-the-walkway (P81). Outlet-guarding and phone-beats-animal angles rejected as weaker. |
+| Landmarks & margins | Machinery Hill | ✅ | 3+ men around a tractor (P22), plus sitting in a combine harvester's driver's seat (P63). |
 | Landmarks & margins | Gadget-demo halls | ✅ | |
 | Landmarks & margins | Vendor pitches (gutters, mops, hot tubs, stairlifts) | ✅ | $10,000+ hot tub for sale banked (P49). Still a fat vein. |
-| Landmarks & margins | Food sticker shock | ✅ | Row added mid-pass. $8+ pizza slice banked (P79), threshold set from verified 2025 pricing. Vague 'a food item over $20' framings rejected as unfunny, per the specificity rule. |
+| Landmarks & margins | Food sticker shock | ✅ | Row added mid-pass. $8+ pizza slice banked (P77), threshold set from verified 2025 pricing. Vague 'a food item over $20' framings rejected as unfunny, per the specificity rule. |
 | Landmarks & margins | Free yardsticks / giveaways | ✅ | The iconic free yardstick banked (P41). |
 | Landmarks & margins | Prize wheels / spin-to-win | ✅ | Spin-a-prize-wheel banked (P48). Reviewed in the scissors pass and kept: the action is good even though the original wording was flat. Rewritten to name the payoff ('which I did not want and could not use') rather than just describing the spin. |
 | Landmarks & margins | Live radio station recording | ❌ | Already rejected once in the idea log as a boring avenue. Row status now matches. Closed. |
@@ -103,8 +103,8 @@ The issue #16 completion pass closed every row it could. The **scissors pass** t
 | Landmarks & margins | Fairchild the gopher mascot | ✅ | Fairchild-in-the-wild banked (P38), realistically a parade-only sighting. |
 | Landmarks & margins | Daily Parade | ✅ | Darting across the route behind a float banked (P59). Rewritten in the scissors pass: the original marked a stranger 'looking really annoyed', which is a mood, not a sighting. Same joke about being inconvenienced by the parade, but the mark is now a body moving. Earlier wording said 'between two units', which reads as parade jargon. Also the realistic place to catch Fairchild. |
 | Landmarks & margins | Great Minnesota Sing-Along | ✅ | Loudest-singer square banked (P37). |
-| Landmarks & margins | Misting stations / heat casualties | ✅ | Misting-station linger banked (P33). |
-| Landmarks & margins | Weather | ✅ | Row added mid-pass, the inherited table had no weather coverage at all. Garbage-bag raincoat banked (P78). Late August in Minnesota swings from 95°F to 55°F, so the territory is real. Rain-drives-everyone-indoors, dressed-for-the-wrong-temperature, and a grandiose 'two seasons in one day' all rejected. |
+| Landmarks & margins | Misting stations / heat casualties | ✅ | Standing in a misting station until your group makes you move banked (P33). Rewritten in the second scissors pass. The original marked what the rest of your group *wondered*, which is an inner-state read. Being in a group is fine to assume, so only the mind-reading was cut. **The rewrite deliberately adds a metagame.** Winning now requires forcing an action out of another person, and that person may well refuse once they realize it hands you the square, so it is a standoff you can lose. Bumped `gimme` to `medium` for exactly that reason. |
+| Landmarks & margins | Weather | ✅ | Row added mid-pass, the inherited table had no weather coverage at all. Garbage-bag raincoat banked (P76). Late August in Minnesota swings from 95°F to 55°F, so the territory is real. Rain-drives-everyone-indoors, dressed-for-the-wrong-temperature, and a grandiose 'two seasons in one day' all rejected. |
 | Landmarks & margins | People lugging bizarre purchases | ❌ | Structurally unwinnable. Naming the unwieldy object ('I saw someone lugging a ___') is the funny version but too specific to reliably witness, and generalizing it to any large purchase kills the joke. No middle ground exists. Second pass after the earlier cast-iron/mop rejection. Closed. |
 | Landmarks & margins | Porta-potty / cash-only economy | ✅ | The unspeakable toilet-stall square banked (P54). Cash-only-ATM angle killed as boring. |
 
@@ -135,6 +135,28 @@ A review of the banked pool for its *weakest* squares, run before merging the co
 | P48, prize wheel | The flattest square in the pool | The *action* is good even if the writing was not. Kept the action, rewrote the line. |
 
 The two cuts were **Big Fat Bacon's fake share** and the **Dairy Building malt**. Both rows were closed outright rather than held open for a replacement. Everything else nominated was repaired rather than removed.
+
+### Round two
+
+A second pass over the survivors. Ten nominations, and the yield was lower on purpose: round one found squares that were *broken*, while round two mostly found squares that were *thin*, and a pool this size is allowed thin squares. **2 cuts, 4 rewrites, 6 keeps.**
+
+Cut: the **4-H kid** square and **Little Farm Hands**, closing both rows. Rewritten: the **misting station**, the **mid-street pileup**, the **goth kid**, and a capitalization fix on the **fries**.
+
+The six keeps, with the reason each was defended. Do not re-pitch these either.
+
+| Square | Nominated because | Kept because |
+|---|---|---|
+| P61, pet a horse | No joke, just a polite errand | You still got to pet a horse. That is something. |
+| P54, toilet horror | Specifies nothing, so it is unfalsifiable and always markable | It is funny. That is good enough here. A square earning its place on laughs alone is a legitimate outcome. |
+| P67, shark tooth necklace | Trivial sighting, and its aside duplicates P81's construction | It is the only square that routes a player to that part of the fair. Coverage can justify a thin square. |
+| P60, the perfectly fine photo | Free to mark, and the joke is a shrug | Also funny enough. Same principle as P54. |
+| P50, goth kid | 'Committed to' is an inference | The only square carrying 'dressed completely wrong for this weather'. Reworded instead of cut. |
+| P42, fries and vinegar | The do is just eating fries | The *constraint* is the square. Having to use malt vinegar and being unable to use ketchup is the joke, and 'a thing of fries' is deliberate. |
+
+Two rules of thumb came out of this round, and they matter more than the individual verdicts.
+
+- **Funny is a sufficient defense.** P54 and P60 both fail structural tests and both survived because they land. Markability and humor are the two bars, and a square that clears one decisively can be worth keeping.
+- **A square can fail by scoring badly everywhere without failing anywhere.** The 4-H square passed no single test outright but was mediocre on inference, meanness, and specificity at once. That is its own kind of failure and worth checking for, since a per-rule audit will never catch it.
 
 Three failure modes did most of the work, and they are worth checking new drafts against.
 
@@ -186,23 +208,28 @@ Specific concepts that are parked or dead, so we don't re-pitch them. Banked ide
 | Ferris wheel stuck at the top | Rejected | Nothing there. |
 | Giant foam cowboy hat | Rejected | Not particularly MN State Fair. Novelty-hats avenue still open otherwise. |
 | Sweet Martha's second angle (bucket-finishing, any consumption framing) | Rejected | Lemon does not want cards encouraging actual Sweet Martha's purchase/consumption. Whole avenue closed, not just #2. |
-| Poultry/rabbit sightings via size or vague description ("ridiculous feathers", "big rabbit", staring contest with a specific rooster) | Rejected | Too subjective or too hard to actually witness. Cage-card breed-name-length (P65) is the angle that stuck. |
-| Cattle barn: kids asleep with their cow, cow getting a bath/leaf-blower groomed in view | Rejected | Not plausible with real foot traffic and visibility. Stall-card hometown (Clarissa, P66) is the angle that stuck. |
+| Poultry/rabbit sightings via size or vague description ("ridiculous feathers", "big rabbit", staring contest with a specific rooster) | Rejected | Too subjective or too hard to actually witness. Cage-card breed-name-length (P64) is the angle that stuck. |
+| Cattle barn: kids asleep with their cow, cow getting a bath/leaf-blower groomed in view | Rejected | Not plausible with real foot traffic and visibility. Stall-card hometown (Clarissa, P65) is the angle that stuck. |
 | Cattle barn hometown gimmick, "town with farm in the name" | Rejected | Farmington is the only real MN town with "farm" in the name, too low-odds to build a square around. Went with a place name instead. |
-| Cattle barn place name: Clarissa, then Todd County | Superseded | Clarissa (a Todd County dairy town that reads as a person's name) was P66's original. It only works if a *hometown* is shown, which the 4-H county rule threw into doubt. Todd County was the proposed fix. Both were beaten by **Otter Tail**, which is simultaneously a real city and a real county, so it survives either signage convention. |
+| Cattle barn place name: Clarissa, then Todd County | Superseded | Clarissa (a Todd County dairy town that reads as a person's name) was P65's original. It only works if a *hometown* is shown, which the 4-H county rule threw into doubt. Todd County was the proposed fix. Both were beaten by **Otter Tail**, which is simultaneously a real city and a real county, so it survives either signage convention. |
 | Horse barn: hoof-size or head-size comparison | Rejected | Implausible ("bigger than my head" reads as a stumpy joke, not a real comparison). Ask-permission-then-pet (P61) is the angle that stuck. |
 | Dairy Building malt eaten backwards with the wrong end of the spoon | Rejected | Spoons go directly into the hard ice cream, no "wrong end" mechanic exists. The straw-defeat version that replaced it was itself later cut, and the whole avenue is now closed. |
 | Shared malt with two straws | Rejected | Not fair vibe, you're walking around, not sitting down to share. |
 | Novelty hat, purchased and worn by the player | Rejected | Forces a purchase for a sighting-shaped joke, and the foam-cowboy-hat version was already rejected once. Avenue closed for this round. |
 | Machinery Hill, sit in an unnamed "biggest, most complicated" machine | Rejected | Landed on naming the machine outright (combine harvester) instead, for markability. |
-| Craft Building: pickles (plain), a quilt's time investment, "Work by Senior Citizens" division standout | Rejected | Pickles alone too obvious, quilt hours unknowable/subjective, and any senior-citizen entry "outclassing" others is a judgment call, not a sighting. Pickled watermelon rind (P70, a specific non-cucumber pickle) and cage/card-reading squares carried this batch instead. |
+| Craft Building: pickles (plain), a quilt's time investment, "Work by Senior Citizens" division standout | Rejected | Pickles alone too obvious, quilt hours unknowable/subjective, and any senior-citizen entry "outclassing" others is a judgment call, not a sighting. Pickled watermelon rind (P68, a specific non-cucumber pickle) and cage/card-reading squares carried this batch instead. |
 | Craft Building: decorated cake "too detailed to cut" | Rejected | Those display cakes are deliberately not meant to be eaten, so the joke doesn't land. |
-| International Bazaar: buying something unidentifiable, watching the free stage, cowhide rug | Parked/Rejected | Free stage "kinda sucks," buying-something-unidentifiable too vague. Shark tooth necklace (P69) landed instead; cowhide rug still a fine fallback if the Bazaar needs a second square later. |
-| Turkey leg / brat from a church or civic-club fundraiser stand | Rejected | Didn't land. The foot-long got a real square instead (P71, six bites or fewer), which finally opened that row. |
+| International Bazaar: buying something unidentifiable, watching the free stage, cowhide rug | Parked/Rejected | Free stage "kinda sucks," buying-something-unidentifiable too vague. Shark tooth necklace (P67) landed instead; cowhide rug still a fine fallback if the Bazaar needs a second square later. |
+| Turkey leg / brat from a church or civic-club fundraiser stand | Rejected | Didn't land. The foot-long got a real square instead (P69, six bites or fewer), which finally opened that row. |
 | Church dining halls: empty hall vs the cheese curd line, saying grace over fair food, a lifer volunteer in an ancient apron | Rejected | All dull. Combined with the earlier meal-as-a-do rejection, the whole church-dining-hall avenue is closed. |
+| 4-H: asking a kid about their award and pretending to listen | Rejected | Cut in round two of the scissors pass, closing the 4-H building row. Failed no single test but scored badly on three at once: unverifiable self-reported pretending, meanness aimed at a proud kid, and vagueness about the actual mark. |
+| Little Farm Hands: a kid leaving with something other than the ice cream | Rejected | Cut in round two despite being genuinely liked. Unreadable without knowing the walkthrough ends in an ice cream, and marking the absence of a thing means watching a kid through the whole walkthrough to confirm. Row closed. |
+| Misting station: standing there until your group wonders where you went | Superseded | The 'wondered' half was an inner-state read. Being in a group is fine to assume, so only the mind-reading was replaced, with a group member asking you to move. |
+| Crowd dead-stop causing a 'ten-person pileup' | Superseded | Nobody counts to ten, so it got marked for any dead stop. Replaced with a single real collision. |
+| Goth kid 'under the full August sun' | Rejected | A drafted fix for the inference problem, killed because **the fair runs into early September**. Never date a square to a month. Became 'in the direct sun'. |
 | Big Fat Bacon offered-then-not-shared | Rejected | Cut in the scissors pass as the weakest square in the pool. Required witnessing a full social exchange between strangers and inferring the offer was insincere. It existed only because a Big Fat Bacon square was wanted. Row closed rather than reopened, since no better angle was on offer. |
 | Malt: a straw standing straight up in it, unassisted | Rejected | The objective replacement drafted for the cut straw-defeat square. Declined, and the whole Dairy Building ice cream avenue closed with it. |
-| Cotton candy: a kid whose mouth is dyed a color that does not occur in food | Rejected | Two problems. Fair cotton candy is essentially always pink, so the color is not a real variable, and pointing the player's attention at a child reads as creepy. Both fixed by moving the dye joke to an adult (P84) and carrying the cotton candy row on size instead. |
+| Cotton candy: a kid whose mouth is dyed a color that does not occur in food | Rejected | Two problems. Fair cotton candy is essentially always pink, so the color is not a real variable, and pointing the player's attention at a child reads as creepy. Both fixed by moving the dye joke to an adult (P82) and carrying the cotton candy row on size instead. |
 | Cotton candy bag 'the size of a pillow' | Rejected | Pillows vary too much to argue about pleasantly. Became 'bigger than their own head', which everyone judges identically in one glance. |
 | Ye Old Mill: someone emerging with a wet ass | Rejected | Objective and appropriately crude, but probably not true to the ride. The silence version (P51) is both objective and says more about how boring the ride is. |
 | Parade: darting across 'between two units' | Superseded | Correct idea, wrong words. 'Units' is parade jargon and reads oddly. Became 'behind a float'. |
@@ -211,7 +238,7 @@ Specific concepts that are parked or dead, so we don't re-pitch them. Banked ide
 | Rabbit sightings: Angora-as-discarded-wig, the flat sploot, a rabbit with its own fan | Rejected | All merely okay, none amazing. |
 | Ride operator's one-yank safety check | Rejected | Funny, but weaker than its siblings in an already-saturated Rides & Midway category. Drafted and cut before shipping. |
 | 4-H robotics: a project 'obviously built by somebody's dad', an inert robot beside a photo of it working, an over-ambitious project title, a LEGO robot next to a machined one | Rejected | Dad-built and the ambition gap both require inferring intent, which the style guide bans. The comparison squares are impossible because **the fair has essentially a single pen with a single robot**, so there is nothing to compare it against. The robotics angle was a note-to-self that did not survive contact. |
-| Balloon animals: an adult carrying one with no kid nearby, a deflated one still being carried | Rejected | Superseded by P77 ('I witnessed the death of a balloon'), which is funnier and simpler. |
+| Balloon animals: an adult carrying one with no kid nearby, a deflated one still being carried | Rejected | Superseded by P75 ('I witnessed the death of a balloon'), which is funnier and simpler. |
 | Llama/alpaca shearing silhouette (Q-tip alpaca, blinding bangs, a fireable haircut) | Rejected | Boring. The shearing angle is closed, though the llama barn later resurfaced as the best place for a name-hunting square (see below). |
 | Lugging an unwieldy purchase (kettle corn bag bigger than a torso, a purchase that hits three strangers) | Rejected | The avenue has no workable setting. Naming the object is funny but unwitnessable, generalizing it is boring. |
 | Crop art: a visible typo, an artist who ran out of one seed color | Rejected | Both loved as ideas, neither would actually happen. The ran-out-of-color version also requires inferring the artist's intent. |
@@ -223,7 +250,7 @@ Specific concepts that are parked or dead, so we don't re-pitch them. Banked ide
 
 ## Unexplored technique: grandiose framing
 
-Surfaced while writing P77 ('I witnessed the death of a balloon'). The style guide's core rule is **specificity is the joke**, and that holds for sightings. But P77 works the opposite way: it is deliberately *non*-specific, and the humor comes from describing something trivial in weighty, formal language. It stays markable because a popped balloon is unmistakable, so vagueness costs nothing.
+Surfaced while writing P75 ('I witnessed the death of a balloon'). The style guide's core rule is **specificity is the joke**, and that holds for sightings. But P75 works the opposite way: it is deliberately *non*-specific, and the humor comes from describing something trivial in weighty, formal language. It stays markable because a popped balloon is unmistakable, so vagueness costs nothing.
 
 This is a distinct lever from specificity and it is **largely unexplored across the pool**. Worth a pass to see which other mundane, guaranteed fair events can be elevated the same way. Candidates to test the technique on, not yet drafted or approved. If it proves out on more than one square, promote it into [`writing-style.md`](writing-style.md) as a named technique alongside 'specificity is the joke'.
 
@@ -239,8 +266,8 @@ From the official [2026 Creative Activities premium book](https://assets.mnstate
 | 626 | *"Fruit"* (porcelain) | 8 |
 
 Notes for future mining:
-- Porcelain painting is a **very small community**. The same four names (Deborah Warwick, Sharon Lindbloom, Sandra Jarosh, Colleen Stephens) place across nearly every class. P80 says 'a bug' rather than 'an insect' so it can be marked off either class 624 or 625, roughly doubling the target.
-- Porcelain rules allow *"a two- or three-dimensional piece… framed or unframed"*, so entries are not necessarily plates. P80 says 'dishware' rather than 'a plate' to survive a bowl or vase.
+- Porcelain painting is a **very small community**. The same four names (Deborah Warwick, Sharon Lindbloom, Sandra Jarosh, Colleen Stephens) place across nearly every class. P78 says 'a bug' rather than 'an insect' so it can be marked off either class 624 or 625, roughly doubling the target.
+- Porcelain rules allow *"a two- or three-dimensional piece… framed or unframed"*, so entries are not necessarily plates. P78 says 'dishware' rather than 'a plate' to survive a bowl or vase.
 - Other absurd verified classes, unused so far: 651 *"Miniature figure, mounted on animal"*, 571 *"Miniature dollhouse rug"*, 519/536/919 *"Judge's class"*, 540 *"Charcuterie or cutting board"*, 589 *"Basketry, Minnesota forged fibers and repurposed materials"*, and the whole **"Work of Senior Citizens (65 and over)"** division.
 
 ## Verified reference: real animal names
@@ -257,9 +284,9 @@ All four 2026 premium books ([beef](https://assets.mnstatefair.org/pdf/competiti
 
 **Open class signage is exhibitor-supplied farm advertising.** Beef rule 15, verbatim: *"No signs of any type will be permitted in the barns, except within the specified assigned stall or on the bulletin board by the superintendent's office. A. Advertising of anything other than the specific farm on display is a violation…"* Dairy rule 16 is near-identical. Poultry rule 12 allows one 5x7 advertising card on a coop, but only after judging concludes.
 
-✅ **This means farm name and hometown are reliably visible**, since that is what a farm advertises about itself. An earlier draft of this doc flagged P66 as at-risk by misapplying the **4-H** premium book's *"exhibitor name and county"* stall-sign rule to the whole fairgrounds. That rule governs the 4-H barns only.
+✅ **This means farm name and hometown are reliably visible**, since that is what a farm advertises about itself. An earlier draft of this doc flagged P65 as at-risk by misapplying the **4-H** premium book's *"exhibitor name and county"* stall-sign rule to the whole fairgrounds. That rule governs the 4-H barns only.
 
-**P66 was rewritten to Otter Tail anyway, and is now signage-proof.** The original said 'a cow from Clarissa' (a city in Todd County), which only worked if a hometown was displayed. **Ottertail is both a real city and the county it sits in**, so 'a cow from Otter Tail' is markable whether the sign shows a hometown (open class farm advertising) or a county (4-H). The trailing 'It explained nothing.' was cut, since the flat statement lands harder.
+**P65 was rewritten to Otter Tail anyway, and is now signage-proof.** The original said 'a cow from Clarissa' (a city in Todd County), which only worked if a hometown was displayed. **Ottertail is both a real city and the county it sits in**, so 'a cow from Otter Tail' is markable whether the sign shows a hometown (open class farm advertising) or a county (4-H). The trailing 'It explained nothing.' was cut, since the flat statement lands harder.
 
 ⚠️ **Still unresolved: whether the animal's own name is posted.** No rule in any of the four books provides a fair-issued stall card or specifies its contents. The books are exhaustive about ear-tag formats and tie-out fees, so the silence is suggestive but is not proof either way.
 
@@ -276,8 +303,8 @@ If names turn out to be readable, point all three at the **llama and Boer goat b
 - **Crop art** — ✅ the "Crop Art" essentials group (CA1–CA14, `essentialFor: "everybody"`, `minimum: 1`) in [`src/ts/partials/squares/_essentials.ts`](../src/ts/partials/squares/_essentials.ts), issue #15. Subjects: a movie poster, a 20+ year-old album, an adult cartoon, the fair itself, dunking on Trump, a famous painting, a repressed meme, a seed pun, an unidentifiable person, an in-memoriam, a non-sports/non-fair Minnesota reference, crop art about crop art, words-only, and a named 2026 candidate.
   - ⚠️ **CA14 has an expiration date.** It names Klobuchar and Flanagan, the 2026 DFL nominees for governor and senator. Verified timely for this fair (the primary was 2026-08-11 and produced all-female matchups in both races, so the crop art wall will be saturated), but it goes stale after November 2026 and should be retired or rewritten before any later fair.
   - **The group skews apolitical relative to the real medium.** Crop art is famously political, but only CA5 (Trump) and CA14 are. Rejected this round: a seed-based argument between two opposing pieces, 'angry about something other than Trump', dunking on the GOP, anti-Klobuchar work, and Klobuchar eating a salad with a comb.
-- **Animal barns** — ✅ done. Poultry (P65), cattle (P66), horse (P61), sheep (P75), Little Farm Hands (P68), and live judging (P76) all landed. Llama/alpaca and a rabbit-specific square were both mined and closed.
-- **Crafts, second pass** — ✅ done. Craft Building now carries P70, P80, and P81, driven off the verified 2026 Creative Activities class list above.
+- **Animal barns** — ✅ done. Poultry (P64), cattle (P65), horse (P61), sheep (P73), and live judging (P74) all landed. Llama/alpaca and a rabbit-specific square were both mined and closed, and Little Farm Hands was closed in round two of the scissors pass.
+- **Crafts, second pass** — ✅ done. Craft Building now carries P68, P78, and P79, driven off the verified 2026 Creative Activities class list above.
 - **4-H robotics** — ❌ closed. Researched and disproven, see the 4-H row.
 - **Grandiose framing** — a promising untested technique, see its section above.
 - **Animal name squares** — three drafted-but-unwritten squares are parked on in-person verification, see the animal names section above.
