@@ -85,4 +85,32 @@ export const centers: BingoSquare[] = [
     rarity: "gimme",
     type: "see",
   },
+  {
+    id: "C11",
+    text: "I saw a line",
+    shortText: "A line",
+    rarity: "gimme",
+    type: "see",
+  },
+  {
+    id: "C12",
+    text: "I saw a t-shirt with words on it",
+    shortText: "A t-shirt with words",
+    rarity: "gimme",
+    type: "see",
+  },
+  {
+    id: "C13",
+    text: "I saw someone eating while walking",
+    shortText: "Eating while walking",
+    rarity: "gimme",
+    type: "see",
+  },
+  {
+    id: "C14",
+    text: "I saw a bench",
+    shortText: "A bench",
+    rarity: "gimme",
+    type: "see",
+  },
 ];

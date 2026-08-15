@@ -106,6 +106,20 @@ export const essentials: EssentialGroup[] = [
         rarity: "medium",
         type: "see",
       },
+      {
+        id: "CA13",
+        text: "I found crop art that is only words",
+        shortText: "CROP ART: words only",
+        rarity: "medium",
+        type: "see",
+      },
+      {
+        id: "CA14",
+        text: "I found a politician's name spelled out in seeds. It was Klobuchar or Flanagan.",
+        shortText: "CROP ART: Klobuchar or Flanagan",
+        rarity: "medium",
+        type: "see",
+      },
     ],
   },
   {
