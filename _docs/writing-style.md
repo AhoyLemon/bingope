@@ -19,7 +19,7 @@ interface BingoSquare {
 Every square must be plausibly markable at the Minnesota State Fair in a single day, by one person on foot. There are two honest ways to mark a square.
 
 - **Witness it.** You see it happen (someone eating Sweet Martha's Cookies out of the bucket). Most squares are this.
-- **Do it.** The square is something the player can go make happen (eat a corn dog, ride the Giant Slide). These are welcome. A "do it" square is a gimme the player controls, which helps keep a card winnable.
+- **Do it.** The square is something the player can go make happen (eat a corn dog, ride the Giant Slide). These are welcome.
 
 Either way, a square must be unambiguous enough to argue about pleasantly. 'Does a corn dog count as a Pronto Pup?' is a good fight. 'Is that person having a bad day?' is an unwinnable one. If nobody can honestly mark it, witnessed or done, it is dead weight.
 
@@ -29,7 +29,7 @@ Mix the frequencies deliberately.
 - **Mediums.** You will probably see it if you are paying attention. This is the backbone of the card.
 - **Rare gems.** You might witness it, and marking it feels like winning a small lottery. A few per pool, never many.
 
-Record each square's tier as its `rarity` and whether it is witnessed or performed as its `type` ('see' or 'do'). Both are hints the card deal can use to keep every card winnable. They are gut calls, not gospel, and stay tunable as the pool grows.
+Record each square's tier as its `rarity` and whether it is witnessed or performed as its `type` ('see' or 'do'). A card should carry some of both types, but that is a loose mix, not a delicate ratio to manage. **Difficulty is the balance that actually matters**, so `rarity` is the dial worth watching. Both are gut calls, not gospel, and stay tunable as the pool grows.
 
 ### 2. Specificity is the joke
 
