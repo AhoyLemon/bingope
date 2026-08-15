@@ -224,7 +224,7 @@ export const squares: BingoSquare[] = [
   {
     id: "P31",
     text: "I held up one beer from a Brewers Guild flight and described its 'notes' for a solid minute",
-    shortText: "Brewer's Guild beer 'notes'",
+    shortText: "Brewers Guild beer 'notes'",
     rarity: "gimme",
     type: "do",
   },
