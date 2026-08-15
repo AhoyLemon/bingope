@@ -5,7 +5,14 @@
  * import the shapes without importing each other.
  */
 
-/** How reliably a player will get to mark this square. A dealing hint, tunable. */
+/**
+ * How reliably a player will get to mark this square. A dealing hint, tunable.
+ *
+ * NOTE: `rarity` is a misnomer. What this actually encodes is **difficulty** —
+ * how hard the square is to mark, not how uncommon the thing itself is. The
+ * name stuck early and renaming it would touch the data, the dealer, and saved
+ * state, so it stays for now. Read it as "difficulty" when authoring.
+ */
 export type Rarity = "gimme" | "medium" | "rare";
 
 /** Whether the square is witnessed or performed by the player. */

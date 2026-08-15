@@ -6,9 +6,11 @@ import { squares, centers, essentials } from "../src/ts/partials/_squares";
 const allSquares = [...squares, ...centers, ...essentials.flatMap((g) => g.squares)];
 
 /**
- * Square IDs are permanent and namespace saved state, so a collision would let
- * one player's mark leak onto another square. Pool, centers, and essentials all
- * share one id space (distinguished by prefix), so the guard covers them together.
+ * Square IDs namespace saved state, so a collision would let one player's mark
+ * leak onto another square. Pool, centers, and essentials all share one id space
+ * (distinguished by prefix), so the guard covers them together. Ids are not
+ * permanent: they renumber on delete (see _docs/writing-style.md), which makes
+ * this uniqueness check load-bearing rather than incidental.
  */
 test("every square id is unique across pool, centers, and essentials", () => {
   const ids = allSquares.map((s) => s.id);
@@ -16,6 +18,19 @@ test("every square id is unique across pool, centers, and essentials", () => {
   const duplicates = ids.filter((id) => (seen.has(id) ? true : (seen.add(id), false)));
 
   expect(duplicates).toEqual([]);
+});
+
+/**
+ * Pool ids are kept contiguous (`P1`..`Pn`, matching array order) so deleting a
+ * square renumbers rather than leaving a gap. A gap is not a correctness bug on
+ * its own, but it means a renumber was done by hand and something downstream
+ * (`_cards.ts`, the plan doc) was probably missed.
+ */
+test("pool ids are contiguous P1..Pn in array order", () => {
+  const actual = squares.map((s) => s.id);
+  const expected = squares.map((_, i) => `P${i + 1}`);
+
+  expect(actual).toEqual(expected);
 });
 
 /**

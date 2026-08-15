@@ -19,7 +19,7 @@ interface BingoSquare {
 Every square must be plausibly markable at the Minnesota State Fair in a single day, by one person on foot. There are two honest ways to mark a square.
 
 - **Witness it.** You see it happen (someone eating Sweet Martha's Cookies out of the bucket). Most squares are this.
-- **Do it.** The square is something the player can go make happen (eat a corn dog, ride the Giant Slide). These are welcome. A "do it" square is a gimme the player controls, which helps keep a card winnable.
+- **Do it.** The square is something the player can go make happen (eat a corn dog, ride the Giant Slide). These are welcome.
 
 Either way, a square must be unambiguous enough to argue about pleasantly. 'Does a corn dog count as a Pronto Pup?' is a good fight. 'Is that person having a bad day?' is an unwinnable one. If nobody can honestly mark it, witnessed or done, it is dead weight.
 
@@ -29,7 +29,9 @@ Mix the frequencies deliberately.
 - **Mediums.** You will probably see it if you are paying attention. This is the backbone of the card.
 - **Rare gems.** You might witness it, and marking it feels like winning a small lottery. A few per pool, never many.
 
-Record each square's tier as its `rarity` and whether it is witnessed or performed as its `type` ('see' or 'do'). Both are hints the card deal can use to keep every card winnable. They are gut calls, not gospel, and stay tunable as the pool grows.
+Record each square's tier as its `rarity` and whether it is witnessed or performed as its `type` ('see' or 'do'). A card should carry some of both types, but that is a loose mix, not a delicate ratio to manage. **Difficulty is the balance that actually matters**, so `rarity` is the dial worth watching. Both are gut calls, not gospel, and stay tunable as the pool grows.
+
+> **`rarity` is a misnomer.** The field encodes **difficulty** — how hard the square is to mark — not how uncommon the thing itself is. The name stuck early. Read it as "difficulty" when authoring.
 
 ### 2. Specificity is the joke
 
@@ -76,6 +78,8 @@ Write them like any other square: the two bars (markable and funny) and the voic
 
 - Follow Lemon's global writing rules. The two that bite here: no em-dashes and no semicolons. Use periods or commas instead. Also avoid the usual AI tells.
 - Use single quotes for any quotation inside a square, since the field itself is a double-quoted string.
+- **`text` is a sentence, so it ends with a period.** Every square is a full first-person sentence, and it gets terminal punctuation like one (a `!` or `?` when the sentence calls for it). This holds for one-clause squares too: 'I saw a kid on a leash.' A closing parenthesis or quote takes the period after it, since the period belongs to the outer sentence, not to the aside.
+- **`shortText` never takes a period.** It is a label on the grid, not a sentence, so it stays bare.
 - **Sentence case.** Capitalize the first word only, then lowercase the rest, except for proper nouns that demand a capital (Sweet Martha's, Pronto Pup, Machinery Hill). Squares read as observations, not headlines.
 - Write `text` for clarity of what counts, not for grid width. Let `shortText` carry the compression.
 
@@ -85,13 +89,13 @@ Approved squares that show the bar in practice.
 
 | `text` | `shortText` | Notes |
 |--------|-------------|-------|
-| Two farm boys sharing a cigarette | (none) | Short and specific. Fits the grid raw, so no `shortText`. |
-| A nearly empty bucket of Sweet Martha's, held by someone who regrets emptying it | A bucket of Sweet Martha's regret | Same joke, compressed. `shortText` earns its place because `text` is long. |
-| A toddler asleep in a wagon with a corn dog still gripped in one fist | (none) | One concrete image doing all the work. Specificity, no stacked references. |
+| I saw two farm boys sharing a cigarette. | Farm boys sharing a smoke | Short and specific. One concrete image doing all the work, no stacked references. |
+| I saw a nearly empty bucket of Sweet Martha's in the hands of someone sick with regret. | A bucket of Sweet Martha's regret | Same joke, compressed. `shortText` earns its place because `text` is long. |
+| I saw a full-size shirt that a belly had turned into an accidental crop top. | Belly vanquishes shirt | Pure observation with no inner-state read. The `shortText` is a tighter phrasing of the same joke, never a different one. |
 
 ## Workflow
 
 1. Draft toward the frequency mix. Check what the pool is short on (gimmes versus mediums versus rares) before adding more of what it already has.
 2. **Pitch bold, Lemon dials back.** When drafting for review, pitch the sharper version. Lemon reads every square and softens anything himself, so 'too far' is his call, not yours to pre-empt. Timid drafts waste the review.
 3. **Explicit yes before it ships.** Never commit or push a square Lemon has not approved. Treat drafts as proposals.
-4. Append approved squares with the next free `id` in that group's prefix (`P` pool, `C` centers, `CA` crop art, etc.), typically the current max for the prefix plus one. IDs are permanent and the number need not be sequential. An id stays with an idea through wording changes, and retired ids are never reused for different content.
+4. Append approved squares with the next free `id` in that group's prefix (`P` pool, `C` centers, `CA` crop art, etc.). **Ids are contiguous, not permanent.** They are positional bookkeeping and carry no meaning, so deleting a square renumbers the rest of its group rather than leaving a gap. Nothing outside the repo persists an id, since a deploy invalidates saved marks. The one thing that does reference them is `_cards.ts`, so any renumber has to remap the five committed cards in the same pass.
