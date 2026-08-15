@@ -10,7 +10,7 @@ Territory to draw squares from. Status is coverage, not quality.
 - 🔷 **Open** — unmined, fair game
 - ❌ **Closed** — mined and nothing landed. Deliberately not revisiting.
 
-The issue #16 completion pass closed every row it could. The **scissors pass** that followed (see the log below) then cut two banked squares on quality grounds, which reopened Big Fat Bacon and closed Malts outright, so two rows moved after that pass. New rows should only appear if genuinely new territory is identified, the way Weather, Food sticker shock, Phones & vaping, and Live animal judging were added mid-pass after the inherited table turned out to be incomplete.
+The issue #16 completion pass closed every row it could. The **scissors pass** that followed (see the log below) then cut two banked squares on quality grounds, closing both Big Fat Bacon and Malts outright rather than holding either row open for a replacement. A square existing only because its row wanted one is not a good enough reason to keep the row alive. New rows should only appear if genuinely new territory is identified, the way Weather, Food sticker shock, Phones & vaping, and Live animal judging were added mid-pass after the inherited table turned out to be incomplete.
 
 | Category | Area | Status | Notes |
 |----------|------|--------|-------|
@@ -19,7 +19,7 @@ The issue #16 completion pass closed every row it could. The **scissors pass** t
 | Food & drink | Pronto Pup / corn dog | ✅ | Two squares, plus the lore tie-in. |
 | Food & drink | All-you-can-drink milk | ✅ | Four-or-more glasses banked (P1). Rewritten in the scissors pass. The original tracked a stranger's *4th refill*, which meant surveilling one person across four trips to the booth. It now counts a fourth glass (the original plus three refills) and the player is allowed to be that person, which drops it from `rare`/`see` to `medium`/`do`. |
 | Food & drink | Mini donuts | ✅ | |
-| Food & drink | Big Fat Bacon | 🔷 | **Reopened by the scissors pass.** The fake-share square (someone offers to share their Big Fat Bacon, then eats all of it) was cut as the weakest square in the pool: it required witnessing a whole social exchange between strangers *and* inferring the offer was insincere. It only existed because a Big Fat Bacon square was wanted. The avenue is fine, the square was not. |
+| Food & drink | Big Fat Bacon | ❌ | **Abandoned in the scissors pass.** The fake-share square (someone offers to share their Big Fat Bacon, then eats all of it) was cut as the weakest square in the pool: it required witnessing a whole social exchange between strangers *and* inferring the offer was insincere. It only existed because a Big Fat Bacon square was wanted, which is the wrong reason for a square to exist. Rather than hold the row open for a replacement, the avenue is closed. Deliberately not revisiting. |
 | Food & drink | Deep-fried everything | ✅ | Candy bar banked (P26). Deep-fried Oreo and pickle-on-a-stick both rejected (see log), so no second deep-fried square unless something special turns up. |
 | Food & drink | Roasted corn on the cob | ✅ | |
 | Food & drink | New foods of the year (annual list) | ✅ | Blind-pick-and-find square banked (P30). |
@@ -134,7 +134,7 @@ A review of the banked pool for its *weakest* squares, run before merging the co
 | P43, queen bee | The 'with help if needed' hedge deletes the challenge | Happy with it as-is. |
 | P48, prize wheel | The flattest square in the pool | The *action* is good even if the writing was not. Kept the action, rewrote the line. |
 
-The two cuts were **Big Fat Bacon's fake share** (reopening that row) and the **Dairy Building malt** (closing that row). Everything else nominated was repaired rather than removed.
+The two cuts were **Big Fat Bacon's fake share** and the **Dairy Building malt**. Both rows were closed outright rather than held open for a replacement. Everything else nominated was repaired rather than removed.
 
 Three failure modes did most of the work, and they are worth checking new drafts against.
 
@@ -200,7 +200,7 @@ Specific concepts that are parked or dead, so we don't re-pitch them. Banked ide
 | International Bazaar: buying something unidentifiable, watching the free stage, cowhide rug | Parked/Rejected | Free stage "kinda sucks," buying-something-unidentifiable too vague. Shark tooth necklace (P69) landed instead; cowhide rug still a fine fallback if the Bazaar needs a second square later. |
 | Turkey leg / brat from a church or civic-club fundraiser stand | Rejected | Didn't land. The foot-long got a real square instead (P71, six bites or fewer), which finally opened that row. |
 | Church dining halls: empty hall vs the cheese curd line, saying grace over fair food, a lifer volunteer in an ancient apron | Rejected | All dull. Combined with the earlier meal-as-a-do rejection, the whole church-dining-hall avenue is closed. |
-| Big Fat Bacon offered-then-not-shared | Rejected | Cut in the scissors pass as the weakest square in the pool. Required witnessing a full social exchange between strangers and inferring the offer was insincere. It existed only because a Big Fat Bacon square was wanted. Row reopened, the avenue is still fine. |
+| Big Fat Bacon offered-then-not-shared | Rejected | Cut in the scissors pass as the weakest square in the pool. Required witnessing a full social exchange between strangers and inferring the offer was insincere. It existed only because a Big Fat Bacon square was wanted. Row closed rather than reopened, since no better angle was on offer. |
 | Malt: a straw standing straight up in it, unassisted | Rejected | The objective replacement drafted for the cut straw-defeat square. Declined, and the whole Dairy Building ice cream avenue closed with it. |
 | Cotton candy: a kid whose mouth is dyed a color that does not occur in food | Rejected | Two problems. Fair cotton candy is essentially always pink, so the color is not a real variable, and pointing the player's attention at a child reads as creepy. Both fixed by moving the dye joke to an adult (P84) and carrying the cotton candy row on size instead. |
 | Cotton candy bag 'the size of a pillow' | Rejected | Pillows vary too much to argue about pleasantly. Became 'bigger than their own head', which everyone judges identically in one glance. |
