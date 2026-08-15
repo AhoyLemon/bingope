@@ -31,6 +31,8 @@ Mix the frequencies deliberately.
 
 Record each square's tier as its `rarity` and whether it is witnessed or performed as its `type` ('see' or 'do'). A card should carry some of both types, but that is a loose mix, not a delicate ratio to manage. **Difficulty is the balance that actually matters**, so `rarity` is the dial worth watching. Both are gut calls, not gospel, and stay tunable as the pool grows.
 
+> **`rarity` is a misnomer.** The field encodes **difficulty** — how hard the square is to mark — not how uncommon the thing itself is. The name stuck early. Read it as "difficulty" when authoring.
+
 ### 2. Specificity is the joke
 
 'Child with a mullet' beats 'funny haircut.' The concrete detail is what makes a square both funnier and more markable. Name the food, the animal, the exact behavior. Vague squares are neither funny nor markable.
