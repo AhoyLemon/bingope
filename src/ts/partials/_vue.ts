@@ -331,6 +331,7 @@ const cardAppOptions: {
       return {
         marked: this.isMarked(square.id),
         "square-center": squareIndex === CENTER_INDEX,
+        "square-crop-art": square.id.startsWith("CA"),
         "task-see": square.type === "see",
         "task-do": square.type === "do",
         "copy-long": square.label.length > 22 || longestWordLength > 8,

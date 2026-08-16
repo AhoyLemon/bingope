@@ -45,6 +45,9 @@ $paper-texture-modal: url("../svg/paper-texture-modal.svg");
     font-size: clamp(2rem, 8.2vw, 3.6rem);
     font-weight: vars.$bold;
     line-height: 1.05;
+    // A long unspaced token (such as an email address) must not escape the
+    // ticket's bounds on narrow screens.
+    overflow-wrap: anywhere;
     text-align: center;
     text-wrap: balance;
   }

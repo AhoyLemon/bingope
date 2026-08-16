@@ -31,6 +31,14 @@ test("no shortText ends with a period", () => {
   expect(offenders).toEqual([]);
 });
 
+test("every Crop Art square uses the shared grid label", () => {
+  const cropArtSquares = essentials
+    .find((group) => group.groupName === "Crop Art")
+    ?.squares.map((square) => square.shortText);
+
+  expect(cropArtSquares).toEqual(Array(14).fill("Crop Art"));
+});
+
 /**
  * Lemon's global writing rules ban em-dashes and semicolons everywhere, and the
  * squares use single quotes internally because the field itself is a
