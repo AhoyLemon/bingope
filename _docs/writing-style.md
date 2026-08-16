@@ -77,7 +77,7 @@ Write them like any other square: the two bars (markable and funny) and the voic
 ## Writing mechanics
 
 - Follow Lemon's global writing rules. The two that bite here: no em-dashes and no semicolons. Use periods or commas instead. Also avoid the usual AI tells.
-- Use single quotes for any quotation inside a square, since the field itself is a double-quoted string.
+- Use curly double quotes (“ ”, U+201C/U+201D) for any quotation inside a square. They're distinct characters from the straight `"` that delimits the field, so no escaping is needed. Plain apostrophes and contractions (Sweet Martha's, don't) stay straight `'` as usual; only quoted words/phrases get curly marks.
 - **`text` is a sentence, so it ends with a period.** Every square is a full first-person sentence, and it gets terminal punctuation like one (a `!` or `?` when the sentence calls for it). This holds for one-clause squares too: 'I saw a kid on a leash.' A closing parenthesis or quote takes the period after it, since the period belongs to the outer sentence, not to the aside.
 - **`shortText` never takes a period.** It is a label on the grid, not a sentence, so it stays bare.
 - **Sentence case.** Capitalize the first word only, then lowercase the rest, except for proper nouns that demand a capital (Sweet Martha's, Pronto Pup, Machinery Hill). Squares read as observations, not headlines.
