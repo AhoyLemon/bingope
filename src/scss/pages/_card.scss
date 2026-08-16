@@ -341,8 +341,7 @@ $paper-texture: url("../svg/paper-texture.svg");
   background: transparent;
   cursor: pointer;
   overflow: hidden;
-  animation: bingo-celebration-arrive 420ms cubic-bezier(0.2, 0.8, 0.28, 1)
-    both;
+  animation: bingo-celebration-arrive 420ms cubic-bezier(0.2, 0.8, 0.28, 1) both;
 
   &:focus-visible {
     outline: none;
@@ -406,8 +405,7 @@ $paper-texture: url("../svg/paper-texture.svg");
     --star-color: #dd3843;
     --star-size: clamp(1.15rem, 5.7dvw, 1.8rem);
 
-    animation: bingo-star-flare 2.7s cubic-bezier(0.18, 0.82, 0.28, 1) 55ms
-      both;
+    animation: bingo-star-flare 2.7s cubic-bezier(0.18, 0.82, 0.28, 1) 55ms both;
   }
 
   &--2 {
@@ -430,8 +428,7 @@ $paper-texture: url("../svg/paper-texture.svg");
     --star-color: #{vars.$green};
     --star-size: clamp(0.88rem, 3.95dvw, 1.25rem);
 
-    animation: bingo-star-hop 3.05s cubic-bezier(0.18, 0.82, 0.28, 1) 215ms
-      both;
+    animation: bingo-star-hop 3.05s cubic-bezier(0.18, 0.82, 0.28, 1) 215ms both;
   }
 
   &--5 {
@@ -474,8 +471,8 @@ $paper-texture: url("../svg/paper-texture.svg");
   background-size: 11rem 11rem;
   color: vars.$ink;
   font-family: vars.$grid-display;
-  font-size: clamp(0.72rem, min(3.25dvw, 2.2dvh), 2.25rem);
-  font-weight: 100;
+  font-size: clamp(0.9rem, min(4dvw, 2.55dvh), 2.5rem);
+  font-weight: 460;
   line-height: 1.05;
   letter-spacing: 0;
   text-align: center;
@@ -517,13 +514,12 @@ $paper-texture: url("../svg/paper-texture.svg");
   }
 
   &.copy-long {
-    font-size: clamp(0.64rem, min(2.85dvw, 1.85dvh), 1.9rem);
+    padding-inline: clamp(0.08rem, 0.28dvw, 0.14rem);
+    font-size: clamp(0.75rem, min(3.35dvw, 2.15dvh), 2.05rem);
   }
 
-  &.copy-very-long {
-    padding-inline: 0;
-    font-size: clamp(0.58rem, min(2.45dvw, 1.55dvh), 1.55rem);
-    letter-spacing: -0.02em;
+  &.copy-extra-long-word {
+    font-size: clamp(0.72rem, min(2.95dvw, 2dvh), 2rem);
   }
 }
 

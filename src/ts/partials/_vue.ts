@@ -322,8 +322,10 @@ const cardAppOptions: {
       square: CardSquare,
       squareIndex: number,
     ): Record<string, boolean> {
-      const longestWordLength = Math.max(
-        ...square.label.split(/\s+/).map((word) => word.length),
+      const words = square.label.split(/\s+/);
+      const longestWordLength = Math.max(...words.map((word) => word.length));
+      const hasExtraLongWord = words.some(
+        (word) => word.length >= 10 && !word.includes("-"),
       );
 
       return {
@@ -332,7 +334,7 @@ const cardAppOptions: {
         "task-see": square.type === "see",
         "task-do": square.type === "do",
         "copy-long": square.label.length > 22 || longestWordLength > 8,
-        "copy-very-long": square.label.length > 28 || longestWordLength > 12,
+        "copy-extra-long-word": hasExtraLongWord,
         "just-stamped": square.id === this.justStamped,
       };
     },
