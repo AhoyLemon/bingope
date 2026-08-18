@@ -29,6 +29,7 @@ function seedSite(): void {
   write("web-app-manifest-192x192.png", "png-bytes-192");
   write("og-wide.png", "big-social-image");
   write("BingSiteAuth.xml", "<xml/>");
+  write("CNAME", "bingope.ahoylemon.xyz");
   write("googledbcd44305048d5b5.html", "verification");
   write(".nojekyll", "");
   write("sw.js", "// a stale service worker from a previous run");
@@ -64,6 +65,7 @@ test("excludes social image, source maps, build tooling, dev Vue, and verificati
   expect(urls).not.toContain("./js/min/routes/pug.routes.js");
   expect(urls).not.toContain("./vendor/README.md");
   expect(urls).not.toContain("./BingSiteAuth.xml");
+  expect(urls).not.toContain("./CNAME");
   expect(urls).not.toContain("./googledbcd44305048d5b5.html");
   expect(urls).not.toContain("./.nojekyll");
   expect(urls).not.toContain("./sw.js"); // the SW must never precache itself

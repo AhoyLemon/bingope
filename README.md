@@ -8,7 +8,7 @@ BINGOPE is a bingo game to play at the 2026 Minnesota State Fair.
 
 Everyone gets a different card full of things they might see at the fair. Mark enough squares to complete a row, column, or diagonal and the site celebrates. Then keep playing. We'll figure out how to score the whole day when we get home.
 
-The finished site will live at [ahoylemon.github.io/bingope](https://ahoylemon.github.io/bingope/).
+The finished site will live at [bingope.ahoylemon.xyz](https://bingope.ahoylemon.xyz).
 
 ## Can I run this locally?
 

@@ -95,7 +95,7 @@ The initial version does not show timestamps. Keeping them makes a later scoring
 - Marks and active Bingo lines live in separate `localStorage` records, namespaced by the normalized player name and stable square or line ID.
 - Recent iPhones and Pixels are the only meaningful browser targets.
 - The site is an installable, offline-capable PWA. A service worker generated at build time (`scripts/build-sw.ts`, wired into `build:pages`) precaches the app shell and silently updates on each deploy; Google Fonts are cached at runtime. Once loaded, gameplay requires no network traffic — and after one online visit, neither does a cold start.
-- Asset URLs must work from the GitHub Pages `/bingope/` project path and from one-folder-deep player routes.
+- Asset URLs must work from the site root and from one-folder-deep player routes, so they stay relative (a per-page `assetPath` prefix) rather than absolute.
 
 Automated testing stays extremely small. `bun run test` builds Sass, type-checks TypeScript, and runs targeted Bun tests for dealing, stable IDs, mark persistence, card copy, Bingo-line reconciliation, and the service-worker precache manifest. The final experience still gets checked manually on the five real phones.
 
