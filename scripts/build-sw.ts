@@ -28,6 +28,7 @@ const EXCLUDE_EXACT = new Set<string>([
   ".nojekyll",
   "og-wide.png", // ~1MB social-share image, not loaded for rendering
   "BingSiteAuth.xml", // Bing site-verification file
+  "CNAME", // GitHub Pages custom-domain file — served at root, never requested by the app
   "vendor/vue.global.js", // Vue dev build — only referenced in `testing`, never in production
 ]);
 const EXCLUDE_EXTENSIONS = [".map", ".d.ts", ".md"];
@@ -76,7 +77,7 @@ export function buildPrecacheManifest(siteDir: string): PrecacheManifest {
     hash.update(rel);
     hash.update(fs.readFileSync(path.join(siteDir, rel)));
     // Root-relative so the SW resolves it against its own location, which works
-    // at both the local root (/) and the production base path (/bingope/).
+    // at the production site root and the local dev root alike.
     urls.push("./" + rel);
   }
 
