@@ -1,7 +1,17 @@
 .javascripts
   if testing
-    script(src="https://unpkg.com/vue@3/dist/vue.global.js")
+    script(src=assetPath + "vendor/vue.global.js")
   else
-    script(src="https://unpkg.com/vue@3/dist/vue.global.prod.js")
+    script(src=assetPath + "vendor/vue.global.prod.js")
 
   script(type="module" src=assetPath + "js/min/src/ts/site.js?updated=" + lastUpdated)
+
+  // Register the service worker for offline / installable PWA support.
+  // Skipped in `testing` (dev watch) so local iteration isn't served stale from cache.
+  if !testing
+    script.
+      if ('serviceWorker' in navigator) {
+        window.addEventListener('load', function () {
+          navigator.serviceWorker.register('#{assetPath}sw.js');
+        });
+      }

@@ -15,6 +15,7 @@
     "build:sass": "sass src/scss/site.scss:css/site.css --no-source-map",
     "build:pug": "bun scripts/build-pug.ts",
     "build:ts": "tsc",
+    "build:sw": "bun scripts/build-sw.ts",
     "watch:sass": "sass src/scss/site.scss:css/site.css --no-source-map --watch",
     "watch:pug": "bun scripts/watch-pug.ts",
     "watch:ts": "tsc --watch",
@@ -26,7 +27,7 @@
     "dev": "bun scripts/dev.ts",
     "watch": "bun scripts/dev.ts",
     "build": "bun run build:sass && bun run build:pug && bun run build:ts",
-    "build:pages": "bun run build && bun scripts/stage-pages.ts",
+    "build:pages": "bun run build && bun scripts/stage-pages.ts && bun run build:sw",
     "test": "bun run test:sass && bun run test:ts && bun run test:unit"
   },
   "keywords": [
