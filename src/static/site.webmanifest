@@ -1,7 +1,19 @@
 {
   "name": "BINGOPE",
   "short_name": "BINGOPE",
+  "description": "Oh ya, some real good Minnesota State Fair Bingo, doncha know?",
+  "start_url": ".",
+  "scope": ".",
+  "display": "standalone",
+  "theme_color": "#eee8d8",
+  "background_color": "#eee8d8",
   "icons": [
+    {
+      "src": "favicon.svg",
+      "type": "image/svg+xml",
+      "sizes": "any",
+      "purpose": "any"
+    },
     {
       "src": "web-app-manifest-192x192.png",
       "sizes": "192x192",
@@ -14,8 +26,5 @@
       "type": "image/png",
       "purpose": "maskable"
     }
-  ],
-  "theme_color": "#eee8d8",
-  "background_color": "#eee8d8",
-  "display": "standalone"
+  ]
 }

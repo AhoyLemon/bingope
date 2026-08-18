@@ -90,14 +90,14 @@ The initial version does not show timestamps. Keeping them makes a later scoring
 - Pug builds two pages: a homepage and a single card page. The homepage takes a name and sends you to `card/?card=<name>`. Player identity comes from that query parameter, not from a folder route.
 - Sass handles styling.
 - TypeScript and Vue 3 handle interactive card behavior.
-- Vue loads from a CDN. Do not add Vite, Nuxt, a router, or a state library without a real need.
+- Vue 3 is vendored locally (pinned) under `src/static/vendor/` and loaded same-origin, so the app carries no third-party runtime dependency and keeps working offline. Do not add Vite, Nuxt, a router, or a state library without a real need.
 - Bun is Lemon's preferred package manager and is used in GitHub Actions. Harmless npm compatibility can stay.
 - Marks and active Bingo lines live in separate `localStorage` records, namespaced by the normalized player name and stable square or line ID.
 - Recent iPhones and Pixels are the only meaningful browser targets.
-- The personal version does not need PWA or guaranteed offline support. Once loaded, gameplay itself requires no network traffic.
+- The site is an installable, offline-capable PWA. A service worker generated at build time (`scripts/build-sw.ts`, wired into `build:pages`) precaches the app shell and silently updates on each deploy; Google Fonts are cached at runtime. Once loaded, gameplay requires no network traffic — and after one online visit, neither does a cold start.
 - Asset URLs must work from the GitHub Pages `/bingope/` project path and from one-folder-deep player routes.
 
-Automated testing stays extremely small. `bun run test` builds Sass, type-checks TypeScript, and runs targeted Bun tests for dealing, stable IDs, mark persistence, card copy, and Bingo-line reconciliation. The final experience still gets checked manually on the five real phones.
+Automated testing stays extremely small. `bun run test` builds Sass, type-checks TypeScript, and runs targeted Bun tests for dealing, stable IDs, mark persistence, card copy, Bingo-line reconciliation, and the service-worker precache manifest. The final experience still gets checked manually on the five real phones.
 
 ## Commits and attribution
 
@@ -120,7 +120,6 @@ These live in Milestones 3 and 4. None have deadlines, and none block the fair.
 - A scoring screen built from the saved `markedAt` / `completedAt` timestamps.
 - Randomized or increasingly extravagant celebrations, and a game-over screen.
 - A possible Firebase hook for game reports.
-- Offline or installable-PWA support.
 - A one-page BINGOPE explainer, a public-facing README, and an Issue/PR contribution policy.
 
 The reusable-public-version question is no longer hypothetical: the seeded name path (Milestone 2, "Publicly Playable") is that version, shipped without a refactor.
