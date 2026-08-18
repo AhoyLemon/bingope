@@ -28,6 +28,7 @@ const EXCLUDE_EXACT = new Set<string>([
   ".nojekyll",
   "og-wide.png", // ~1MB social-share image, not loaded for rendering
   "BingSiteAuth.xml", // Bing site-verification file
+  "vendor/vue.global.js", // Vue dev build — only referenced in `testing`, never in production
 ]);
 const EXCLUDE_EXTENSIONS = [".map", ".d.ts", ".md"];
 // Compiled build tooling — emitted into js/min but never loaded by the app.
@@ -87,7 +88,9 @@ export function buildPrecacheManifest(siteDir: string): PrecacheManifest {
 // PRECACHE_URLS are injected above it by renderServiceWorker().
 const SW_RUNTIME = `
 const PRECACHE = "bingope-precache-" + CACHE_VERSION;
-const RUNTIME_FONTS = "bingope-fonts";
+// Versioned too, so the activate sweep clears it each deploy: bounds its growth
+// and lets a stale or bad (opaque) font entry self-heal instead of pinning forever.
+const RUNTIME_FONTS = "bingope-fonts-" + CACHE_VERSION;
 const FONT_HOSTS = ["fonts.googleapis.com", "fonts.gstatic.com"];
 
 self.addEventListener("install", (event) => {

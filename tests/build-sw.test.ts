@@ -3,7 +3,7 @@ import fs from "fs";
 import os from "os";
 import path from "path";
 
-import { buildPrecacheManifest } from "../scripts/build-sw";
+import { buildPrecacheManifest, renderServiceWorker } from "../scripts/build-sw";
 
 let siteDir: string;
 
@@ -23,7 +23,8 @@ function seedSite(): void {
   write("js/min/src/ts/site.js.map", "{}");
   write("js/min/scripts/build-sw.js", "// compiled build tooling");
   write("js/min/routes/pug.routes.js", "// compiled route map");
-  write("vendor/vue.global.prod.js", "/* vue */");
+  write("vendor/vue.global.prod.js", "/* vue prod */");
+  write("vendor/vue.global.js", "/* vue dev — testing builds only */");
   write("vendor/README.md", "# vendored assets");
   write("web-app-manifest-192x192.png", "png-bytes-192");
   write("og-wide.png", "big-social-image");
@@ -53,9 +54,11 @@ test("precaches the app shell", () => {
   expect(urls).toContain("./web-app-manifest-192x192.png");
 });
 
-test("excludes social image, source maps, build tooling, and verification files", () => {
+test("excludes social image, source maps, build tooling, dev Vue, and verification files", () => {
   const { urls } = buildPrecacheManifest(siteDir);
   expect(urls).not.toContain("./og-wide.png");
+  // Dev Vue build is only referenced in `testing` output, never in production.
+  expect(urls).not.toContain("./vendor/vue.global.js");
   expect(urls).not.toContain("./js/min/src/ts/site.js.map");
   expect(urls).not.toContain("./js/min/scripts/build-sw.js");
   expect(urls).not.toContain("./js/min/routes/pug.routes.js");
@@ -78,4 +81,19 @@ test("version is stable when only an excluded file changes", () => {
   write("og-wide.png", "an entirely different social image");
   const after = buildPrecacheManifest(siteDir).version;
   expect(after).toBe(before);
+});
+
+test("renderServiceWorker embeds the version + precache URLs into valid JS", () => {
+  const manifest = buildPrecacheManifest(siteDir);
+  const source = renderServiceWorker(manifest);
+
+  // The generated sw.js must actually carry the manifest, or the SW caches nothing.
+  expect(source).toContain(`const CACHE_VERSION = "${manifest.version}"`);
+  expect(source).toContain('"./index.html"');
+  expect(source).toContain('"./vendor/vue.global.prod.js"');
+
+  // Guard against a broken template injection shipping a syntactically invalid SW
+  // that CI would otherwise never catch (the SW is a generated string, not tsc-checked).
+  // new Function parses the body without executing it — a syntax error throws here.
+  expect(() => new Function(source)).not.toThrow();
 });
