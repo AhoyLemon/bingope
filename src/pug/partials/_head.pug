@@ -10,6 +10,22 @@ head
   link(rel="preconnect" href="https://fonts.gstatic.com" crossorigin)
   link(href="https://fonts.googleapis.com/css2?family=Oswald:wght@200..700&family=Zilla+Slab:wght@500;700&display=swap" rel="stylesheet")
   meta(name="viewport" content="width=device-width, initial-scale=1")
+  script.
+    // Android PWAs may report a dynamic viewport that extends below the
+    // gesture bar. Keep full-screen layouts in the measured visible viewport.
+    (function () {
+      function setViewportHeight() {
+        var viewport = window.visualViewport;
+        var height = viewport ? viewport.height : window.innerHeight;
+        document.documentElement.style.setProperty("--viewport-height", height + "px");
+      }
+
+      setViewportHeight();
+      window.addEventListener("resize", setViewportHeight);
+      if (window.visualViewport) {
+        window.visualViewport.addEventListener("resize", setViewportHeight);
+      }
+    })();
   meta(name="description" content=description)
   meta(http-equiv="last-modified" content=lastUpdated)
 
