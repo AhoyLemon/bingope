@@ -19,7 +19,7 @@ $paper-texture: url("../svg/paper-texture.svg");
     padding: 1rem 10px;
     border: 0;
     text-align: initial;
-    min-height: 100dvh;
+    min-height: calc(100dvh - 0.75rem);
     display: flex;
     flex-direction: column;
     justify-content: space-between;
