@@ -34,7 +34,7 @@ interface BingoSquare {
   id: string;
   text: string;
   shortText?: string;
-  rarity: "gimme" | "medium" | "rare";
+  difficulty: "gimme" | "medium" | "rare";
   type: "see" | "do";
 }
 ```
@@ -43,9 +43,9 @@ The data lives under [`src/ts/partials/squares/`](../src/ts/partials/squares/), 
 
 `text` is the canonical wording and defines what counts. The grid displays `shortText ?? text`, and the larger zoomed view always displays `text`. Since the player always reads full `text` before marking, `text` can be declarative and longer than the grid allows. `shortText` is the concise card label: optional but strongly encouraged, and required whenever `text` is too long to fit the grid.
 
-Square IDs are group-prefixed strings: `P` for the pool (`P1`…`P62`, `P5` retired), `C` for centers (`C1`…`C10`), and a per-group prefix for essentials (`CA` crop art, `SD` special dares, future groups their own). An ID stays with the same idea through wording changes. Retired IDs are never reused for different content. The number is a unique tag: IDs do not describe order, rarity, or card position, so they need not be sequential. Group prefixes also keep a bare id from auto-linking to a GitHub issue.
+Square IDs are group-prefixed strings: `P` for the pool (`P1`…`P62`, `P5` retired), `C` for centers (`C1`…`C10`), and a per-group prefix for essentials (`CA` crop art, `SD` special dares, future groups their own). An ID stays with the same idea through wording changes. Retired IDs are never reused for different content. The number is a unique tag: IDs do not describe order, difficulty, or card position, so they need not be sequential. Group prefixes also keep a bare id from auto-linking to a GitHub issue.
 
-`rarity` and `type` are authoring-time judgments recorded for the eventual card deal. `rarity` ('gimme', 'medium', 'rare') lets the deal weight cards so every card stays winnable. `type` ('see', 'do') marks whether the square is witnessed or performed. Both are hints, not gospel, and stay tunable.
+`difficulty` and `type` are authoring-time judgments recorded for the eventual card deal. `difficulty` ('gimme', 'medium', 'rare') lets the deal weight cards so every card stays winnable. `type` ('see', 'do') marks whether the square is witnessed or performed. Both are hints, not gospel, and stay tunable.
 
 [`writing-style.md`](writing-style.md) is the source of truth for square writing. No square copy ships without Lemon's approval. [`squares-plan.md`](squares-plan.md) tracks area coverage and the log of parked and rejected ideas.
 

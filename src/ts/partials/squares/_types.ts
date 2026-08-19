@@ -6,14 +6,10 @@
  */
 
 /**
- * How reliably a player will get to mark this square. A dealing hint, tunable.
- *
- * NOTE: `rarity` is a misnomer. What this actually encodes is **difficulty** —
- * how hard the square is to mark, not how uncommon the thing itself is. The
- * name stuck early and renaming it would touch the data, the dealer, and saved
- * state, so it stays for now. Read it as "difficulty" when authoring.
+ * How hard the square is to mark: `gimme` (nearly certain), `medium`, or `rare`
+ * (a real catch). A tunable dealing hint, not how uncommon the thing itself is.
  */
-export type Rarity = "gimme" | "medium" | "rare";
+export type Difficulty = "gimme" | "medium" | "rare";
 
 /** Whether the square is witnessed or performed by the player. */
 export type SquareType = "see" | "do";
@@ -23,12 +19,12 @@ export interface BingoSquare {
    * Permanent, globally unique, never reused. Namespaces saved state, so a
    * collision would leak marks between squares. Prefixed by group: `P` pool,
    * `C` centers, `CA` crop art (future essential groups get their own prefix).
-   * The number is a unique tag, not an order or a rarity.
+   * The number is a unique tag, not an order or a difficulty.
    */
   id: string;
   text: string;
   shortText?: string;
-  rarity: Rarity;
+  difficulty: Difficulty;
   type: SquareType;
 }
 

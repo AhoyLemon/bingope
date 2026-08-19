@@ -25,7 +25,7 @@ class MemoryStorage {
 const square = (id: string): BingoSquare => ({
   id,
   text: `Square ${id}`,
-  rarity: "medium",
+  difficulty: "medium",
   type: "see",
 });
 
