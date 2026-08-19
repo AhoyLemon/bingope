@@ -19,9 +19,6 @@ $paper-texture: url("../svg/paper-texture.svg");
     padding: 1rem 10px;
     border: 0;
     text-align: initial;
-    // This shell lives inside `.site-shell`, which keeps bottom padding for
-    // the board's shadow. Reserving that space here prevents the board from
-    // extending below the PWA viewport.
     min-height: calc(100dvh - 0.75rem);
     display: flex;
     flex-direction: column;
