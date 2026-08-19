@@ -3,6 +3,8 @@
 $paper-texture: url("../svg/paper-texture.svg");
 
 .card-page {
+  --card-bottom-inset: max(0.75rem, env(safe-area-inset-bottom, 0px));
+  --card-viewport-height: var(--viewport-height, 100dvh);
   --ticket-height: clamp(7rem, min(19dvw, 21dvh), 10.75rem);
 
   overflow-x: clip;
@@ -10,8 +12,8 @@ $paper-texture: url("../svg/paper-texture.svg");
 
   .site-shell {
     width: min(100%, 53.25rem);
-    min-height: 100dvh;
-    padding-block: 0 0.75rem;
+    min-height: var(--card-viewport-height);
+    padding-block: 0 var(--card-bottom-inset);
     background: transparent;
   }
 
@@ -19,10 +21,20 @@ $paper-texture: url("../svg/paper-texture.svg");
     padding: 1rem 10px;
     border: 0;
     text-align: initial;
-    min-height: calc(100dvh - 0.75rem);
+    min-height: calc(
+      var(--card-viewport-height) - var(--card-bottom-inset)
+    );
     display: flex;
     flex-direction: column;
     justify-content: space-between;
+  }
+}
+
+@media (display-mode: standalone) {
+  .card-page {
+    // Some Android PWA shells overlay the gesture bar without reporting a
+    // safe-area inset. Leave enough room for the whole card in that case.
+    --card-bottom-inset: max(3rem, env(safe-area-inset-bottom, 0px));
   }
 }
 
@@ -280,7 +292,10 @@ $paper-texture: url("../svg/paper-texture.svg");
   display: grid;
   height: clamp(
     23rem,
-    calc(100dvh - var(--ticket-height) - clamp(2.25rem, 6dvw, 3.75rem)),
+    calc(
+      var(--card-viewport-height) - var(--ticket-height) -
+        clamp(2.25rem, 6dvw, 3.75rem)
+    ),
     calc((100dvw - clamp(1rem, 4dvw, 2rem)) * 1.22)
   );
   min-width: 22rem;
