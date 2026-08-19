@@ -7,7 +7,7 @@ interface BingoSquare {
   id: string;
   text: string;
   shortText?: string;
-  rarity: "gimme" | "medium" | "rare";
+  difficulty: "gimme" | "medium" | "rare";
   type: "see" | "do";
 }
 ```
@@ -29,9 +29,7 @@ Mix the frequencies deliberately.
 - **Mediums.** You will probably see it if you are paying attention. This is the backbone of the card.
 - **Rare gems.** You might witness it, and marking it feels like winning a small lottery. A few per pool, never many.
 
-Record each square's tier as its `rarity` and whether it is witnessed or performed as its `type` ('see' or 'do'). A card should carry some of both types, but that is a loose mix, not a delicate ratio to manage. **Difficulty is the balance that actually matters**, so `rarity` is the dial worth watching. Both are gut calls, not gospel, and stay tunable as the pool grows.
-
-> **`rarity` is a misnomer.** The field encodes **difficulty** — how hard the square is to mark — not how uncommon the thing itself is. The name stuck early. Read it as "difficulty" when authoring.
+Record each square's tier as its `difficulty` and whether it is witnessed or performed as its `type` ('see' or 'do'). A card should carry some of both types, but that is a loose mix, not a delicate ratio to manage. **Difficulty is the balance that actually matters**, so it is the dial worth watching. Both are gut calls, not gospel, and stay tunable as the pool grows.
 
 ### 2. Specificity is the joke
 

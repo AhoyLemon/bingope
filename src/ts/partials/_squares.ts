@@ -9,7 +9,7 @@
 
 export type {
   BingoSquare,
-  Rarity,
+  Difficulty,
   SquareType,
   EssentialAudience,
   EssentialGroup,
