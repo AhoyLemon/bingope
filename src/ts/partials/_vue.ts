@@ -9,7 +9,7 @@
 // Vue is loaded from the CDN in the HTML.
 declare const Vue: any;
 
-import { CENTER_INDEX, normalizeName, resolveCard } from "./_deal.js";
+import { CENTER_INDEX, resolveCard } from "./_deal.js";
 import {
   activeBingoLines,
   bingoCelebrationMessage,
@@ -24,6 +24,7 @@ import { loadMarks, saveMarks, toggleMark } from "./_marks.js";
 import {
   browserStorage,
   claimCard,
+  freshCardSlug,
   loadPlayer,
   saveDisplayName,
 } from "./_player.js";
@@ -469,20 +470,16 @@ const cardAppOptions: {
     },
     generateNewCard(): void {
       const trimmed = this.nameDraft.trim();
-      const slug = normalizeName(trimmed);
-      if (!slug) return; // blank: leave the dialog open for another try
+      if (!trimmed) return; // blank: leave the dialog open for another try
 
-      if (storage) {
-        // A generated card starts blank: wipe anything saved under its name
-        // (same name, same deterministic layout — the wipe is what makes it
-        // new), and carry the typed name onto the fresh ticket.
-        saveMarks(slug, {}, storage);
-        saveBingos(slug, {}, storage);
-        saveDisplayName(slug, trimmed, storage);
-      }
+      // A random seed guarantees a different layout even for an unchanged
+      // (or bespoke) name, and a never-seen slug starts with blank marks for
+      // free. The typed name is saved as the display name so the fresh
+      // ticket still reads right once the next page load claims the slug.
+      const slug = freshCardSlug(trimmed);
+      if (storage) saveDisplayName(slug, trimmed, storage);
 
-      // Landing on the card claims it (last-viewed-wins); location.href
-      // keeps the old card one Back away.
+      // location.href keeps the old card one Back away.
       window.location.href = `?${new URLSearchParams({ card: slug })}`;
     },
     clearSelectedSquare(): void {

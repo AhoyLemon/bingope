@@ -5,6 +5,7 @@
  * never the dealt card or its saved marks.
  */
 
+import { normalizeName } from "./_deal.js";
 import type { StorageLike } from "./_marks.js";
 
 export const PLAYER_STORAGE_KEY = "bingope:player";
@@ -88,6 +89,33 @@ export function saveDisplayName(
   const player: Player = { slug, displayName: trimmed };
   savePlayer(player, storage);
   return player;
+}
+
+// Lowercase alphanumerics only, so normalizeName leaves tokens intact.
+const TOKEN_ALPHABET = "abcdefghijklmnopqrstuvwxyz0123456789";
+const TOKEN_LENGTH = 6;
+
+/**
+ * A brand-new card identity for `name`: the normalized name plus a random
+ * token. The deal is seeded differently every time, while the ticket keeps
+ * showing the typed name via the display-name override. `random` is
+ * injectable for tests.
+ */
+export function freshCardSlug(
+  name: string,
+  random: () => number = Math.random,
+): string {
+  let token = "";
+  for (let index = 0; index < TOKEN_LENGTH; index += 1) {
+    const at = Math.min(
+      TOKEN_ALPHABET.length - 1,
+      Math.floor(random() * TOKEN_ALPHABET.length),
+    );
+    token += TOKEN_ALPHABET[at];
+  }
+
+  const base = normalizeName(name);
+  return base ? `${base} ${token}` : token;
 }
 
 /**

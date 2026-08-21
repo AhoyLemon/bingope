@@ -3,6 +3,7 @@ import { expect, test } from "bun:test";
 import {
   PLAYER_STORAGE_KEY,
   claimCard,
+  freshCardSlug,
   loadPlayer,
   returningCardUrl,
   saveDisplayName,
@@ -139,6 +140,20 @@ test("returningCardUrl honors the ?new escape hatch", () => {
   expect(returningCardUrl("?new=1", storage)).toBeNull();
   expect(returningCardUrl("?utm_source=qr&new", storage)).toBeNull();
   expect(returningCardUrl("?utm_source=qr", storage)).toBe("card/?card=lemon");
+});
+
+test("freshCardSlug appends a random token to the normalized name", () => {
+  const alwaysZero = () => 0;
+  expect(freshCardSlug("  Lemon  ", alwaysZero)).toBe("lemon aaaaaa");
+});
+
+test("freshCardSlug never resolves back to the bare name", () => {
+  expect(freshCardSlug("lemon")).not.toBe("lemon");
+  expect(freshCardSlug("")).not.toBe("");
+});
+
+test("freshCardSlug differs call to call", () => {
+  expect(freshCardSlug("lemon")).not.toBe(freshCardSlug("lemon"));
 });
 
 test("returningCardUrl stays on the form without a saved player", () => {
