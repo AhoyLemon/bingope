@@ -250,10 +250,36 @@ $paper-texture: url("../svg/paper-texture.svg");
   }
 }
 
+// The heading text is itself the button that opens the ticket dialog.
+// Buttons don't inherit type, so the ticket heading's look is restated as
+// inherits — the site-wide h1/button defaults must not leak in.
 .card-ticket__owner-name {
   min-width: 0;
   overflow: hidden;
+  margin: 0;
+  padding: 0;
+  border: 0;
+  border-radius: 0.25rem;
+  background: transparent;
+  color: inherit;
+  font: inherit;
+  letter-spacing: inherit;
+  white-space: inherit;
   text-overflow: ellipsis;
+  cursor: pointer;
+
+  &:hover {
+    color: vars.$navy;
+  }
+
+  &:active {
+    transform: translateY(0.08rem);
+  }
+
+  &:focus-visible {
+    outline: 0.2rem solid vars.$green;
+    outline-offset: 0.15rem;
+  }
 }
 
 .card-ticket__star-rail {

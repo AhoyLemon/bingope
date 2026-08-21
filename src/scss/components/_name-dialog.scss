@@ -1,0 +1,153 @@
+@use "../abstracts/variables" as vars;
+
+$paper-texture: url("../svg/paper-texture.svg");
+
+// The change-your-name dialog: a modest paper slip, not the five-ring ticket.
+// It opens/closes natively (no zoom animation) — only the backdrop fades in.
+.name-dialog {
+  width: min(100% - 1.5rem, 26rem);
+  margin: auto; // the shared reset zeroes dialog margins, killing auto-centering
+  padding: 0.4rem;
+  border: 0.18rem solid vars.$green;
+  border-radius: 0.4rem;
+  background: vars.$paper $paper-texture;
+  color: vars.$ink;
+  filter: drop-shadow(0 0.3rem 0.5rem rgba(vars.$ink, 0.35));
+
+  &::backdrop {
+    background: rgba(vars.$navy, 0.86);
+    opacity: 1;
+    transition: opacity 240ms ease;
+  }
+}
+
+@starting-style {
+  .name-dialog[open]::backdrop {
+    opacity: 0;
+  }
+}
+
+.name-dialog__form {
+  display: grid;
+  gap: 0.7rem;
+  // The thin inner rule echoes the ticket's double frame.
+  padding: clamp(1rem, 5vw, 1.5rem);
+  border: 0.1rem solid vars.$green;
+  border-radius: 0.25rem;
+
+  h2 {
+    margin: 0;
+    color: vars.$navy;
+    font-family: vars.$ticket-serif;
+    font-size: clamp(1.4rem, 6vw, 1.8rem);
+    font-weight: vars.$bold;
+    line-height: 1.1;
+  }
+
+  label {
+    color: vars.$green;
+    font-family: vars.$ticket-serif;
+    font-size: clamp(1.05rem, 4vw, 1.25rem);
+    font-weight: vars.$bold;
+  }
+
+  input {
+    min-height: 3.4rem;
+    padding: 0.65rem 0.8rem;
+    border: 0.16rem solid vars.$green;
+    border-radius: 0.4rem;
+    background: rgba(vars.$paper, 0.8);
+    color: vars.$ink;
+    font: inherit;
+    font-size: 1.125rem;
+
+    &:focus-visible {
+      outline: 0.22rem solid vars.$focus;
+      outline-offset: 0.2rem;
+    }
+  }
+}
+
+.name-dialog__note {
+  margin: 0;
+  color: vars.$ink;
+  font-size: 0.95rem;
+}
+
+.name-dialog__actions {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: end;
+  gap: 0.6rem;
+  margin-top: 0.3rem;
+}
+
+.name-dialog__actions button,
+.name-dialog__generate {
+  min-height: 2.9rem;
+  padding: 0.35em 1em;
+  border: 0.16rem solid vars.$green;
+  border-radius: 0.4rem;
+  font: inherit;
+  font-size: 1.05rem;
+  font-weight: vars.$bold;
+  letter-spacing: 0.02em;
+  text-align: center;
+  transition:
+    filter 140ms ease-out,
+    transform 140ms ease-out;
+
+  &:hover {
+    filter: brightness(1.08);
+  }
+
+  &:active {
+    transform: translateY(0.12rem);
+  }
+
+  &:focus-visible {
+    outline: 0.22rem solid vars.$focus;
+    outline-offset: 0.2rem;
+  }
+}
+
+.name-dialog__cancel {
+  margin-right: auto;
+  border-color: transparent;
+  background: transparent;
+  color: vars.$green;
+}
+
+.name-dialog__save {
+  background: vars.$green;
+  color: vars.$paper;
+}
+
+.name-dialog__divider {
+  display: flex;
+  gap: 0.6rem;
+  align-items: center;
+  color: vars.$green;
+  font-family: vars.$ticket-serif;
+  font-weight: vars.$bold;
+}
+
+.name-dialog__divider-line {
+  height: 0.1rem;
+  flex: 1;
+  background: currentColor;
+}
+
+.name-dialog__generate {
+  width: 100%;
+  background: transparent;
+  color: vars.$green;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .name-dialog::backdrop,
+  .name-dialog__actions button,
+  .name-dialog__generate {
+    transition: none;
+  }
+}

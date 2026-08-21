@@ -21,6 +21,13 @@ import {
 } from "./_bingos.js";
 import { markActionText, resolveCardSquares } from "./_cardSquares.js";
 import { loadMarks, saveMarks, toggleMark } from "./_marks.js";
+import {
+  browserStorage,
+  claimCard,
+  freshCardSlug,
+  loadPlayer,
+  saveDisplayName,
+} from "./_player.js";
 import { poolVersionHash, resetStaleCard } from "./_cardVersion.js";
 import { squares, centers, essentials } from "./_squares.js";
 import type { BingoLine, Bingos } from "./_bingos.js";
@@ -127,6 +134,8 @@ interface CardAppData {
   // Homepage-only: the name-entry form's input. Inert everywhere else, same
   // as the rest of this shared app is inert on pages that aren't the card.
   name: { input: string };
+  // Draft value inside the change-your-name dialog.
+  nameDraft: string;
 }
 
 interface CardAppMethods {
@@ -141,6 +150,11 @@ interface CardAppMethods {
   openSquare(square: CardSquare, event?: Event): void;
   closeSquare(afterClose?: () => void): void;
   onBackdropClick(event: MouseEvent): void;
+  openNameDialog(): void;
+  closeNameDialog(): void;
+  onNameDialogBackdropClick(event: MouseEvent): void;
+  submitNameChange(event: Event): void;
+  generateNewCard(): void;
   clearSelectedSquare(): void;
   toggleSelectedSquare(): void;
   playBingoReveal(lines: BingoLine[]): void;
@@ -154,23 +168,32 @@ interface CardAppMethods {
 interface CardAppInstance extends CardAppData, CardAppMethods {
   $refs: {
     markDialog?: HTMLDialogElement;
+    nameDialog?: HTMLDialogElement;
     bingoGrid?: HTMLElement;
   };
 }
 
-function browserStorage(): Storage | null {
-  try {
-    return window.localStorage;
-  } catch {
-    return null;
-  }
-}
-
 const storage = browserStorage();
+
+const onCardPage = document.body.classList.contains("card-page");
 
 const rawCard = new URLSearchParams(window.location.search).get("card");
 const resolved = resolveCard(rawCard);
 const cardSquares = resolved ? resolveCardSquares(resolved.squareIds) : [];
+
+// A bare /card/ visit (old bookmark, home-screen shortcut) canonicalizes to
+// the saved player's card instead of a dead "No card yet" page.
+if (onCardPage && !resolved && storage) {
+  const saved = loadPlayer(storage);
+  if (saved) {
+    window.location.replace(`?${new URLSearchParams({ card: saved.slug })}`);
+  }
+}
+
+// Rendering a card claims it for this browser — last-viewed-wins. Re-claiming
+// your own card keeps any custom display name.
+const player =
+  onCardPage && resolved && storage ? claimCard(resolved.slug, storage) : null;
 
 // A squares-pool edit (add/edit/remove a square, center, or essential) means
 // every dealt card may look different than what a player last marked, so
@@ -287,7 +310,9 @@ const cardAppOptions: {
     return {
       resolved,
       hasCard: resolved !== null,
-      cardLabel: resolved ? `${resolved.name}'s Card` : "",
+      cardLabel: resolved
+        ? `${player?.displayName ?? resolved.name}'s Card`
+        : "",
       cardSquares,
       dauberPaths,
       marks:
@@ -309,6 +334,7 @@ const cardAppOptions: {
       bingoAnnouncement: "",
       fairBurst: [],
       name: { input: "" },
+      nameDraft: "",
     };
   },
   methods: {
@@ -414,6 +440,47 @@ const cardAppOptions: {
       // A click whose target is the dialog element itself landed on the
       // backdrop (not the ticket) — treat it as a cancel.
       if (event.target === this.$refs.markDialog) this.closeSquare();
+    },
+    openNameDialog(): void {
+      if (!this.resolved) return;
+
+      const current = storage ? loadPlayer(storage) : null;
+      this.nameDraft = current?.displayName ?? this.resolved.name;
+      const dialog = this.$refs.nameDialog;
+      if (dialog && !dialog.open) dialog.showModal();
+    },
+    closeNameDialog(): void {
+      this.$refs.nameDialog?.close();
+    },
+    onNameDialogBackdropClick(event: MouseEvent): void {
+      if (event.target === this.$refs.nameDialog) this.closeNameDialog();
+    },
+    submitNameChange(event: Event): void {
+      const trimmed = this.nameDraft.trim();
+      if (!trimmed || !this.resolved) {
+        // Whitespace-only: keep the dialog open for another try.
+        event.preventDefault();
+        return;
+      }
+
+      // Without storage the rename still holds for this session.
+      if (storage) saveDisplayName(this.resolved.slug, trimmed, storage);
+      this.cardLabel = `${trimmed}'s Card`;
+      // The form's method="dialog" closes the dialog natively.
+    },
+    generateNewCard(): void {
+      const trimmed = this.nameDraft.trim();
+      if (!trimmed) return; // blank: leave the dialog open for another try
+
+      // A random seed guarantees a different layout even for an unchanged
+      // (or bespoke) name, and a never-seen slug starts with blank marks for
+      // free. The typed name is saved as the display name so the fresh
+      // ticket still reads right once the next page load claims the slug.
+      const slug = freshCardSlug(trimmed);
+      if (storage) saveDisplayName(slug, trimmed, storage);
+
+      // location.href keeps the old card one Back away.
+      window.location.href = `?${new URLSearchParams({ card: slug })}`;
     },
     clearSelectedSquare(): void {
       this.selectedSquare = null;

@@ -1,0 +1,25 @@
+dialog.name-dialog(
+  ref="nameDialog"
+  aria-labelledby="NameDialogTitle"
+  @click="onNameDialogBackdropClick"
+)
+  form.name-dialog__form(method="dialog" @submit="submitNameChange")
+    h2#NameDialogTitle Change your ticket
+    p.name-dialog__note Renaming keeps your card and your marks. A new card deals you a fresh one for a fresh day.
+    label(for="DisplayName") What's your name?
+    input#DisplayName(
+      type="text"
+      name="displayName"
+      autocomplete="name"
+      required
+      autofocus
+      v-model="nameDraft"
+    )
+    .name-dialog__actions
+      button.name-dialog__cancel(type="button" @click="closeNameDialog") Cancel
+      button.name-dialog__save(type="submit") Rename
+    .name-dialog__divider
+      span.name-dialog__divider-line(aria-hidden="true")
+      span.name-dialog__divider-text or
+      span.name-dialog__divider-line(aria-hidden="true")
+    button.name-dialog__generate(type="button" @click="generateNewCard") Generate a new card

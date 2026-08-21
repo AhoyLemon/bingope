@@ -25,7 +25,9 @@ There is one card page, not five folders. The homepage asks for a name and sends
 - **The five special names** (`lemon`, `simone`, `angie`, `mike`, `victor`) resolve to their bespoke, hand-tuned card, committed as plain data.
 - **Any other name** is used as a seed. A deterministic deal turns the name into a card, so the same name always produces the same card in any browser or session, until the squares pool changes.
 
-Names are normalized (lowercased and trimmed) before matching and before namespacing saved state. Landing on `card/` with no name, or a name that resolves to nothing, shows a friendly nudge back to the homepage rather than a broken grid.
+Names are normalized (lowercased and trimmed) before matching and before namespacing saved state. Landing on `card/` with no name, or a name that resolves to nothing, forwards to this browser's remembered card when one exists, and otherwise shows a friendly nudge back to the homepage rather than a broken grid.
+
+The browser remembers your card. Opening a card claims it as this browser's card (last-viewed-wins), and the bare homepage — where the installed PWA launches — forwards a remembered player straight to their card instead of the name form, so playfully retyping a name can't accidentally deal a new card. `/?new` reaches the form deliberately. Tapping the ticket's name opens a dialog with two actions: **rename** changes only the displayed name (the dealt card and its marks stay untouched), while **generate a new card** deals a genuinely different card — the day-two path. It seeds from the normalized name plus a random token (so even an unchanged or bespoke name gets a new layout, with blank marks for free under the never-seen slug) and saves the typed name as the display name, so the fresh ticket still reads right. The old card stays saved under its old name, one Back away.
 
 ## Square data
 
@@ -92,7 +94,7 @@ The initial version does not show timestamps. Keeping them makes a later scoring
 - TypeScript and Vue 3 handle interactive card behavior.
 - Vue 3 is vendored locally (pinned) under `src/static/vendor/` and loaded same-origin, so the app carries no third-party runtime dependency and keeps working offline. Do not add Vite, Nuxt, a router, or a state library without a real need.
 - Bun is Lemon's preferred package manager and is used in GitHub Actions. Harmless npm compatibility can stay.
-- Marks and active Bingo lines live in separate `localStorage` records, namespaced by the normalized player name and stable square or line ID.
+- Marks and active Bingo lines live in separate `localStorage` records, namespaced by the normalized player name and stable square or line ID. A single `bingope:player` record remembers the last-viewed card's slug plus an optional display-name override, powering the homepage forward and the ticket rename.
 - Recent iPhones and Pixels are the only meaningful browser targets.
 - The site is an installable, offline-capable PWA. A service worker generated at build time (`scripts/build-sw.ts`, wired into `build:pages`) precaches the app shell and silently updates on each deploy; Google Fonts are cached at runtime. Once loaded, gameplay requires no network traffic — and after one online visit, neither does a cold start.
 - Asset URLs must work from the site root and from one-folder-deep player routes, so they stay relative (a per-page `assetPath` prefix) rather than absolute.
