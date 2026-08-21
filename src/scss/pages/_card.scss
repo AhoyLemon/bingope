@@ -252,6 +252,10 @@ $paper-texture: url("../svg/paper-texture.svg");
 .card-ticket__owner-name {
   min-width: 0;
   overflow: hidden;
+  // The site-wide h1 defaults (headline family, huge clamp, bottom margin)
+  // must not leak in — the ticket wrapper owns this heading's type.
+  margin: 0;
+  font: inherit;
   text-overflow: ellipsis;
 }
 

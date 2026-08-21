@@ -31,6 +31,15 @@ test("card layout follows the browser's visible PWA viewport", () => {
   expect(headTemplate).toContain('setProperty("--viewport-height"');
 });
 
+test("the ticket owner heading keeps the ticket's type, not the site h1 scale", () => {
+  const ownerName = cardStyles.match(
+    /\.card-ticket__owner-name\s*\{(?<rules>[^}]*)\}/,
+  );
+
+  expect(ownerName?.groups?.rules).toContain("font: inherit;");
+  expect(ownerName?.groups?.rules).toContain("margin: 0;");
+});
+
 test("installed cards reserve room for Android's gesture bar", () => {
   expect(cardStyles).toContain(
     "--card-bottom-inset: max(3rem, env(safe-area-inset-bottom, 0px));",
