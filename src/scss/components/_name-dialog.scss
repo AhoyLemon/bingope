@@ -76,6 +76,7 @@ $paper-texture: url("../svg/paper-texture.svg");
 
 .name-dialog__actions {
   display: flex;
+  flex-wrap: wrap;
   justify-content: end;
   gap: 0.6rem;
   margin-top: 0.3rem;
@@ -110,6 +111,13 @@ $paper-texture: url("../svg/paper-texture.svg");
 }
 
 .name-dialog__cancel {
+  margin-right: auto;
+  border-color: transparent;
+  background: transparent;
+  color: vars.$green;
+}
+
+.name-dialog__deal {
   background: transparent;
   color: vars.$green;
 }

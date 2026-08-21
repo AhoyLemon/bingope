@@ -4,8 +4,8 @@ dialog.name-dialog(
   @click="onNameDialogBackdropClick"
 )
   form.name-dialog__form(method="dialog" @submit="submitNameChange")
-    h2#NameDialogTitle Change your name
-    p.name-dialog__note Your card and your marks stay exactly the same.
+    h2#NameDialogTitle Change your ticket
+    p.name-dialog__note Renaming keeps your card and your marks. A new card deals you a fresh one for a fresh day.
     label(for="DisplayName") What should your ticket say?
     input#DisplayName(
       type="text"
@@ -17,4 +17,5 @@ dialog.name-dialog(
     )
     .name-dialog__actions
       button.name-dialog__cancel(type="button" @click="closeNameDialog") Never mind
-      button.name-dialog__save(type="submit") Save
+      button.name-dialog__deal(type="button" @click="dealNewCard") New card
+      button.name-dialog__save(type="submit") Rename

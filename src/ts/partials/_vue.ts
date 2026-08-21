@@ -9,7 +9,7 @@
 // Vue is loaded from the CDN in the HTML.
 declare const Vue: any;
 
-import { CENTER_INDEX, resolveCard } from "./_deal.js";
+import { CENTER_INDEX, normalizeName, resolveCard } from "./_deal.js";
 import {
   activeBingoLines,
   bingoCelebrationMessage,
@@ -153,6 +153,7 @@ interface CardAppMethods {
   closeNameDialog(): void;
   onNameDialogBackdropClick(event: MouseEvent): void;
   submitNameChange(event: Event): void;
+  dealNewCard(): void;
   clearSelectedSquare(): void;
   toggleSelectedSquare(): void;
   playBingoReveal(lines: BingoLine[]): void;
@@ -465,6 +466,14 @@ const cardAppOptions: {
       if (storage) saveDisplayName(this.resolved.slug, trimmed, storage);
       this.cardLabel = `${trimmed}'s Card`;
       // The form's method="dialog" closes the dialog natively.
+    },
+    dealNewCard(): void {
+      const slug = normalizeName(this.nameDraft);
+      if (!slug) return; // blank: leave the dialog open for another try
+
+      // Landing on the new card claims it (last-viewed-wins), so no pointer
+      // bookkeeping here. location.href keeps the old card one Back away.
+      window.location.href = `?${new URLSearchParams({ card: slug })}`;
     },
     clearSelectedSquare(): void {
       this.selectedSquare = null;

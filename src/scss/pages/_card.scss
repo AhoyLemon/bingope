@@ -227,9 +227,10 @@ $paper-texture: url("../svg/paper-texture.svg");
   display: grid;
   width: 100%;
   min-width: 0;
-  grid-template-columns:
-    minmax(0.5rem, 1fr) minmax(0, max-content) max-content
-    minmax(0.5rem, 1fr);
+  grid-template-columns: minmax(0.5rem, 1fr) minmax(0, max-content) minmax(
+      0.5rem,
+      1fr
+    );
   gap: clamp(0.4rem, 1.6cqw, 0.85rem);
   align-items: center;
   margin: 0;
@@ -249,28 +250,23 @@ $paper-texture: url("../svg/paper-texture.svg");
   }
 }
 
+// The heading text is itself the button that opens the ticket dialog.
+// Buttons don't inherit type, so the ticket heading's look is restated as
+// inherits — the site-wide h1/button defaults must not leak in.
 .card-ticket__owner-name {
   min-width: 0;
   overflow: hidden;
-  // The site-wide h1 defaults (headline family, huge clamp, bottom margin)
-  // must not leak in — the ticket wrapper owns this heading's type.
   margin: 0;
-  font: inherit;
-  text-overflow: ellipsis;
-}
-
-.card-ticket__edit-name {
-  display: grid;
-  width: 1.6em;
-  height: 1.6em;
-  place-items: center;
   padding: 0;
   border: 0;
   border-radius: 0.25rem;
   background: transparent;
-  color: vars.$green;
-  font-size: 1.1em;
-  line-height: 1;
+  color: inherit;
+  font: inherit;
+  letter-spacing: inherit;
+  white-space: inherit;
+  text-overflow: ellipsis;
+  cursor: pointer;
 
   &:hover {
     color: vars.$navy;

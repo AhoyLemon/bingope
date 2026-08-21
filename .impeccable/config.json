@@ -1,0 +1,14 @@
+{
+  "detector": {
+    "ignoreRules": [],
+    "ignoreFiles": [],
+    "ignoreValues": [
+      {
+        "rule": "bounce-easing",
+        "value": "bingo-star-spring",
+        "createdAt": "2026-08-21T17:08:14.688Z",
+        "reason": "Claude triage: easing is smooth ease-out cubic-bezier(0.18,0.82,0.28,1), only the keyframe name says spring; pre-existing carnival celebration motion untouched by this change"
+      }
+    ]
+  }
+}

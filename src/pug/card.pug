@@ -28,14 +28,12 @@ html(lang="en")
                       .card-ticket__brand
                         .card-ticket__wordmark(aria-label="BINGOPE" role="img")
                           include ../svg/bingope_v2.svg
-                        .card-ticket__owner
-                          h1.card-ticket__owner-name {{ cardLabel }}
-                          button.card-ticket__edit-name(
+                        h1.card-ticket__owner
+                          button.card-ticket__owner-name(
                             type="button"
-                            aria-label="Change your name"
+                            aria-haspopup="dialog"
                             @click="openNameDialog"
-                          )
-                            span(aria-hidden="true") ✎
+                          ) {{ cardLabel }}
                       .card-ticket__star-rail.card-ticket__star-rail--right(aria-hidden="true")
                         span ★
                         span ★
