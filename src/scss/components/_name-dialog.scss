@@ -80,33 +80,34 @@ $paper-texture: url("../svg/paper-texture.svg");
   justify-content: end;
   gap: 0.6rem;
   margin-top: 0.3rem;
+}
 
-  button {
-    min-height: 2.9rem;
-    padding: 0.35em 1em;
-    border: 0.16rem solid vars.$green;
-    border-radius: 0.4rem;
-    font: inherit;
-    font-size: 1.05rem;
-    font-weight: vars.$bold;
-    letter-spacing: 0.02em;
-    text-align: center;
-    transition:
-      filter 140ms ease-out,
-      transform 140ms ease-out;
+.name-dialog__actions button,
+.name-dialog__generate {
+  min-height: 2.9rem;
+  padding: 0.35em 1em;
+  border: 0.16rem solid vars.$green;
+  border-radius: 0.4rem;
+  font: inherit;
+  font-size: 1.05rem;
+  font-weight: vars.$bold;
+  letter-spacing: 0.02em;
+  text-align: center;
+  transition:
+    filter 140ms ease-out,
+    transform 140ms ease-out;
 
-    &:hover {
-      filter: brightness(1.08);
-    }
+  &:hover {
+    filter: brightness(1.08);
+  }
 
-    &:active {
-      transform: translateY(0.12rem);
-    }
+  &:active {
+    transform: translateY(0.12rem);
+  }
 
-    &:focus-visible {
-      outline: 0.22rem solid vars.$focus;
-      outline-offset: 0.2rem;
-    }
+  &:focus-visible {
+    outline: 0.22rem solid vars.$focus;
+    outline-offset: 0.2rem;
   }
 }
 
@@ -117,19 +118,36 @@ $paper-texture: url("../svg/paper-texture.svg");
   color: vars.$green;
 }
 
-.name-dialog__deal {
-  background: transparent;
-  color: vars.$green;
-}
-
 .name-dialog__save {
   background: vars.$green;
   color: vars.$paper;
 }
 
+.name-dialog__divider {
+  display: flex;
+  gap: 0.6rem;
+  align-items: center;
+  color: vars.$green;
+  font-family: vars.$ticket-serif;
+  font-weight: vars.$bold;
+}
+
+.name-dialog__divider-line {
+  height: 0.1rem;
+  flex: 1;
+  background: currentColor;
+}
+
+.name-dialog__generate {
+  width: 100%;
+  background: transparent;
+  color: vars.$green;
+}
+
 @media (prefers-reduced-motion: reduce) {
   .name-dialog::backdrop,
-  .name-dialog__actions button {
+  .name-dialog__actions button,
+  .name-dialog__generate {
     transition: none;
   }
 }

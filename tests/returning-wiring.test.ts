@@ -34,7 +34,10 @@ test("the ticket name opens the dialog, and the escape hatch reaches the form", 
   expect(cardTemplate).toContain('href="../?new"');
 });
 
-test("the ticket dialog can deal a fresh card for a fresh day", () => {
-  expect(nameDialogTemplate).toContain('@click="dealNewCard"');
-  expect(vueSource).toContain("dealNewCard(");
+test("the ticket dialog can generate a fresh card for a fresh day", () => {
+  expect(nameDialogTemplate).toContain('@click="generateNewCard"');
+  expect(vueSource).toContain("generateNewCard(");
+  // A generated card starts blank: both stores get wiped for its slug.
+  expect(vueSource).toContain("saveMarks(slug, {}, storage)");
+  expect(vueSource).toContain("saveBingos(slug, {}, storage)");
 });

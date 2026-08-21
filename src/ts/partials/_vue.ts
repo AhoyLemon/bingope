@@ -153,7 +153,7 @@ interface CardAppMethods {
   closeNameDialog(): void;
   onNameDialogBackdropClick(event: MouseEvent): void;
   submitNameChange(event: Event): void;
-  dealNewCard(): void;
+  generateNewCard(): void;
   clearSelectedSquare(): void;
   toggleSelectedSquare(): void;
   playBingoReveal(lines: BingoLine[]): void;
@@ -467,12 +467,22 @@ const cardAppOptions: {
       this.cardLabel = `${trimmed}'s Card`;
       // The form's method="dialog" closes the dialog natively.
     },
-    dealNewCard(): void {
-      const slug = normalizeName(this.nameDraft);
+    generateNewCard(): void {
+      const trimmed = this.nameDraft.trim();
+      const slug = normalizeName(trimmed);
       if (!slug) return; // blank: leave the dialog open for another try
 
-      // Landing on the new card claims it (last-viewed-wins), so no pointer
-      // bookkeeping here. location.href keeps the old card one Back away.
+      if (storage) {
+        // A generated card starts blank: wipe anything saved under its name
+        // (same name, same deterministic layout — the wipe is what makes it
+        // new), and carry the typed name onto the fresh ticket.
+        saveMarks(slug, {}, storage);
+        saveBingos(slug, {}, storage);
+        saveDisplayName(slug, trimmed, storage);
+      }
+
+      // Landing on the card claims it (last-viewed-wins); location.href
+      // keeps the old card one Back away.
       window.location.href = `?${new URLSearchParams({ card: slug })}`;
     },
     clearSelectedSquare(): void {
