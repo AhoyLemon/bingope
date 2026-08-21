@@ -1,0 +1,20 @@
+dialog.name-dialog(
+  ref="nameDialog"
+  aria-labelledby="NameDialogTitle"
+  @click="onNameDialogBackdropClick"
+)
+  form.name-dialog__form(method="dialog" @submit="submitNameChange")
+    h2#NameDialogTitle Change your name
+    p.name-dialog__note Your card and your marks stay exactly the same.
+    label(for="DisplayName") What should your ticket say?
+    input#DisplayName(
+      type="text"
+      name="displayName"
+      autocomplete="name"
+      required
+      autofocus
+      v-model="nameDraft"
+    )
+    .name-dialog__actions
+      button.name-dialog__cancel(type="button" @click="closeNameDialog") Never mind
+      button.name-dialog__save(type="submit") Save

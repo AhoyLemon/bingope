@@ -227,10 +227,9 @@ $paper-texture: url("../svg/paper-texture.svg");
   display: grid;
   width: 100%;
   min-width: 0;
-  grid-template-columns: minmax(0.5rem, 1fr) minmax(0, max-content) minmax(
-      0.5rem,
-      1fr
-    );
+  grid-template-columns:
+    minmax(0.5rem, 1fr) minmax(0, max-content) max-content
+    minmax(0.5rem, 1fr);
   gap: clamp(0.4rem, 1.6cqw, 0.85rem);
   align-items: center;
   margin: 0;
@@ -254,6 +253,33 @@ $paper-texture: url("../svg/paper-texture.svg");
   min-width: 0;
   overflow: hidden;
   text-overflow: ellipsis;
+}
+
+.card-ticket__edit-name {
+  display: grid;
+  width: 1.6em;
+  height: 1.6em;
+  place-items: center;
+  padding: 0;
+  border: 0;
+  border-radius: 0.25rem;
+  background: transparent;
+  color: vars.$green;
+  font-size: 1.1em;
+  line-height: 1;
+
+  &:hover {
+    color: vars.$navy;
+  }
+
+  &:active {
+    transform: translateY(0.08rem);
+  }
+
+  &:focus-visible {
+    outline: 0.2rem solid vars.$green;
+    outline-offset: 0.15rem;
+  }
 }
 
 .card-ticket__star-rail {

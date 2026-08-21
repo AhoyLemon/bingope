@@ -28,8 +28,14 @@ html(lang="en")
                       .card-ticket__brand
                         .card-ticket__wordmark(aria-label="BINGOPE" role="img")
                           include ../svg/bingope_v2.svg
-                        h1.card-ticket__owner
-                          span.card-ticket__owner-name {{ cardLabel }}
+                        .card-ticket__owner
+                          h1.card-ticket__owner-name {{ cardLabel }}
+                          button.card-ticket__edit-name(
+                            type="button"
+                            aria-label="Change your name"
+                            @click="openNameDialog"
+                          )
+                            span(aria-hidden="true") ✎
                       .card-ticket__star-rail.card-ticket__star-rail--right(aria-hidden="true")
                         span ★
                         span ★
@@ -166,10 +172,11 @@ html(lang="en")
                 ) ★
 
           include sections/_dialog.pug
+          include sections/_nameDialog.pug
 
         template(v-else)
           h2 No card yet
           p Head back and pick a name to get your Card.
-          a.back-link(href="../") Go to the homepage
+          a.back-link(href="../?new") Go to the homepage
 
     include partials/_javascripts
