@@ -413,6 +413,8 @@ const cardAppOptions: {
         marked: this.isMarked(square.id),
         "square-center": squareIndex === CENTER_INDEX,
         "square-crop-art": square.id.startsWith("CA"),
+        "square-blank-metal": square.id.startsWith("_M"),
+        "square-special-dare": square.id.startsWith("SD"),
         "task-see": square.type === "see",
         "task-do": square.type === "do",
         "copy-long": square.label.length > 22 || longestWordLength > 8,
