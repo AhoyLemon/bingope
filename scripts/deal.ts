@@ -21,7 +21,7 @@ import Table from "cli-table3";
 
 import { squares, centers, essentials } from "../src/ts/partials/_squares.js";
 import type { BingoSquare } from "../src/ts/partials/_squares.js";
-import { dealGrid, CENTER_INDEX } from "../src/ts/partials/_deal.js";
+import { dealGrid, CENTER_INDEX, GRID_SIZE } from "../src/ts/partials/_deal.js";
 import committedCards from "../src/ts/partials/_cards.js";
 import type { PlayerCard } from "../src/ts/partials/_cards.js";
 
@@ -189,11 +189,21 @@ function main(): void {
 
   // Prefer a center no other card already uses, so the five stay distinct.
   const usedCenters = new Set<string>();
+  // Soft cap on ordinary pool squares: overlap across the five is fine (even
+  // desirable, since they're playing as a team), just not concentrated on one
+  // square. Track how many *other* cards currently carry each pool square and
+  // prefer ones under the cap; fall back to the full pool if that leaves too
+  // few candidates to fill the grid. Not a hard exclusion like centers.
+  const POOL_SHARE_CAP = 2;
+  const poolUsage = new Map<string, number>();
   if (!isAll) {
     for (const { slug } of ROSTER) {
       if (slug === target) continue;
-      const committedCenter = result[slug].squareIds[CENTER_INDEX];
-      if (committedCenter) usedCenters.add(committedCenter);
+      for (const id of result[slug].squareIds) {
+        if (id.startsWith("P")) {
+          poolUsage.set(id, (poolUsage.get(id) ?? 0) + 1);
+        }
+      }
     }
   }
 
@@ -201,8 +211,14 @@ function main(): void {
 
   for (const slug of targets) {
     const availableCenters = centers.filter((c) => !usedCenters.has(c.id));
+    const underCap = squares.filter(
+      (s) => (poolUsage.get(s.id) ?? 0) < POOL_SHARE_CAP,
+    );
+    // GRID_SIZE - 1 is a safe upper bound on how many pool cells any card
+    // could need (minus the center, before essentials take their share).
+    const enoughCandidates = underCap.length >= GRID_SIZE - 1;
     const grid = dealGrid({
-      pool: squares,
+      pool: enoughCandidates ? underCap : squares,
       centers: availableCenters.length > 0 ? availableCenters : centers,
       essentials,
       audience: "special",
@@ -210,6 +226,11 @@ function main(): void {
     });
     result[slug].squareIds = grid;
     usedCenters.add(grid[CENTER_INDEX]);
+    for (const id of grid) {
+      if (id.startsWith("P")) {
+        poolUsage.set(id, (poolUsage.get(id) ?? 0) + 1);
+      }
+    }
     renderGrid(result[slug].name, grid);
   }
 

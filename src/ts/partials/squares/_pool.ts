@@ -585,4 +585,11 @@ export const squares: BingoSquare[] = [
     difficulty: "medium",
     type: "see",
   },
+  {
+    id: "P83",
+    text: "I wore one of those paper hats they give out (ex: Oink Booth) for at least half an hour.",
+    shortText: "Wear paper hat",
+    difficulty: "gimme",
+    type: "do",
+  },
 ];

@@ -9,7 +9,7 @@
 // Vue is loaded from the CDN in the HTML.
 declare const Vue: any;
 
-import { CENTER_INDEX, resolveCard } from "./_deal.js";
+import { CENTER_INDEX, normalizeName, resolveCard } from "./_deal.js";
 import {
   activeBingoLines,
   bingoCelebrationMessage,
@@ -30,11 +30,14 @@ import {
 } from "./_player.js";
 import { poolVersionHash, resetStaleCard } from "./_cardVersion.js";
 import { squares, centers, essentials } from "./_squares.js";
+import { activeSpecialDay } from "./_specialDays.js";
+import cards from "./_cards.js";
 import type { BingoLine, Bingos } from "./_bingos.js";
 import type { CardSquare } from "./_cardSquares.js";
 import type { ResolvedCard } from "./_deal.js";
 import type { Marks } from "./_marks.js";
 import type { SquareType } from "./_squares.js";
+import type { SpecialDay } from "./_specialDays.js";
 
 const { createApp, nextTick } = Vue;
 
@@ -136,6 +139,10 @@ interface CardAppData {
   name: { input: string };
   // Draft value inside the change-your-name dialog.
   nameDraft: string;
+  // Homepage-only: today's special day (see _specialDays.ts), if any, and
+  // whether the player has answered its opt-in question yet.
+  specialDay: SpecialDay | null;
+  specialDayOptIn: boolean | null;
 }
 
 interface CardAppMethods {
@@ -147,6 +154,8 @@ interface CardAppMethods {
   ): Record<string, boolean>;
   bingoLinePath(line: BingoLine): string;
   bingoLineClasses(line: BingoLine): Record<string, boolean>;
+  bespokeName(slug: string): string;
+  answerSpecialDay(optIn: boolean): void;
   openSquare(square: CardSquare, event?: Event): void;
   closeSquare(afterClose?: () => void): void;
   onBackdropClick(event: MouseEvent): void;
@@ -178,7 +187,14 @@ const storage = browserStorage();
 const onCardPage = document.body.classList.contains("card-page");
 
 const rawCard = new URLSearchParams(window.location.search).get("card");
-const resolved = resolveCard(rawCard);
+// The player's saved special-group opt-in (see _specialDays.ts) only applies
+// to the card it was recorded against — a different slug (e.g. peeking at a
+// shared link, #54) must not inherit someone else's opt-in.
+const savedPlayerForOptIn = storage ? loadPlayer(storage) : null;
+const includeOneDay =
+  !!savedPlayerForOptIn?.specialGroup &&
+  savedPlayerForOptIn.slug === (rawCard ? normalizeName(rawCard) : null);
+const resolved = resolveCard(rawCard, includeOneDay);
 const cardSquares = resolved ? resolveCardSquares(resolved.squareIds) : [];
 
 // A bare /card/ visit (old bookmark, home-screen shortcut) canonicalizes to
@@ -335,9 +351,17 @@ const cardAppOptions: {
       fairBurst: [],
       name: { input: "" },
       nameDraft: "",
+      specialDay: activeSpecialDay(new Date()) ?? null,
+      specialDayOptIn: null,
     };
   },
   methods: {
+    bespokeName(slug: string): string {
+      return cards[slug]?.name ?? slug;
+    },
+    answerSpecialDay(optIn: boolean): void {
+      this.specialDayOptIn = optIn;
+    },
     isMarked(squareId: string): boolean {
       return Boolean(this.marks[squareId]);
     },

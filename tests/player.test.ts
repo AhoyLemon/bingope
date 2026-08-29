@@ -7,6 +7,7 @@ import {
   loadPlayer,
   returningCardUrl,
   saveDisplayName,
+  saveSpecialGroupOptIn,
 } from "../src/ts/partials/_player";
 
 class MemoryStorage {
@@ -84,6 +85,55 @@ test("a blank display name is a no-op", () => {
   expect(loadPlayer(storage)).toEqual({
     slug: "lemon",
     displayName: "Lemon the Magnificent",
+  });
+});
+
+test("saveSpecialGroupOptIn persists the group and round-trips", () => {
+  const storage = new MemoryStorage();
+  claimCard("alpha", storage);
+
+  saveSpecialGroupOptIn("alpha", "blank-metal", storage);
+
+  expect(loadPlayer(storage)).toEqual({
+    slug: "alpha",
+    specialGroup: "blank-metal",
+  });
+});
+
+test("re-claiming the same slug preserves a special-group opt-in", () => {
+  const storage = new MemoryStorage();
+  claimCard("alpha", storage);
+  saveSpecialGroupOptIn("alpha", "blank-metal", storage);
+
+  claimCard("alpha", storage);
+
+  expect(loadPlayer(storage)).toEqual({
+    slug: "alpha",
+    specialGroup: "blank-metal",
+  });
+});
+
+test("claiming a different slug drops the old special-group opt-in", () => {
+  const storage = new MemoryStorage();
+  claimCard("alpha", storage);
+  saveSpecialGroupOptIn("alpha", "blank-metal", storage);
+
+  claimCard("bravo", storage);
+
+  expect(loadPlayer(storage)).toEqual({ slug: "bravo" });
+});
+
+test("saveSpecialGroupOptIn preserves an existing display name", () => {
+  const storage = new MemoryStorage();
+  claimCard("alpha", storage);
+  saveDisplayName("alpha", "Alpha", storage);
+
+  saveSpecialGroupOptIn("alpha", "blank-metal", storage);
+
+  expect(loadPlayer(storage)).toEqual({
+    slug: "alpha",
+    displayName: "Alpha",
+    specialGroup: "blank-metal",
   });
 });
 

@@ -15,6 +15,12 @@ export interface Player {
   slug: string;
   /** Optional ticket-header override. Never changes the dealt card or saved marks. */
   displayName?: string;
+  /**
+   * A special day's `name` (see `_specialDays.ts`) the player opted into,
+   * e.g. "blank-metal". A string, not a boolean, so future special groups
+   * don't need another field. Drives `includeOneDay` at deal time.
+   */
+  specialGroup?: string;
 }
 
 /** localStorage, or null where the browser blocks it (private mode). */
@@ -37,15 +43,19 @@ export function loadPlayer(storage: StorageLike): Player | null {
       return null;
     }
 
-    const { slug, displayName } = saved as {
+    const { slug, displayName, specialGroup } = saved as {
       slug?: unknown;
       displayName?: unknown;
+      specialGroup?: unknown;
     };
     if (typeof slug !== "string" || !slug) return null;
 
     const player: Player = { slug };
     if (typeof displayName === "string" && displayName.trim()) {
       player.displayName = displayName;
+    }
+    if (typeof specialGroup === "string" && specialGroup.trim()) {
+      player.specialGroup = specialGroup;
     }
     return player;
   } catch {
@@ -69,8 +79,12 @@ export function savePlayer(player: Player, storage: StorageLike): void {
 export function claimCard(slug: string, storage: StorageLike): Player {
   const existing = loadPlayer(storage);
   const player: Player =
-    existing?.slug === slug && existing.displayName
-      ? { slug, displayName: existing.displayName }
+    existing?.slug === slug
+      ? {
+          slug,
+          ...(existing.displayName && { displayName: existing.displayName }),
+          ...(existing.specialGroup && { specialGroup: existing.specialGroup }),
+        }
       : { slug };
 
   savePlayer(player, storage);
@@ -87,6 +101,27 @@ export function saveDisplayName(
   if (!trimmed) return null;
 
   const player: Player = { slug, displayName: trimmed };
+  savePlayer(player, storage);
+  return player;
+}
+
+/**
+ * Persist a special-day opt-in for `slug` (see `_specialDays.ts`). Preserves
+ * any existing displayName. This is what a "yes" answer on a special day's
+ * homepage question writes, before navigating to the card.
+ */
+export function saveSpecialGroupOptIn(
+  slug: string,
+  groupName: string,
+  storage: StorageLike,
+): Player {
+  const existing = loadPlayer(storage);
+  const player: Player = {
+    slug,
+    ...(existing?.slug === slug &&
+      existing.displayName && { displayName: existing.displayName }),
+    specialGroup: groupName,
+  };
   savePlayer(player, storage);
   return player;
 }

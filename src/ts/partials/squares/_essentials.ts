@@ -6,8 +6,10 @@
  * squares are ordinary dealt cells, just guaranteed to appear, so they live only
  * here and never in the main pool. Deal-time enforcement is dealer work (#4/#12).
  *
- * Crop art (`CA`) and special dares (`SD`) are the current groups. Any future
- * group gets its own id prefix. "Crop Art" is the
+ * Crop art (`CA`), special dares (`SD`), and Blank Metal Squares (`_M`, only
+ * dealt via `"one day"` when the player opted into that special group — see
+ * `_specialDays.ts`) are the current groups. Any future group gets its own id
+ * prefix. "Crop Art" is the
  * Minnesota State Fair's official term for the seed-portrait exhibit in the
  * Agriculture Horticulture building ("seed art" is the same thing). Every crop
  * art squares share the same short label, so the specific crop-art joke stays a
@@ -133,6 +135,35 @@ export const essentials: EssentialGroup[] = [
         id: "SD1",
         text: "I threw a pair of underwear onto the roof from the Skyglider. I respect the tradition. For the record, I (probably?) brought a spare pair for this event. So either I respect tradition enough to plan ahead, or enough to fully commit.",
         shortText: "Throw your underwear",
+        difficulty: "gimme",
+        type: "do",
+      },
+    ],
+  },
+  {
+    groupName: "Blank Metal Squares",
+    essentialFor: "one day",
+    minimum: 1,
+    maximum: 1,
+    squares: [
+      {
+        id: "_M1",
+        text: "I found one of Tasha's Blue Ribbons and sent a photo of it to her in Slack.",
+        shortText: "Tasha's Blue Ribbon",
+        difficulty: "gimme",
+        type: "do",
+      },
+      {
+        id: "_M2",
+        text: "I saw someone wearing Zubaz who wasn't Ben.",
+        shortText: "Zubaz, not Ben",
+        difficulty: "medium",
+        type: "see",
+      },
+      {
+        id: "_M3",
+        text: "I wore my Blank Metal shirt for at least an hour.",
+        shortText: "Wore the shirt",
         difficulty: "gimme",
         type: "do",
       },

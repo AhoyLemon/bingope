@@ -33,8 +33,13 @@ export interface BingoSquare {
  * - `everybody`  — every card, bespoke and public seeded.
  * - `special`    — only the five bespoke cards.
  * - `unspecial`  — only public seeded cards (everyone but the five).
+ * - `one day`    — only applies on a specific day, not every card.
  */
-export type EssentialAudience = "everybody" | "special" | "unspecial";
+export type EssentialAudience =
+  | "everybody"
+  | "special"
+  | "unspecial"
+  | "one day";
 
 /**
  * A guaranteed ("must") group. The deal places between `minimum` and `maximum`
