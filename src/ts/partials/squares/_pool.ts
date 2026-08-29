@@ -592,4 +592,25 @@ export const squares: BingoSquare[] = [
     difficulty: "gimme",
     type: "do",
   },
+  {
+    id: "P84",
+    text: "I saw a rabbit with ears long enough to touch the cage floor.",
+    shortText: "Long-eared rabbit",
+    difficulty: "medium",
+    type: "see",
+  },
+  {
+    id: "P85",
+    text: "I made a BIG DEAL of how strong I am, then I stepped up to the hammer-and-bell game and swung so weakly the puck barely moved.",
+    shortText: "All talk, no bell",
+    difficulty: "medium",
+    type: "do",
+  },
+  {
+    id: "P86",
+    text: "I used $5+ worth of coupons from the $5 Blue Ribbon book.",
+    shortText: "Bargain Book breakeven",
+    difficulty: "medium",
+    type: "do",
+  },
 ];

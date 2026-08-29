@@ -36,7 +36,7 @@ test("every Crop Art square uses the shared grid label", () => {
     .find((group) => group.groupName === "Crop Art")
     ?.squares.map((square) => square.shortText);
 
-  expect(cropArtSquares).toEqual(Array(14).fill("Crop Art"));
+  expect(cropArtSquares).toEqual(Array(15).fill("Crop Art"));
 });
 
 /**
