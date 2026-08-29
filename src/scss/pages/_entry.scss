@@ -70,7 +70,7 @@ $paper-texture: url("../svg/paper-texture.svg");
   text-align: left;
 
   label {
-    color: vars.$green;
+    color: vars.$navy;
     font-family: vars.$ticket-serif;
     font-size: clamp(1.25rem, 5vw, 1.7rem);
     font-weight: vars.$bold;
@@ -135,6 +135,150 @@ $paper-texture: url("../svg/paper-texture.svg");
   }
 }
 
+// SPECIAL DAY OPT-IN //////////////////////////////////////////////////////
+.entry-special-day {
+  display: flex;
+  flex-wrap: nowrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.6rem;
+  padding-top: 2rem;
+  padding-bottom: 1rem;
+  text-align: left;
+
+  &__question {
+    flex: 1 1 auto;
+    min-width: 0;
+    margin: 0;
+    color: vars.$navy;
+    font-family: vars.$ticket-serif;
+    font-size: clamp(0.95rem, 3.8vw, 1.25rem);
+    font-weight: vars.$bold;
+  }
+
+  // A single hand-shaped, ticket-stub pill holding both segments — traced
+  // SVG art (special-day-toggle.svg), not CSS-drawn, since the hourglass
+  // waist where "No" and "Yes" meet isn't a plain corner-radius shape. The
+  // outline/divider layers are static; the navy "active" fill per side is a
+  // separate SVG layer Vue shows via `is-active`, sitting under real button
+  // text so the label itself stays plain, accessible, colorable HTML.
+  &__toggle {
+    position: relative;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    flex: 0 0 auto;
+    width: clamp(7.5rem, 26vw, 9.5rem);
+    aspect-ratio: 110 / 41;
+  }
+
+  &__toggle > svg {
+    grid-column: 1 / -1;
+    grid-row: 1;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+  }
+
+  &__toggle-outline path {
+    fill: vars.$green;
+  }
+
+  &__toggle-divider rect {
+    fill: vars.$green;
+  }
+
+  &__toggle-active path {
+    fill: vars.$navy;
+  }
+
+  &__toggle-active {
+    opacity: 0;
+    transition: opacity 140ms ease-out;
+
+    &.is-active {
+      opacity: 1;
+    }
+  }
+
+  &__toggle button {
+    grid-row: 1;
+    min-height: 0;
+    padding: 0.4em 0.6em;
+    border: 0;
+    background: transparent;
+    color: vars.$green;
+    font: inherit;
+    font-size: 0.9rem;
+    font-weight: vars.$bold;
+    letter-spacing: 0.02em;
+    text-align: center;
+    transition: color 140ms ease-out;
+
+    &.is-active {
+      color: vars.$paper;
+    }
+
+    &:focus-visible {
+      outline: 0.22rem solid vars.$focus;
+      outline-offset: -0.22rem;
+    }
+  }
+
+  &__no {
+    grid-column: 1;
+  }
+
+  &__yes {
+    grid-column: 2;
+  }
+}
+
+.entry-special-day--picker {
+  display: grid;
+  gap: 0.7rem;
+  margin-top: 0.7rem;
+  text-align: left;
+
+  .entry-special-day__question {
+    color: vars.$green;
+  }
+
+  .button-holder {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+
+  .button {
+    min-height: 3rem;
+    padding: 0.35em 1em;
+    border: 0.14rem solid vars.$green;
+    border-radius: 0.4rem;
+    background: transparent;
+    color: vars.$green;
+    font: inherit;
+    font-size: 1.1rem;
+    font-weight: vars.$bold;
+    letter-spacing: 0.02em;
+    text-align: center;
+    text-decoration: none;
+    transition: background-color 140ms ease-out;
+
+    &:hover {
+      background-color: rgba(vars.$green, 0.1);
+    }
+
+    &:active {
+      background-color: rgba(vars.$green, 0.18);
+    }
+
+    &:focus-visible {
+      outline: 0.22rem solid vars.$focus;
+      outline-offset: 0.2rem;
+    }
+  }
+}
+
 .entry-help {
   margin: 1.5rem 0 0;
   text-align: center;
@@ -163,7 +307,10 @@ $paper-texture: url("../svg/paper-texture.svg");
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .name-entry button {
+  .name-entry button,
+  .entry-special-day button,
+  .entry-special-day__toggle-active,
+  .entry-special-day--picker .button {
     transition: none;
   }
 }

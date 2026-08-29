@@ -176,7 +176,11 @@ export function dealGrid(input: DealGridInput): string[] {
  *
  * `includeOneDay` (default `false`) is the caller-supplied Blank-Metal-style
  * opt-in — see `DealGridInput.includeOneDay`. It only affects the seeded
- * path; bespoke cards are pre-committed and never call `dealGrid`.
+ * path; bespoke cards are pre-committed and never call `dealGrid`. It also
+ * deliberately **skips the bespoke lookup entirely**: a player who opted into
+ * a different special group (Blank Metal) has explicitly said they are not
+ * one of the five, so a name collision (typing "lemon" while opted into
+ * Blank Metal) must not silently hand them Lemon's exact locked friend card.
  */
 export function resolveCard(
   rawName: string | null | undefined,
@@ -186,7 +190,7 @@ export function resolveCard(
   const slug = normalizeName(rawName);
   if (!slug) return null;
 
-  const bespoke = cards[slug];
+  const bespoke = includeOneDay ? undefined : cards[slug];
   if (bespoke) {
     return {
       slug,

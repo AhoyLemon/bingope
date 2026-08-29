@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<!-- Decorative background for .entry-special-day__toggle, traced from
+     yes-no-layers.svg: an hourglass-waisted pill (toggle-outline) split by a
+     dividing line, with a navy fill shape per side (toggle-active--no/--yes)
+     Vue shows via `is-active`. Unlike the site's other included SVGs, this
+     one carries live `v-bind:class` bindings baked into its groups below —
+     don't regenerate it from a design tool without carrying those over. The
+     clickable "No"/"Yes" labels are real <button> text laid over this, not
+     baked into the SVG, so they stay accessible and colorable via plain CSS. -->
+<svg width="100%" height="100%" viewBox="0 0 110 41" preserveAspectRatio="none" aria-hidden="true" xmlns="http://www.w3.org/2000/svg">
+  <g class="entry-special-day__toggle-active entry-special-day__toggle-active--no" v-bind:class="{ 'is-active': specialDayOptIn === false }" transform="matrix(0.994121,0,0,1,-0.2662,0)">
+    <path d="M55.273,41.18L7.49,41.18C7.503,41.003 7.51,40.824 7.51,40.644C7.51,36.651 4.276,33.409 0.293,33.409C0.195,33.409 0.097,33.411 -0,33.415L0,7.196C0.097,7.199 0.195,7.201 0.293,7.201C4.276,7.201 7.51,3.96 7.51,-0.033L7.509,-0.18L55.273,-0.18L55.273,41.18Z"/>
+  </g>
+  <g class="entry-special-day__toggle-active entry-special-day__toggle-active--yes" v-bind:class="{ 'is-active': specialDayOptIn === true }" transform="matrix(1.00241,0,0,1,-0.2662,0)">
+    <path d="M54.908,-0.18L102.469,-0.18L102.467,-0.033C102.467,3.96 105.701,7.201 109.685,7.201C109.89,7.201 110.093,7.193 110.293,7.176L110.293,33.426C110.13,33.415 109.965,33.409 109.799,33.409C105.816,33.409 102.582,36.651 102.582,40.644C102.582,40.824 102.588,41.003 102.601,41.18L54.908,41.18L54.908,-0.18Z"/>
+  </g>
+  <g class="entry-special-day__toggle-outline" transform="matrix(1.00241,0,0,1,-0.2662,0)">
+    <path d="M7.494,0.45C7.505,0.29 7.51,0.129 7.51,-0.033L7.509,-0.18L102.469,-0.18L102.467,-0.033C102.467,3.96 105.701,7.201 109.685,7.201C109.89,7.201 110.093,7.193 110.293,7.176L110.293,33.426C110.13,33.415 109.965,33.409 109.799,33.409C105.816,33.409 102.582,36.651 102.582,40.644C102.582,40.824 102.588,41.003 102.601,41.18L7.49,41.18C7.503,41.003 7.51,40.824 7.51,40.644C7.51,36.651 4.276,33.409 0.293,33.409C0.195,33.409 0.097,33.411 -0,33.415L0,7.196C0.097,7.199 0.195,7.201 0.293,7.201C3.681,7.201 6.527,4.856 7.302,1.698L7.509,1.903L7.494,0.45ZM7.656,1.903L7.655,1.903L7.51,2.05L7.656,1.903ZM100.591,1.903L9.387,1.903C8.618,5.542 5.729,8.4 2.078,9.113L2.078,31.498C5.858,32.236 8.822,35.274 9.461,39.097L100.631,39.097C101.281,35.206 104.339,32.129 108.215,31.461L108.215,9.169C104.416,8.563 101.381,5.646 100.591,1.903ZM102.467,2.05L102.323,1.903L102.321,1.903L102.467,2.05Z"/>
+  </g>
+  <g class="entry-special-day__toggle-divider" transform="matrix(1,0,0,1,2.23796,0)">
+    <rect x="51.635" y="0.045" width="1.833" height="40.858"/>
+  </g>
+</svg>

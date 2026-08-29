@@ -12,8 +12,8 @@ import cards from "./_cards.js";
 export interface SpecialDay {
   /** Internal id. Matches `Player.specialGroup` for the opt-in path. */
   name: string;
-  /** UI phrase: "Are you part of {label}?" */
-  label: string;
+  /** The full homepage question, phrased however fits this day. */
+  question: string;
   /** Exact "YYYY-MM-DD". These are one-off real dates, not a recurring year. */
   date: string;
   /** Present only when there's a fixed roster to pick from. */
@@ -23,13 +23,13 @@ export interface SpecialDay {
 export const specialDays: SpecialDay[] = [
   {
     name: "lemon-day",
-    label: "Lemon's group",
+    question: "Are you here with Lemon?",
     date: "2026-09-03",
     bespokeSlugs: Object.keys(cards),
   },
   {
     name: "blank-metal",
-    label: "Blank Metal",
+    question: "Do you work for Blank Metal?",
     date: "2026-09-01",
   },
 ];
@@ -48,4 +48,19 @@ export function activeSpecialDay(
 ): SpecialDay | undefined {
   const key = dateKey(date);
   return days.find((day) => day.date === key);
+}
+
+/**
+ * Parse a `?asOf=YYYY-MM-DD` debug override into a local-midnight `Date`, for
+ * testing a special day without changing the system clock. Returns `null`
+ * for anything missing or malformed. Deliberately hand-parsed rather than
+ * `new Date(raw)` — a bare ISO date string parses as UTC midnight, which can
+ * land on the wrong local day depending on timezone.
+ */
+export function parseDateOverride(raw: string | null): Date | null {
+  if (!raw) return null;
+  const match = /^(\d{4})-(\d{2})-(\d{2})$/.exec(raw);
+  if (!match) return null;
+  const [, year, month, day] = match;
+  return new Date(Number(year), Number(month) - 1, Number(day));
 }

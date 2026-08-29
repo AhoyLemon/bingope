@@ -20,30 +20,40 @@ html(lang="en")
 
       .entry-content
         //- On a special day (see ts/partials/_specialDays.ts), Vue asks the
-        //- opt-in question first; a day with a fixed roster (Lemon Day) then
-        //- offers a picker straight to the bespoke card. Both blocks default
-        //- to an inline `display:none`, understood without JS, so a no-JS
-        //- visit falls straight through to the plain form below on every
-        //- day, exactly as it always has. Vue overrides `display` once it
-        //- mounts via `:style`, which merges with a static `style` rather
-        //- than conflicting with it — unlike a plain attribute, so this
-        //- (never `v-if`/`template`) keeps the fallback markup genuinely
-        //- present in the static HTML instead of living inside JS-only
-        //- template blocks.
+        //- opt-in question. The question stays visible and answerable either
+        //- way once answered (the picked side just goes active) rather than
+        //- being replaced by the next step — so a misclick is one more tap to
+        //- undo, not a dead end. Defaults to an inline `display:none`,
+        //- understood without JS, so a no-JS visit falls straight through to
+        //- the plain form below on every day, exactly as it always has. Vue
+        //- overrides `display` once it mounts via `:style`, which merges with
+        //- a static `style` rather than conflicting with it — unlike a plain
+        //- attribute, so this (never `v-if`/`template`) keeps the fallback
+        //- markup genuinely present in the static HTML instead of living
+        //- inside JS-only template blocks.
         div.entry-special-day(
           style="display:none"
-          v-bind:style="{ display: specialDay && specialDayOptIn === null ? 'block' : 'none' }"
+          v-bind:style="{ display: specialDay ? 'flex' : 'none' }"
         )
-          p {{ specialDay ? `Are you part of ${specialDay.label}?` : '' }}
-          .button-holder
-            button(type="button" v-on:click="answerSpecialDay(true)") Yes
-            button(type="button" v-on:click="answerSpecialDay(false)") No
+          p.entry-special-day__question {{ specialDay ? specialDay.question : '' }}
+          .entry-special-day__toggle
+            include ../svg/special-day-toggle.svg
+            button.entry-special-day__no(
+              type="button"
+              v-bind:class="{ 'is-active': specialDayOptIn === false }"
+              v-on:click="answerSpecialDay(false)"
+            ) No
+            button.entry-special-day__yes(
+              type="button"
+              v-bind:class="{ 'is-active': specialDayOptIn === true }"
+              v-on:click="answerSpecialDay(true)"
+            ) Yes
 
-        div.entry-special-day(
+        div.entry-special-day--picker(
           style="display:none"
-          v-bind:style="{ display: specialDay && specialDayOptIn && specialDay.bespokeSlugs ? 'block' : 'none' }"
+          v-bind:style="{ display: showPicker() ? 'block' : 'none' }"
         )
-          p Which one are you?
+          p.entry-special-day__question Which one are you?
           .button-holder
             a.button(v-for="slug in (specialDay && specialDay.bespokeSlugs) || []" :key="slug" :href="`card/?card=${slug}`") {{ bespokeName(slug) }}
 
@@ -55,7 +65,7 @@ html(lang="en")
         form.name-entry(
           action="card/"
           method="get"
-          v-bind:style="{ display: (specialDay && specialDayOptIn === null) || (specialDay && specialDayOptIn && specialDay.bespokeSlugs) ? 'none' : undefined }"
+          v-bind:style="{ display: showNameForm() ? undefined : 'none' }"
           v-bind:data-special-group="specialDayOptIn && specialDay && !specialDay.bespokeSlugs ? specialDay.name : null"
         )
           label(for="CardName") What's your name?
