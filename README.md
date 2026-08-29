@@ -52,4 +52,6 @@ Pug, Sass, TypeScript, and Vue 3. It builds into a small static site and deploys
 
 Anyone can play, just type a name. Five names get bespoke, hand-tuned cards because that's who this was originally built for; every other name gets a card seeded deterministically from what you type. Special games (an extra themed square set, a one-day dare) can be layered on for specific groups at Lemon's discretion, but that's a feature on top of the game, not the whole point of it.
 
+On a special day, the homepage asks an extra opt-in question before the name form ("Are you here with Lemon?", "Do you work for Blank Metal?"). Say yes and you either land on one of the five bespoke cards or get a seeded card guaranteed to include that day's themed square. See [`_docs/project.md`](_docs/project.md#special-days) for how that actually works.
+
 Every push to `main` builds and republishes the site.

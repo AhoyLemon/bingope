@@ -31,6 +31,15 @@ Names are normalized (lowercased and trimmed) before matching and before namespa
 
 The browser remembers your card. Opening a card claims it as this browser's card (last-viewed-wins), and the bare homepage — where the installed PWA launches — forwards a remembered player straight to their card instead of the name form, so playfully retyping a name can't accidentally deal a new card. `/?new` reaches the form deliberately. Tapping the ticket's name opens a dialog with two actions: **rename** changes only the displayed name (the dealt card and its marks stay untouched), while **generate a new card** deals a genuinely different card — the day-two path. It seeds from the normalized name plus a random token (so even an unchanged or bespoke name gets a new layout, with blank marks for free under the never-seen slug) and saves the typed name as the display name, so the fresh ticket still reads right. The old card stays saved under its old name, one Back away.
 
+## Special days
+
+On one specific date, the homepage adds an opt-in question before the name form. [`_specialDays.ts`](../src/ts/partials/_specialDays.ts) lists each `SpecialDay` by `name`, `question`, and exact `date` (real one-off dates, not a recurring yearly event). Today's date decides whether one is active at all, and outside that exact date the opt-in question never appears.
+
+A special day works one of two ways, depending on whether it carries `bespokeSlugs`:
+
+- **A fixed roster** (Lemon Day, `lemon-day`, September 3, 2026). `bespokeSlugs` lists the five already-committed bespoke names. Answering "yes" is pure navigation: pick a name from that roster and land on its existing card. There is no new dealing, since the five already carry their own `Special Dares` essential group.
+- **No fixed roster** (Blank Metal Day, `blank-metal`, September 1, 2026). Any name can opt in. With no roster to route through, the opt-in has to be remembered against whatever the player types: it saves onto `Player.specialGroup` ([`_player.ts`](../src/ts/partials/_player.ts)), and the deal reads it back as `_deal.ts`'s `includeOneDay` flag to guarantee that day's `"one day"` essential group (Blank Metal Squares) lands on the seeded card.
+
 ## Square data
 
 ```ts
