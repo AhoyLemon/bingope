@@ -4,11 +4,13 @@ This file records the project decisions that are not obvious from the code. Curr
 
 ## The goal
 
-BINGOPE is a personal, one-day observation bingo game for Lemon, Simone, Angie, Mike, and Victor at the 2026 Minnesota State Fair.
+BINGOPE is an observation bingo game for anyone at the Minnesota State Fair. Type a name on the homepage and get a card pulling from one shared pool of funny, specific things you might plausibly see or do at the fair.
 
-Each person gets a distinct, pre-dealt card. The cards pull from one shared pool of funny, specific things someone might plausibly see at the fair. The five cards should differ but can overlap.
+It started as a personal project for five friends (Lemon, Simone, Angie, Mike, and Victor), who still get bespoke, hand-tuned cards instead of a seeded deal. That origin doesn't define the game anymore: any other name works too, dealt deterministically from what you type.
 
-The site is publicly accessible because it is hosted on GitHub Pages. Its heart is still those five people, and their five hand-tuned cards are the one thing that must ship. Beyond them, anyone can play: you type a name and get a card. It never needs accounts, privacy controls, a backend, or shared state between phones.
+Special games can layer extra squares onto a card for a specific group or a specific day, at Lemon's discretion (see [Essential ("must") squares](#essential-must-squares) below). That's a feature on top of the game, not a description of who the game is for.
+
+The site is publicly accessible because it is hosted on GitHub Pages. It never needs accounts, privacy controls, a backend, or shared state between phones.
 
 ## How the game works
 
@@ -60,16 +62,16 @@ Some squares sit between the free center and the ordinary pool: not free, becaus
 ```ts
 interface EssentialGroup {
   groupName: string;
-  essentialFor: "everybody" | "special" | "unspecial";
+  essentialFor: "everybody" | "special" | "unspecial" | "one day";
   minimum: number;
   maximum: number;
   squares: BingoSquare[];
 }
 ```
 
-`essentialFor` sets the audience: `everybody` (all cards), `special` (just the five bespoke cards), or `unspecial` (public seeded cards only). `minimum`/`maximum` say how many of the group land on an applicable card, and may be 0 ("might not happen" / "definitely won't"). Unlike centers, essential squares are ordinary dealt cells that are merely guaranteed, so they live only in their group, never in the main pool, which is what makes the count authoritative.
+`essentialFor` sets the audience: `everybody` (all cards), `special` (just the five bespoke cards), `unspecial` (public seeded cards only), or `one day` (only for a player who opted into a specific special-day group, see [`_specialDays.ts`](../src/ts/partials/_specialDays.ts)). `minimum`/`maximum` say how many of the group land on an applicable card, and may be 0 ("might not happen" / "definitely won't"). Unlike centers, essential squares are ordinary dealt cells that are merely guaranteed, so they live only in their group, never in the main pool, which is what makes the count authoritative.
 
-Two groups exist. **Crop Art** (`everybody`, `CA` id prefix) is a reliably findable theme in the Agriculture Horticulture building. **Special Dares** (`special`, `SD` id prefix) is one shared dare placed on all five bespoke cards, the same square in a different cell on each: the Skyglider underwear-throw tradition (`SD1`).
+Three groups exist. **Crop Art** (`everybody`, `CA` id prefix) is a reliably findable theme in the Agriculture Horticulture building. **Special Dares** (`special`, `SD` id prefix) is one shared dare placed on all five bespoke cards, the same square in a different cell on each: the Skyglider underwear-throw tradition (`SD1`). **Blank Metal Squares** (`one day`, `_M` id prefix) is an opt-in set of in-jokes for one specific group's day at the fair — a special game for a special group, layered on top of a normal card rather than a redefinition of who the game is for.
 
 The structure exists now; the deal actually reserving and placing essential squares is still separate work (dealer script #4, seeded path #12).
 

@@ -29,7 +29,7 @@ bun run build:pages  # build the deployable site in _site/
 
 ## Where is everything?
 
-- [`src/pug/`](src/pug/) contains the homepage, five player pages, and shared page partials.
+- [`src/pug/`](src/pug/) contains the homepage, the single card page (shared by every player), and shared page partials.
 - [`routes/pug.routes.ts`](routes/pug.routes.ts) maps those templates to clean URLs.
 - [`src/scss/`](src/scss/) contains the styles.
 - [`src/ts/`](src/ts/) contains the Vue application code.
@@ -50,6 +50,6 @@ Pug, Sass, TypeScript, and Vue 3. It builds into a small static site and deploys
 
 ## What else should I know?
 
-This is a personal project, not a general-purpose bingo platform. Build the version we need for September 3, 2026 first. Anything reusable or public can be somebody's problem later.
+Anyone can play, just type a name. Five names get bespoke, hand-tuned cards because that's who this was originally built for; every other name gets a card seeded deterministically from what you type. Special games (an extra themed square set, a one-day dare) can be layered on for specific groups at Lemon's discretion, but that's a feature on top of the game, not the whole point of it.
 
-The code and cards freeze on September 1. Every push to `main` builds and republishes the site.
+Every push to `main` builds and republishes the site.
