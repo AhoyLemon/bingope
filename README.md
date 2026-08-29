@@ -1,14 +1,14 @@
 # BINGOPE
 
-#### (Minnesota State Fair bingo for five specific people)
+#### (Minnesota State Fair bingo)
 
 ## What is this?
 
 BINGOPE is a bingo game to play at the 2026 Minnesota State Fair.
 
-Everyone gets a different card full of things they might see at the fair. Mark enough squares to complete a row, column, or diagonal and the site celebrates. Then keep playing. We'll figure out how to score the whole day when we get home.
+Everyone gets a different card full of things they might see at the fair. Mark enough squares to complete a row, column, or diagonal and the site celebrates. Then keep playing. As for scoring and prizes, that's up to you.
 
-The finished site will live at [bingope.ahoylemon.xyz](https://bingope.ahoylemon.xyz).
+It's running at [bingope.ahoylemon.xyz](https://bingope.ahoylemon.xyz).
 
 ## Can I run this locally?
 
@@ -36,7 +36,6 @@ bun run build:pages  # build the deployable site in _site/
 - [`src/svg/`](src/svg/) and [`src/img/`](src/img/) contain static assets.
 - [`scripts/`](scripts/) contains the build and development tools.
 - [`_docs/`](_docs/) has project notes, writing guidelines, and tooling references — see [`_docs/project.md`](_docs/project.md) for the decisions and constraints that are easy to forget.
-- [Milestone 1](https://github.com/AhoyLemon/bingope/milestone/1) and its issues are the actual project plan.
 
 ## What's this written in?
 
@@ -47,7 +46,7 @@ bun run build:pages  # build the deployable site in _site/
 [![Bun](https://img.shields.io/badge/Bun-000?style=flat-square&labelColor=212121&logo=bun&logoColor=FBF0DF&color=fff)](https://bun.sh/)
 [![GitHub Pages](https://img.shields.io/badge/GitHub%20Pages-000?style=flat-square&labelColor=212121&logo=github&logoColor=fff&color=fff)](https://pages.github.com/)
 
-Pug, Sass, TypeScript, and Vue 3. It builds into a small static site and deploys to GitHub Pages. There is no backend, no Vite, and no Nuxt.
+Pug, Sass, TypeScript, and Vue 3. It builds into a small static site and deploys to GitHub Pages. There is no backend, everything is saved in `localStorage`.
 
 ## What else should I know?
 
