@@ -6,8 +6,10 @@
  * squares are ordinary dealt cells, just guaranteed to appear, so they live only
  * here and never in the main pool. Deal-time enforcement is dealer work (#4/#12).
  *
- * Crop art (`CA`) and special dares (`SD`) are the current groups. Any future
- * group gets its own id prefix. "Crop Art" is the
+ * Crop art (`CA`), special dares (`SD`), and Blank Metal Squares (`_M`, only
+ * dealt via `"one day"` when the player opted into that special group — see
+ * `_specialDays.ts`) are the current groups. Any future group gets its own id
+ * prefix. "Crop Art" is the
  * Minnesota State Fair's official term for the seed-portrait exhibit in the
  * Agriculture Horticulture building ("seed art" is the same thing). Every crop
  * art squares share the same short label, so the specific crop-art joke stays a
@@ -121,6 +123,13 @@ export const essentials: EssentialGroup[] = [
         difficulty: "medium",
         type: "see",
       },
+      {
+        id: "CA15",
+        text: "I found crop art that left no doubt the artist despises ICE. For the record, so does the guy who made this game.",
+        shortText: "Crop Art",
+        difficulty: "gimme",
+        type: "see",
+      },
     ],
   },
   {
@@ -134,6 +143,84 @@ export const essentials: EssentialGroup[] = [
         text: "I threw a pair of underwear onto the roof from the Skyglider. I respect the tradition. For the record, I (probably?) brought a spare pair for this event. So either I respect tradition enough to plan ahead, or enough to fully commit.",
         shortText: "Throw your underwear",
         difficulty: "gimme",
+        type: "do",
+      },
+    ],
+  },
+  {
+    groupName: "Blank Metal Squares",
+    essentialFor: "one day",
+    minimum: 1,
+    maximum: 1,
+    squares: [
+      {
+        id: "_M1",
+        text: "I found one of Tasha's blue ribbons and sent her a photo in Slack. If I am Tasha, this one is free.",
+        shortText: "Tasha's Blue Ribbon",
+        difficulty: "gimme",
+        type: "do",
+      },
+      {
+        id: "_M2",
+        text: "I saw someone wearing Zubaz who wasn't Ben.",
+        shortText: "Zubaz (not Ben)",
+        difficulty: "medium",
+        type: "see",
+      },
+      {
+        id: "_M3",
+        text: "I wore any Blank Metal shirt, including one handed out that day, for at least an hour.",
+        shortText: "Guerrilla Marketing",
+        difficulty: "gimme",
+        type: "do",
+      },
+      {
+        id: "_M4",
+        text: "I lined up three bald Blanksmiths' heads like a rack of bowling balls and got the photo.",
+        shortText: "3 Bald Heads",
+        difficulty: "rare",
+        type: "do",
+      },
+      {
+        id: "_M5",
+        text: "I got a photo of EJ wearing a color that wasn't black or grey.",
+        shortText: "EJ in color",
+        difficulty: "medium",
+        type: "do",
+      },
+      {
+        id: "_M6",
+        text: "I got Elli to give me a design opinion on something, whether I asked for one or not.",
+        shortText: "Elli's opinion",
+        difficulty: "gimme",
+        type: "do",
+      },
+      {
+        id: "_M7",
+        text: "I overheard a total stranger going off about AI, with no idea Claude helped build this exact game.",
+        shortText: "Overheard AI take",
+        difficulty: "medium",
+        type: "see",
+      },
+      {
+        id: "_M8",
+        text: "I watched Lemon lean over someone's shoulder to check how their bingo card was going.",
+        shortText: "Lemon checks a card",
+        difficulty: "rare",
+        type: "see",
+      },
+      {
+        id: "_M9",
+        text: "I opened a GitHub issue on the BINGOPE repo demanding a specific new square.",
+        shortText: "File GitHub issue",
+        difficulty: "rare",
+        type: "do",
+      },
+      {
+        id: "_M10",
+        text: "I threw a pair of underwear onto the roof from the Skyglider. So either I packed a spare pair because I knew this was coming, or I got creative.",
+        shortText: "Throw your underwear",
+        difficulty: "medium",
         type: "do",
       },
     ],

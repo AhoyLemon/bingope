@@ -9,7 +9,7 @@
 // Vue is loaded from the CDN in the HTML.
 declare const Vue: any;
 
-import { CENTER_INDEX, resolveCard } from "./_deal.js";
+import { CENTER_INDEX, normalizeName, resolveCard } from "./_deal.js";
 import {
   activeBingoLines,
   bingoCelebrationMessage,
@@ -30,11 +30,14 @@ import {
 } from "./_player.js";
 import { poolVersionHash, resetStaleCard } from "./_cardVersion.js";
 import { squares, centers, essentials } from "./_squares.js";
+import { activeSpecialDay, parseDateOverride } from "./_specialDays.js";
+import cards from "./_cards.js";
 import type { BingoLine, Bingos } from "./_bingos.js";
 import type { CardSquare } from "./_cardSquares.js";
 import type { ResolvedCard } from "./_deal.js";
 import type { Marks } from "./_marks.js";
 import type { SquareType } from "./_squares.js";
+import type { SpecialDay } from "./_specialDays.js";
 
 const { createApp, nextTick } = Vue;
 
@@ -136,6 +139,10 @@ interface CardAppData {
   name: { input: string };
   // Draft value inside the change-your-name dialog.
   nameDraft: string;
+  // Homepage-only: today's special day (see _specialDays.ts), if any, and
+  // whether the player has answered its opt-in question yet.
+  specialDay: SpecialDay | null;
+  specialDayOptIn: boolean | null;
 }
 
 interface CardAppMethods {
@@ -147,6 +154,10 @@ interface CardAppMethods {
   ): Record<string, boolean>;
   bingoLinePath(line: BingoLine): string;
   bingoLineClasses(line: BingoLine): Record<string, boolean>;
+  bespokeName(slug: string): string;
+  answerSpecialDay(optIn: boolean): void;
+  showPicker(): boolean;
+  showNameForm(): boolean;
   openSquare(square: CardSquare, event?: Event): void;
   closeSquare(afterClose?: () => void): void;
   onBackdropClick(event: MouseEvent): void;
@@ -177,8 +188,28 @@ const storage = browserStorage();
 
 const onCardPage = document.body.classList.contains("card-page");
 
+// Debug affordance, dev hosts only: ?asOf=YYYY-MM-DD lets a special day be
+// tested without changing the system clock. Never honored on the deployed
+// site, where it's just today.
+const isDevHost = ["localhost", "127.0.0.1", "192.168.4.37"].includes(
+  window.location.hostname,
+);
+const today =
+  (isDevHost &&
+    parseDateOverride(
+      new URLSearchParams(window.location.search).get("asOf"),
+    )) ||
+  new Date();
+
 const rawCard = new URLSearchParams(window.location.search).get("card");
-const resolved = resolveCard(rawCard);
+// The player's saved special-group opt-in (see _specialDays.ts) only applies
+// to the card it was recorded against — a different slug (e.g. peeking at a
+// shared link, #54) must not inherit someone else's opt-in.
+const savedPlayerForOptIn = storage ? loadPlayer(storage) : null;
+const includeOneDay =
+  !!savedPlayerForOptIn?.specialGroup &&
+  savedPlayerForOptIn.slug === (rawCard ? normalizeName(rawCard) : null);
+const resolved = resolveCard(rawCard, includeOneDay);
 const cardSquares = resolved ? resolveCardSquares(resolved.squareIds) : [];
 
 // A bare /card/ visit (old bookmark, home-screen shortcut) canonicalizes to
@@ -250,7 +281,7 @@ function fairStar(grid: DOMRect): FairBurstPiece {
   const approach = pointOnArc(0.72);
 
   return {
-    id: fairStarId += 1,
+    id: (fairStarId += 1),
     expiresAt: Date.now() + durationMs,
     sourceX: `${round(sourceX)}px`,
     sourceY: `${round(sourceY)}px`,
@@ -265,7 +296,8 @@ function fairStar(grid: DOMRect): FairBurstPiece {
     approachRotation: Math.round(randomBetween(-70, 70)),
     landingRotation: Math.round(randomBetween(-38, 38)),
     size: `${round(randomBetween(1.5, 2.13))}rem`,
-    color: FAIR_STAR_COLORS[Math.floor(Math.random() * FAIR_STAR_COLORS.length)],
+    color:
+      FAIR_STAR_COLORS[Math.floor(Math.random() * FAIR_STAR_COLORS.length)],
     duration: `${Math.round(durationMs)}ms`,
     landingScale: round(randomBetween(0.8, 1.18)),
   };
@@ -284,9 +316,12 @@ function sharpiePath(line: BingoLine): string {
     x: -(end.y - start.y) / distance,
     y: (end.x - start.x) / distance,
   };
-  const seed = [...line.id].reduce((total, character) => total + character.charCodeAt(0), 0);
+  const seed = [...line.id].reduce(
+    (total, character) => total + character.charCodeAt(0),
+    0,
+  );
   // Slight enough to feel hand-drawn, not so much that it reads as a doodle.
-  const wobble = (step: number) => ((seed + step * 7) % 11 - 5) * 0.45;
+  const wobble = (step: number) => (((seed + step * 7) % 11) - 5) * 0.45;
   let path = `M ${start.x + normal.x * wobble(0)} ${start.y + normal.y * wobble(0)}`;
 
   for (let index = 1; index < points.length; index += 1) {
@@ -304,8 +339,7 @@ const cardAppOptions: {
   data: () => CardAppData;
   methods: CardAppMethods;
   mounted: () => void;
-} &
-  ThisType<CardAppInstance> = {
+} & ThisType<CardAppInstance> = {
   data() {
     return {
       resolved,
@@ -335,9 +369,30 @@ const cardAppOptions: {
       fairBurst: [],
       name: { input: "" },
       nameDraft: "",
+      specialDay: activeSpecialDay(today) ?? null,
+      specialDayOptIn: null,
     };
   },
   methods: {
+    bespokeName(slug: string): string {
+      return cards[slug]?.name ?? slug;
+    },
+    answerSpecialDay(optIn: boolean): void {
+      this.specialDayOptIn = optIn;
+    },
+    // The bespoke-roster picker (Lemon Day, once answered yes).
+    showPicker(): boolean {
+      return Boolean(
+        this.specialDay && this.specialDayOptIn && this.specialDay.bespokeSlugs,
+      );
+    },
+    // The name form: always shown on an ordinary day, or once the special
+    // day's question has an answer that doesn't lead to the picker.
+    showNameForm(): boolean {
+      if (!this.specialDay) return true;
+      if (this.specialDayOptIn === null) return false;
+      return !(this.specialDayOptIn && this.specialDay.bespokeSlugs);
+    },
     isMarked(squareId: string): boolean {
       return Boolean(this.marks[squareId]);
     },
@@ -358,6 +413,8 @@ const cardAppOptions: {
         marked: this.isMarked(square.id),
         "square-center": squareIndex === CENTER_INDEX,
         "square-crop-art": square.id.startsWith("CA"),
+        "square-blank-metal": square.id.startsWith("_M"),
+        "square-special-dare": square.id.startsWith("SD"),
         "task-see": square.type === "see",
         "task-do": square.type === "do",
         "copy-long": square.label.length > 22 || longestWordLength > 8,
@@ -394,7 +451,11 @@ const cardAppOptions: {
             { transform: originTransform(dialog), opacity: 0 },
             { transform: "none", opacity: 1 },
           ],
-          { duration: OPEN_MS, easing: "cubic-bezier(0.2, 0.9, 0.25, 1)", fill: "backwards" },
+          {
+            duration: OPEN_MS,
+            easing: "cubic-bezier(0.2, 0.9, 0.25, 1)",
+            fill: "backwards",
+          },
         );
       });
     },
@@ -426,7 +487,11 @@ const cardAppOptions: {
           { transform: "none", opacity: 1 },
           { transform: originTransform(dialog), opacity: 0 },
         ],
-        { duration: CLOSE_MS, easing: "cubic-bezier(0.4, 0.05, 0.7, 0.2)", fill: "forwards" },
+        {
+          duration: CLOSE_MS,
+          easing: "cubic-bezier(0.4, 0.05, 0.7, 0.2)",
+          fill: "forwards",
+        },
       );
       animation.onfinish = () => {
         dialog.classList.remove("is-closing");
@@ -549,10 +614,7 @@ const cardAppOptions: {
           this.pendingBingoLineIds = this.pendingBingoLineIds.filter(
             (lineId) => lineId !== line.id,
           );
-          this.revealingBingoLineIds = [
-            ...this.revealingBingoLineIds,
-            line.id,
-          ];
+          this.revealingBingoLineIds = [...this.revealingBingoLineIds, line.id];
           await nextTick();
           await waitFor(BINGO_LINE_MS);
 
@@ -566,7 +628,9 @@ const cardAppOptions: {
     },
     prepareCelebration(lines: BingoLine[]): void {
       const activeLines = activeBingoLines(this.bingos);
-      const blackout = this.cardSquares.every((square) => this.isMarked(square.id));
+      const blackout = this.cardSquares.every((square) =>
+        this.isMarked(square.id),
+      );
 
       this.celebrationMessage = bingoCelebrationMessage(
         lines,
@@ -605,8 +669,10 @@ const cardAppOptions: {
       const throwNextStar = () => {
         const now = Date.now();
         const next = makeStar();
-        this.fairBurst = [...this.fairBurst.filter((piece) => piece.expiresAt > now), next]
-          .slice(-FAIR_STAR_MAX);
+        this.fairBurst = [
+          ...this.fairBurst.filter((piece) => piece.expiresAt > now),
+          next,
+        ].slice(-FAIR_STAR_MAX);
         fairStarTimer = window.setTimeout(
           throwNextStar,
           randomBetween(FAIR_STAR_MIN_DELAY_MS, FAIR_STAR_MAX_DELAY_MS),

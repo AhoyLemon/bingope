@@ -6,7 +6,7 @@ product
 
 ## Users
 
-Five friends play a personal, one-day observation bingo game at the Minnesota State Fair on their phones. Their primary job is to quickly recognize a square, check its full meaning, and mark it while walking around the fairgrounds.
+Three audiences share one card page, all on their phones at the Minnesota State Fair. Five friends get hand-tuned bespoke cards. Anyone else gets a card seeded from whatever name they type. On a special day, the homepage can also offer an opt-in tailored to that day, at Lemon's discretion, whether that's routing to a fixed roster of bespoke cards or guaranteeing an extra in-joke square on a seeded one. Across all three, the job is the same: quickly recognize a square, check its full meaning, and mark it while walking around the fairgrounds.
 
 ## Product Purpose
 

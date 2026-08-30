@@ -5,12 +5,17 @@ import { mulberry32 } from "../src/ts/partials/_prng";
 import { squares, centers, essentials } from "../src/ts/partials/_squares";
 import type { BingoSquare, EssentialGroup } from "../src/ts/partials/_squares";
 
-function deal(audience: "special" | "unspecial", seed: number): string[] {
+function deal(
+  audience: "special" | "unspecial",
+  seed: number,
+  includeOneDay = false,
+): string[] {
   return dealGrid({
     pool: squares,
     centers,
     essentials,
     audience,
+    includeOneDay,
     rng: mulberry32(seed),
   });
 }
@@ -48,17 +53,35 @@ test("a special card carries exactly one Crop Art and one Special Dare", () => {
 
 test("an unspecial card gets Crop Art but not the special-only dare", () => {
   const grid = deal("unspecial", 9);
-  const counts = { CA: 0, SD: 0, P: 0 };
+  const counts = { CA: 0, SD: 0, P: 0, _M: 0 };
   grid.forEach((id, i) => {
     if (i === CENTER_INDEX) return;
     counts[prefix(id) as keyof typeof counts]++;
   });
-  expect(counts).toEqual({ CA: 1, SD: 0, P: 23 });
+  expect(counts).toEqual({ CA: 1, SD: 0, P: 23, _M: 0 });
 });
 
-test("dealt essential ids belong to their group", () => {
-  const grid = new Set(deal("special", 5));
+test("includeOneDay deals exactly one Blank Metal square, otherwise none", () => {
+  const withOneDay = deal("unspecial", 11, true);
+  const without = deal("unspecial", 11, false);
+  const countOf = (grid: string[], p: string) =>
+    grid.filter((id, i) => i !== CENTER_INDEX && prefix(id) === p).length;
+
+  expect(countOf(withOneDay, "_M")).toBe(1);
+  expect(countOf(without, "_M")).toBe(0);
+});
+
+test("dealt essential ids belong to their applicable group", () => {
+  const audience = "special";
+  const includeOneDay = false;
+  const grid = new Set(deal(audience, 5, includeOneDay));
   for (const group of essentials as EssentialGroup[]) {
+    const applies =
+      group.essentialFor === audience ||
+      group.essentialFor === "everybody" ||
+      (group.essentialFor === "one day" && includeOneDay);
+    if (!applies) continue;
+
     const groupIds = group.squares.map((s) => s.id);
     const dealt = groupIds.filter((id) => grid.has(id));
     expect(dealt.length).toBeGreaterThanOrEqual(group.minimum);

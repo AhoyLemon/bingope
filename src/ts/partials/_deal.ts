@@ -17,7 +17,9 @@
  *
  * `resolveCard` turns a name from the URL into a card: the five special names
  * (committed in `_cards.ts`) get their bespoke card; any other name gets a
- * card seeded deterministically from the normalized name.
+ * card seeded deterministically from the normalized name. Its `includeOneDay`
+ * parameter is the caller-supplied Blank-Metal-style special-group opt-in
+ * (see `_specialDays.ts`, `_player.ts`), only ever relevant to the seeded path.
  */
 
 import { shuffle } from "../globals/_functions.js";
@@ -68,7 +70,15 @@ export interface DealGridInput {
    * "special" for the five bespoke cards; "unspecial" for the public seeded
    * path (#12). "everybody" groups apply to both, so it is not selectable here.
    */
-  audience: Exclude<EssentialAudience, "everybody">;
+  audience: Exclude<EssentialAudience, "everybody" | "one day">;
+  /**
+   * Whether to also deal `"one day"` essential groups (e.g. Blank Metal
+   * Squares). Driven by the player's saved special-group opt-in
+   * (`Player.specialGroup`, see `_player.ts`), not by today's date — the date
+   * only gates whether the opt-in question is ever offered. Defaults to
+   * `false`.
+   */
+  includeOneDay?: boolean;
   /** Injected RNG (0..1). #4 passes `Math.random`; #12 a name-seeded PRNG. */
   rng: () => number;
 }
@@ -115,7 +125,8 @@ export function dealCard<T>(
  * what it is handed.
  */
 export function dealGrid(input: DealGridInput): string[] {
-  const { pool, centers, essentials, audience, rng } = input;
+  const { pool, centers, essentials, audience, includeOneDay = false, rng } =
+    input;
 
   if (centers.length === 0) {
     throw new Error("dealGrid: no center candidates to draw from.");
@@ -124,7 +135,11 @@ export function dealGrid(input: DealGridInput): string[] {
 
   const essentialIds: string[] = [];
   for (const group of essentials) {
-    if (group.essentialFor !== audience && group.essentialFor !== "everybody") {
+    const applies =
+      group.essentialFor === audience ||
+      group.essentialFor === "everybody" ||
+      (group.essentialFor === "one day" && includeOneDay);
+    if (!applies) {
       continue;
     }
     if (group.minimum > group.squares.length) {
@@ -158,15 +173,24 @@ export function dealGrid(input: DealGridInput): string[] {
  * work with (missing or blank). The five special names get their committed
  * bespoke card; any other name gets a card seeded deterministically from the
  * normalized name, so the same name always deals the same card.
+ *
+ * `includeOneDay` (default `false`) is the caller-supplied Blank-Metal-style
+ * opt-in — see `DealGridInput.includeOneDay`. It only affects the seeded
+ * path; bespoke cards are pre-committed and never call `dealGrid`. It also
+ * deliberately **skips the bespoke lookup entirely**: a player who opted into
+ * a different special group (Blank Metal) has explicitly said they are not
+ * one of the five, so a name collision (typing "lemon" while opted into
+ * Blank Metal) must not silently hand them Lemon's exact locked friend card.
  */
 export function resolveCard(
   rawName: string | null | undefined,
+  includeOneDay = false,
 ): ResolvedCard | null {
   if (!rawName) return null;
   const slug = normalizeName(rawName);
   if (!slug) return null;
 
-  const bespoke = cards[slug];
+  const bespoke = includeOneDay ? undefined : cards[slug];
   if (bespoke) {
     return {
       slug,
@@ -182,6 +206,7 @@ export function resolveCard(
     centers,
     essentials,
     audience: "unspecial",
+    includeOneDay,
     rng,
   });
   return {

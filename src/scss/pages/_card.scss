@@ -565,6 +565,39 @@ $paper-texture: url("../svg/paper-texture.svg");
     }
   }
 
+  // Same faded-watermark treatment as Crop Art, sized for this mark's taller
+  // (not square) aspect ratio (viewBox 210.07 x 249.59).
+  &.square-blank-metal {
+    background-image:
+      url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 210.07 249.59' fill='%23fc2ffc' fill-opacity='.2'%3E%3Cpolygon points='167.84 0 167.84 105.21 160.7 105.21 160.7 52.79 121.47 52.79 121.47 113.29 117.9 115.85 114.33 113.29 114.33 52.79 75.09 52.79 75.09 105.2 67.98 105.2 67.98 0 25.75 0 25.75 105.9 0 105.9 0 183.14 25.75 197.92 25.75 198.31 30.56 200.96 30.35 201.08 117.9 249.59 117.9 249.59 117.9 249.59 117.9 249.59 117.9 249.59 205.45 201.08 205.36 201.03 210.07 198.43 210.07 93.95 210.07 0 167.84 0'/%3E%3C/svg%3E"),
+      $paper-texture;
+    background-position:
+      center,
+      0 0;
+    background-repeat: no-repeat, repeat;
+    background-size:
+      60% 71%,
+      11rem 11rem;
+    color: vars.$navy;
+  }
+
+  // Same faded-watermark treatment as Crop Art; this mark shares Crop Art's
+  // square 1200x1200 viewBox, so the sizing matches too. No color override —
+  // the lone Special Dare is already a "do" square, so it keeps the default
+  // purple task-do color.
+  &.square-special-dare {
+    background-image:
+      url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1200 1200' fill='%23dd3843' fill-opacity='.2'%3E%3Cpath fill-rule='evenodd' d='m1143.8 240.94c0-5.5508-2.4375-10.801-6.6758-14.363s-9.8242-5.0625-15.262-4.125c-347.89 59.961-695.74 60.188-1043.6 0-5.4375-0.9375-11.023 0.5625-15.262 4.125s-6.6758 8.8125-6.6758 14.363v168.75c0 7.3125 4.2383 13.949 10.875 17.023 205.31 94.949 376.31 339.3 440.02 538.09 2.4766 7.7617 9.7109 13.012 17.852 13.012h150c8.25 0 15.523-5.3633 17.926-13.273 58.648-191.74 227.29-437.4 440.1-537.9 6.5234-3.1133 10.727-9.7109 10.727-16.949v-168.75zm-543.75 133.2-36.074-36.039c-7.3125-7.3516-19.199-7.3516-26.512 0-7.3125 7.3125-7.3125 19.199 0 26.512l36.074 36.074-36.074 36.039c-7.3125 7.3516-7.3125 19.199 0 26.551 7.3125 7.3125 19.199 7.3125 26.512 0l36.074-36.074 36.074 36.074c7.3125 7.3125 19.199 7.3125 26.512 0 7.3125-7.3516 7.3125-19.199 0-26.551l-36.074-36.039 36.074-36.074c7.3125-7.3125 7.3125-19.199 0-26.512-7.3125-7.3516-19.199-7.3516-26.512 0z'/%3E%3C/svg%3E"),
+      $paper-texture;
+    background-position:
+      center,
+      0 0;
+    background-repeat: no-repeat, repeat;
+    background-size:
+      80% 80%,
+      11rem 11rem;
+  }
+
   &:focus-visible {
     z-index: 1;
     outline: 0.25rem solid vars.$green;

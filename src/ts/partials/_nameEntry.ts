@@ -16,7 +16,11 @@
  */
 
 import { normalizeName } from "./_deal.js";
-import { browserStorage, returningCardUrl } from "./_player.js";
+import {
+  browserStorage,
+  returningCardUrl,
+  saveSpecialGroupOptIn,
+} from "./_player.js";
 
 const form = document.querySelector<HTMLFormElement>("form.name-entry");
 const input = form?.querySelector<HTMLInputElement>('input[name="card"]');
@@ -33,6 +37,14 @@ if (returning) {
     if (!name) return; // whitespace-only; let the field stay put
 
     event.preventDefault();
+
+    // Set by index.pug's Vue template when the player answered "yes" to a
+    // special day with no fixed roster (Blank Metal Day) — see _vue.ts.
+    const specialGroup = form.dataset.specialGroup;
+    if (specialGroup && storage) {
+      saveSpecialGroupOptIn(name, specialGroup, storage);
+    }
+
     const query = new URLSearchParams({ card: name }).toString();
     window.location.href = `card/?${query}`;
   });

@@ -34,3 +34,29 @@ test("a bespoke name still resolves via the bespoke path", () => {
   expect(resolved?.source).toBe("bespoke");
   expect(resolved?.name).toBe("Lemon");
 });
+
+test("includeOneDay deals exactly one Blank Metal square on the seeded path", () => {
+  const withOneDay = resolveCard("alpha", true);
+  const without = resolveCard("alpha", false);
+  const withoutDefault = resolveCard("alpha");
+
+  const countOf = (ids: string[] | undefined) =>
+    (ids ?? []).filter((id) => id.startsWith("_M")).length;
+
+  expect(countOf(withOneDay?.squareIds)).toBe(1);
+  expect(countOf(without?.squareIds)).toBe(0);
+  expect(countOf(withoutDefault?.squareIds)).toBe(0);
+});
+
+test("includeOneDay bypasses bespoke lookup, even on a name collision", () => {
+  // A player who opted into Blank Metal has explicitly said they aren't one
+  // of the five — typing "lemon" must not hand them Lemon's locked card.
+  const resolved = resolveCard("lemon", true);
+  expect(resolved?.source).toBe("seeded");
+  expect(resolved?.squareIds.some((id) => id.startsWith("_M"))).toBe(true);
+});
+
+test("without includeOneDay, a bespoke name still resolves via the bespoke path", () => {
+  const resolved = resolveCard("lemon", false);
+  expect(resolved?.source).toBe("bespoke");
+});
