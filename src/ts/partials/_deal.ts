@@ -70,7 +70,7 @@ export interface DealGridInput {
    * "special" for the five bespoke cards; "unspecial" for the public seeded
    * path (#12). "everybody" groups apply to both, so it is not selectable here.
    */
-  audience: Exclude<EssentialAudience, "everybody">;
+  audience: Exclude<EssentialAudience, "everybody" | "one day">;
   /**
    * Whether to also deal `"one day"` essential groups (e.g. Blank Metal
    * Squares). Driven by the player's saved special-group opt-in

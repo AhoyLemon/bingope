@@ -212,7 +212,7 @@ export const essentials: EssentialGroup[] = [
       {
         id: "_M9",
         text: "I opened a GitHub issue on the BINGOPE repo demanding a specific new square.",
-        shortText: "file github issue",
+        shortText: "File GitHub issue",
         difficulty: "rare",
         type: "do",
       },

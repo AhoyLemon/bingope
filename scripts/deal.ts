@@ -199,6 +199,8 @@ function main(): void {
   if (!isAll) {
     for (const { slug } of ROSTER) {
       if (slug === target) continue;
+      const committedCenter = result[slug].squareIds[CENTER_INDEX];
+      if (committedCenter) usedCenters.add(committedCenter);
       for (const id of result[slug].squareIds) {
         if (id.startsWith("P")) {
           poolUsage.set(id, (poolUsage.get(id) ?? 0) + 1);
