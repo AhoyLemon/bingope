@@ -389,13 +389,13 @@ export const squares: BingoSquare[] = [
     difficulty: "medium",
     type: "see",
   },
-  {
-    id: "P55",
-    text: "I saw two people the GOP is always complaining about kiss for a photo op in front of the GOP building.",
-    shortText: "GOP kiss",
-    difficulty: "medium",
-    type: "see",
-  },
+  // {
+  //   id: "P55",
+  //   text: "I saw two people the GOP is always complaining about kiss for a photo op in front of the GOP building.",
+  //   shortText: "GOP kiss",
+  //   difficulty: "medium",
+  //   type: "see",
+  // },
   {
     id: "P56",
     text: "I passed by the Libertarian booth twice and saw the same three guys.",
