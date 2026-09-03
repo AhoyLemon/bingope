@@ -10,6 +10,7 @@
 declare const Vue: any;
 
 import { CENTER_INDEX, normalizeName, resolveCard } from "./_deal.js";
+import { clearStorageIfVersionChanged } from "./_clearStorage.js";
 import {
   activeBingoLines,
   bingoCelebrationMessage,
@@ -185,6 +186,7 @@ interface CardAppInstance extends CardAppData, CardAppMethods {
 }
 
 const storage = browserStorage();
+clearStorageIfVersionChanged(storage);
 
 const onCardPage = document.body.classList.contains("card-page");
 
