@@ -216,13 +216,6 @@ export const essentials: EssentialGroup[] = [
         difficulty: "rare",
         type: "do",
       },
-      // {
-      //   id: "_M10",
-      //   text: "I threw a pair of underwear onto the roof from the Skyglider. So either I packed a spare pair because I knew this was coming, or I got creative.",
-      //   shortText: "Throw your underwear",
-      //   difficulty: "medium",
-      //   type: "do",
-      // },
     ],
   },
 ];
